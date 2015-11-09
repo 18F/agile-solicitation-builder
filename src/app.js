@@ -1,6 +1,12 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 
+// Dependencies
+var View = require('react-flexbox');
+
+// Bootstrap
+var PageHeader = require('react-bootstrap').PageHeader;
+
 // Router stuff
 var Router = require('react-router').Router;
 var Route = require('react-router').Route;
@@ -9,24 +15,28 @@ var Link = require('react-router').Link;
 var IndexLink = require('react-router').IndexLink;
 var Redirect = require('react-router').Redirect;
 
-// Other elements
-Request = require('./request');
-RequestOverview = require('./request_overview');
-Question = require('./question');
-Results = require('./results');
+// Custom elements
+var Welcome = require('./welcome');
+var Request = require('./request');
+var RequestOverview = require('./request_overview');
+var Question = require('./question');
+var Results = require('./results');
 
 var App = React.createClass({
 	render: function() {
+		var appStyle = {
+			padding: 8,
+		};
+
 		return (
-			<div>
-				<div>Hello, world!</div>
-				<div>
-					<IndexLink to="/rfp/1">RFP #1</IndexLink><br/>
-					<Link to="/rfp/1/question/2">Question 2</Link><br/>
-					<Link to="/rfp/1/results">Results</Link>
-				</div>
+			<View column style={appStyle}>
+				<View>
+					<PageHeader>
+						<IndexLink to="/">Playbook in Action</IndexLink>
+					</PageHeader>
+				</View>
 				{this.props.children}
-			</div>
+			</View>
 		);
 	},
 });
@@ -34,6 +44,7 @@ var App = React.createClass({
 ReactDOM.render(
 	<Router>
 		<Route path="/" component={App}>
+			<IndexRoute component={Welcome} />
 			<Route path="rfp/:id" component={Request}>
 				<IndexRoute component={RequestOverview} />
 				<Route path="question/:qid" component={Question} />

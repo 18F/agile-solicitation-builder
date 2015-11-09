@@ -1,0 +1,22 @@
+{
+  "name": "playbook",
+  "description": "Playbook in Action",
+  "main": "index.js",
+  "authors": [
+    "Tom Buckley <tbuckley89@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/tbuckley/playbook",
+  "moduleType": [],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.5"
+  }
+}

@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 var browserify = require('browserify');
 var reactify = require('reactify');
+var watchify = require('watchify');
 var source = require('vinyl-source-stream');
 var rename = require('gulp-rename');
 
@@ -12,8 +13,21 @@ gulp.task('default', function() {
         cache: {}, packageCache: {}, fullPaths: true // Requirement of watchify
     });
 
-    return bundler.bundle()
-    	.pipe(source('./src/app.js'))
+	var watcher  = watchify(bundler);
+
+    return watcher
+	    .on('update', function () { // When any files update
+	        var updateStart = Date.now();
+	        console.log('Updating!');
+
+	        watcher.bundle() // Create new bundle that uses the cache for high performance
+	        	.pipe(source('./src/app.js'))
+		    	.pipe(rename('bundle.js'))
+		    	.pipe(gulp.dest('./build'));
+	        console.log('Updated!', (Date.now() - updateStart) + 'ms');
+	    })
+	    .bundle() // Create the initial bundle when starting the task
+	    .pipe(source('./src/app.js'))
     	.pipe(rename('bundle.js'))
     	.pipe(gulp.dest('./build'));
 });

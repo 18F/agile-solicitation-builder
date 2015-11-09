@@ -11,7 +11,9 @@
   "dependencies": {
     "history": "^1.13.0",
     "react": "^0.14.2",
+    "react-bootstrap": "^0.27.3",
     "react-dom": "^0.14.2",
+    "react-flexbox": "^3.0.0",
     "react-router": "^1.0.0-rc4"
   },
   "devDependencies": {
@@ -19,6 +21,7 @@
     "gulp": "^3.9.0",
     "gulp-rename": "^1.2.2",
     "reactify": "^1.1.1",
-    "vinyl-source-stream": "^1.1.0"
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.6.0"
   }
 }
