@@ -56,21 +56,25 @@ var Sidebar = React.createClass({
 	},
 });
 
+
 var Request = React.createClass({
 	render: function() {
 		var mainStyle = {
 			paddingLeft: 16,
 		};
-
 		return (
 			<View row>
-				<View width="256px">
-					<Sidebar width={256} currentPage={this.props.location.pathname} rfpId={this.props.params.id} />
+				<View className="col-md-2">
+					<Sidebar width={200} currentPage={this.props.location.pathname} rfpId={this.props.params.id} />
 				</View>
-				<View className="main" style={mainStyle}>
+								<View className="col-md-1">					
+				</View>
+				<View className="main col-md-8" style={mainStyle}>
 					<div>
 						{this.props.children}
 					</div>
+				</View>
+				<View className="col-md-1">					
 				</View>
 			</View>
 		);
