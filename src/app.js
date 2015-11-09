@@ -22,22 +22,31 @@ var RequestOverview = require('./request_overview');
 var Question = require('./question');
 var Results = require('./results');
 
-var App = React.createClass({
+var Header = React.createClass({
 	render: function() {
-		var appStyle = {
-			padding: 8,
-		};
 		var inheritStyle = {
 			color: "inherit",
 			textDecoration: "inherit",
 		};
 
 		return (
+			<PageHeader>
+				<IndexLink to="/" style={inheritStyle}>Playbook in Action</IndexLink>
+			</PageHeader>
+		);
+	},
+});
+
+var App = React.createClass({
+	render: function() {
+		var appStyle = {
+			padding: 8,
+		};
+
+		return (
 			<View column style={appStyle}>
 				<View>
-					<PageHeader>
-						<IndexLink to="/" style={inheritStyle}>Playbook in Action</IndexLink>
-					</PageHeader>
+					<Header />
 				</View>
 				{this.props.children}
 			</View>
