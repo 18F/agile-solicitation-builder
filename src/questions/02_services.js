@@ -38,7 +38,7 @@ var Services = React.createClass({
 				<div className="radio">
 				  <label>
 				    <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3"></input>
-				    A third type of contract
+				    A fourth type of contract
 				  </label>
 				</div>
 
@@ -52,14 +52,20 @@ var Services = React.createClass({
 				<p>@TODO</p>
 
 				<h4>Payment Schedule</h4>
-				<textarea className="form-control" rows="3"></textarea>
-				<p>The contractor shall be paid upon the completion of each iteration upon its acceptance and verification by the Contracting Officer’s Representative (COR). Invoices shall be submitted at the end of each iteration in accordance with the delivery schedule as established in the Performance Work Statement.</p>
+					<p>Would you like to include the standard agile contracting text here? (shown below)</p>
+					
+					<button type="button" className="btn btn-default">Yes</button>
+					<button type="button" className="btn btn-default">No</button>
+					
+					<textarea className="form-control" rows="3"></textarea>
+					
+					<p>The contractor shall be paid upon the completion of each iteration upon its acceptance and verification by the Contracting Officer’s Representative (COR). Invoices shall be submitted at the end of each iteration in accordance with the delivery schedule as established in the Performance Work Statement.</p>
 
 				<h4>2.4 Award Term Incentive</h4>
 
 				<p>This Task Order shall be Firm Fixed Price/Award Term Incentive. The purpose of the Award Term Incentive is to incentivize superior performance and delivery by offering an additional period of performance. Following the base period, the Government will offer one (1) Award Term Incentive and two (2) additional options pending availability of funds.</p>
 
-				<p>There is more text, but Jonathan says it isn't easily re-usable across RFQs/RFPs.</p>
+				<p>There is more text, but Jonathan says it is not easily re-usable across RFQs/RFPs.</p>
 
 			</div>
 		);

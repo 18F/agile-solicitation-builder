@@ -30,9 +30,11 @@ var Header = React.createClass({
 		};
 
 		return (
-			<PageHeader>
-				<IndexLink to="/" style={inheritStyle}>Playbook in Action</IndexLink>
-			</PageHeader>
+			<div className="col-md-12">
+				<h1>
+					<IndexLink to="/" style={inheritStyle}>Playbook in Action</IndexLink>
+				</h1>
+			</div>
 		);
 	},
 });

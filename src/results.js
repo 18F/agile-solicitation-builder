@@ -4,7 +4,7 @@ var Results = React.createClass({
 	render: function() {
 		return (
 			<div>
-				<div>Results for RFP {this.props.params.id}!</div>
+				<div>Yay results for RFP/RFQ {this.props.params.id}!</div>
 			</div>
 		);
 	},

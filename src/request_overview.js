@@ -11,7 +11,7 @@ var RequestOverview = React.createClass({
 		return (
 			<div>
 				<div>
-					You're on your way to writing an awesome request! We'll
+					You're on your way to writing an awesome RFQ or RFP! We'll
 					ask you some questions to understand what you want to build,
 					and then let you download your form.
 				</div>
