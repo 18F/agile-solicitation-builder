@@ -27,12 +27,16 @@ var App = React.createClass({
 		var appStyle = {
 			padding: 8,
 		};
+		var inheritStyle = {
+			color: "inherit",
+			textDecoration: "inherit",
+		};
 
 		return (
 			<View column style={appStyle}>
 				<View>
 					<PageHeader>
-						<IndexLink to="/">Playbook in Action</IndexLink>
+						<IndexLink to="/" style={inheritStyle}>Playbook in Action</IndexLink>
 					</PageHeader>
 				</View>
 				{this.props.children}

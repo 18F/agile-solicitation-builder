@@ -6,17 +6,15 @@ var Services = require('./questions/02_services');
 
 var Question = React.createClass({
 	render: function() {
-		console.log("Question:"+this.props.params.qid, typeof this.props.params.qid);
-
 		// Store the question to display in el;
 		var question;
 		switch(this.props.params.qid) {
 			case "1":
-				question = <Declarations />;
+				question = <Declarations params={this.props.params} />;
 				break;
 			
 			case "2":
-				question = <Services />;
+				question = <Services params={this.props.params} />;
 				break;
 
 			default:

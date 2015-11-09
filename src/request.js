@@ -17,17 +17,29 @@ var Request = React.createClass({
 			paddingLeft: 8,
 		};
 
+		var subpages = [
+			{id: "", title: "Overview"},
+			{id: "/question/1", title: "1. Declarations"},
+			{id: "/question/2", title: "2. Services"},
+			{id: "/results", title: "Results"},
+		];
+
+		var links = subpages.map(function(subpage, i) {
+			var link = "/rfp/"+this.props.params.id+subpage.id;
+			var active = (link == this.props.location.pathname);
+			return (
+				<li role="presentation" className={active ? "active" : ""}><IndexLink to={link}>{subpage.title}</IndexLink></li>
+			);
+		}.bind(this));
+
 		return (
 			<View row>
 				<View width="256px">
-					<Nav stacked style={{width:256}}>
-						<li><IndexLink to="/rfp/1">Overview</IndexLink></li>
-						<li><Link to="/rfp/1/question/1">1. Declarations</Link></li>
-						<li><Link to="/rfp/1/question/2">2. Services</Link></li>
-						<li><Link to="/rfp/1/results">Results</Link></li>
+					<Nav stacked style={{width:256}} bsStyle="pills">
+						{links}
 					</Nav>
 				</View>
-				<View class="main" style={mainStyle}>
+				<View className="main" style={mainStyle}>
 					<div>
 						{this.props.children}
 					</div>
