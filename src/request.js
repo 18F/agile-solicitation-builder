@@ -11,6 +11,9 @@ var NavItem = require('react-bootstrap').NavItem;
 var Link = require('react-router').Link;
 var IndexLink = require('react-router').IndexLink;
 
+// Custom elements
+var questionList = require('./question_list');
+
 var Sidebar = React.createClass({
 	propTypes: {
 		rfpId: React.PropTypes.string.isRequired,
@@ -22,15 +25,11 @@ var Sidebar = React.createClass({
 
 		var prefixLinks = [{link: baseURL, title: "Overview"}];
 		var postfixLinks = [{link: baseURL+"/results", title: "Results"}];
-		var questions = [
-			{id: "1", title: "1. Declarations"},
-			{id: "2", title: "2. Services"},
-		];
 
 		// Generate subpages
-		var questionLinks = questions.map(function(question) {
+		var questionLinks = questionList.map(function(question) {
 			return {
-				link: baseURL+"/question/"+question.id,
+				link: baseURL+"/question/"+question.code,
 				title: question.title,
 			};
 		});

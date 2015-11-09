@@ -1,30 +1,28 @@
 var React = require('react');
 
-// Question components
-var Declarations = require('./questions/01_declaration');
-var Services = require('./questions/02_services');
+// Custom components
+var questionList = require('./question_list');
 
 var Question = React.createClass({
 	render: function() {
-		// Store the question to display in el;
+		// Store the question to display in `question`.
 		var question;
-		switch(this.props.params.qid) {
-			case "1":
-				question = <Declarations params={this.props.params} />;
-				break;
-			
-			case "2":
-				question = <Services params={this.props.params} />;
-				break;
-
-			default:
-				question = "Unknown question: '"+this.props.params.qid+"'";
+		questionList.forEach(function(q) {
+			if(q.code == this.props.params.qid) {
+				var Component = q.component;
+				question = (
+					<Component params={this.props.params} />
+				);
+			}
+		}.bind(this));
+		
+		// If there was no match
+		if(!question) {
+			question = "Unknown question: '"+this.props.params.qid+"'";
 		}
 
 		return (
-			<div>
-				{question}
-			</div>
+			<div>{question}</div>
 		);
 	},
 });
