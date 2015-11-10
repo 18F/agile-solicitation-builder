@@ -1,0 +1,16 @@
+.header {
+	border-bottom: solid 1px #aeb0b5;
+	margin-bottom: 15px;
+}
+
+.term {
+	font-weight: 500;
+}
+
+.yes-no {
+	margin-right: 10px;
+}
+
+#definitions{
+	margin-top: 15px;
+}

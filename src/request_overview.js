@@ -11,10 +11,11 @@ var RequestOverview = React.createClass({
 		return (
 			<div>
 				<div>
-					You're on your way to writing an awesome RFQ or RFP! We'll
-					ask you some questions to understand what you want to build,
-					and then let you download your form.
+					<p>You're on your way to writing an awesome RFQ or RFP!</p>
+					<p>We'll ask you some questions to understand what you want to build,
+					and then let you download the generated documents.</p>
 				</div>
+				<br />
 				<Link to={"/rfp/"+this.props.params.id+"/question/1"}>
 					<Button bsStyle="primary">{"Let's go!"}</Button>
 				</Link>

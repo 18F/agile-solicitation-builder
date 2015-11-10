@@ -1,20 +1,46 @@
 var React = require('react');
 
 var Declaration = React.createClass({
+	getInitialState: function() {
+		return {
+			response: false,
+			showTerms: true,
+		};
+	},
 	save: function(cb) {
 		// TODO: save data
 		setTimeout(cb, 500);
+	},
+	updateResponse: function(response){
+		console.log("updating response!");
+		console.log(this.state.response);
+		console.log(this.state.showTerms);
+		if (response == "no") {
+			this.state.showTerms = false;
+		}
+		else {
+			this.state.showTerms = true;
+		}
+		this.state.response = response;
 	},
 	render: function() {
 		return (
 			<div>
 				<p>These are the standard definitions for agile development terms in alignment with the USDS Playbook. Do you wish to add these definitions to your own document? You can also modify the definitions and add additional terms after they are added.</p>
 
-				<button type="button" className="btn btn-default">Yes</button>
-				<button type="button" className="btn btn-default">No</button>
+				<button type="button" className="btn btn-default yes-no" onClick={this.updateResponse("yes")}>Yes</button>
+				<button type="button" className="btn btn-default yes-no" onClick={this.updateResponse("no")}>No</button>
+				
+				{this.state.showTerms? <Terms /> : null}
+			</div>
+		);
+	},
+});
 
-				<br />
-				<br />
+var Terms = React.createClass({
+	render: function() {
+		return (
+			<div id="definitions">
 
 				<span className="term">AGILE DEVELOPMENT/AGILE SOFTWARE DEVELOPMENT</span>
 				<p>A proven commercial methodology for software development that is characterized by incremental and iterative processes where releases are produced in close collaboration with the customer. This process improves investment manageability, lowers risk of project failure, shortens the time to realize value, and allows agencies to better adapt to changing needs.</p>
@@ -49,6 +75,7 @@ var Declaration = React.createClass({
 
 				<span className="term">THROUGHPUT</span>
 				<p>The amount of material or items passing through a system or process; in this document, refers to the work activity of a product development team.</p>
+
 			</div>
 		);
 	},

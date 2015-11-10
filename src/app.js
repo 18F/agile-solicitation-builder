@@ -4,9 +4,6 @@ var ReactDOM = require('react-dom');
 // Dependencies
 var View = require('react-flexbox');
 
-// Bootstrap
-var PageHeader = require('react-bootstrap').PageHeader;
-
 // Router stuff
 var Router = require('react-router').Router;
 var Route = require('react-router').Route;
@@ -30,7 +27,7 @@ var Header = React.createClass({
 		};
 
 		return (
-			<div className="col-md-12">
+			<div className="col-md-12 header">
 				<h1>
 					<IndexLink to="/" style={inheritStyle}>Playbook in Action</IndexLink>
 				</h1>
