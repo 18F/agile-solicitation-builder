@@ -8,9 +8,21 @@
 }
 
 .yes-no {
-	margin-right: 10px;
+	margin-right: 5px;
+	margin-left: 5px;
+}
+
+.sub-heading{
+	font-size: 20px;
+	font-weight: 500;
+	margin-bottom: 10px;
 }
 
 #definitions{
 	margin-top: 15px;
+}
+
+.help {
+	background-color: #aeb0b5;
+	font-weight: 600;
 }
