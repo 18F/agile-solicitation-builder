@@ -17,8 +17,9 @@ var Declaration = React.createClass({
 		console.log(this.state.showTerms);
 		if (response == "no") {
 			this.state.showTerms = false;
+			console.log('no!');
 		}
-		else {
+		else if (response == "yes") {
 			this.state.showTerms = true;
 		}
 		this.state.response = response;
@@ -28,8 +29,8 @@ var Declaration = React.createClass({
 			<div>
 				<p>These are the standard definitions for agile development terms in alignment with the USDS Playbook. Do you wish to add these definitions to your own document? You can also modify the definitions and add additional terms after they are added.</p>
 
-				<button type="button" className="btn btn-default yes-no" onClick={this.updateResponse("yes")}>Yes</button>
-				<button type="button" className="btn btn-default yes-no" onClick={this.updateResponse("no")}>No</button>
+				<button type="button" className="btn btn-default yes-no" onClick={this.updateResponse.bind("yes")}>Yes</button>
+				<button type="button" className="btn btn-default yes-no" onClick={this.updateResponse.bind("no")}>No</button>
 				
 				{this.state.showTerms? <Terms /> : null}
 			</div>

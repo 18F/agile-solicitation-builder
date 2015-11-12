@@ -14,6 +14,8 @@ var RequestOverview = React.createClass({
 					<p>You're on your way to writing an awesome RFQ or RFP!</p>
 					<p>We'll ask you some questions to understand what you want to build,
 					and then let you download the generated documents.</p>
+					<p>Firstly, what agency is this for?</p>
+					<p>Secondly, is this an X or a Y?</p>
 				</div>
 				<br />
 				<Link to={"/rfp/"+this.props.params.id+"/question/1"}>
