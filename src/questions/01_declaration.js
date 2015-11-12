@@ -11,18 +11,18 @@ var Declaration = React.createClass({
 		// TODO: save data
 		setTimeout(cb, 500);
 	},
-	updateResponse: function(response){
+	updateResponse: function(response_text){
 		console.log("updating response!");
 		console.log(this.state.response);
 		console.log(this.state.showTerms);
-		if (response == "no") {
-			this.state.showTerms = false;
+		if (response_text == "no") {
+			this.setState({showTerms: false});
 			console.log('no!');
 		}
-		else if (response == "yes") {
-			this.state.showTerms = true;
+		else if (response_text == "yes") {
+			this.setState({showTerms: true});
 		}
-		this.state.response = response;
+		this.setState({response: response_text});
 	},
 	render: function() {
 		return (
