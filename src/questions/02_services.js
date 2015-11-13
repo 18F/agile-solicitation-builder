@@ -1,31 +1,18 @@
 var React = require('react');
 
-var PaymentText = React.createClass({
-	render: function() {
-		return (
-			<p>The contractor shall be paid upon the completion of each iteration upon its acceptance and verification by the Contracting Officer’s Representative (COR). Invoices shall be submitted at the end of each iteration in accordance with the delivery schedule as established in the Performance Work Statement.
-			</p>
-		);
-	},
-});
+var defaultPaymentText = "The contractor shall be paid upon the completion of each iteration upon its acceptance and verification by the Contracting Officer’s Representative (COR). Invoices shall be submitted at the end of each iteration in accordance with the delivery schedule as established in the Performance Work Statement."
 
 var Services = React.createClass({
 	getInitialState: function() {
 		return {
 			response: false,
 			textInBox: false,
+			paymentText: defaultPaymentText,
 		};
 	},
-	updateState: function(response_text){
-		if (response_text == "no") {
-			this.setState({textInBox: false});
-		}
-		if (response_text == "yes") {
-			this.setState({textInBox: true});
-		}
-		this.setState({response: response_text});
-		console.log(this.state.textInBox);
-	},
+	handleChange: function(section, event) {
+    this.setState({paymentText : event.target.value });
+  },
 	save: function(cb) {
 		// TODO: save data
 		setTimeout(cb, 500);
@@ -54,22 +41,17 @@ var Services = React.createClass({
 				<h5>NAICS and FAR Justification Codes</h5>
 				<p>Helpful hints go here</p>
 
-				<textarea className="form-control" rows="3" defaultValue="This requirement will be solicited under the following North American Industrial Classification System (NAICS) Code: 541512, Computer Systems Design Services, [TOTAL COST]. This Task Order will be made in accordance with FAR 16.505 which governs orders placed under Indefinite Delivery contracts as detailed in the GSA GWAC Ordering guide."></textarea>
+				<textarea className="form-control" rows="4" defaultValue="This requirement will be solicited under the following North American Industrial Classification System (NAICS) Code: 541512, Computer Systems Design Services, [TOTAL COST]. This Task Order will be made in accordance with FAR 16.505 which governs orders placed under Indefinite Delivery contracts as detailed in the GSA GWAC Ordering guide."></textarea>
 
 				<span className="sub-heading">Contract Line Item Number (CLIN) Format</span>
 
 				<p>@TODO</p>
 
 				<span className="sub-heading">Payment Schedule</span>
-					<p>Would you like to include the standard agile contracting text here? (shown below)
-						<button type="button" className="btn btn-default yes-no" onClick={this.updateState.bind(this, "yes")}>Yes</button>
-						<button type="button" className="btn btn-default yes-no" onClick={this.updateState.bind(this, "no")}>No</button>
+					<p>We have pre-populated this section with the standard agile contracting text. However you are free to add to, modify or delete this text as you see fit.
 					</p>												
-					<textarea className="form-control" rows="3" value={this.state.textInBox? <PaymentText /> : ""}>
-					</textarea>
-
-					{this.state.textInBox? null : <PaymentText />}
-					
+					<textarea className="form-control" rows="3" onChange={this.handleChange.bind(this, 'paymentText')} defaultValue={this.state.paymentText}>
+					</textarea>								
 				
 				<h4>Award Term Incentive</h4>
 				<h5>Would you like to include an award or an incentive?</h5>
@@ -92,9 +74,7 @@ var Services = React.createClass({
 					  </label>
 					</div>
 
-				<p>This Task Order shall be Firm Fixed Price/Award Term Incentive. The purpose of the Award Term Incentive is to incentivize superior performance and delivery by offering an additional period of performance. Following the base period, the Government will offer one (1) Award Term Incentive and two (2) additional options pending availability of funds.</p>
-
-
+				<p>(if firm fixed price?) This Task Order shall be Firm Fixed Price/Award Term Incentive. The purpose of the Award Term Incentive is to incentivize superior performance and delivery by offering an additional period of performance. Following the base period, the Government will offer one (1) Award Term Incentive and two (2) additional options pending availability of funds.</p>
 			</div>
 		);
 	},
