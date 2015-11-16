@@ -19,7 +19,9 @@ var Services = React.createClass({
 	},
 	render: function() {
 		return (
-			<div>				
+			<div>
+				<div className="main-heading">Services and Prices</div>
+
 				<span className="sub-heading">Brief Description of Services</span>
 				<p>Ex: Services required under this Task Order are to assist the U.S. Small Business Administration (SBA) with the design and implementation of systems to support the SBA’s 504 Lending Program.</p>
 				<textarea className="form-control" rows="4" placeholder="1-2 sentences"></textarea>				
@@ -53,7 +55,7 @@ var Services = React.createClass({
 					<textarea className="form-control" rows="3" onChange={this.handleChange.bind(this, 'paymentText')} defaultValue={this.state.paymentText}>
 					</textarea>								
 				
-				<h4>Award Term Incentive</h4>
+				<span className="sub-heading">Award Term Incentive</span>
 				<h5>Would you like to include an award or an incentive?</h5>
 					<div className="checkbox">
 					  <label>

@@ -12,10 +12,15 @@
 	margin-left: 5px;
 }
 
+.main-heading{
+	font-size: 28px;
+	margin-bottom: 10px;
+}
+
 .sub-heading{
 	font-size: 20px;
 	font-weight: 500;
-	margin-bottom: 10px;
+	margin-bottom: 50px;
 }
 
 #definitions{
@@ -25,4 +30,12 @@
 .help {
 	background-color: #aeb0b5;
 	font-weight: 600;
+}
+
+p {
+	margin-top: 5px;
+}
+
+textarea {
+	margin: 10px 0px;
 }

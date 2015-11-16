@@ -8,21 +8,23 @@ var Objective = React.createClass({
 	render: function() {
 		return (
 			<div>
-				<h3>Statement of Objectives</h3>
-				<h4>General Background</h4>
+				<div className="main-heading">Statement of Objectives</div>
+				<p>This section has 6 components.</p>
+
+				<span className="sub-heading">General Background</span>
 				<p>Please provide several paragraphs about your project's history, mission, and current state.</p>
 
 				<textarea className="form-control" rows="9"></textarea>
 
-				<h4>Program History</h4>
+				<span className="sub-heading">Program History</span>
 				<p>If you have any information about the current vendors and specific technology being used please provide it here.</p>
 
 				<textarea className="form-control" rows="10"></textarea>
 
-				<h4>3.3 Objectives</h4>
+				<span className="sub-heading">Objectives</span>
 				<p>Note: The Statement of Objectives will be removed at time of award and replaced with the Offeror’s Performance Work Statement. All listed objectives and requirements shall be included as part of the Offeror’s Performance Work Statement.</p>
 
-				<h4>3.3.1 Overview </h4>
+				<span className="sub-heading">Overview </span>
 				<p>Who is your user(s)? Has anyone working on this project done any user research? [learn more here!]</p>
 
 				<p>What are your top five goals for this project? </p>

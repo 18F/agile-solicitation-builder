@@ -1,6 +1,6 @@
 var React = require('react');
 
-var Declaration = React.createClass({
+var Definition = React.createClass({
 	getInitialState: function() {
 		return {
 			response: false,
@@ -11,13 +11,12 @@ var Declaration = React.createClass({
 		// TODO: save data
 		setTimeout(cb, 500);
 	},
+	handleChange: function(event) {
+    this.setState({ text: event.target.value });
+  },
 	updateResponse: function(response_text){
-		console.log("updating response!");
-		console.log(this.state.response);
-		console.log(this.state.showTerms);
 		if (response_text == "no") {
 			this.setState({showTerms: false});
-			console.log('no!');
 		}
 		else if (response_text == "yes") {
 			this.setState({showTerms: true});
@@ -27,12 +26,13 @@ var Declaration = React.createClass({
 	render: function() {
 		return (
 			<div>
+				<div className="main-heading">Definitions</div>
 				<p>These are the standard definitions for agile development terms in alignment with the USDS Playbook. Do you wish to add these definitions to your own document? You can also modify the definitions and add additional terms after they are added.</p>
 
 				<button type="button" className="btn btn-default yes-no" onClick={this.updateResponse.bind(this, "yes")}>Yes</button>
 				<button type="button" className="btn btn-default yes-no" onClick={this.updateResponse.bind(this, "no")}>No</button>
-				
-				{this.state.showTerms? <Terms /> : null}
+
+				{this.state.showTerms? <Terms /> : <textarea className="form-control" rows="5" onChange={this.handleChange}></textarea>}
 
 			</div>
 		);
@@ -83,4 +83,4 @@ var Terms = React.createClass({
 	},
 });
 
-module.exports = Declaration;
+module.exports = Definition;

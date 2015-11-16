@@ -8,7 +8,9 @@ var Requirement = React.createClass({
 	render: function() {
 		return (
 			<div>
-				<h4>4.1	Key Personnel</h4>
+				<div className="main-heading">Contract Requirements</div>
+				<p>This section has many components but much of the content is pre-filled.</p>
+				<span className="sub-heading">4.1	Key Personnel</span>
 				<p>The following requirements related to personnel must be met:</p>
 				<ul>
 					<li>a) If awarded this Task Order, the Contractor shall assign to perform this Task Order those persons whose résumés are submitted with its proposal and who are identified in the Contractor’s proposal as Key Personnel. Not all contractor employees assigned to perform this Task Order will be Key Personnel.</li>
@@ -31,14 +33,14 @@ var Requirement = React.createClass({
 							<li>h) Proven knowledge of managing Agile Software Development efforts.</li>
 						</ul>
 				</ul>
-				<h4>Transition Plan</h4>
+				<span className="sub-heading">Transition Plan</span>
 				<p>1)	Ensure that all deliverables, products, licenses, designs, data, documentation, tests, user research notes, source code, configuration settings and files, and materials developed throughout this Task Order will be the property of the U.S. Government.
 2)	30 days prior to Task Order base period conclusion, provide a Transition Plan for all deliverables, products, and materials. Should options be exercised, the Transition Plan will be updated 30 days prior to the end of each option period.</p>
 				3)	Coordinate with the COR and potentially another vendor, and implement the Transition Plan according to the COR’s direction.
 4)	Provide assistance to the COR and potentially another vendor to stand-up and ensure the applications, systems, databases, platform, and environments are tested and fully operational.
 5)	Ensure the transition plan includes a detailed inventory of all files, materials, etc. that will be submitted along with detailed instructions to seamlessly set up the websites, applications, databases, systems, platform, etc. At that time, all files, materials, boxes, etc. shall be clearly labeled, packaged, and indexed according to the inventory.
 @TODO standard for code, 
-				<h4>Transition Activities</h4>
+				<span className="sub-heading">Transition Activities</span>
 				<p>The Contractor shall:
 1)	During the transition to the Government and/or a new contractor, the Contractor shall perform all necessary transition activities, including, but not limited to, continued full services to SBA and other customers; participation, at discretion of COR in five or more meetings with the Government or new contractor to effect a smooth transition and provide detailed information on the operation of all deliverables; training of new personnel (contractor or Government) during transition period, in all system operation and maintenance functions; appropriate close-out of outstanding technical and related work.
 2)	Final report should include list of accomplishments, documentation, and customized code developed for SBA. Should the Contractor be terminated prior to the end of the scheduled base period, the Contractor shall transfer all project materials to the COR within two weeks of the COR’s request.
