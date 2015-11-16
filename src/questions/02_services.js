@@ -1,6 +1,8 @@
 var React = require('react');
 
-var defaultPaymentText = "The contractor shall be paid upon the completion of each iteration upon its acceptance and verification by the Contracting Officer’s Representative (COR). Invoices shall be submitted at the end of each iteration in accordance with the delivery schedule as established in the Performance Work Statement."
+var defaultPaymentText = "The contractor shall be paid upon the completion of each iteration upon its acceptance and verification by the Contracting Officer’s Representative (COR). Invoices shall be submitted at the end of each iteration in accordance with the delivery schedule as established in the Performance Work Statement.";
+
+var defaultCodesText = "This requirement will be solicited under the following North American Industrial Classification System (NAICS) Code: 541512, Computer Systems Design Services, [TOTAL COST]. This Task Order will be made in accordance with FAR 16.505 which governs orders placed under Indefinite Delivery contracts as detailed in the GSA GWAC Ordering guide.";
 
 var Services = React.createClass({
 	getInitialState: function() {
@@ -8,6 +10,7 @@ var Services = React.createClass({
 			response: false,
 			textInBox: false,
 			paymentText: defaultPaymentText,
+			codesText: defaultCodesText,
 		};
 	},
 	handleChange: function(section, event) {
@@ -22,11 +25,13 @@ var Services = React.createClass({
 			<div>
 				<div className="main-heading">Services and Prices</div>
 
-				<span className="sub-heading">Brief Description of Services</span>
-				<p>Ex: Services required under this Task Order are to assist the U.S. Small Business Administration (SBA) with the design and implementation of systems to support the SBA’s 504 Lending Program.</p>
+				<div className="sub-heading">Brief Description of Services</div>
+				<p>Ex: Services required under this {docType} are to assist the {agencyFullname} ({agency}) with the design and implementation of systems to support the {agency}’s Program for X.</p>
 				<textarea className="form-control" rows="4" placeholder="1-2 sentences"></textarea>				
 
-				<span className="sub-heading">Type of Contract</span>
+				<div className="sub-heading">Type of Contract</div>
+				<p>What time of contract will these be?</p>
+				<div className="sub-text">We recommend Firm Fixed Price as it better supports agile development.</div>
 				<div className="radio">
 				  <label>
 				    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" defaultChecked></input>
@@ -43,19 +48,19 @@ var Services = React.createClass({
 				<h5>NAICS and FAR Justification Codes</h5>
 				<p>Helpful hints go here</p>
 
-				<textarea className="form-control" rows="4" defaultValue="This requirement will be solicited under the following North American Industrial Classification System (NAICS) Code: 541512, Computer Systems Design Services, [TOTAL COST]. This Task Order will be made in accordance with FAR 16.505 which governs orders placed under Indefinite Delivery contracts as detailed in the GSA GWAC Ordering guide."></textarea>
+				<textarea className="form-control" rows="4" defaultValue={this.state.codesText}></textarea>
 
-				<span className="sub-heading">Contract Line Item Number (CLIN) Format</span>
+				<div className="sub-heading">Contract Line Item Number (CLIN) Format</div>
 
 				<p>@TODO</p>
 
-				<span className="sub-heading">Payment Schedule</span>
+				<div className="sub-heading">Payment Schedule</div>
 					<p>We have pre-populated this section with the standard agile contracting text. However you are free to add to, modify or delete this text as you see fit.
 					</p>												
 					<textarea className="form-control" rows="3" onChange={this.handleChange.bind(this, 'paymentText')} defaultValue={this.state.paymentText}>
 					</textarea>								
 				
-				<span className="sub-heading">Award Term Incentive</span>
+				<div className="sub-heading">Award Term Incentive</div>
 				<h5>Would you like to include an award or an incentive?</h5>
 					<div className="checkbox">
 					  <label>

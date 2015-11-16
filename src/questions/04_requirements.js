@@ -10,7 +10,7 @@ var Requirement = React.createClass({
 			<div>
 				<div className="main-heading">Contract Requirements</div>
 				<p>This section has many components but much of the content is pre-filled.</p>
-				<span className="sub-heading">4.1	Key Personnel</span>
+				<div className="sub-heading">Key Personnel</div>
 				<p>The following requirements related to personnel must be met:</p>
 				<ul>
 					<li>a) If awarded this Task Order, the Contractor shall assign to perform this Task Order those persons whose résumés are submitted with its proposal and who are identified in the Contractor’s proposal as Key Personnel. Not all contractor employees assigned to perform this Task Order will be Key Personnel.</li>
@@ -33,35 +33,90 @@ var Requirement = React.createClass({
 							<li>h) Proven knowledge of managing Agile Software Development efforts.</li>
 						</ul>
 				</ul>
-				<span className="sub-heading">Transition Plan</span>
-				<p>1)	Ensure that all deliverables, products, licenses, designs, data, documentation, tests, user research notes, source code, configuration settings and files, and materials developed throughout this Task Order will be the property of the U.S. Government.
-2)	30 days prior to Task Order base period conclusion, provide a Transition Plan for all deliverables, products, and materials. Should options be exercised, the Transition Plan will be updated 30 days prior to the end of each option period.</p>
-				3)	Coordinate with the COR and potentially another vendor, and implement the Transition Plan according to the COR’s direction.
-4)	Provide assistance to the COR and potentially another vendor to stand-up and ensure the applications, systems, databases, platform, and environments are tested and fully operational.
-5)	Ensure the transition plan includes a detailed inventory of all files, materials, etc. that will be submitted along with detailed instructions to seamlessly set up the websites, applications, databases, systems, platform, etc. At that time, all files, materials, boxes, etc. shall be clearly labeled, packaged, and indexed according to the inventory.
-@TODO standard for code, 
-				<span className="sub-heading">Transition Activities</span>
-				<p>The Contractor shall:
-1)	During the transition to the Government and/or a new contractor, the Contractor shall perform all necessary transition activities, including, but not limited to, continued full services to SBA and other customers; participation, at discretion of COR in five or more meetings with the Government or new contractor to effect a smooth transition and provide detailed information on the operation of all deliverables; training of new personnel (contractor or Government) during transition period, in all system operation and maintenance functions; appropriate close-out of outstanding technical and related work.
-2)	Final report should include list of accomplishments, documentation, and customized code developed for SBA. Should the Contractor be terminated prior to the end of the scheduled base period, the Contractor shall transfer all project materials to the COR within two weeks of the COR’s request.
-</p>
-				<h4>4.3-4.7</h4>
-				<p></p>
-				<h4>6.1, 6.2</h4>
-				<p></p>
-				<h4>section 7</h4>
-				<p>what is your total period of performance? (suggest not more than 3)
-				how many option periods would you like? 
-				how long would you like each individual period of performance to be?
-				(suggested per FAR 39.1 consider less or= 6 mo per period)
-				if they answer it will populate into some kind of paragraph. 
-					7.2: place of performance? 
-				</p>
-				<h4></h4>
-				<p></p>
-				<h4></h4>
+				<div className="sub-heading">Transition Plan</div>
+				<p>The Contractor shall:</p>
+				<ol>
+					<li>Ensure that all deliverables, products, licenses, designs, data, documentation, tests, user research notes, source code, configuration settings and files, and materials developed throughout this Task Order will be the property of the U.S. Government.
+					</li>
+					<li>30 days prior to Task Order base period conclusion, provide a Transition Plan for all deliverables, products, and materials. Should options be exercised, the Transition Plan will be updated 30 days prior to the end of each option period.
+					</li>
+					<li>Coordinate with the COR and potentially another vendor, and implement the Transition Plan according to the COR’s direction.
+					</li>
+					<li>Provide assistance to the COR and potentially another vendor to stand-up and ensure the applications, systems, databases, platform, and environments are tested and fully operational.
+					</li>
+					<li>Ensure the transition plan includes a detailed inventory of all files, materials, etc. that will be submitted along with detailed instructions to seamlessly set up the websites, applications, databases, systems, platform, etc. At that time, all files, materials, boxes, etc. shall be clearly labeled, packaged, and indexed according to the inventory.
+					</li>
+				</ol>
+
+				<p>@TODO standard for code</p>
+
+				<div className="sub-heading">Transition Activities</div>
+				<p>The Contractor shall:</p>
+				<ol>
+					<li>During the transition to the Government and/or a new contractor, the Contractor shall perform all necessary transition activities, including, but not limited to, continued full services to SBA and other customers; participation, at discretion of COR in five or more meetings with the Government or new contractor to effect a smooth transition and provide detailed information on the operation of all deliverables; training of new personnel (contractor or Government) during transition period, in all system operation and maintenance functions; appropriate close-out of outstanding technical and related work.
+				</li>
+				<li>Final report should include list of accomplishments, documentation, and customized code developed for SBA. Should the Contractor be terminated prior to the end of the scheduled base period, the Contractor shall transfer all project materials to the COR within two weeks of the COR’s request.
+				</li>
+			</ol>
+			<div className="sub-heading">Controlled Facilities and Information Systems Security</div>
+			<p>The contractor must adhere to the IT security requirements described in the Appendix, including all security requirements related to deliverables under this Task Order.</p>
+			
+			<div className="sub-heading">Section 508 Accessibility Standards Notice (September 2009)</div>
+			<p>All deliverables (including, but not limited to, electronic and information technology (EIT)) procured through this Task Order must meet the applicable accessibility standards at 36 CFR § 1194, U.S. Architectural and Transportation Barriers Compliance Board (Access Board) under the authority of Section 508 of the Rehabilitation Act Amendment of 1998, unless an agency exception to this requirement exists. 36 CFR § 1194, U.S. Architectural and Transportation Barriers Compliance Board (Access Board) is viewable at http://www.section508.gov.  The Contractor shall indicate for each line item in the schedule whether each product or service is compliant or noncompliant with the accessibility standards at 36 CFR § 1194.  Further, the proposal must indicate where full details of compliance can be found (e.g., vendor’s website or other exact location).</p>
+
+			<div className="sub-heading">Non-Disclosure Policies</div>
+			<p>The work to be performed by and the data released to the Contractor’s personnel shall be treated as sensitive and confidential in nature and is not to be discussed with or released to anyone except SBA employees assigned to work with the Contractor and other Contractor personnel working on the Task Order.
+			</p>
+			<p>The Contractor is responsible for requiring all of its employees working under this Task Order, who have access to privileged information under this Task Order, to execute all Certifications required by the SBA. The SBA, as it deems appropriate, may require additional certifications be completed by the contractor at any time during Task Order performance.
+			</p>
+
+			<div className="sub-heading">Potential Organizational Conflicts of Interest</div>
+			<p>Offerors shall provide a signed statement which describes concisely all relevant facts concerning any past, present, or planned interest (financial, contractual, organizational, or otherwise) relating to the work to be performed under the proposed contract or task order and bearing on whether the Offeror has a possible organizational or personnel conflict of interest with respect to:
+			</p>
+			<ol>
+				<li>Being able to render impartial, technically sound, and objective assistance or advice, or
+				</li>
+				<li>Being given an unfair competitive advantage.
+				</li>
+			</ol>
+			<p>The Offeror may also provide relevant facts that show how its organizational structure and/or management systems limit its knowledge of possible organizational conflicts of interest relating to other divisions or sections of the organization and how that structure or system would avoid or mitigate such organizational conflict.
+			</p>
+			<p>No task order award shall be made until any potential conflict of interest has been neutralized or mitigated to the satisfaction of the Contracting Officer. The vendor will notify the Contracting Officer in writing as soon as any conflict of interest is identified and will propose steps for mitigating the conflict.</p>
+			<p>Refusal to provide the requested information or the willful misrepresentation of any relevant information by an Offeror shall disqualify the Offeror from further consideration for award of a task order under this solicitation.</p>
+			<p>If the Contracting Officer determines that a potential conflict can be avoided, effectively mitigated, or otherwise resolved through the inclusion of a special contract clause, the terms of the clause will be subject to negotiation.</p>
+
+
+			<div className="sub-heading">Contractor Use of Commercial Computer Software, Including Open Source Software</div>
+			<p>Open source software is often licensed under terms that require a user to make user’s modifications to the open source software or any software that the user combines with the open source software freely available in source code form pursuant to distribution obligations in the license. In cases where the Contractor proposes to use the open source software while performing under this Task Order, regardless of whether the open source software is delivered, the Contractor shall not create, or purport to create, any Government distribution obligation with respect to Government computer software deliverables. Prior to using any commercial computer software, including open source software which is considered commercial computer software, the Contractor shall evaluate each license for commercial computer software, and confirm that each of the following requirements is satisfied:
+			</p>
+			<ol>
+				<li>A license for a particular commercial computer software shall be compatible with all licenses for other commercial computer software that are or will be linked to, adapted to, integrated, combined or merged with the particular commercial computer software, including when the particular commercial computer software and the other commercial computer software are used with another computer program
+				</li>
+				<li>A license for commercial computer software shall not impose a future Government obligation that is foreseeable by the Contractor
+				</li>
+				<li>A license for commercial computer software shall not be terminated by the Contractor’s use of the commercial computer software in performing under the contract
+				</li>
+				<li>Contractor’s cost to comply with this requirement presents no additional costs to the Government
+				</li>
+			</ol>
+			<p>If, as a result of the Contractor’s evaluation, the Contractor satisfies all of the requirements in the paragraphs above, then the Contractor shall provide a written summary report of the above findings to the Contracting Officer stating that the Contractor has evaluated the commercial computer software use and the commercial computer software license, and made each determination required in the paragraphs above. The Contractor shall request permission from the Contracting Officer to use the proposed commercial computer software. This notification shall include all information regarding the identification and proposed use(s) of the commercial computer software.
+			</p>
+			<p>If the Contractor is unable to satisfy all of the requirements in the paragraphs above for a particular commercial computer software license, then the Contractor may not use the commercial computer software covered by the particular license without prior written approval of the Contracting Officer. If the Contractor wants to use the commercial computer software for which the requirements in the paragraphs above within this section are not satisfied, the Contractor shall request approval to use the otherwise prohibited subject commercial computer software from the Contracting Officer by providing written notification addressing the following:
+			</p>
+			<ol>
+				<li>The name and version number of the software;</li>
+				<li>The name of applicable license(s);</li>
+				<li>A brief description of the technical use and implementing approach</li>
+				<li>A “yes/no” indication as to whether the Contractor has made, or will make, any modifications to the source code;</li>
+				<li>The software website; and,</li>
+				<li>An identification of the reason(s) that the Contractor was unable to make the determination in the paragraphs above.
+				</li>
+			</ol>
+
+			<div className="sub-heading"></div>
 				<p></p>								
 			</div>
+
 		);
 	},
 });

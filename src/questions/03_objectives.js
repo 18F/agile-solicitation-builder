@@ -1,5 +1,7 @@
 var React = require('react');
 
+var defaultStakeholdersText = "Stakeholders for this project include, but are not limited to, ___, ___, the Contracting Officer’s Representative (COR) and the Contracting Officer.";
+
 var Objective = React.createClass({
 	save: function(cb) {
 		// TODO: save data
@@ -11,21 +13,21 @@ var Objective = React.createClass({
 				<div className="main-heading">Statement of Objectives</div>
 				<p>This section has 6 components.</p>
 
-				<span className="sub-heading">General Background</span>
+				<div className="sub-heading">General Background</div>
 				<p>Please provide several paragraphs about your project's history, mission, and current state.</p>
 
 				<textarea className="form-control" rows="9"></textarea>
 
-				<span className="sub-heading">Program History</span>
+				<div className="sub-heading">Program History</div>
 				<p>If you have any information about the current vendors and specific technology being used please provide it here.</p>
 
 				<textarea className="form-control" rows="10"></textarea>
 
-				<span className="sub-heading">Objectives</span>
+				<div className="sub-heading">Objectives</div>
 				<p>Note: The Statement of Objectives will be removed at time of award and replaced with the Offeror’s Performance Work Statement. All listed objectives and requirements shall be included as part of the Offeror’s Performance Work Statement.</p>
 
-				<span className="sub-heading">Overview </span>
-				<p>Who is your user(s)? Has anyone working on this project done any user research? [learn more here!]</p>
+				<div className="sub-heading">Overview </div>
+				<p>Who is your user(s)? Has anyone working on this project done any user research? (Learn more <a href="https://playbook.cio.gov/#play1" target="_blank">here</a>!)</p>
 
 				<p>What are your top five goals for this project? </p>
 				<ol>
@@ -39,44 +41,54 @@ var Objective = React.createClass({
 				<p>Each deliverable shall incorporate agency IT requirements as detailed in the Appendix of this document and the United States Digital Service Playbook standards (https://playbook.cio.gov) and be compliant with Section 508.</p>
 				<div>Deliverables - https://quip.com/SFN4AAN4NA2F</div>
 				<p>Functional Requirements, translated into Epics and User Stories that will be used to populate the Product Backlog may include, but are not limited to:
-  UX requirements gathering
-•	Initial application design and implementation
-•	System configuration to support business processes
-•	Integration for input and output methods
-•	Workflow design and implementation
-•	Overall collaboration of applications
-•	Enhancements, patches, and updates to applications, data, or cloud systems
-•	Data import of records collected from legacy systems
-•	Automated testing
-•	Training of end users on the systems</p>
-			<h4>Stakeholders</h4>
-			<p>All possible stakeholders? @TODO</p>
+					  UX requirements gathering
+					•	Initial application design and implementation
+					•	System configuration to support business processes
+					•	Integration for input and output methods
+					•	Workflow design and implementation
+					•	Overall collaboration of applications
+					•	Enhancements, patches, and updates to applications, data, or cloud systems
+					•	Data import of records collected from legacy systems
+					•	Automated testing
+					•	Training of end users on the systems</p>
 
-			<h4>Agile Development Management Plan (ADMP) and Key Personnel</h4>
-			<p>Offerors shall propose an Agile Development Management Plan (ADMP) which demonstrates how the Offeror intends to manage, develop, implement, and maintain the requirements described in this SOO and the RFQ. The plan shall include, at a minimum:
-•	Contact information for all senior leaders and an organizational chart showing the Offeror’s organizational hierarchy and reporting structure, with specific designation of individuals as Key Personnel;
-•	Management resources;
-•	Technical resources and skill sets required to develop, implement, and maintain the proposed solution; and
-•	Details on the management of the Offeror’s team that will be on-site.
+				<div className="sub-heading">Stakeholders</div>
+				<p>Feel free to add additional stakeholders as is relevant to your project.</p>
+				<textarea className="form-control" rows="4" placeholder="1-2 sentences" defaultValue={defaultStakeholdersText}>					
+				</textarea>
 
-The ADMP and the listing of Key Personnel shall become part of the Task Order upon award. 
-</p>
+				<div className="sub-heading">Agile Development Management Plan (ADMP) and Key Personnel</div>
+				<p>Offerors shall propose an Agile Development Management Plan (ADMP) which demonstrates how the Offeror intends to manage, develop, implement, and maintain the requirements described in this SOO and the RFQ. The plan shall include, at a minimum:</p>
+				<ul>
+					<li>Contact information for all senior leaders and an organizational chart showing the Offeror’s organizational hierarchy and reporting structure, with specific designation of individuals as Key Personnel;
+					</li>
+					<li>Management resources;
+					</li>
+					<li>Technical resources and skill sets required to develop, implement, and maintain the proposed solution; and
+					</li>
+					<li>Details on the management of the Offeror’s team that will be on-site.
+					</li>
+				</ul>
+				<p>The ADMP and the listing of Key Personnel shall become part of the Task Order upon award.</p>
 
-<p>The agency [Deputy Chief of Staff], relevant personnel, Contracting Officer, and COR shall hold a Kick-Off meeting/Post-Award Conference in Washington, DC with contractor’s team and other relevant Government staff to review and clarify the project’s objectives, expectations from the Government, and address any questions the Contractor may have.
-The Contractor shall provide and collaborate with the COR on an agenda for this meeting. Discussion topics shall include, but not be limited to: introduction of the Contractor and Government Staff; understanding of the specific tasks and subtasks; project management expectations; agreement on meeting schedules; and agreement on initial delivery dates.
-The Kick-Off meeting/Post-Award Conference will take place within 10 days from award and will be scheduled by the Contracting Officer.
-</p>
-<p>Is there a required place of performance? What region the work will be done?</p>
+				<div className="sub-heading">Kick-Off Meeting/Post-Award Conference</div>
+				<p>Is there a required place of performance? What region the work will be done?</p>
 
-<h4>System Documentation and Training</h4>
-<p>The Contractor shall:
-•	Provide all system documentation and training to SBA staff (in-person, video, and via webinar).
-•	Develop and provide effective training materials of all deliverables, including, but not limited to, “train the trainer” documentation.
-•	Conduct “train the trainer” sessions for SBA staff.
-•	Consult with the COR to determine what is appropriate, effective, and essential for training.
-each iteration gets documentation? should be updated with each iteration
-technical documentation?
-</p>
+				<p>The agency [Deputy Chief of Staff], relevant personnel, Contracting Officer, and COR shall hold a Kick-Off meeting/Post-Award Conference in Washington, DC with contractor’s team and other relevant Government staff to review and clarify the project’s objectives, expectations from the Government, and address any questions the Contractor may have.</p>
+				<p>The Contractor shall provide and collaborate with the COR on an agenda for this meeting. Discussion topics shall include, but not be limited to: introduction of the Contractor and Government Staff; understanding of the specific tasks and subtasks; project management expectations; agreement on meeting schedules; and agreement on initial delivery dates.</p>
+				<p>The Kick-Off meeting/Post-Award Conference will take place within 10 days from award and will be scheduled by the Contracting Officer.</p>
+
+				<div className="sub-heading">System Documentation and Training</div>
+
+				<p>The Contractor shall:</p>	
+				<ul>
+					<li>Provide all system documentation and training to SBA staff (in-person, video, and via webinar).</li>
+					<li>Develop and provide effective training materials of all deliverables, including, but not limited to, “train the trainer” documentation.</li>
+					<li>Conduct “train the trainer” sessions for SBA staff.</li>
+					<li>Consult with the COR to determine what is appropriate, effective, and essential for training.</li>
+				</ul>
+
+				<p className="new-content">Furthermore, documentation should be updated with each iteration. This includes technical documentation including but not limited to setup instructions in the README.md, user reseach findings etc. All documents should be stored electronically such that the CO, PM, and any other relevant government employees who have been granted permissions can access them at any time.</p>
 
 			</div>
 		);

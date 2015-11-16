@@ -1,6 +1,7 @@
 var React = require('react');
 var Definitions = require('./questions/01_definitions.js');
 var Services = require('./questions/02_services.js');
+var Requirements = require('./questions/04_requirements.js');
 
 var Results = React.createClass({
 	getInitialState: function() {
@@ -25,7 +26,8 @@ var Results = React.createClass({
 		return (
 			<div>
 				<div>Yay results for RFP/RFQ {this.props.params.id}!</div>
-				<div></div>
+				<div>{docType}</div>
+				<div>{agency}, {agencyFullname}</div>
 			</div>
 		);
 	},
