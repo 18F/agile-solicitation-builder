@@ -7,6 +7,11 @@ var Button = require('react-bootstrap').Button;
 var IndexLink = require('react-router').IndexLink;
 
 var Welcome = React.createClass({
+	getInitialState: function() {
+		localStorage.clear();
+		localStorage.definitions = "";
+		return {};
+	},
 	render: function() {
 		return (
 			<div className="col-md-8">

@@ -26,7 +26,7 @@ var Services = React.createClass({
 				<div className="main-heading">Services and Prices</div>
 
 				<div className="sub-heading">Brief Description of Services</div>
-				<p>Ex: Services required under this {docType} are to assist the {agencyFullname} ({agency}) with the design and implementation of systems to support the {agency}’s Program for X.</p>
+				<p>Ex: Services required under this {localStorage.getItem("docType")} are to assist the {localStorage.getItem("agencyFullname")} ({localStorage.getItem("agency")}) with the design and implementation of systems to support the {localStorage.getItem("agency")}’s Program for X.</p>
 				<textarea className="form-control" rows="4" placeholder="1-2 sentences"></textarea>				
 
 				<div className="sub-heading">Type of Contract</div>

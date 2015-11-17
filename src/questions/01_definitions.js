@@ -1,10 +1,23 @@
 var React = require('react');
 
-var Definition = React.createClass({
+var termsText = "AGILE DEVELOPMENT/AGILE SOFTWARE DEVELOPMENT: A proven commercial methodology for software development that is characterized by incremental and iterative processes where releases are produced in close collaboration with the customer. This process improves investment manageability, lowers risk of project failure, shortens the time to realize value, and allows agencies to better adapt to changing needs.\n\nCONTRACTING OFFICER (CO): The Government official responsible for the execution and administration of contracts on behalf of the Government.\n\nCONTRACTING OFFICER’S REPRESENTATIVE (COR): An individual designated by the Contracting Officer to act as his/her representative to assist in managing the contract. The authorities and limitations of a COR appointment are contained in the written letter of appointment.\n\nDAY: A calendar day unless stated otherwise. If a deliverable is due on a weekend or holiday, the deliverable shall be considered due the next business day.\n\n";
+
+var Definition = React.createClass({	
 	getInitialState: function() {
-		return {
-			response: false,
+		var response = false;
+		var textValue = "";
+		if (localStorage.getItem("definitions").length > 0){
+			response = true;
+			console.log('here!');
+			textValue: localStorage.getItem("definitions");
+		}
+		console.log(response);
+		//for some reason the below isn't displaying anything in the console :( 
+		console.log(textValue);
+		return {			
+			response: response,
 			showTerms: true,
+			text: textValue,
 		};
 	},
 	save: function(cb) {
@@ -13,13 +26,18 @@ var Definition = React.createClass({
 	},
 	handleChange: function(event) {
     this.setState({ text: event.target.value });
+    localStorage.definitions = event.target.value;
   },
 	updateResponse: function(response_text){
 		if (response_text == "no") {
 			this.setState({showTerms: false});
+			this.setState({text: ""});
 		}
 		else if (response_text == "yes") {
 			this.setState({showTerms: true});
+			localStorage.definitions = termsText;
+			this.setState({text: termsText});
+			localStorage.definitions = termsText;
 		}
 		this.setState({response: response_text});
 	},
@@ -32,7 +50,7 @@ var Definition = React.createClass({
 				<button type="button" className="btn btn-default yes-no" onClick={this.updateResponse.bind(this, "yes")}>Yes</button>
 				<button type="button" className="btn btn-default yes-no" onClick={this.updateResponse.bind(this, "no")}>No</button>
 
-				{this.state.showTerms? <Terms /> : <textarea className="form-control" rows="5" onChange={this.handleChange}></textarea>}
+				{this.state.response? <textarea className="form-control" rows="10" value={this.state.text} onChange={this.handleChange}></textarea> : <Terms />}
 
 			</div>
 		);

@@ -16,13 +16,13 @@ var RequestOverview = React.createClass({
 	setAgency: function(event) {
 		var response = event.target.value;
 		if (response.length > 1){
-			agency = response.split(" (")[1].split(")")[0];
-			agencyFullname = "U.S. " + response.split(" (")[0];
+			localStorage.agency = response.split(" (")[1].split(")")[0];
+			localStorage.agencyFullname = "U.S. " + response.split(" (")[0];
 			this.setState({response1: true});
 		}
 	},
 	setDoctype: function(event) {
-		docType = event.target.value;
+		localStorage.docType = event.target.value;
 		this.setState({response2: true});
 	},
 	render: function() {

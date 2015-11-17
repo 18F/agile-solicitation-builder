@@ -19,11 +19,6 @@ var RequestOverview = require('./request_overview');
 var Question = require('./question');
 var Results = require('./results');
 
-// Global variables
-var agency = "[AGENCY]";
-var agencyFullname = "[AGENCY FULL NAME]";
-var docType = "Task Order";
-
 
 var Header = React.createClass({
 	render: function() {

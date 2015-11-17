@@ -6,7 +6,10 @@ var Requirements = require('./questions/04_requirements.js');
 var Results = React.createClass({
 	getInitialState: function() {
 		return {
-			definitions01: "",
+			agency: localStorage.getItem("agency"),
+			agencyFullName: localStorage.getItem("agencyFullname"),
+			docType: localStorage.getItem("docType"),
+			definitions01: localStorage.getItem("definitions"),
 			services02: "",
 			objectives03: "",
 			requirements04: "",
@@ -19,15 +22,17 @@ var Results = React.createClass({
 			documents11: "",
 			conditions12: "",
 			evaluation13: "",
-			appendix: "",
+			appendix: "",			
 		};
 	},
 	render: function() {
 		return (
 			<div>
-				<div>Yay results for RFP/RFQ {this.props.params.id}!</div>
-				<div>{docType}</div>
-				<div>{agency}, {agencyFullname}</div>
+				<div className="main-heading">Resulting RFP/RFQ</div>
+				<div>Results for RFP/RFQ {this.props.params.id}!</div>
+				<div>This is a <b>{this.state.docType}</b> for the {this.state.agencyFullName} ({this.state.agency}).</div>
+				<div className="sub-heading">Definitions</div>
+				<div>{this.state.definitions01}</div>
 			</div>
 		);
 	},
