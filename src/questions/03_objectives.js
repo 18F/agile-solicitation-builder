@@ -42,7 +42,7 @@ var Objective = React.createClass({
 					</li>
 				</ol>
 
-				<div class="sub-heading">Specific Tasks and Deliverables</div>
+				<div className="sub-heading">Specific Tasks and Deliverables</div>
 				<ul>
 					<li>Research, Insights, and Synthesis</li>
 					<li>Prototype Design Solutions</li>
@@ -50,7 +50,7 @@ var Objective = React.createClass({
 					<li>Program Management and Stewardship</li>
 				</ul>
 
-				<div class="sub-heading">Deliverables</div>
+				<div className="sub-heading">Deliverables</div>
 				<p>Would you like to use ...?</p>
 				<p>Deliverables under this {this.state.docType} are defined as the completion and acceptance according to the “Definition of Done” of the iterations completed, which are based on the contractor’s Agile Software Development methodology. This methodology defines the repeatable process of providing development and deployment services in small iterations lasting two to five weeks which results in usable software, data, or product, which have little to no inherent defects. Each iteration shall be defined in the Performance Work Statement but should document how planning, requirement analysis (user story building), design, coding, testing, quality assurance, and documentation will all meet the contractor’s “Definition of Done”.</p>
 				<p>Each deliverable shall incorporate agency IT requirements as detailed in the Appendix of this document and the <a href="https://playbook.cio.gov" target="_blank">United States Digital Service Playbook</a> standards and be compliant with Section 508.</p>
@@ -89,7 +89,7 @@ var Objective = React.createClass({
 				<div className="sub-heading">Kick-Off Meeting/Post-Award Conference</div>
 				<p>Is there a required place of performance? What region the work will be done?</p>
 
-				<p>The agency [Deputy Chief of Staff], relevant personnel, Contracting Officer, and COR shall hold a Kick-Off meeting/Post-Award Conference in Washington, DC with contractor’s team and other relevant Government staff to review and clarify the project’s objectives, expectations from the Government, and address any questions the Contractor may have.</p>
+				<p>The agency's relevant personnel, Contracting Officer, and COR shall hold a Kick-Off meeting/Post-Award Conference in Washington, DC with contractor’s team and other relevant Government staff to review and clarify the project’s objectives, expectations from the Government, and address any questions the Contractor may have.</p>
 				<p>The Contractor shall provide and collaborate with the COR on an agenda for this meeting. Discussion topics shall include, but not be limited to: introduction of the Contractor and Government Staff; understanding of the specific tasks and subtasks; project management expectations; agreement on meeting schedules; and agreement on initial delivery dates.</p>
 				<p>The Kick-Off meeting/Post-Award Conference will take place within 10 days from award and will be scheduled by the Contracting Officer.</p>
 
@@ -102,7 +102,7 @@ var Objective = React.createClass({
 				for documents is separate
 				</p>
 				<p>Github: version control</p>
-				<p>The Contractor shall:</p>	
+				<p>The Contractor shall:</p>
 				<ul>
 					<li>Provide all system documentation and training to {this.state.agency} staff (in-person, video, and via webinar).</li>
 					<li>Develop and provide effective training materials of all deliverables, including, but not limited to, “train the trainer” documentation.</li>
