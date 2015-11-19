@@ -42,6 +42,14 @@ var Objective = React.createClass({
 					</li>
 				</ol>
 
+				<div class="sub-heading">Specific Tasks and Deliverables</div>
+				<ul>
+					<li>Research, Insights, and Synthesis</li>
+					<li>Prototype Design Solutions</li>
+					<li>Recommendations</li>
+					<li>Program Management and Stewardship</li>
+				</ul>
+
 				<div class="sub-heading">Deliverables</div>
 				<p>Would you like to use ...?</p>
 				<p>Deliverables under this {this.state.docType} are defined as the completion and acceptance according to the “Definition of Done” of the iterations completed, which are based on the contractor’s Agile Software Development methodology. This methodology defines the repeatable process of providing development and deployment services in small iterations lasting two to five weeks which results in usable software, data, or product, which have little to no inherent defects. Each iteration shall be defined in the Performance Work Statement but should document how planning, requirement analysis (user story building), design, coding, testing, quality assurance, and documentation will all meet the contractor’s “Definition of Done”.</p>

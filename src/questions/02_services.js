@@ -36,7 +36,7 @@ var Services = React.createClass({
 
 				<div className="sub-heading">Type of Contract</div>
 				<p>What time of contract will these be?</p>
-				<div className="sub-text">We recommend Firm Fixed Price as it better supports agile development.</div>
+				<div className="sub-text">At the moment this tool only supports Firm Fixed Price as it better supports agile development.</div>
 				<div className="radio">
 				  <label>
 				    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" defaultChecked></input>
@@ -45,7 +45,7 @@ var Services = React.createClass({
 				</div>
 				<div className="radio">
 				  <label>
-				    <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2"></input>
+				    <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2" disabled></input>
 				    Time and Materials
 				  </label>
 				</div>

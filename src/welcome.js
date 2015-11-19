@@ -18,6 +18,7 @@ var Welcome = React.createClass({
     localStorage.setItem("locationRequirement", false);
     localStorage.setItem("locationText", null);
     localStorage.setItem("totalBudget", 0);
+    localStorage.setItem("travelBudget", 0);
 		return {};
 	},
 	render: function() {
