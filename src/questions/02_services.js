@@ -2,6 +2,7 @@ var React = require('react');
 
 var defaultPaymentText = "The contractor shall be paid upon the completion of each iteration upon its acceptance and verification by the Contracting Officer’s Representative (COR). Invoices shall be submitted at the end of each iteration in accordance with the delivery schedule as established in the Performance Work Statement.";
 
+// how can I make [TOTAL COST] a variable?
 var defaultCodesText = "This requirement will be solicited under the following North American Industrial Classification System (NAICS) Code: 541512, Computer Systems Design Services, [TOTAL COST]. This Task Order will be made in accordance with FAR 16.505 which governs orders placed under Indefinite Delivery contracts as detailed in the GSA GWAC Ordering guide.";
 
 var Services = React.createClass({
@@ -11,10 +12,14 @@ var Services = React.createClass({
 			textInBox: false,
 			paymentText: defaultPaymentText,
 			codesText: defaultCodesText,
+			totalBudget: localStorage.getItem("totalBudget"),
 		};
 	},
 	handleChange: function(section, event) {
     this.setState({paymentText : event.target.value });
+  },
+  updateBudget: function(event) {
+  	this.setState({totalBudget: event.target.value });
   },
 	save: function(cb) {
 		// TODO: save data
@@ -45,8 +50,19 @@ var Services = React.createClass({
 				  </label>
 				</div>
 
+
+				<p>What is the maximum budget for your project?</p>
+				<form className="form-inline">
+					<div className="form-group">
+						<div className="input-group">
+							<div className="input-group-addon">$</div>
+	    				<input type="text" className="form-control short-response" placeholder="ex: 10,000,000" value={this.state.totalBudget} onChange={this.handleChange}></input>
+	    			</div>
+	    		</div>
+				</form>
+
 				<h5>NAICS and FAR Justification Codes</h5>
-				<p>Helpful hints go here</p>
+				<div className="sub-text">We have provided justifications you can use that are most commonly used for acquisitions involve software and software services.</div>
 
 				<textarea className="form-control" rows="4" defaultValue={this.state.codesText}></textarea>
 

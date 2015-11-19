@@ -14,12 +14,26 @@ var RequestOverview = React.createClass({
 		};
 	},
 	setAgency: function(event) {
+		var agencyFullNames = {
+				"ED": "Department of Education",
+				"DOE": "Department of Energy",
+				"EPA": "Environmental Protection Agency",
+				"GSA": "General Services Administration",
+				"DOL": "Department of Labor",
+				"NARA": "National Archives and Records Administration",
+				"NASA": "National Aeronautics and Space Administration",
+				"OMB": "Office of Management and Budget",
+				"VA": "Department of Veteran Affairs"
+		}
 		var response = event.target.value;
 		if (response.length > 1){
-			localStorage.agency = response.split(" (")[1].split(")")[0];
-			localStorage.agencyFullname = "U.S. " + response.split(" (")[0];
+			localStorage.agency = response;
+			localStorage.agencyFullname = "U.S. " + agencyFullNames[response];
 			this.setState({response1: true});
 		}
+	},
+	getAgency: function() {
+		agency = localStorage.getItem("agency");
 	},
 	setDoctype: function(event) {
 		localStorage.docType = event.target.value;
@@ -36,17 +50,17 @@ var RequestOverview = React.createClass({
 					
 					
 					<h5>Firstly, what agency is this for?</h5>
-						<select className="form-control short-response" onChange={this.setAgency}>
+						<select className="form-control medium-response" onChange={this.setAgency}>
 							<option></option>
-							<option>Department of Education (ED)</option>
-							<option>Department of Energy (DOE)</option>
-						  <option>Environmental Protection Agency (EPA)</option>
-						  <option>General Services Administration (GSA)</option>
-						  <option>Department of Labor (DOL)</option>
-						  <option>National Archives and Records Administration (NARA)</option>
-						  <option>National Aeronautics and Space Administration (NASA)</option>
-						  <option>Office of Management and Budget (OMB)</option>
-						  <option>Department of Veteran Affairs (VA)</option>
+							<option value="ED">Department of Education (ED)</option>
+							<option value="DOE">Department of Energy (DOE)</option>
+						  <option value="EPA">Environmental Protection Agency (EPA)</option>
+						  <option value="GSA">General Services Administration (GSA)</option>
+						  <option value="DOL">Department of Labor (DOL)</option>
+						  <option value="NARA">National Archives and Records Administration (NARA)</option>
+						  <option value="NASA">National Aeronautics and Space Administration (NASA)</option>
+						  <option value="OMB">Office of Management and Budget (OMB)</option>
+						  <option value="VA">Department of Veteran Affairs (VA)</option>
 						</select>
 					<br />
 
@@ -55,25 +69,25 @@ var RequestOverview = React.createClass({
 					<div className="radio">
 					  <label>
 					    <input type="radio" name="optionsRadios" value="Contract" onClick={this.setDoctype}></input>
-					    ... a new purchase under Far 15 (Contract)
+					    ... a new purchase under Far 15
 					  </label>
 					</div>
 					<div className="radio">
 					  <label>
-					    <input type="radio" name="optionsRadios" value="Purchase Order" onClick={this.setDoctype}></input>
-					    ... a new purchase under Far 13 (Purchase Order)
+					    <input type="radio" name="optionsRadios" value="Purchase Order" onClick={this.setDoctype} ></input>
+					    ... a new purchase under Far 13
 					  </label>
 					</div>
 					<div className="radio">
 					  <label>
 					    <input type="radio" name="optionsRadios" value="Task Order" onClick={this.setDoctype}></input>
-					    ... being issued off an existing Indefinite Delivery Indefinite Quantity (ID/IQ) (Task Order)
+					    ... being issued off an existing Indefinite Delivery Indefinite Quantity (ID/IQ)
 					  </label>
 					</div>
 					<div className="radio">
 					  <label>
 					    <input type="radio" name="optionsRadios" value="Call" onClick={this.setDoctype}></input>
-					    ... being ordered off an existing Blanket Purchase Agreement (BPA) (Call)
+					    ... being ordered off an existing Blanket Purchase Agreement (BPA)
 					  </label>
 					</div>
 				</div>

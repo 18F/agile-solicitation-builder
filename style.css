@@ -48,6 +48,10 @@
 	width: 150px;
 }
 
+.medium-response{
+	width: 300px;
+}
+
 .new-content {
 	font-weight: 600;
 	font-color: red;

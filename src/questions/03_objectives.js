@@ -3,6 +3,12 @@ var React = require('react');
 var defaultStakeholdersText = "Stakeholders for this project include, but are not limited to, ___, ___, the Contracting Officer’s Representative (COR) and the Contracting Officer.";
 
 var Objective = React.createClass({
+	getInitialState: function() {
+		return {
+			docType: localStorage.getItem("docType"),
+			agency: localStorage.getItem("agency"),
+		};
+	},
 	save: function(cb) {
 		// TODO: save data
 		setTimeout(cb, 500);
@@ -35,10 +41,11 @@ var Objective = React.createClass({
 						<input type="text" className="form-control" placeholder="objective"></input>
 					</li>
 				</ol>
-				<h4>Deliverables</h4>
+
+				<div class="sub-heading">Deliverables</div>
 				<p>Would you like to use ...?</p>
-				<p>Deliverables under this Task Order are defined as the completion and acceptance according to the “Definition of Done” of the iterations completed, which are based on the contractor’s Agile Software Development methodology. This methodology defines the repeatable process of providing development and deployment services in small iterations lasting two to five weeks which results in usable software, data, or product, which have little to no inherent defects. Each iteration shall be defined in the Performance Work Statement but should document how planning, requirement analysis (user story building), design, coding, testing, quality assurance, and documentation will all meet the contractor’s “Definition of Done”.</p>
-				<p>Each deliverable shall incorporate agency IT requirements as detailed in the Appendix of this document and the United States Digital Service Playbook standards (https://playbook.cio.gov) and be compliant with Section 508.</p>
+				<p>Deliverables under this {this.state.docType} are defined as the completion and acceptance according to the “Definition of Done” of the iterations completed, which are based on the contractor’s Agile Software Development methodology. This methodology defines the repeatable process of providing development and deployment services in small iterations lasting two to five weeks which results in usable software, data, or product, which have little to no inherent defects. Each iteration shall be defined in the Performance Work Statement but should document how planning, requirement analysis (user story building), design, coding, testing, quality assurance, and documentation will all meet the contractor’s “Definition of Done”.</p>
+				<p>Each deliverable shall incorporate agency IT requirements as detailed in the Appendix of this document and the <a href="https://playbook.cio.gov" target="_blank">United States Digital Service Playbook</a> standards and be compliant with Section 508.</p>
 				<div>Deliverables - https://quip.com/SFN4AAN4NA2F</div>
 				<p>Functional Requirements, translated into Epics and User Stories that will be used to populate the Product Backlog may include, but are not limited to:
 					  UX requirements gathering
@@ -69,7 +76,7 @@ var Objective = React.createClass({
 					<li>Details on the management of the Offeror’s team that will be on-site.
 					</li>
 				</ul>
-				<p>The ADMP and the listing of Key Personnel shall become part of the Task Order upon award.</p>
+				<p>The ADMP and the listing of Key Personnel shall become part of the {this.state.docType} upon award.</p>
 
 				<div className="sub-heading">Kick-Off Meeting/Post-Award Conference</div>
 				<p>Is there a required place of performance? What region the work will be done?</p>
@@ -79,12 +86,19 @@ var Objective = React.createClass({
 				<p>The Kick-Off meeting/Post-Award Conference will take place within 10 days from award and will be scheduled by the Contracting Officer.</p>
 
 				<div className="sub-heading">System Documentation and Training</div>
-
+				<p>Would you like a collaborative workspace (phrasing)
+				strongly encourage the use of a collaborative environment, do you have one?
+				GSA - google drive, other places, ???
+				check with agency policy to see which collaboration software is allowed. ex: box.com, google drive/google docs, 
+				code - version control, define what is, examples. (encourage certain options, but vendor will specify)
+				for documents is separate
+				</p>
+				<p>Github: version control</p>
 				<p>The Contractor shall:</p>	
 				<ul>
-					<li>Provide all system documentation and training to SBA staff (in-person, video, and via webinar).</li>
+					<li>Provide all system documentation and training to {this.state.agency} staff (in-person, video, and via webinar).</li>
 					<li>Develop and provide effective training materials of all deliverables, including, but not limited to, “train the trainer” documentation.</li>
-					<li>Conduct “train the trainer” sessions for SBA staff.</li>
+					<li>Conduct “train the trainer” sessions for {this.state.agency} staff.</li>
 					<li>Consult with the COR to determine what is appropriate, effective, and essential for training.</li>
 				</ul>
 
