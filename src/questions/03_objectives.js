@@ -48,6 +48,16 @@ var Objective = React.createClass({
 					<li>Prototype Design Solutions</li>
 					<li>Recommendations</li>
 					<li>Program Management and Stewardship</li>
+					<li>UX requirements gathering</li>
+					<li>Initial application design and implementation</li>
+					<li>System configuration to support business processes</li>
+					<li>Integration for input and output methods</li>
+					<li>Workflow design and implementation</li>
+					<li>Overall collaboration of applications</li>
+					<li>Enhancements, patches, and updates to applications, data, or cloud systems</li>
+					<li>Data import of records collected from legacy systems</li>
+					<li>Automated testing</li>
+					<li>Training of end users on the systems</li>
 				</ul>
 
 				<div className="sub-heading">Deliverables</div>

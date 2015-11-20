@@ -13,7 +13,22 @@ var Services = React.createClass({
 			paymentText: defaultPaymentText,
 			codesText: defaultCodesText,
 			totalBudget: localStorage.getItem("totalBudget"),
+			edit: null,
+			docType: localStorage.getItem("docType"),
 		};
+	},
+	toggleEdit: function(key, event) {
+		console.log(key);
+		if (this.state.edit === key){
+			this.setState({
+      	edit: null,
+	    });
+		}
+		else {
+			this.setState({
+	      edit: key,
+	    });
+		}
 	},
 	handleChange: function(section, event) {
     this.setState({paymentText : event.target.value });
@@ -64,8 +79,11 @@ var Services = React.createClass({
 				<h5>NAICS and FAR Justification Codes</h5>
 				<div className="sub-text">We have provided justifications you can use that are most commonly used for acquisitions involve software and software services.</div>
 
-				<textarea className="form-control" rows="4" defaultValue={this.state.codesText}></textarea>
-
+				<div className="edit" onClick={this.toggleEdit.bind(this, 'codes')}>Edit</div>
+				{this.state.edit === "codes"? <textarea className="form-control" rows="4" defaultValue={this.state.codesText}></textarea> :
+				<div><p>{this.state.docType} against [GSA Alliant Small Business (SB) GWAC] – Firm Fixed Price</p>
+				<p>This requirement will be solicited under the following North American Industrial Classification System (NAICS) Code: 541512, Computer Systems Design Services, {this.state.totalBudget}. This Task Order will be made in accordance with FAR 16.505 which governs orders placed under Indefinite Delivery contracts as detailed in the GSA GWAC Ordering guide.</p></div>				
+			}
 				<div className="sub-heading">Contract Line Item Number (CLIN) Format</div>
 
 				<p>@TODO</p>

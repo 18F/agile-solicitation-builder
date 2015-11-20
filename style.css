@@ -7,6 +7,12 @@
 	font-weight: 500;
 }
 
+div.edit {
+	color: #337ab7;
+	cursor: pointer; 
+	cursor: hand;
+}
+
 .yes-no {
 	margin-right: 5px;
 	margin-left: 5px;
