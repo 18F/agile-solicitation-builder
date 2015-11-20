@@ -47,16 +47,6 @@ var Deliveries = React.createClass({
       		travelBudget: event.target.value,
 		    });
 		    break;
-		  case "locationText":
-		  	this.setState({
-					locationText: event.target.value,
-				});
-				break;
-			case "performancePeriod":
-				this.setState({ 
-					performancePeriod: event.target.value,
-				});
-				break;
 		}
 	},
   getInitialState: function() {
