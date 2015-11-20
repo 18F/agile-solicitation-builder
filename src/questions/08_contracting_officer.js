@@ -2,6 +2,32 @@ var React = require('react');
 
 var defaultCOText = "The Contracting Officer is the only individual who can legally commit or obligate the Government for the expenditure of public funds. The technical administration of this Task Order shall not be construed to authorize the revision of the terms and conditions of this Task Order. Only the Contracting Officer can authorize any such revision in writing. The Contracting Officer shall promptly countermand any action that exceeds the authority of the COR.";
 
+var CoText = React.createClass({
+	getInitialState: function() {
+		return {
+			docType: localStorage.getItem("docType"),
+		};
+	},
+	render: function() {
+		return (
+				<p>The Contracting Officer is the only individual who can legally commit or obligate the Government for the expenditure of public funds. The technical administration of this {this.state.docType} shall not be construed to authorize the revision of the terms and conditions of this {this.state.docType}. Only the Contracting Officer can authorize any such revision in writing. The Contracting Officer shall promptly countermand any action that exceeds the authority of the COR.</p>
+		);
+	},
+});
+
+var CorText = React.createClass({
+	getInitialState: function() {
+		return {
+			docType: localStorage.getItem("docType"),
+		};
+	},
+	render: function() {
+		return (
+			<p>The Contracting Officer may designate additional technical personnel to serve in monitoring the work under this {this.state.docType}. The COR will coordinate and manage the activities under the {this.state.docType}.</p>
+		);
+	},
+});
+
 var ContractingOfficer = React.createClass({
 	toggleEdit: function(key, event) {
 		console.log(key);
@@ -36,8 +62,9 @@ var ContractingOfficer = React.createClass({
 	getInitialState: function() {
 		return {
 			edit: null,
-			coText: localStorage.getItem("coText"),
-			corText: localStorage.getItem("corText"),
+//			coText: localStorage.getItem("coText"),
+			coText: <CoText />,
+			corText: <CorText />,
 			docType: localStorage.getItem("docType"),
 		};
 	},
@@ -48,13 +75,13 @@ var ContractingOfficer = React.createClass({
 				<p>We have already provided some recommended content for this section. To delete, modify, or add additional content click the "edit" above the section you wish to change.</p>
 
 				<div className="sub-heading">Contracting Officer’s Authority</div>
-				
+
 				{this.state.edit === "co"?
 				<div><div className="edit" onClick={this.toggleEdit.bind(this, 'co')}>Done</div>
 					<textarea className="form-control" rows="4" defaultValue={this.state.coText} onChange={this.handleChange.bind(this, 'co')}></textarea></div>:
 				<div>
 					<div className="edit" onClick={this.toggleEdit.bind(this, 'co')}>Edit</div>
-					<p>{this.state.coText}</p>
+					{this.state.coText}
 				</div>
 				}
 
@@ -66,7 +93,7 @@ var ContractingOfficer = React.createClass({
 				<textarea className="form-control" rows="4" defaultValue={this.state.corText} onChange={this.handleChange.bind(this, 'cor')}></textarea></div> :
 				<div>
 				<div className="edit" onClick={this.toggleEdit.bind(this, 'cor')}>Edit</div>
-				<p>{this.state.corText}</p></div>
+				{this.state.corText}</div>
 				}
 
 			</div>
