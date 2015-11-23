@@ -15,6 +15,8 @@ var Welcome = React.createClass({
 		localStorage.clear();
 		localStorage.setItem("definitions", termsText);
 		localStorage.setItem("performancePeriod", null);
+		localStorage.setItem("agency", null);
+		localStorage.setItem("docType", "");
     localStorage.setItem("periodDuration", null);
     localStorage.setItem("locationRequirement", false);
     localStorage.setItem("locationText", null);

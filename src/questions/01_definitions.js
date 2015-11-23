@@ -62,14 +62,12 @@ var Definition = React.createClass({
         cb(null);
     },
     handleChange: function(event) {
-    	console.log(event.target.value);
         this.setState({
             text: event.target.value,
         });
         // TODO: add auto-save at some point
     },
     handleResponse: function(response) {
-    	console.log(response);
         this.setState({        	
           response: response,           
         });

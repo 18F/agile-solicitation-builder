@@ -38,7 +38,7 @@ var Sidebar = React.createClass({
 		var links = subpages.map(function(subpage, i) {
 			var active = (subpage.link == this.props.currentPage);
 			return (
-				<li className={active ? "active" : ""}>
+				<li className={active ? "active" : ""} ref={"link-"+i}>
 					<IndexLink to={subpage.link}>{subpage.title}</IndexLink>
 				</li>
 			);
@@ -58,6 +58,42 @@ var Sidebar = React.createClass({
 
 
 var Request = React.createClass({
+	loadData: function(cb) {
+		// TODO: load data from localStorage
+		cb("Error: no data found");
+	},
+	updateQuestion: function(questionName, data) {
+		var updates = {};
+		updates[questionName] = data;
+		this.setState(updates);
+	},
+	componentDidMount: function() {
+		this.loadData(function(err, data) {
+			if(err) {
+				console.log("Error fetching data for questions: "+err);
+				return;
+			}
+
+			this.setState(data);
+		}.bind(this));
+	},
+
+	getInitialState: function() {
+		return {
+			question1: {},
+			question2: {},
+		};
+	},
+
+	renderChildren: function() {
+		return React.Children.map(this.props.children, function(child) {
+			return React.cloneElement(child, {
+				questionData: this.state,
+				updateQuestion: this.updateQuestion,
+			});
+		}.bind(this));
+	},
+
 	render: function() {
 		var mainStyle = {
 			paddingLeft: 16,
@@ -67,7 +103,7 @@ var Request = React.createClass({
 
 				<View className="main col-md-8" style={mainStyle}>
 					<div>
-						{this.props.children}
+						{this.renderChildren()}
 					</div>
 				</View>
 				<View className="col-md-1">					

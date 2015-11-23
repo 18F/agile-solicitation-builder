@@ -23,7 +23,7 @@ var Results = React.createClass({
 			conditions12: "",
 			evaluation13: "",
 			appendix: "",
-			locationRequirement: localStorage.getItem("locationRequirement"),
+			locationRequirement: JSON.parse(localStorage.getItem("locationRequirement")),
 			locationText: localStorage.getItem("locationText"),
 		};
 	},

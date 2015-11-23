@@ -6,11 +6,12 @@ var Button = require('react-bootstrap').Button;
 // Router stuff
 var Link = require('react-router').Link;
 
+
 var RequestOverview = React.createClass({
 	getInitialState: function() {
 		return {
-			response1: false,
-			response2: false,
+			docType: localStorage.getItem("docType"),
+			agency: localStorage.getItem("agency"),
 		};
 	},
 	setAgency: function(event) {
@@ -29,15 +30,12 @@ var RequestOverview = React.createClass({
 		if (response.length > 1){
 			localStorage.agency = response;
 			localStorage.agencyFullname = "U.S. " + agencyFullNames[response];
-			this.setState({response1: true});
+			this.setState({agency: response});
 		}
-	},
-	getAgency: function() {
-		agency = localStorage.getItem("agency");
 	},
 	setDoctype: function(event) {
 		localStorage.docType = event.target.value;
-		this.setState({response2: true});
+		this.setState({docType: event.target.value});
 	},
 	render: function() {
 		return (
@@ -50,17 +48,17 @@ var RequestOverview = React.createClass({
 					
 					
 					<h5>Firstly, what agency is this for?</h5>
-						<select className="form-control medium-response" onChange={this.setAgency}>
-							<option></option>
-							<option value="ED">Department of Education (ED)</option>
-							<option value="DOE">Department of Energy (DOE)</option>
-						  <option value="EPA">Environmental Protection Agency (EPA)</option>
-						  <option value="GSA">General Services Administration (GSA)</option>
-						  <option value="DOL">Department of Labor (DOL)</option>
-						  <option value="NARA">National Archives and Records Administration (NARA)</option>
-						  <option value="NASA">National Aeronautics and Space Administration (NASA)</option>
-						  <option value="OMB">Office of Management and Budget (OMB)</option>
-						  <option value="VA">Department of Veteran Affairs (VA)</option>
+						<select className="form-control medium-response" onChange={this.setAgency} value={this.state.agency}>
+							<option value=""></option>
+							<option value="ED" >Department of Education (ED)</option>
+							<option value="DOE" >Department of Energy (DOE)</option>
+						  <option value="EPA" >Environmental Protection Agency (EPA)</option>
+						  <option value="GSA" >General Services Administration (GSA)</option>
+						  <option value="DOL" >Department of Labor (DOL)</option>
+						  <option value="NARA" >National Archives and Records Administration (NARA)</option>
+						  <option value="NASA" >National Aeronautics and Space Administration (NASA)</option>
+						  <option value="OMB" >Office of Management and Budget (OMB)</option>
+						  <option value="VA" >Department of Veteran Affairs (VA)</option>
 						</select>
 					<br />
 
@@ -68,33 +66,33 @@ var RequestOverview = React.createClass({
 
 					<div className="radio">
 					  <label>
-					    <input type="radio" name="optionsRadios" value="Contract" onClick={this.setDoctype}></input>
-					    ... a new purchase under Far 15
+					    <input type="radio" value="Contract" onChange={this.setDoctype} checked={this.state.docType === "Contract"}></input>
+					    ... a new purchase under Far 15 (Contract)
 					  </label>
 					</div>
 					<div className="radio">
 					  <label>
-					    <input type="radio" name="optionsRadios" value="Purchase Order" onClick={this.setDoctype} ></input>
-					    ... a new purchase under Far 13
+					    <input type="radio" value="Purchase Order" onChange={this.setDoctype} checked={this.state.docType === "Purchase Order"}></input>
+					    ... a new purchase under Far 13 (Purchase Order)
 					  </label>
 					</div>
 					<div className="radio">
 					  <label>
-					    <input type="radio" name="optionsRadios" value="Task Order" onClick={this.setDoctype}></input>
-					    ... being issued off an existing Indefinite Delivery Indefinite Quantity (ID/IQ)
+					    <input type="radio" value="Task Order" onChange={this.setDoctype} checked={this.state.docType === "Task Order"}></input>
+					    ... being issued off an existing Indefinite Delivery Indefinite Quantity (ID/IQ) (Task Order)
 					  </label>
 					</div>
 					<div className="radio">
 					  <label>
-					    <input type="radio" name="optionsRadios" value="Call" onClick={this.setDoctype}></input>
-					    ... being ordered off an existing Blanket Purchase Agreement (BPA)
+					    <input type="radio" value="Call" onChange={this.setDoctype} checked={this.state.docType === "Call"}></input>
+					    ... being ordered off an existing Blanket Purchase Agreement (BPA) (Call)
 					  </label>
 					</div>
 				</div>
 
 				<br />
 				<Link to={"/rfp/"+this.props.params.id+"/question/1"}>
-					<Button bsStyle="primary" disabled={this.state.response1 === false}>{"Let's go!"}</Button>
+					<Button bsStyle="primary" >{"Let's go!"}</Button>
 				</Link>
 			</div>
 		);

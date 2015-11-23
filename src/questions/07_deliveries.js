@@ -40,13 +40,17 @@ var Deliveries = React.createClass({
 		});
 	},
 	handleChange: function(key, event) {
-		console.log(key);
 		switch(key) {
 			case "travelBudget":
 				this.setState({
       		travelBudget: event.target.value,
 		    });
 		    break;
+		  case "locationText":
+		  	this.setState({
+					locationText: event.target.value,
+				});
+				break;
 		}
 	},
   getInitialState: function() {
