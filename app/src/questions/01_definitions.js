@@ -20,6 +20,10 @@ var defaultTerms = (
         <span className="term">QUARTER</span>
         <p>A quarter will be defined as the first of January through the end of March, first of April through the end of June, first of July through the end of September, and first of October through the end of December.</p>
 
+        <span className="term">PRODUCT VISION</span>
+        <p>@TODO</p>
+
+
         <span className="term">BUSINESS DAY</span>
         <p>Any day other than a Saturday, a Sunday, a Federal holiday or other day on which the Federal Government by law or executive order is closed. Note: This includes any weather-related office closures if the place of performance is in a Federal Building.</p>
 
@@ -82,16 +86,20 @@ var Definition = React.createClass({
     // React functions
 
     componentDidMount: function() {
-        this.fetchDefinitionsSettings(function(err, definitionsSettings) {
-            if(err) {return;}
-
-            this.setState({
-                didRespond: definitionsSettings.didRespond,
-                response: definitionsSettings.response,
-                text: definitionsSettings.text,
-            })
-        }.bind(this));
+      $.ajax({
+        type: "GET",
+        data: {
+          format: 'json'
+        },
+        url: "/api/get_content/definitions",
+        success: function(data){ 
+          this.setState({
+            text: data,
+          })
+        }.bind(this),
+      });
     },
+
     getInitialState: function() {
         return {
             response: false,
@@ -103,7 +111,7 @@ var Definition = React.createClass({
             <div>
                 <div className="main-heading">Definitions</div>
                 <p>These are the standard definitions for agile development terms in alignment with the USDS Playbook. You can also modify the definitions and add additional terms. When you are done click the "Next" button at the bottom of the page.</p>
-                <textarea className="form-control" rows="10" value={this.state.text}onChange={this.handleChange}></textarea>
+                <textarea className="form-control" rows="10" value={this.state.text} onChange={this.handleChange}></textarea>
             </div>
         );
     },

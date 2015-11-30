@@ -70,7 +70,7 @@ var Request = React.createClass({
 	componentDidMount: function() {
 		this.loadData(function(err, data) {
 			if(err) {
-				console.log("Error fetching data for questions: "+err);
+				// console.log("Error fetching data for questions: "+err);
 				return;
 			}
 

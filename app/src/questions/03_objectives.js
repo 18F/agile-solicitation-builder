@@ -34,13 +34,55 @@ var Objective = React.createClass({
 
 				<div className="sub-heading">Overview </div>
 				<p>Who is your user(s)? Has anyone working on this project done any user research? (Learn more <a href="https://playbook.cio.gov/#play1" target="_blank">here</a>!)</p>
+					<p>The primary users of this X are:</p>
+					<div className="checkbox">
+					  <label>
+					    <input type="checkbox" value=""></input>
+					    Internal 
+					  </label>
+					</div>
+					<div className="checkbox">
+					  <label>
+					    <input type="checkbox" value=""></input>
+					    External
+					  </label>
+					</div>
+					<div className="checkbox">
+					  <label>
+					    <input type="checkbox" value=""></input>
+					    Internal (systems)
+					  </label>
+					</div>
+					<div className="checkbox">
+					  <label>
+					    <input type="checkbox" value=""></input>
+					    External (systems, developers)
+					  </label>
+					</div>
 
-				<p>What are your top five goals for this project? </p>
-				<ol>
-					<li>
-						<input type="text" className="form-control" placeholder="objective"></input>
-					</li>
-				</ol>
+					<p>The primary users of this [XXX] will include X, Y, Z. To ensure the system supports interoperability, XX must be followed. (see section). To ensure the (human facing side) is X, Y (playbook language) @TODO</p>
+
+				<p>What is your User Research Strategy?</p>
+			
+					<div className="checkbox">
+					  <label>
+					    <input type="checkbox" value=""></input>
+							We or another vendor have already conducted user research internally. (proceed to product/program vision questionnaire)
+					  </label>
+					</div>
+					<div className="checkbox">
+					  <label>
+					    <input type="checkbox" value=""></input>
+					    We intend to conduct user research internally prior to the start date of this engagement.
+					  </label>
+					</div>
+					<div className="checkbox">
+					  <label>
+					    <input type="checkbox" value=""></input>
+					    The vendor will be responsible for the user research. 
+					  </label>
+					</div>
+			
 
 				<div className="sub-heading">Specific Tasks and Deliverables</div>
 				<ul>
@@ -62,8 +104,8 @@ var Objective = React.createClass({
 
 				<div className="sub-heading">Deliverables</div>
 				<p>Would you like to use ...?</p>
-				<p>Deliverables under this {this.state.docType} are defined as the completion and acceptance according to the “Definition of Done” of the iterations completed, which are based on the contractor’s Agile Software Development methodology. This methodology defines the repeatable process of providing development and deployment services in small iterations lasting two to five weeks which results in usable software, data, or product, which have little to no inherent defects. Each iteration shall be defined in the Performance Work Statement but should document how planning, requirement analysis (user story building), design, coding, testing, quality assurance, and documentation will all meet the contractor’s “Definition of Done”.</p>
-				<p>Each deliverable shall incorporate agency IT requirements as detailed in the Appendix of this document and the <a href="https://playbook.cio.gov" target="_blank">United States Digital Service Playbook</a> standards and be compliant with Section 508.</p>
+				<p>A deliverably will be considered complete and acceptable when it meets the contractor's "Definition of Done".</p>
+				<p>Each deliverable shall incorporate agency IT requirements as detailed in the Appendix of this document and the <a href="https://playbook.cio.gov" target="_blank">United States Digital Service Playbook</a> standards and be compliant with Section 508. (see <a>here</a>)</p>
 				<div>Deliverables - https://quip.com/SFN4AAN4NA2F</div>
 				<p>Functional Requirements, translated into Epics and User Stories that will be used to populate the Product Backlog may include, but are not limited to:
 					  UX requirements gathering
@@ -84,6 +126,7 @@ var Objective = React.createClass({
 
 				<div className="sub-heading">Agile Development Management Plan (ADMP) and Key Personnel</div>
 				<p>Offerors shall propose an Agile Development Management Plan (ADMP) which demonstrates how the Offeror intends to manage, develop, implement, and maintain the requirements described in this SOO and the RFQ. The plan shall include, at a minimum:</p>
+				<p>The performance work statement will include:</p>
 				<ul>
 					<li>Contact information for all senior leaders and an organizational chart showing the Offeror’s organizational hierarchy and reporting structure, with specific designation of individuals as Key Personnel;
 					</li>
@@ -99,11 +142,13 @@ var Objective = React.createClass({
 				<div className="sub-heading">Kick-Off Meeting/Post-Award Conference</div>
 				<p>Is there a required place of performance? What region the work will be done?</p>
 
+				<p>@TODO Move location question in section 7 to here and add follow up question</p>
 				<p>The agency's relevant personnel, Contracting Officer, and COR shall hold a Kick-Off meeting/Post-Award Conference in Washington, DC with contractor’s team and other relevant Government staff to review and clarify the project’s objectives, expectations from the Government, and address any questions the Contractor may have.</p>
 				<p>The Contractor shall provide and collaborate with the COR on an agenda for this meeting. Discussion topics shall include, but not be limited to: introduction of the Contractor and Government Staff; understanding of the specific tasks and subtasks; project management expectations; agreement on meeting schedules; and agreement on initial delivery dates.</p>
 				<p>The Kick-Off meeting/Post-Award Conference will take place within 10 days from award and will be scheduled by the Contracting Officer.</p>
 
 				<div className="sub-heading">System Documentation and Training</div>
+				<p>Do you believe training will be required? @TODO ask VA & 18F consulting</p>
 				<p>Would you like a collaborative workspace (phrasing)
 				strongly encourage the use of a collaborative environment, do you have one?
 				GSA - google drive, other places, ???

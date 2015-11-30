@@ -1,32 +1,10 @@
 var React = require('react');
 
-var defaultCOText = "The Contracting Officer is the only individual who can legally commit or obligate the Government for the expenditure of public funds. The technical administration of this Task Order shall not be construed to authorize the revision of the terms and conditions of this Task Order. Only the Contracting Officer can authorize any such revision in writing. The Contracting Officer shall promptly countermand any action that exceeds the authority of the COR.";
+var defaultCOText = "The Contracting Officer is the only individual who can legally commit or obligate the Government for the expenditure of public funds. The technical administration of this " + localStorage.getItem("docType") + " shall not be construed to authorize the revision of the terms and conditions of this " + localStorage.getItem("docType") + ". Only the Contracting Officer can authorize any such revision in writing. The Contracting Officer shall promptly countermand any action that exceeds the authority of the COR.";
 
-var CoText = React.createClass({
-	getInitialState: function() {
-		return {
-			docType: localStorage.getItem("docType"),
-		};
-	},
-	render: function() {
-		return (
-				<p>The Contracting Officer is the only individual who can legally commit or obligate the Government for the expenditure of public funds. The technical administration of this {this.state.docType} shall not be construed to authorize the revision of the terms and conditions of this {this.state.docType}. Only the Contracting Officer can authorize any such revision in writing. The Contracting Officer shall promptly countermand any action that exceeds the authority of the COR.</p>
-		);
-	},
-});
 
-var CorText = React.createClass({
-	getInitialState: function() {
-		return {
-			docType: localStorage.getItem("docType"),
-		};
-	},
-	render: function() {
-		return (
-			<p>The Contracting Officer may designate additional technical personnel to serve in monitoring the work under this {this.state.docType}. The COR will coordinate and manage the activities under the {this.state.docType}.</p>
-		);
-	},
-});
+var defaultCorText = "The Contracting Officer may designate additional technical personnel to serve in monitoring the work under this " + localStorage.getItem("docType") + ". The COR will coordinate and manage the activities under the " + localStorage.getItem("docType") + ".";
+
 
 var ContractingOfficer = React.createClass({
 	toggleEdit: function(key, event) {
@@ -62,10 +40,9 @@ var ContractingOfficer = React.createClass({
 	getInitialState: function() {
 		return {
 			edit: null,
-//			coText: localStorage.getItem("coText"),
-			coText: <CoText />,
-			corText: <CorText />,
 			docType: localStorage.getItem("docType"),
+			coText: defaultCOText,
+			corText: defaultCorText,
 		};
 	},
 	render: function() {
@@ -95,7 +72,7 @@ var ContractingOfficer = React.createClass({
 				<div className="edit" onClick={this.toggleEdit.bind(this, 'cor')}>Edit</div>
 				{this.state.corText}</div>
 				}
-
+				<br />
 			</div>
 		);
 	},

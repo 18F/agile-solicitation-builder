@@ -1,16 +1,30 @@
 var React = require('react');
 
-var defaultPaymentText = "The contractor shall be paid upon the completion of each iteration upon its acceptance and verification by the Contracting Officer’s Representative (COR). Invoices shall be submitted at the end of each iteration in accordance with the delivery schedule as established in the Performance Work Statement.";
+// var defaultPaymentText = "The contractor shall be paid upon the completion of each iteration upon its acceptance and verification by the Contracting Officer’s Representative (COR). Invoices shall be submitted at the end of each iteration in accordance with the delivery schedule as established in the Performance Work Statement.";
 
 // how can I make [TOTAL COST] a variable?
-var defaultCodesText = "This requirement will be solicited under the following North American Industrial Classification System (NAICS) Code: 541512, Computer Systems Design Services, [TOTAL COST]. This Task Order will be made in accordance with FAR 16.505 which governs orders placed under Indefinite Delivery contracts as detailed in the GSA GWAC Ordering guide.";
+var defaultCodesText = "This requirement will be solicited under the following North American Industrial Classification System (NAICS) Code: 541512, Computer Systems Design Services, $27.5 million. This Task Order will be made in accordance with FAR 16.505 which governs orders placed under Indefinite Delivery contracts as detailed in the GSA GWAC Ordering guide.";
 
 var Services = React.createClass({
+	componentDidMount: function() {
+    $.ajax({
+      type: "GET",
+      data: {
+        format: 'json'
+      },
+      url: "/api/get_content/payment_schedule",
+      success: function(data){ 
+        this.setState({
+          paymentText: data,
+        })
+      }.bind(this),
+	  });
+  },
 	getInitialState: function() {
 		return {
 			response: false,
 			textInBox: false,
-			paymentText: defaultPaymentText,
+			// paymentText: defaultPaymentText,
 			codesText: defaultCodesText,
 			totalBudget: localStorage.getItem("totalBudget"),
 			edit: null,
@@ -79,22 +93,27 @@ var Services = React.createClass({
 				</form>
 
 				<h5>NAICS and FAR Justification Codes</h5>
-				<div className="sub-text">We have provided justifications you can use that are most commonly used for acquisitions involve software and software services.</div>
+				<div className="sub-text">We have provided a NAICS code that commonly applies to the acquisition of software development services. If you believe your requirement is not covered under this NAICS code you may search under <a>this link</a> to select a different one.</div>
 
 				<div className="edit" onClick={this.toggleEdit.bind(this, 'codes')}>Edit</div>
 				{this.state.edit === "codes"? <textarea className="form-control" rows="4" defaultValue={this.state.codesText}></textarea> :
 				<div><p>{this.state.docType} against [GSA Alliant Small Business (SB) GWAC] – Firm Fixed Price</p>
-				<p id="naics-far-text1">This requirement will be solicited under the following North American Industrial Classification System (NAICS) Code: 541512, Computer Systems Design Services, ${this.state.totalBudget}. This Task Order will be made in accordance with FAR 16.505 which governs orders placed under Indefinite Delivery contracts as detailed in the GSA GWAC Ordering guide.</p></div>				
+				<p id="naics-far-text1">This requirement will be solicited under the following North American Industrial Classification System (NAICS) Code: 541512, Computer Systems Design Services, $27.5 million. This Task Order will be made in accordance with FAR 16.505 which governs orders placed under Indefinite Delivery contracts as detailed in the GSA GWAC Ordering guide.</p></div>				
 				}
 				<div className="sub-heading">Contract Line Item Number (CLIN) Format</div>
 
-				<p>@TODO</p>
+				<p>@TODO CLIN number is editable ("0001"), as many boxes as there are periods of performance. Option to add a completely empty box if they want. </p>
+
+				<p>If you believe you need additional CLINs, 6 total, 2 per year, 3 years</p>
 
 				<div className="sub-heading">Payment Schedule</div>
-					<p>We have pre-populated this section with the standard agile contracting text. However you are free to add to, modify or delete this text as you see fit.
-					</p>												
-					<textarea className="form-control" rows="3" onChange={this.handleChange.bind(this, 'paymentText')} defaultValue={this.state.paymentText}>
-					</textarea>								
+				
+				<p>We have pre-populated this section with the standard agile contracting text. However you are free to add to, modify or delete this text as you see fit.
+				</p>												
+				<textarea className="form-control" rows="3" onChange={this.handleChange.bind(this, 'paymentText')} default={this.state.paymentText}>
+				{this.state.paymentText}
+				</textarea>
+				{this.state.paymentText}
 				
 				<div className="sub-heading">Award Term Incentive</div>
 				<h5>Would you like to include an award or an incentive?</h5>
@@ -110,17 +129,18 @@ var Services = React.createClass({
 					    Incentive Fee
 					  </label>
 					</div>
-					<div className="checkbox">
-					  <label>
-					    <input type="checkbox" value=""></input>
-					    Award Term <span className="help">?</span>
-					  </label>
-					</div>
 
-				<p>(if firm fixed price?) This Task Order shall be Firm Fixed Price/Award Term Incentive. The purpose of the Award Term Incentive is to incentivize superior performance and delivery by offering an additional period of performance. Following the base period, the Government will offer one (1) Award Term Incentive and two (2) additional options pending availability of funds.</p>
+				<br />
+				
 			</div>
 		);
 	},
 });
+// if they click award fee or incentive fee - not to exceed X. utilize agency specific guidance regarding the [award fee]
+// award subjective - specific criteria ex: product is quality, the form works
+// incentive fee = objective assessment, ex: stuck to schedule, defect rate was < 5%
+// (Jonathan doesn't like...)
+
+// <p>This Task Order shall be Firm Fixed Price/Award Term Incentive. The purpose of the Award Term Incentive is to incentivize superior performance and delivery by offering an additional period of performance. Following the base period, the Government will offer one (1) Award Term Incentive and two (2) additional options pending availability of funds.</p>
 
 module.exports = Services;

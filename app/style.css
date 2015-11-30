@@ -1,0 +1,76 @@
+.header {
+	border-bottom: solid 1px #aeb0b5;
+	margin-bottom: 15px;
+}
+
+.term {
+	font-weight: 500;
+}
+
+div.edit {
+	color: #337ab7;
+	cursor: pointer; 
+	cursor: hand;
+}
+
+.yes-no {
+	margin-right: 5px;
+	margin-left: 5px;
+}
+
+.main-heading{
+	font-size: 28px;
+	margin-bottom: 10px;
+}
+
+.sub-heading{
+	font-size: 20px;
+	font-weight: 500;	
+}
+
+.sub-text{
+	font-style: italic;
+	margin-top: -5px;
+	margin-bottom: 10px;
+	font-size: 95%;
+}
+
+.resulting-text{
+	font-weight: 500;
+	font-size: 115%;
+	text-decoration: underline;
+}
+
+#definitions{
+	margin-top: 15px;
+}
+
+.help {
+	background-color: #aeb0b5;
+	font-weight: 600;
+}
+
+.short-response{
+	width: 150px;
+}
+
+.medium-response{
+	width: 300px;
+}
+
+.new-content {
+	font-weight: 600;
+	font-color: red;
+}
+
+.input-guidelines{
+	margin-left: 10px;
+}
+
+p {
+	margin-top: 5px;
+}
+
+textarea {
+	margin: 10px 0px;
+}

@@ -3,10 +3,11 @@
   "description": "Playbook in Action",
   "main": "index.js",
   "authors": [
+    "Julia Winn <julia.winn@gsa.gov>"
     "Tom Buckley <tbuckley89@gmail.com>"
   ],
   "license": "ISC",
-  "homepage": "https://github.com/tbuckley/playbook",
+  "homepage": "https://github.com/18F/playbook-in-action",
   "moduleType": [],
   "private": true,
   "ignore": [

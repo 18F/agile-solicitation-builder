@@ -1,5 +1,5 @@
-node_modules/
-build/
-bower_components/
+app/node_modules/
+app/build/
+app/bower_components/
 .DS_Store
-
+venv/

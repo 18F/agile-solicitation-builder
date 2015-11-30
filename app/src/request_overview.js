@@ -20,10 +20,10 @@ var AGENCY_NAMES = {
 };
 
 var DOC_TYPES = {
-	contact: "a new purchase under Far 15 (Contract)",
-	purchaseOrder: "a new purchase under Far 13 (Purchase Order)",
-	taskOrder: "being issued off an existing Indefinite Delivery Indefinite Quantity (ID/IQ) (Task Order)",
-	call: "being ordered off an existing Blanket Purchase Agreement (BPA) (Call)",
+	"Contact": "a new purchase under Far 15 (Contract)",
+	"Purchase Order": "a new purchase under Far 13 (Purchase Order)",
+	"Task Order": "being issued off an existing Indefinite Delivery Indefinite Quantity (ID/IQ) (Task Order)",
+	"Call": "being ordered off an existing Blanket Purchase Agreement (BPA) (Call)",
 };
 
 var RequestOverview = React.createClass({
