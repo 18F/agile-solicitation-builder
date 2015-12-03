@@ -4,6 +4,19 @@ var SpecialRequirements = React.createClass({
 	getInitialState: function() {
 		return {};
 	},
+	toggleEdit: function(key, event) {
+		console.log(key);
+		if (this.state.edit === key){
+			this.setState({
+      	edit: null,
+	    });
+		}
+		else {
+			this.setState({
+	      edit: key,
+	    });
+		}
+	},
 	render: function() {
 		return (
 			<div>

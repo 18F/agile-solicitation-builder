@@ -48,7 +48,7 @@ var ContractingOfficer = React.createClass({
 	render: function() {
 		return (
 			<div>
-				<div className="main-heading">Contracting Officer</div>
+				<div className="main-heading">Roles and Responsibilities</div>
 				<p>We have already provided some recommended content for this section. To delete, modify, or add additional content click the "edit" above the section you wish to change.</p>
 
 				<div className="sub-heading">Contracting Officer’s Authority</div>

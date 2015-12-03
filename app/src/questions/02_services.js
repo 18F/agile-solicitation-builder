@@ -1,8 +1,8 @@
 var React = require('react');
 
 // var defaultPaymentText = "The contractor shall be paid upon the completion of each iteration upon its acceptance and verification by the Contracting Officer’s Representative (COR). Invoices shall be submitted at the end of each iteration in accordance with the delivery schedule as established in the Performance Work Statement.";
-
-// how can I make [TOTAL COST] a variable?
+// <p>If you believe you need additional CLINs, 6 total, 2 per year, 3 years</p>
+// <p>@TODO CLIN number is editable ("0001"), as many boxes as there are periods of performance. Option to add a completely empty box if they want. </p>
 var defaultCodesText = "This requirement will be solicited under the following North American Industrial Classification System (NAICS) Code: 541512, Computer Systems Design Services, $27.5 million. This Task Order will be made in accordance with FAR 16.505 which governs orders placed under Indefinite Delivery contracts as detailed in the GSA GWAC Ordering guide.";
 
 var Services = React.createClass({
@@ -24,15 +24,15 @@ var Services = React.createClass({
 		return {
 			response: false,
 			textInBox: false,
-			// paymentText: defaultPaymentText,
 			codesText: defaultCodesText,
 			totalBudget: localStorage.getItem("totalBudget"),
 			edit: null,
 			docType: localStorage.getItem("docType"),
+			awardFee: false,
+			incentiveFee: false,
 		};
 	},
 	toggleEdit: function(key, event) {
-		console.log(key);
 		if (this.state.edit === key){
 			this.setState({
       	edit: null,
@@ -44,8 +44,22 @@ var Services = React.createClass({
 	    });
 		}
 	},
-	handleChange: function(section, event) {
-    this.setState({paymentText : event.target.value });
+	handleChange: function(key, event) {
+		console.log(event.target.value);
+		switch(key) {
+			case "awardFee":
+			// @TODO make this work :(
+				this.setState({
+					awardFee : event.target.value? false : true,
+				});
+				console.log(this.state.awardFee);
+				break;
+			case "paymentText":
+				this.setState({
+					paymentText: event.target.value,
+				});
+				break;
+		}    
   },
   updateBudget: function(event) {
   	this.setState({totalBudget: event.target.value });
@@ -81,7 +95,6 @@ var Services = React.createClass({
 				  </label>
 				</div>
 
-
 				<p>What is the maximum budget for your project?</p>
 				<form className="form-inline">
 					<div className="form-group">
@@ -92,46 +105,230 @@ var Services = React.createClass({
 	    		</div>
 				</form>
 
+				<div className="sub-heading">Period of Performance</div>
+
+				<p>How many option periods would you like? We suggest no more than 3. <a href="#">Learn More</a>.</p>
+				<form className="form-inline">
+    			<input type="text" className="form-control short-response" placeholder="enter a number" value={this.state.performancePeriod} onChange={this.handleChange}></input>
+				</form>
+
+				<p>How long would you like each individual period of performance to be?</p>
+				<div className="sub-text">We suggest 6 months or less, per <a href="#">FAR 39.1</a>.</div>
+				<form className="form-inline">
+    			<input type="text" className="form-control" placeholder="enter a number">
+    			</input>
+    			<select className="form-control">
+    				<option>months</option>
+    				<option>weeks</option>
+    			</select>
+				</form>
+
+				<div className="resulting-text">Resulting Text</div>
+				<p>The Period of Performance for this {this.state.docType} shall be a base period of <b>6 months</b>, with <b>one (1) 6-month</b> Award Term Incentive. <b>Two (2)</b> additional <b>6 month</b> Award Term Options will be included for a total potential period of performance of up to two (2) years as described in section 2.
+				</p>
+
 				<h5>NAICS and FAR Justification Codes</h5>
 				<div className="sub-text">We have provided a NAICS code that commonly applies to the acquisition of software development services. If you believe your requirement is not covered under this NAICS code you may search under <a>this link</a> to select a different one.</div>
 
 				<div className="edit" onClick={this.toggleEdit.bind(this, 'codes')}>Edit</div>
+				
 				{this.state.edit === "codes"? <textarea className="form-control" rows="4" defaultValue={this.state.codesText}></textarea> :
 				<div><p>{this.state.docType} against [GSA Alliant Small Business (SB) GWAC] – Firm Fixed Price</p>
 				<p id="naics-far-text1">This requirement will be solicited under the following North American Industrial Classification System (NAICS) Code: 541512, Computer Systems Design Services, $27.5 million. This Task Order will be made in accordance with FAR 16.505 which governs orders placed under Indefinite Delivery contracts as detailed in the GSA GWAC Ordering guide.</p></div>				
 				}
-				<div className="sub-heading">Contract Line Item Number (CLIN) Format</div>
+				<div className="sub-heading">Contract Line Item Number (CLIN) Format</div>							
+				<button className="add">Add CLIN</button>
 
-				<p>@TODO CLIN number is editable ("0001"), as many boxes as there are periods of performance. Option to add a completely empty box if they want. </p>
+				<table className="table table-bordered table-striped">
+					<thead>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Base Period: (6 months, period of performance)</td>
+						</tr>
+						<tr>
+							<td>CLIN 0001, FFP- Completion - The Contractor shall provide services for the Government in accordance with the Performance Work Statement (PWS)</td>
+						</tr>
+					</tbody>
+				</table>
+				<table className="table table-bordered">
+					<thead>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Iteration PoP</td>
+							<td><input type="text"></input> Weeks</td>			
+						</tr>
+						<tr>
+							<td>Price Per Iteration</td>
+							<td>$<input type="text"></input></td>			
+						</tr>
+						<tr>
+							<td>Other Direct Costs</td>
+							<td>NTE Ceiling $100,000.00</td>			
+						</tr>
+						<tr>
+							<td>Period of Performance:</td>
+							<td>(period of performance)</td>			
+						</tr>
+						<tr>
+							<td>Firm Fixed Price (Completion):</td>
+							<td>$<input type="text"></input></td>
+						</tr>						
+					</tbody>
+				</table>
 
-				<p>If you believe you need additional CLINs, 6 total, 2 per year, 3 years</p>
+				<table className="table table-bordered table-striped">
+					<thead>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Award Term 02/Option Term: (6 months, period of performance)</td>
+						</tr>
+						<tr>
+							<td>CLIN 0002, FFP- Completion - The Contractor shall provide services for the Government in accordance with the Performance Work Statement (PWS)</td>
+						</tr>
+					</tbody>
+				</table>
+				<table className="table table-bordered">
+					<thead>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Iteration PoP</td>
+							<td><input type="text"></input> Weeks</td>			
+						</tr>
+						<tr>
+							<td>Price Per Iteration</td>
+							<td>$<input type="text"></input></td>			
+						</tr>
+						<tr>
+							<td>Other Direct Costs</td>
+							<td>TBD</td>			
+						</tr>
+						<tr>
+							<td>Period of Performance:</td>
+							<td>(period of performance)</td>			
+						</tr>
+						<tr>
+							<td>Firm Fixed Price (Completion):</td>
+							<td>$<input type="text"></input></td>
+						</tr>						
+					</tbody>
+				</table>
+
+				<table className="table table-bordered table-striped">
+					<thead>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Award Term 02/Option Term: 6 months(period of performance)</td>
+						</tr>
+						<tr>
+							<td>CLIN 1001, FFP- Completion - The Contractor shall provide services for the Government in accordance with the Performance Work Statement (PWS)</td>
+						</tr>
+					</tbody>
+				</table>
+				<table className="table table-bordered">
+					<thead>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Iteration PoP</td>
+							<td><input type="text"></input> Weeks</td>			
+						</tr>
+						<tr>
+							<td>Price Per Iteration</td>
+							<td>$<input type="text"></input></td>			
+						</tr>
+						<tr>
+							<td>Other Direct Costs</td>
+							<td>TBD</td>			
+						</tr>
+						<tr>
+							<td>Period of Performance:</td>
+							<td>(period of performance)</td>			
+						</tr>
+						<tr>
+							<td>Firm Fixed Price (Completion):</td>
+							<td>$<input type="text"></input></td>
+						</tr>						
+					</tbody>
+				</table>
+
+				<table className="table table-bordered table-striped">
+					<thead>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Award Term 03/Option Term: 6 months(period of performance)</td>
+						</tr>
+						<tr>
+							<td>CLIN 1002, FFP- Completion - The Contractor shall provide services for the Government in accordance with the Performance Work Statement (PWS)</td>
+						</tr>
+					</tbody>
+				</table>
+				<table className="table table-bordered">
+					<thead>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Iteration PoP</td>
+							<td><input type="text"></input> Weeks</td>			
+						</tr>
+						<tr>
+							<td>Price Per Iteration</td>
+							<td>$<input type="text"></input></td>			
+						</tr>
+						<tr>
+							<td>Other Direct Costs</td>
+							<td>TBD</td>			
+						</tr>
+						<tr>
+							<td>Period of Performance:</td>
+							<td>(period of performance)</td>			
+						</tr>
+						<tr>
+							<td>Firm Fixed Price (Completion):</td>
+							<td>$<input type="text"></input></td>
+						</tr>						
+					</tbody>
+				</table>
 
 				<div className="sub-heading">Payment Schedule</div>
 				
 				<p>We have pre-populated this section with the standard agile contracting text. However you are free to add to, modify or delete this text as you see fit.
-				</p>												
-				<textarea className="form-control" rows="3" onChange={this.handleChange.bind(this, 'paymentText')} default={this.state.paymentText}>
-				{this.state.paymentText}
-				</textarea>
-				{this.state.paymentText}
+				</p>
+
+				{this.state.edit === "paymentText"?
+				<div><div className="edit" onClick={this.toggleEdit.bind(this, 'paymentText')}>Done</div>
+					<textarea className="form-control" rows="4" defaultValue={this.state.paymentText} onChange={this.handleChange.bind(this, 'paymentText')}></textarea></div>:
+				<div>
+					<div className="edit" onClick={this.toggleEdit.bind(this, 'paymentText')}>Edit</div>
+					{this.state.paymentText}
+				</div>
+				}	
 				
 				<div className="sub-heading">Award Term Incentive</div>
 				<h5>Would you like to include an award or an incentive?</h5>
-					<div className="checkbox">
-					  <label>
-					    <input type="checkbox" value=""></input>
-					    Award Fee
-					  </label>
-					</div>
-					<div className="checkbox">
-					  <label>
-					    <input type="checkbox" value=""></input>
-					    Incentive Fee
-					  </label>
-					</div>
+				<div className="checkbox">
+				  <label>
+				    <input type="checkbox" value={this.state.awardFee} onChange={this.handleChange.bind(this, "awardFee")}></input>
+				    Award Fee
+				  </label>
+				</div>
+				<div className="checkbox">
+				  <label>
+				    <input type="checkbox" onChange={this.handleChange.bind(this, "incentiveFee")}></input>
+				    Incentive Fee
+				  </label>
+				</div>
+
+				{this.state.awardFee? <div>yes</div> : null}
+				
 
 				<br />
-				
+				<p>This Task Order shall be Firm Fixed Price/Award Term Incentive. The purpose of the Award Term Incentive is to incentivize superior performance and delivery by offering an additional period of performance. Following the base period, the Government will offer one (1) Award Term Incentive and two (2) additional options pending availability of funds.</p>
 			</div>
 		);
 	},
@@ -141,6 +338,6 @@ var Services = React.createClass({
 // incentive fee = objective assessment, ex: stuck to schedule, defect rate was < 5%
 // (Jonathan doesn't like...)
 
-// <p>This Task Order shall be Firm Fixed Price/Award Term Incentive. The purpose of the Award Term Incentive is to incentivize superior performance and delivery by offering an additional period of performance. Following the base period, the Government will offer one (1) Award Term Incentive and two (2) additional options pending availability of funds.</p>
+
 
 module.exports = Services;

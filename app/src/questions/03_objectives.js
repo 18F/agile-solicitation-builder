@@ -32,19 +32,21 @@ var Objective = React.createClass({
 				<div className="sub-heading">Objectives</div>
 				<p>Note: The Statement of Objectives will be removed at time of award and replaced with the Offeror’s Performance Work Statement. All listed objectives and requirements shall be included as part of the Offeror’s Performance Work Statement.</p>
 
+				<p>The government is willing to invest a maximum budget of $[max budget] in this endeavor.</p>
+
 				<div className="sub-heading">Overview </div>
-				<p>Who is your user(s)? Has anyone working on this project done any user research? (Learn more <a href="https://playbook.cio.gov/#play1" target="_blank">here</a>!)</p>
+
 					<p>The primary users of this X are:</p>
 					<div className="checkbox">
 					  <label>
 					    <input type="checkbox" value=""></input>
-					    Internal 
+					    Internal (people)
 					  </label>
 					</div>
 					<div className="checkbox">
 					  <label>
 					    <input type="checkbox" value=""></input>
-					    External
+					    External (people)
 					  </label>
 					</div>
 					<div className="checkbox">
@@ -60,7 +62,30 @@ var Objective = React.createClass({
 					  </label>
 					</div>
 
-					<p>The primary users of this [XXX] will include X, Y, Z. To ensure the system supports interoperability, XX must be followed. (see section). To ensure the (human facing side) is X, Y (playbook language) @TODO</p>
+				<p>Has anyone working on this project done any user research? (Learn more <a href="https://playbook.cio.gov/#play1" target="_blank">here</a>!)</p>
+
+				<div className="checkbox">
+					  <label>
+					    <input type="checkbox" value=""></input>
+					    Yes
+					  </label>
+					</div>
+					<div className="checkbox">
+					  <label>
+					    <input type="checkbox" value=""></input>
+					    No, but our team intends to
+					  </label>
+					</div>
+					<div className="checkbox">
+					  <label>
+					    <input type="checkbox" value=""></input>
+					    No, this will be carried out by the vendor
+					  </label>
+					</div>
+
+					<p>The (group responsible) for this contract commit to support the vendor in the user research process, and will provide the vendor with access to the government employees who will be the users of the product.</p>
+
+					<p>The primary users of this [XXX] will include X, Y, Z. To ensure the system supports interoperability, XX must be followed. (see section). To ensure the user interface is X, Y (playbook language) @TODO</p>
 
 				<p>What is your User Research Strategy?</p>
 			

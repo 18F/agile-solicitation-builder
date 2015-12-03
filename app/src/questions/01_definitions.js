@@ -23,7 +23,6 @@ var defaultTerms = (
         <span className="term">PRODUCT VISION</span>
         <p>@TODO</p>
 
-
         <span className="term">BUSINESS DAY</span>
         <p>Any day other than a Saturday, a Sunday, a Federal holiday or other day on which the Federal Government by law or executive order is closed. Note: This includes any weather-related office closures if the place of performance is in a Federal Building.</p>
 
@@ -48,32 +47,26 @@ var defaultTerms = (
     </div>
 );
 
+    // fetchDefinitionsSettings: function(cb) {
+    //     // TODO: replace w/ actual server call
+    //     var definitionsSettings = localStorage.getItem("definitionsSettings");
+    //     if(!definitionsSettings) {
+    //         cb("Definitions do not exist");
+    //     } else {
+    //         cb(null, JSON.parse(definitionsSettings));
+    //     }
+    // },
+    // saveDefinitionsSettings: function(definitionsSettings, cb) {
+    //     // TODO: replace w/ actual server call
+    //     localStorage.setItem("definitionsSettings", JSON.stringify(definitionsSettings));
+    //     cb(null);
+    // },
+
 var Definition = React.createClass({
     // Custom logic
-
-    fetchDefinitionsSettings: function(cb) {
-        // TODO: replace w/ actual server call
-        var definitionsSettings = localStorage.getItem("definitionsSettings");
-        if(!definitionsSettings) {
-            cb("Definitions do not exist");
-        } else {
-            cb(null, JSON.parse(definitionsSettings));
-        }
-    },
-    saveDefinitionsSettings: function(definitionsSettings, cb) {
-        // TODO: replace w/ actual server call
-        localStorage.setItem("definitionsSettings", JSON.stringify(definitionsSettings));
-        cb(null);
-    },
     handleChange: function(event) {
         this.setState({
             text: event.target.value,
-        });
-        // TODO: add auto-save at some point
-    },
-    handleResponse: function(response) {
-        this.setState({        	
-          response: response,           
         });
         // TODO: add auto-save at some point
     },
@@ -81,25 +74,17 @@ var Definition = React.createClass({
     // Every question must implement a save() method
     save: function(cb) {
       localStorage.setItem("definitions", this.state.text)
+      // @TODO put_data
     },
 
     // React functions
 
     componentDidMount: function() {
-      $.ajax({
-        type: "GET",
-        data: {
-          format: 'json'
-        },
-        url: "/api/get_content/definitions",
-        success: function(data){ 
-          this.setState({
-            text: data,
-          })
-        }.bind(this),
+      content = get_data("definitions");
+      this.setState({
+        text: content,
       });
     },
-
     getInitialState: function() {
         return {
             response: false,

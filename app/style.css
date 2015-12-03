@@ -13,6 +13,10 @@ div.edit {
 	cursor: hand;
 }
 
+button.add {
+	margin-bottom: 10px;
+}
+
 .yes-no {
 	margin-right: 5px;
 	margin-left: 5px;
