@@ -24,7 +24,8 @@ payment_schedule_text = "The contractor shall be paid upon the completion of eac
 
 DATA = {
     "definitions": terms_text, 
-    "payment_schedule": payment_schedule_text}
+    "payment_schedule": payment_schedule_text,
+}
 
 
 def abort_if_content_doesnt_exist(content_key):
@@ -36,22 +37,22 @@ class Data(Resource):
     def get(self, content_key):
         abort_if_content_doesnt_exist(content_key)
         print "content key! " + content_key
+        print type(DATA[content_key])
         return DATA[content_key]
 
     def put(self, content_key):
         abort_if_content_doesnt_exist(content_key)
         content = request.form['content']
-        print "content " + content
+        print "content '" + content + "'"
         DATA[content_key] = updated_content
 
 api.add_resource(Data, '/get_content/<string:content_key>')
 
 
-
 # map index.html to app/index.html, map /build/bundle.js to app/build.bundle.js
 @app.route('/initiate')
 def initiate():
-    Document.create(agency="", agency_full_name="", doc_type="")
+    RFQ.create(agency="", agency_full_name="", doc_type="")
 
 @app.route('/')
 def index():
@@ -61,16 +62,31 @@ def index():
 def send_js(path):
     return send_from_directory("app", path)
 
-@app.route('/download')
+@app.route('/download/<int:doc_id>')
 def download():
-    csv = ""
-    # We need to modify the response, so the first thing we 
-    # need to do is create a response out of the CSV string
-    response = make_response(csv)
-    # This is the key: Set the right header for the response
-    # to be downloaded, instead of just printed on the browser
-    response.headers["Content-Disposition"] = "attachment; filename=books.csv"
-    return response
+    document = Document()
+
+    rfq = RFQ.find(id=doc_id)
+    title = "RFQ for " + rfq.agency
+    document.add_heading('RFQ', 0)
+
+    p = document.add_paragraph('A plain paragraph having some ')
+    p.add_run('bold').bold = True
+    p.add_run(' and some ')
+    p.add_run('italic.').italic = True
+
+    document.add_heading('Heading, level 1', level=1)
+    document.add_paragraph('Intense quote', style='IntenseQuote')
+
+    document.add_paragraph(
+        'first item in unordered list', style='ListBullet'
+    )
+    document.add_paragraph(
+        'first item in ordered list', style='ListNumber'
+    )
+    document.save('demo.docx')
+
+    return "document created"
 
 if __name__ == "__main__":
     app.run(debug=True)

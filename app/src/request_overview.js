@@ -34,9 +34,6 @@ var SETASIDES = {
 	"none": "None of the above",
 };
 
-// Do you intend to set aside this acquisition for any of the following under FAR part 19?
-// 8(a) business development participants, HUBZone small business concerns, service-disabled veteran-owned small business concerns, and economically disadvantaged women-owned small business concerns and women-owned small business concerns eligible under the Women-Owned Small Business Program;
-
 // IDIQ & BPA require 
 // please identify the base award number [input box]
 // This is an RFQ for the alliant BPA #XXXXX
@@ -48,6 +45,8 @@ var RequestOverview = React.createClass({
 			docType: localStorage.getItem("docType"),
 			agency: localStorage.getItem("agency") || "none",
 			setaside: localStorage.getItem("setaside") || "none",
+			baseNumber: localStorage.getItem("baseNumber") || "",
+			baseNumberNeeded: localStorage.getItem("baseNumber") || false,
 		};
 	},
 	setAgency: function(event) {
@@ -55,26 +54,36 @@ var RequestOverview = React.createClass({
 		localStorage.setItem("agency", event.target.value);
 		this.setState({agency: event.target.value});
 	},
-	handleChange: function(key, event) {
+	handleChange: function(key, event) {		
+		var value = event.target.value;
+		console.log(value);
 		switch(key) {
 			case "docType":
+				var base = false;
+				if (value  === "Task Order" || value === "Call"){
+					base = true;
+				}
 				this.setState({
 					docType: event.target.value,
+					baseNumberNeeded: base,
 				});
-				localStorage.setItem("docType", event.target.value);
+				localStorage.setItem("docType", value);
+				localStorage.setItem("baseNumberNeeded", value);
 				break;
 			case "setaside":
 				this.setState({
 					setaside: event.target.value,					
 				});
-				localStorage.setItem("setaside", event.target.value);
+				localStorage.setItem("setaside", value);
+				break;
+			case "baseNumber":
+				this.setState({
+					baseNumber: event.target.value,					
+				});
+				localStorage.setItem("baseNumber", value);
 				break;
 		}    
-  },
-	setDoctype: function(event) {
-		localStorage.setItem("docType", event.target.value);
-		this.setState({docType: event.target.value});
-	},	
+  },	
 	render: function() {
 		// Create the agency names list
 		var agencyNameOptions = [(
@@ -140,9 +149,16 @@ var RequestOverview = React.createClass({
 					<radiogroup onChange={this.handleChange.bind(this, 'setaside')}>
 						{setasideOptions}
 					</radiogroup>
-				</div>
 
-				<br />
+					{this.state.baseNumberNeeded?
+						<h5>Base award number: 
+							<input type="text" className="shot-response" value={this.state.baseNumber} onChange={this.handleChange.bind(this, "baseNumber")} />
+						</h5>	
+					 : null}
+
+					 <br />
+
+				</div>
 
 				<Link to={"/rfp/"+this.props.params.id+"/question/1"}>
 					<Button bsStyle="primary" disabled={continueDisabled}>{"Let's go!"}</Button>

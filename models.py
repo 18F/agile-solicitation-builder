@@ -112,9 +112,9 @@ class Content(db.Model):
 	variables = db.Column(db.Boolean, default=False)
 	template = db.Column(db.Text)
 	text = db.Column(db.Text)
-	document_id = db.Column(db.Integer, db.ForeignKey('document.id'))
+	document_id = db.Column(db.Integer, db.ForeignKey('rfq.id'))
 
-class Document(db.Model):
+class RFQ(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
 	agency = db.Column(db.String)
 	agency_full_name = db.Column(db.String)

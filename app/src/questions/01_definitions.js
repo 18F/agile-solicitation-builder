@@ -47,20 +47,6 @@ var defaultTerms = (
     </div>
 );
 
-    // fetchDefinitionsSettings: function(cb) {
-    //     // TODO: replace w/ actual server call
-    //     var definitionsSettings = localStorage.getItem("definitionsSettings");
-    //     if(!definitionsSettings) {
-    //         cb("Definitions do not exist");
-    //     } else {
-    //         cb(null, JSON.parse(definitionsSettings));
-    //     }
-    // },
-    // saveDefinitionsSettings: function(definitionsSettings, cb) {
-    //     // TODO: replace w/ actual server call
-    //     localStorage.setItem("definitionsSettings", JSON.stringify(definitionsSettings));
-    //     cb(null);
-    // },
 
 var Definition = React.createClass({
     // Custom logic

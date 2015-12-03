@@ -4,8 +4,6 @@ var Deliveries = React.createClass({
 	save: function(cb) {
 		localStorage.setItem("locationText", this.state.locationText);
 		localStorage.setItem("locationRequirement", this.state.locationRequirement);
-		localStorage.setItem("performancePeriod", this.state.performancePeriod);
-		localStorage.setItem("periodDuration", this.state.periodDuration);
 		localStorage.setItem("travelRequirement", this.state.travelRequirement);
 		localStorage.setItem("travelBudget", this.state.travelBudget);
 		setTimeout(cb, 500);
@@ -69,29 +67,8 @@ var Deliveries = React.createClass({
 	render: function() {
 		return (
 			<div>
-				<div className="main-heading">Deliveries and Performance</div>
-				<div className="sub-heading">Period of Performance</div>
 
-				<p>How many option periods would you like? We suggest no more than 3. <a href="#">Learn More</a>.</p>
-				<form className="form-inline">
-    			<input type="text" className="form-control short-response" placeholder="enter a number" value={this.state.performancePeriod} onChange={this.handleChange}></input>
-				</form>
 
-				<p>How long would you like each individual period of performance to be?</p>
-				<div className="sub-text">We suggest 6 months or less, per <a href="#">FAR 39.1</a>.</div>
-				<form className="form-inline">
-    			<input type="text" className="form-control" placeholder="enter a number">
-    			</input>
-    			<select className="form-control">
-    				<option>months</option>
-    				<option>weeks</option>
-    			</select>
-				</form>
-
-				<div className="resulting-text">Resulting Text</div>
-				<p>The Period of Performance for this {this.state.docType} shall be a base period of <b>6 months</b>, with <b>one (1) 6-month</b> Award Term Incentive. <b>Two (2)</b> additional <b>6 month</b> Award Term Options will be included for a total potential period of performance of up to two (2) years as described in section 2.
-				</p>
-				
 				<div className="sub-heading">Place of Performance</div>
 				<p>Will you require the contractor to have a full-time working staff presence onsite at a specific location?</p>
 				<div className="sub-text">Ex: SBA headquarters in Washington, DC</div>

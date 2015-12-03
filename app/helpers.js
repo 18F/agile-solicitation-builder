@@ -4,6 +4,7 @@ function get_data(key){
 		data: { format : 'json' },
 		url: "/api/get_content/" + key,
 		success: function(data){
+			console.log(data);
 			return data;
 		}
 	});

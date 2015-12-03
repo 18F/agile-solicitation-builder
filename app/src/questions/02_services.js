@@ -6,20 +6,13 @@ var React = require('react');
 var defaultCodesText = "This requirement will be solicited under the following North American Industrial Classification System (NAICS) Code: 541512, Computer Systems Design Services, $27.5 million. This Task Order will be made in accordance with FAR 16.505 which governs orders placed under Indefinite Delivery contracts as detailed in the GSA GWAC Ordering guide.";
 
 var Services = React.createClass({
-	componentDidMount: function() {
-    $.ajax({
-      type: "GET",
-      data: {
-        format: 'json'
-      },
-      url: "/api/get_content/payment_schedule",
-      success: function(data){ 
-        this.setState({
-          paymentText: data,
-        })
-      }.bind(this),
-	  });
-  },
+ 	componentDidMount: function() {
+    text = get_data("payment_schedule");
+    console.log(text);
+    this.setState({
+      paymentText: text,
+    });
+   },
 	getInitialState: function() {
 		return {
 			response: false,
@@ -28,8 +21,12 @@ var Services = React.createClass({
 			totalBudget: localStorage.getItem("totalBudget"),
 			edit: null,
 			docType: localStorage.getItem("docType"),
-			awardFee: false,
-			incentiveFee: false,
+			awardFee: localStorage.getItem("awardFee") || false,
+			incentiveFee: localStorage.getItem("incentiveFee") || false,
+			optionPeriods: localStorage.getItem("optionPeriods") || null,
+			periodDurationNumber: localStorage.getItem("periodDurationNumber") || 6,
+			periodDurationUnit: localStorage.getItem("periodDurationUnit") || "months",
+			periodDuration: localStorage.getItem("periodDuration") || "6 months",
 		};
 	},
 	toggleEdit: function(key, event) {
@@ -44,19 +41,36 @@ var Services = React.createClass({
 	    });
 		}
 	},
+
 	handleChange: function(key, event) {
-		console.log(event.target.value);
+		// console.log(event.target.value);
 		switch(key) {
 			case "awardFee":
-			// @TODO make this work :(
+			// @TODO make this toggle work :(
 				this.setState({
 					awardFee : event.target.value? false : true,
 				});
-				console.log(this.state.awardFee);
 				break;
 			case "paymentText":
 				this.setState({
 					paymentText: event.target.value,
+				});
+				break;
+			case "optionPeriods":
+				this.setState({
+					optionPeriods: event.target.value,
+				});
+				break;
+			case "periodDurationNumber":
+				this.setState({
+					periodDurationNumber: event.target.value,
+					periodDuration: event.target.value + " " + this.state.periodDurationUnit,
+				});
+				break;
+			case "periodDurationUnit":
+				this.setState({
+					periodDurationUnit: event.target.value,
+					periodDuration: this.state.periodDurationNumber + " " + event.target.value,
 				});
 				break;
 		}    
@@ -109,22 +123,22 @@ var Services = React.createClass({
 
 				<p>How many option periods would you like? We suggest no more than 3. <a href="#">Learn More</a>.</p>
 				<form className="form-inline">
-    			<input type="text" className="form-control short-response" placeholder="enter a number" value={this.state.performancePeriod} onChange={this.handleChange}></input>
+    			<input type="text" className="form-control short-response" placeholder="enter a number" value={this.state.optionPeriods} onChange={this.handleChange.bind(this, "optionPeriods")}></input>
 				</form>
 
 				<p>How long would you like each individual period of performance to be?</p>
 				<div className="sub-text">We suggest 6 months or less, per <a href="#">FAR 39.1</a>.</div>
 				<form className="form-inline">
-    			<input type="text" className="form-control" placeholder="enter a number">
-    			</input>
-    			<select className="form-control">
+    			<input type="text" className="form-control" placeholder="enter a number" onChange={this.handleChange.bind(this, "periodDurationNumber")} value={this.state.periodDurationNumber}/>
+
+    			<select className="form-control" onChange={this.handleChange.bind(this, "periodDurationUnit")} value={this.state.periodDurationUnit}>
     				<option>months</option>
     				<option>weeks</option>
     			</select>
 				</form>
 
 				<div className="resulting-text">Resulting Text</div>
-				<p>The Period of Performance for this {this.state.docType} shall be a base period of <b>6 months</b>, with <b>one (1) 6-month</b> Award Term Incentive. <b>Two (2)</b> additional <b>6 month</b> Award Term Options will be included for a total potential period of performance of up to two (2) years as described in section 2.
+				<p>The Period of Performance for this {this.state.docType} shall be a base period of <b>{this.state.periodDurationNumber} {this.state.periodDurationUnit}</b>, with <b>one (1) {this.state.periodDuration}</b> Award Term Incentive. <b>Two (2)</b> additional <b>6 month</b> Award Term Options will be included for a total potential period of performance of up to two (2) years as described in section 2.
 				</p>
 
 				<h5>NAICS and FAR Justification Codes</h5>
@@ -300,6 +314,7 @@ var Services = React.createClass({
 				<p>We have pre-populated this section with the standard agile contracting text. However you are free to add to, modify or delete this text as you see fit.
 				</p>
 
+				{this.state.paymentText}
 				{this.state.edit === "paymentText"?
 				<div><div className="edit" onClick={this.toggleEdit.bind(this, 'paymentText')}>Done</div>
 					<textarea className="form-control" rows="4" defaultValue={this.state.paymentText} onChange={this.handleChange.bind(this, 'paymentText')}></textarea></div>:

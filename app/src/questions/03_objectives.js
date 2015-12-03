@@ -7,6 +7,7 @@ var Objective = React.createClass({
 		return {
 			docType: localStorage.getItem("docType"),
 			agency: localStorage.getItem("agency"),
+			maxBudget: 0,
 		};
 	},
 	save: function(cb) {
@@ -17,7 +18,7 @@ var Objective = React.createClass({
 		return (
 			<div>
 				<div className="main-heading">Statement of Objectives</div>
-				<p>This section has 6 components.</p>
+				<p>This section has many components.</p>
 
 				<div className="sub-heading">General Background</div>
 				<p>Please provide several paragraphs about your project's history, mission, and current state.</p>
@@ -32,7 +33,7 @@ var Objective = React.createClass({
 				<div className="sub-heading">Objectives</div>
 				<p>Note: The Statement of Objectives will be removed at time of award and replaced with the Offeror’s Performance Work Statement. All listed objectives and requirements shall be included as part of the Offeror’s Performance Work Statement.</p>
 
-				<p>The government is willing to invest a maximum budget of $[max budget] in this endeavor.</p>
+				<p>The government is willing to invest a maximum budget of ${this.state.maxBudget} in this endeavor.</p>
 
 				<div className="sub-heading">Overview </div>
 
