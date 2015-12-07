@@ -56,16 +56,11 @@ var Definition = React.createClass({
         });
         // TODO: add auto-save at some point
     },
-
     // Every question must implement a save() method
-    save: function(cb) {
-      // localStorage.setItem("definitions", this.state.text)
+    save: function(cb) {      
       put_data("definitions", this.state.text);
-      // @TODO put_data
     },
-
     // React functions
-
     getInitialState: function(){
       return {
         text: "",

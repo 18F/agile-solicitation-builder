@@ -143,7 +143,7 @@ var RequestOverview = React.createClass({
 					</radiogroup>
 
 					{this.state.baseNumberNeeded?
-						<h5>Base award number: 
+						<h5>Base award number:  
 							<input type="text" className="shot-response" value={this.state.baseNumber} onChange={this.handleChange.bind(this, "baseNumber")} />
 						</h5>	
 					 : null}

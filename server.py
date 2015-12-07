@@ -27,21 +27,17 @@ DATA = {
     "payment_schedule": payment_schedule_text,
 }
 
-
-def abort_if_content_doesnt_exist(content_key):
-    if content_key not in DATA:
-        abort(404, message="Content {} doesn't exist".format(key))
+# def abort_if_content_doesnt_exist(content_key):
+#     if content_key not in DATA:
+#         abort(404, message="Content {} doesn't exist".format(key))
 
 class Data(Resource):
 
     def get(self, content_key):
-        abort_if_content_doesnt_exist(content_key)
         print "content key! " + content_key
-        print type(DATA[content_key])
         return DATA[content_key]
 
     def put(self, content_key):
-        abort_if_content_doesnt_exist(content_key)
         data = request.get_json()
         content = data['text']
         print "content '" + content + "'"

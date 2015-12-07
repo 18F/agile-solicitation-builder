@@ -10,8 +10,24 @@ var Objective = React.createClass({
 			maxBudget: 0,
 		};
 	},
+	componentDidMount: function() {
+    get_data("max_budget", function(content){ 
+      this.setState({
+        maxBudget: content,
+      });
+    }.bind(this));
+  },
+	handleChange: function(key, event) {
+		switch(key) {
+			case "maxBudget":
+				this.setState({
+					maxBudget : event.target.value,
+				});
+				break;
+		}
+	},
 	save: function(cb) {
-		// TODO: save data
+		put_data("maxBudget", this.state.text);
 		setTimeout(cb, 500);
 	},
 	render: function() {
@@ -32,6 +48,16 @@ var Objective = React.createClass({
 
 				<div className="sub-heading">Objectives</div>
 				<p>Note: The Statement of Objectives will be removed at time of award and replaced with the Offeror’s Performance Work Statement. All listed objectives and requirements shall be included as part of the Offeror’s Performance Work Statement.</p>
+
+				<p>What is the maximum budget for your project?</p>
+				<form className="form-inline">
+					<div className="form-group">
+						<div className="input-group">
+							<div className="input-group-addon">$</div>
+	    				<input type="text" className="form-control short-response" placeholder="ex: 10,000,000" value={this.state.maxBudget} onChange={this.handleChange.bind(this, "maxBudget")}></input>
+	    			</div>
+	    		</div>
+				</form>
 
 				<p>The government is willing to invest a maximum budget of ${this.state.maxBudget} in this endeavor.</p>
 

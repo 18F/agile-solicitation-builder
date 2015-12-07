@@ -6,17 +6,15 @@ var React = require('react');
 var defaultCodesText = "This requirement will be solicited under the following North American Industrial Classification System (NAICS) Code: 541512, Computer Systems Design Services, $27.5 million. This Task Order will be made in accordance with FAR 16.505 which governs orders placed under Indefinite Delivery contracts as detailed in the GSA GWAC Ordering guide.";
 
 var Services = React.createClass({
- 	componentDidMount: function() {
-    text = get_data("payment_schedule");
-    console.log(text);
-    this.setState({
-      paymentText: text,
-    });
-   },
+  componentDidMount: function() {
+    get_data("payment_schedule", function(content){ 
+      this.setState({
+        paymentText: content,
+      });
+    }.bind(this));
+  },
 	getInitialState: function() {
 		return {
-			response: false,
-			textInBox: false,
 			codesText: defaultCodesText,
 			totalBudget: localStorage.getItem("totalBudget"),
 			edit: null,
@@ -43,7 +41,6 @@ var Services = React.createClass({
 	},
 
 	handleChange: function(key, event) {
-		// console.log(event.target.value);
 		switch(key) {
 			case "awardFee":
 			// @TODO make this toggle work :(
@@ -98,26 +95,16 @@ var Services = React.createClass({
 				<div className="sub-text">At the moment this tool only supports Firm Fixed Price as it better supports agile development.</div>
 				<div className="radio">
 				  <label>
-				    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" defaultChecked></input>
+				    <input type="radio" defaultChecked></input>
 				    Firm Fixed Price
 				  </label>
 				</div>
 				<div className="radio">
 				  <label>
-				    <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2" disabled></input>
+				    <input type="radio" disabled></input>
 				    Time and Materials
 				  </label>
 				</div>
-
-				<p>What is the maximum budget for your project?</p>
-				<form className="form-inline">
-					<div className="form-group">
-						<div className="input-group">
-							<div className="input-group-addon">$</div>
-	    				<input type="text" className="form-control short-response" placeholder="ex: 10,000,000" value={this.state.totalBudget} onChange={this.updateBudget}></input>
-	    			</div>
-	    		</div>
-				</form>
 
 				<div className="sub-heading">Period of Performance</div>
 
@@ -314,7 +301,6 @@ var Services = React.createClass({
 				<p>We have pre-populated this section with the standard agile contracting text. However you are free to add to, modify or delete this text as you see fit.
 				</p>
 
-				{this.state.paymentText}
 				{this.state.edit === "paymentText"?
 				<div><div className="edit" onClick={this.toggleEdit.bind(this, 'paymentText')}>Done</div>
 					<textarea className="form-control" rows="4" defaultValue={this.state.paymentText} onChange={this.handleChange.bind(this, 'paymentText')}></textarea></div>:
@@ -326,23 +312,25 @@ var Services = React.createClass({
 				
 				<div className="sub-heading">Award Term Incentive</div>
 				<h5>Would you like to include an award or an incentive?</h5>
-				<div className="checkbox">
+				<div className="radio">
 				  <label>
-				    <input type="checkbox" value={this.state.awardFee} onChange={this.handleChange.bind(this, "awardFee")}></input>
+				    <input type="radio" value={this.state.awardFee} onChange={this.handleChange.bind(this, "awardFee")}></input>
 				    Award Fee
 				  </label>
 				</div>
-				<div className="checkbox">
+				<div className="radio">
 				  <label>
-				    <input type="checkbox" onChange={this.handleChange.bind(this, "incentiveFee")}></input>
+				    <input type="radio" onChange={this.handleChange.bind(this, "incentiveFee")}></input>
 				    Incentive Fee
 				  </label>
 				</div>
+				<div className="radio">
+				  <label>
+				    <input type="radio" onChange={this.handleChange.bind(this, "noFee")}></input>
+				    Neither
+				  </label>
+				</div>
 
-				{this.state.awardFee? <div>yes</div> : null}
-				
-
-				<br />
 				<p>This Task Order shall be Firm Fixed Price/Award Term Incentive. The purpose of the Award Term Incentive is to incentivize superior performance and delivery by offering an additional period of performance. Following the base period, the Government will offer one (1) Award Term Incentive and two (2) additional options pending availability of funds.</p>
 			</div>
 		);
