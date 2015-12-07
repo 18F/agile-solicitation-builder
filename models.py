@@ -22,6 +22,7 @@ class RFQ(Base):
     id = Column(Integer, primary_key=True)
     agency = Column(String)
     doc_type = Column(String)
+    setaside = Column(String)
     components = relationship("ContentComponent")
 
     def __repr__(self):
@@ -43,12 +44,25 @@ class ContentComponent(Base):
     document_id = Column(Integer, ForeignKey('rfqs.id'), primary_key=True)
     section = Column(Integer, primary_key=True)
     name = Column(String, primary_key=True)
+    variables = Column(Boolean, default=False)
 
-    updated = Column(Boolean, default=False)
     text = Column(Text)
     
     def __repr__(self):
         return "<ContentComponent(name='%s', doc_id='%d', text='%s')>" % (self.name, self.document_id, self.text)
+
+
+class ValueComponent(Base):
+    __tablename__ = 'value_components'
+
+    document_id = Column(Integer, ForeignKey('rfqs.id'), primary_key=True)
+    section = Column(Integer, primary_key=True)
+    name = Column(String, primary_key=True)
+
+    value = Column(Integer)
+    
+    def __repr__(self):
+        return "<ValueComponent(name='%s', doc_id='%d', value='%d')>" % (self.name, self.document_id, self.value)
 
             
 

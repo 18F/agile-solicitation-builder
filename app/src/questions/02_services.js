@@ -1,9 +1,8 @@
 var React = require('react');
 
-// var defaultPaymentText = "The contractor shall be paid upon the completion of each iteration upon its acceptance and verification by the Contracting Officer’s Representative (COR). Invoices shall be submitted at the end of each iteration in accordance with the delivery schedule as established in the Performance Work Statement.";
 // <p>If you believe you need additional CLINs, 6 total, 2 per year, 3 years</p>
 // <p>@TODO CLIN number is editable ("0001"), as many boxes as there are periods of performance. Option to add a completely empty box if they want. </p>
-var defaultCodesText = "This requirement will be solicited under the following North American Industrial Classification System (NAICS) Code: 541512, Computer Systems Design Services, $27.5 million. This Task Order will be made in accordance with FAR 16.505 which governs orders placed under Indefinite Delivery contracts as detailed in the GSA GWAC Ordering guide.";
+
 
 var Services = React.createClass({
   componentDidMount: function() {
@@ -12,10 +11,15 @@ var Services = React.createClass({
         paymentText: content,
       });
     }.bind(this));
+    get_data("naics_codes", function(content){ 
+      this.setState({
+        codesText: content,
+      });
+    }.bind(this));
   },
 	getInitialState: function() {
 		return {
-			codesText: defaultCodesText,
+			codesText: "",
 			totalBudget: localStorage.getItem("totalBudget"),
 			edit: null,
 			docType: localStorage.getItem("docType"),
@@ -40,14 +44,28 @@ var Services = React.createClass({
 		}
 	},
 
-	handleChange: function(key, event) {
+	addFee: function(key, event) {
+		// awardFee, incentiveFee, noFee
 		switch(key) {
 			case "awardFee":
-			// @TODO make this toggle work :(
 				this.setState({
-					awardFee : event.target.value? false : true,
+					"fee": "Award Fee",
 				});
 				break;
+			case "incentiveFee":
+				this.setState({
+					"fee": "Incentive Fee",
+				});
+				break;
+			case "noFee":
+				this.setState({
+					"fee": "none",
+				});
+				break;
+		}
+	},
+	handleChange: function(key, event) {
+		switch(key) {
 			case "paymentText":
 				this.setState({
 					paymentText: event.target.value,
@@ -129,13 +147,13 @@ var Services = React.createClass({
 				</p>
 
 				<h5>NAICS and FAR Justification Codes</h5>
-				<div className="sub-text">We have provided a NAICS code that commonly applies to the acquisition of software development services. If you believe your requirement is not covered under this NAICS code you may search under <a>this link</a> to select a different one.</div>
+				<div className="sub-text">We have provided a NAICS code that commonly applies to the acquisition of software development services. If you believe your requirement is not covered under this NAICS code you may search under <a href="http://www.census.gov/eos/www/naics/" target="_blank">this link</a> to select a different one.</div>
 
 				<div className="edit" onClick={this.toggleEdit.bind(this, 'codes')}>Edit</div>
 				
 				{this.state.edit === "codes"? <textarea className="form-control" rows="4" defaultValue={this.state.codesText}></textarea> :
 				<div><p>{this.state.docType} against [GSA Alliant Small Business (SB) GWAC] – Firm Fixed Price</p>
-				<p id="naics-far-text1">This requirement will be solicited under the following North American Industrial Classification System (NAICS) Code: 541512, Computer Systems Design Services, $27.5 million. This Task Order will be made in accordance with FAR 16.505 which governs orders placed under Indefinite Delivery contracts as detailed in the GSA GWAC Ordering guide.</p></div>				
+				<p id="naics-far-text1">This requirement will be solicited under the following North American Industrial Classification System (NAICS) Code: 541512, Computer Systems Design Services, $27.5 million. This Task Order will be made in accordance with FAR 16.505 which governs orders placed under Indefinite Delivery contracts as detailed in the GSA GWAC Ordering guide.</p></div>
 				}
 				<div className="sub-heading">Contract Line Item Number (CLIN) Format</div>							
 				<button className="add">Add CLIN</button>
@@ -310,23 +328,25 @@ var Services = React.createClass({
 				</div>
 				}	
 				
+				<br />
+
 				<div className="sub-heading">Award Term Incentive</div>
 				<h5>Would you like to include an award or an incentive?</h5>
 				<div className="radio">
 				  <label>
-				    <input type="radio" value={this.state.awardFee} onChange={this.handleChange.bind(this, "awardFee")}></input>
+				    <input type="radio" value={this.state.awardFee} onChange={this.addFee.bind(this, "awardFee")}></input>
 				    Award Fee
 				  </label>
 				</div>
 				<div className="radio">
 				  <label>
-				    <input type="radio" onChange={this.handleChange.bind(this, "incentiveFee")}></input>
+				    <input type="radio" onChange={this.addFee.bind(this, "incentiveFee")}></input>
 				    Incentive Fee
 				  </label>
 				</div>
 				<div className="radio">
 				  <label>
-				    <input type="radio" onChange={this.handleChange.bind(this, "noFee")}></input>
+				    <input type="radio" onChange={this.addFee.bind(this, "noFee")}></input>
 				    Neither
 				  </label>
 				</div>

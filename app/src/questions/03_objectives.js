@@ -2,6 +2,23 @@ var React = require('react');
 
 var defaultStakeholdersText = "Stakeholders for this project include, but are not limited to, ___, ___, the Contracting Officer’s Representative (COR) and the Contracting Officer.";
 
+var DELIVERABLES = {
+	"1": "Research, Insights, and Synthesis",
+	"2": "Prototype Design Solutions",
+	"3": "Recommendations",
+	"4": "Program Management and Stewardship",
+	"5": "UX requirements gathering",
+	"6": "Initial application design and implementation",
+	"7": "System configuration to support business processes",
+	"8": "Integration for input and output methods",
+	"9": "Workflow design and implementation",
+	"10": "Overall collaboration of applications",
+	"11": "Enhancements, patches, and updates to applications, data, or cloud systems",
+	"12": "Data import of records collected from legacy systems",
+	"13": "Automated testing",
+	"14": "Training of end users on the systems"
+}
+
 var Objective = React.createClass({
 	getInitialState: function() {
 		return {
@@ -24,6 +41,11 @@ var Objective = React.createClass({
 					maxBudget : event.target.value,
 				});
 				break;
+			case "stakeholders":
+				this.setState({
+					stakeholders : event.target.value,
+				});
+				break;
 		}
 	},
 	save: function(cb) {
@@ -31,6 +53,18 @@ var Objective = React.createClass({
 		setTimeout(cb, 500);
 	},
 	render: function() {
+
+		var deliverables = [];
+		for(var key in DELIVERABLES) {
+			deliverables.push(
+				<div className="checkbox">
+					<label>
+						<input type="checkbox" value={key} />{ DELIVERABLES[key] }
+				  </label>
+				</div>
+			);
+		}
+
 		return (
 			<div>
 				<div className="main-heading">Statement of Objectives</div>
@@ -113,46 +147,41 @@ var Objective = React.createClass({
 					<p>The (group responsible) for this contract commit to support the vendor in the user research process, and will provide the vendor with access to the government employees who will be the users of the product.</p>
 
 					<p>The primary users of this [XXX] will include X, Y, Z. To ensure the system supports interoperability, XX must be followed. (see section). To ensure the user interface is X, Y (playbook language) @TODO</p>
+					<ol>
+						<li>Early in the project, spend time with current and prospective users of the service</li>
+						<li>Use a range of qualitative and quantitative research methods to determine people’s goals, needs, and behaviors; be thoughtful about the time spent</li>
+						<li>Test prototypes of solutions with real people, in the field if possible</li>
+						<li>Document the findings about user goals, needs, behaviors, and preferences</li>
+						<li>Share findings with the team and agency leadership</li>
+						<li>Create a prioritized list of tasks the user is trying to accomplish, also known as "user stories"</li>
+						<li>As the digital service is being built, regularly test it with potential users to ensure it meets people’s needs</li>
+					</ol>
 
 				<p>What is your User Research Strategy?</p>
 			
-					<div className="checkbox">
+					<div className="radio">
 					  <label>
-					    <input type="checkbox" value=""></input>
-							We or another vendor have already conducted user research internally. (proceed to product/program vision questionnaire)
+					    <input type="radio" value=""></input>
+							Research has already been conducted, either internally or by another vendor. (proceed to product/program vision questionnaire)
 					  </label>
 					</div>
-					<div className="checkbox">
+					<div className="radio">
 					  <label>
-					    <input type="checkbox" value=""></input>
+					    <input type="radio" value=""></input>
 					    We intend to conduct user research internally prior to the start date of this engagement.
 					  </label>
 					</div>
-					<div className="checkbox">
+					<div className="radio">
 					  <label>
-					    <input type="checkbox" value=""></input>
+					    <input type="radio" value=""></input>
 					    The vendor will be responsible for the user research. 
 					  </label>
 					</div>
 			
 
 				<div className="sub-heading">Specific Tasks and Deliverables</div>
-				<ul>
-					<li>Research, Insights, and Synthesis</li>
-					<li>Prototype Design Solutions</li>
-					<li>Recommendations</li>
-					<li>Program Management and Stewardship</li>
-					<li>UX requirements gathering</li>
-					<li>Initial application design and implementation</li>
-					<li>System configuration to support business processes</li>
-					<li>Integration for input and output methods</li>
-					<li>Workflow design and implementation</li>
-					<li>Overall collaboration of applications</li>
-					<li>Enhancements, patches, and updates to applications, data, or cloud systems</li>
-					<li>Data import of records collected from legacy systems</li>
-					<li>Automated testing</li>
-					<li>Training of end users on the systems</li>
-				</ul>
+				<p>Deliverables may include:</p>
+					{deliverables}
 
 				<div className="sub-heading">Deliverables</div>
 				<p>Would you like to use ...?</p>
@@ -173,7 +202,7 @@ var Objective = React.createClass({
 
 				<div className="sub-heading">Stakeholders</div>
 				<p>Feel free to add additional stakeholders as is relevant to your project.</p>
-				<textarea className="form-control" rows="4" placeholder="1-2 sentences" defaultValue={defaultStakeholdersText}>					
+				<textarea className="form-control" rows="4" value={this.state.stakeholders} onChange={this.handleChange.bind(this, "stakeholders")}>
 				</textarea>
 
 				<div className="sub-heading">Agile Development Management Plan (ADMP) and Key Personnel</div>

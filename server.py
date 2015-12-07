@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from flask import Flask, send_from_directory, request
-from flask_restful import Resource, Api
+from flask import Flask, send_from_directory, request, jsonify
+from flask_restful import Resource, Api, reqparse
 from flask_sqlalchemy import SQLAlchemy
 
 from pprint import pprint
@@ -9,12 +9,11 @@ import os
 import config
 
 from docx import Document
-# from models import *
+from models import Agency, RFQ, ContentComponent, Base, Session, engine
 
 
 # set the project root directory as the static folder, you can set others.
 app = Flask(__name__, static_folder='app')
-# app.config.from_object(os.environ['APP_SETTINGS'])
 app.config['APP_SETTINGS'] = config.DevelopmentConfig
 db = SQLAlchemy(app)
 api = Api(app, prefix="/api")
@@ -31,11 +30,23 @@ DATA = {
 #     if content_key not in DATA:
 #         abort(404, message="Content {} doesn't exist".format(key))
 
+parser = reqparse.RequestParser()
+parser.add_argument('agency')
+parser.add_argument('doc_type')
+parser.add_argument('setaside')
+
+class Agencies(Resource):
+    def get(self):
+        agencies = session.query(Agency).order_by(Agency.full_name).all()
+        return jsonify(agencies)
+
 class Data(Resource):
 
-    def get(self, content_key):
+    def get(self, content_key):        
         print "content key! " + content_key
-        return DATA[content_key]
+        session = Session()
+        content = session.query(ContentComponent).filter_by(name=content_key)
+        return jsonify(content)
 
     def put(self, content_key):
         data = request.get_json()
@@ -43,8 +54,23 @@ class Data(Resource):
         print "content '" + content + "'"
         DATA[content_key] = content
 
-api.add_resource(Data, '/get_content/<string:content_key>')
+class Create(Resource):
 
+     def post(self):
+        # get agency, doc_type, setaside values
+        args = parser.parse_args()
+        agency = args['agency']
+        doc_type = args['doc_type']
+        setaside = args['setaside']
+
+        rfq = RFQ(agency=agency, doc_type=doc_type, setaside=setaside)
+        session.add(rfq)
+        session.commit()
+
+
+api.add_resource(Data, '/get_content/<string:content_key>')
+api.add_resource(Create, '/rfqs')
+api.add_resource(Agencies, '/agencies')
 
 # map index.html to app/index.html, map /build/bundle.js to app/build.bundle.js
 @app.route('/initiate')
