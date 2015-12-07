@@ -56,7 +56,6 @@ var RequestOverview = React.createClass({
 	},
 	handleChange: function(key, event) {		
 		var value = event.target.value;
-		console.log(value);
 		switch(key) {
 			case "docType":
 				var base = false;
@@ -119,8 +118,8 @@ var RequestOverview = React.createClass({
 			);
 		}
 
-		var validAgency = this.state.agency != null && this.state.agency != "none";
-		var validDocType = this.state.docType != null;
+		var validAgency = this.state.agency != "null" && this.state.agency != "none";
+		var validDocType = this.state.docType != "";
 		var continueDisabled = !(validAgency && validDocType);
 
 		return (
@@ -143,18 +142,18 @@ var RequestOverview = React.createClass({
 						{docTypeOptions}
 					</radiogroup>
 
+					{this.state.baseNumberNeeded?
+						<h5>Base award number: 
+							<input type="text" className="shot-response" value={this.state.baseNumber} onChange={this.handleChange.bind(this, "baseNumber")} />
+						</h5>	
+					 : null}
+
 					<br />
 
 					<h5>Do you intend to set aside this acquisition for any of the following under FAR part 19?</h5>
 					<radiogroup onChange={this.handleChange.bind(this, 'setaside')}>
 						{setasideOptions}
 					</radiogroup>
-
-					{this.state.baseNumberNeeded?
-						<h5>Base award number: 
-							<input type="text" className="shot-response" value={this.state.baseNumber} onChange={this.handleChange.bind(this, "baseNumber")} />
-						</h5>	
-					 : null}
 
 					 <br />
 

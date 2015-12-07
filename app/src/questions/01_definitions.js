@@ -67,6 +67,7 @@ var Definition = React.createClass({
 
     componentDidMount: function() {
       content = get_data("definitions");
+      console.log(content);
       this.setState({
         text: content,
       });
