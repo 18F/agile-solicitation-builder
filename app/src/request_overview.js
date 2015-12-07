@@ -159,12 +159,13 @@ var RequestOverview = React.createClass({
 
 				</div>
 
-				<Link to={"/rfp/"+this.props.params.id+"/question/1"}>
-					<Button bsStyle="primary" disabled={continueDisabled}>{"Let's go!"}</Button>
+				<Link to={"/rfps"}>					
+					<Button bsStyle="primary" disabled={continueDisabled}>{"Let's go!"}</Button>				
 				</Link>
 			</div>
 		);
 	},
 });
+// <Link to={"/rfp/"+this.props.params.id+"/question/1"}>			
 
 module.exports = RequestOverview;

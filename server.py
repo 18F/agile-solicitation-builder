@@ -66,6 +66,7 @@ class Create(Resource):
         rfq = RFQ(agency=agency, doc_type=doc_type, setaside=setaside)
         session.add(rfq)
         session.commit()
+        return redirect("/rfp/1/question/1")
 
 
 api.add_resource(Data, '/get_content/<string:content_key>')
@@ -111,5 +112,10 @@ def download():
 
     return "document created"
 
+def create_tables():
+    Base.metadata.create_all(engine)
+
 if __name__ == "__main__":
+    create_tables()
     app.run(debug=True)
+
