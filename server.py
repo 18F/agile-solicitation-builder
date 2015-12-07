@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import Flask, send_from_directory
+from flask import Flask, send_from_directory, request
 from flask_restful import Resource, Api
 from flask_sqlalchemy import SQLAlchemy
 
@@ -42,9 +42,10 @@ class Data(Resource):
 
     def put(self, content_key):
         abort_if_content_doesnt_exist(content_key)
-        content = request.form['content']
+        data = request.get_json()
+        content = data['text']
         print "content '" + content + "'"
-        DATA[content_key] = updated_content
+        DATA[content_key] = content
 
 api.add_resource(Data, '/get_content/<string:content_key>')
 

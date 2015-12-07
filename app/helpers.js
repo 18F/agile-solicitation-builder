@@ -1,24 +1,28 @@
-function get_data(key){
+function get_data(key, callback){
 	$.ajax({
 		type: "GET",
-		data: { format : 'json' },
 		url: "/api/get_content/" + key,
+		dataType: 'json',	
 		success: function(data){
 			console.log(data);
-			return data;
+			if (callback){
+				callback(data);
+			}
 		}
 	});
 }
 
-function put_data(key, content){
-	var url_component = key + '?content="' + content + '"';
+function put_data(key, content, callback){	
 	$.ajax({
-		type: "PUT",
-		data: { format : 'json' },
-		url: "/api/get_content/" + url_component, 
+		type: "PUT",		
+		url: "/api/get_content/" + key,
+		data: JSON.stringify({text: content}),
+		contentType: 'application/json',
+		dataType: 'json',
 		success: function(data){
-			// what should happen here?
-			return data;
+			if (callback){
+				callback(data);
+			}
 		}
 	});
 }

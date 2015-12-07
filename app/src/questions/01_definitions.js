@@ -59,25 +59,28 @@ var Definition = React.createClass({
 
     // Every question must implement a save() method
     save: function(cb) {
-      localStorage.setItem("definitions", this.state.text)
+      // localStorage.setItem("definitions", this.state.text)
+      put_data("definitions", this.state.text);
       // @TODO put_data
     },
 
     // React functions
 
+    getInitialState: function(){
+      return {
+        text: "",
+      };
+    },
+
     componentDidMount: function() {
-      content = get_data("definitions");
-      console.log(content);
-      this.setState({
-        text: content,
-      });
+      get_data("definitions", function(content){ 
+        console.log(content);
+        this.setState({
+          text: content,
+        });
+      }.bind(this));
     },
-    getInitialState: function() {
-        return {
-            response: false,
-            text: localStorage.getItem("definitions"),
-        };
-    },
+
     render: function() {
         return (
             <div>
