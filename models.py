@@ -16,6 +16,17 @@ Base = declarative_base()
 
 content_components = seed.content_components
 
+class Agency(Base):
+    __tablename__ = 'agencies'
+
+    id = Column(Integer, primary_key=True)
+    full_name = Column(String)
+    abbreviation = Column(String)
+
+    def __repr__(self):
+        return "<Agency(id='%d', full_name='%s', abbreviation='%s')>" % (self.id, self.full_name, self.abbreviation)
+
+
 class RFQ(Base):
     __tablename__ = 'rfqs'
 
@@ -66,13 +77,4 @@ class ValueComponent(Base):
 
             
 
-class Agency(Base):
-    __tablename__ = 'agencies'
-
-    id = Column(Integer, primary_key=True)
-    full_name = Column(String)
-    abbreviation = Column(String)
-
-    def __repr__(self):
-        return "<Agency(id='%d', full_name='%s', abbreviation='%s')>" % (self.id, self.full_name, self.abbreviation)
 

@@ -2,7 +2,7 @@ function get_data(key, callback){
 	$.ajax({
 		type: "GET",
 		url: "/api/get_content/" + key,
-		dataType: 'json',	
+		dataType: 'json',
 		success: function(data){
 			console.log(data);
 			if (callback){

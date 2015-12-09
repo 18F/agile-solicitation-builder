@@ -9,7 +9,7 @@ import os
 import config
 
 from docx import Document
-from models import Agency, RFQ, ContentComponent, Base, Session, engine
+from models import Agency, RFQ, ContentComponent, ValueComponent, Base, Session, engine
 from seed import agencies
 
 
@@ -40,6 +40,7 @@ class Agencies(Resource):
     def get(self):
         session = Session()
         agencies = session.query(Agency).order_by(Agency.full_name).all()
+        dump()
         return jsonify(agencies)
 
 class Data(Resource):
@@ -74,7 +75,7 @@ class Create(Resource):
 class Workon(Resource):
     
     def get(self, rfq_id):
-        # get a specific RFQ
+        # get a specific RFQ        
         pass
 
 
@@ -82,11 +83,35 @@ class Workon(Resource):
         # update a specific RFQ
         pass
 
+class Sections(Resource):
 
+    def get(self, rfq_id, section_id):
+        # Get the values for a specific section
+        session = Session()
+        sections = session.query(ContentComponent).filter_by(section=section_id).all()
+        values = session.query(ValueComponent).filter_by(section=section_id).all()
+        print type(sections)
+        print type(values)
+        return sections
+
+    def put(self, rfq_id, section_id):
+        # Update the value for a specific section
+        pass
+
+class Results(Resource):
+
+    def get(self, rfq_id):
+        # Get the results
+        pass
+
+
+api.add_resource(Agencies, '/agencies')
 api.add_resource(Data, '/get_content/<string:content_key>')
 api.add_resource(Create, '/rfqs')
-api.add_resource(Workon, 'rfqs/<int:rfq_id>')
-api.add_resource(Agencies, '/agencies')
+api.add_resource(Workon, '/rfqs/<int:rfq_id>')
+api.add_resource(Sections, '/rfqs/<int:rfq_id>/sections/<int:section_id>')
+api.add_resource(Results, '/rfqs/<int:rfq_id>/results')
+# api.add_resource(Downloads, '/rfqs/<int:rfq_id>/results/download')
 
 # map index.html to app/index.html, map /build/bundle.js to app/build.bundle.js
 @app.route('/initiate')
@@ -101,11 +126,19 @@ def index():
 def send_js(path):
     return send_from_directory("app", path)
 
-@app.route('/download/<int:doc_id>')
-def download():
+# @app.route('/downloads/<path:filename>', methods=['GET'])
+# def download(filename):
+#     uploads = os.path.join(current_app.root_folder, app.config['UPLOAD_FOLDER'])
+#     return send_from_directory(directory=uploads, filename=filename)
+
+@app.route('/download/<int:rfq_id>')
+def download(rfq_id):
     document = Document()
 
-    rfq = RFQ.find(id=doc_id)
+    session = Session()
+    rfq = session.query(RFQ).filter_by(id=rfq_id).first()
+    print rfq
+
     title = "RFQ for " + rfq.agency
     document.add_heading('RFQ', 0)
 
@@ -123,17 +156,26 @@ def download():
     document.add_paragraph(
         'first item in ordered list', style='ListNumber'
     )
-    document.save('demo.docx')
 
-    return "document created"
+    doc_name = "RFQ_" + str(rfq_id) + ".docx"
+    file_path = os.path.join(doc_name, "downloads")
+    document.save(file_path)
+
+    # download_folder = os.path.join(current_app.root_folder, "downloads")
+    return send_from_directory(directory="downloads", filename=doc_name)
 
 def create_tables():
     Base.metadata.create_all(engine)
     session = Session()
+
     for agency in agencies:
         a = Agency(abbreviation=agency, full_name=agencies[agency])
         session.add(a)
         session.commit()
+
+    rfq = RFQ(agency="GSA", doc_type="Task Order")
+    session.add(rfq)
+    session.commit()
 
 
 if __name__ == "__main__":
