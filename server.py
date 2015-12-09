@@ -10,6 +10,7 @@ import config
 
 from docx import Document
 from models import Agency, RFQ, ContentComponent, Base, Session, engine
+from seed import agencies
 
 
 # set the project root directory as the static folder, you can set others.
@@ -37,6 +38,7 @@ parser.add_argument('setaside')
 
 class Agencies(Resource):
     def get(self):
+        session = Session()
         agencies = session.query(Agency).order_by(Agency.full_name).all()
         return jsonify(agencies)
 
@@ -58,6 +60,7 @@ class Create(Resource):
 
      def post(self):
         # get agency, doc_type, setaside values
+        # need to figure out how to transfer values from request in args
         args = parser.parse_args()
         agency = args['agency']
         doc_type = args['doc_type']
@@ -68,9 +71,21 @@ class Create(Resource):
         session.commit()
         return redirect("/rfp/1/question/1")
 
+class Workon(Resource):
+    
+    def get(self, rfq_id):
+        # get a specific RFQ
+        pass
+
+
+    def put(self, rfq_id):
+        # update a specific RFQ
+        pass
+
 
 api.add_resource(Data, '/get_content/<string:content_key>')
 api.add_resource(Create, '/rfqs')
+api.add_resource(Workon, 'rfqs/<int:rfq_id>')
 api.add_resource(Agencies, '/agencies')
 
 # map index.html to app/index.html, map /build/bundle.js to app/build.bundle.js
@@ -114,6 +129,12 @@ def download():
 
 def create_tables():
     Base.metadata.create_all(engine)
+    session = Session()
+    for agency in agencies:
+        a = Agency(abbreviation=agency, full_name=agencies[agency])
+        session.add(a)
+        session.commit()
+
 
 if __name__ == "__main__":
     create_tables()

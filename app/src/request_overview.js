@@ -159,7 +159,7 @@ var RequestOverview = React.createClass({
 
 				</div>
 
-				<Link to={"/rfps"}>					
+				<Link to={"/api/rfqs"}>
 					<Button bsStyle="primary" disabled={continueDisabled}>{"Let's go!"}</Button>				
 				</Link>
 			</div>
