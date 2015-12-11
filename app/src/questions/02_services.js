@@ -3,6 +3,12 @@ var React = require('react');
 // <p>If you believe you need additional CLINs, 6 total, 2 per year, 3 years</p>
 // <p>@TODO CLIN number is editable ("0001"), as many boxes as there are periods of performance. Option to add a completely empty box if they want. </p>
 
+// this is a firm fixed price purchase order
+// this is a firm fixed price {call/etc.} against [78fhjh].
+// move to beginning of services and prices
+
+// <p>Ex: Services required under this {localStorage.getItem("docType")} are to assist the {localStorage.getItem("agencyFullname")} ({localStorage.getItem("agency")}) with the design and implementation of systems to support the {localStorage.getItem("agency")}’s Program for X.</p>
+
 
 var Services = React.createClass({
   componentDidMount: function() {
@@ -105,8 +111,7 @@ var Services = React.createClass({
 				<div className="main-heading">Services and Prices</div>
 
 				<div className="sub-heading">Brief Description of Services</div>
-				<p>Ex: Services required under this {localStorage.getItem("docType")} are to assist the {localStorage.getItem("agencyFullname")} ({localStorage.getItem("agency")}) with the design and implementation of systems to support the {localStorage.getItem("agency")}’s Program for X.</p>
-				<textarea className="form-control" rows="4" placeholder="1-2 sentences"></textarea>				
+								<textarea className="form-control" rows="4" placeholder="1-2 sentences"></textarea>				
 
 				<div className="sub-heading">Type of Contract</div>
 				<p>What time of contract will these be?</p>
@@ -126,11 +131,6 @@ var Services = React.createClass({
 
 				<div className="sub-heading">Period of Performance</div>
 
-				<p>How many option periods would you like? We suggest no more than 3. <a href="#">Learn More</a>.</p>
-				<form className="form-inline">
-    			<input type="text" className="form-control short-response" placeholder="enter a number" value={this.state.optionPeriods} onChange={this.handleChange.bind(this, "optionPeriods")}></input>
-				</form>
-
 				<p>How long would you like each individual period of performance to be?</p>
 				<div className="sub-text">We suggest 6 months or less, per <a href="#">FAR 39.1</a>.</div>
 				<form className="form-inline">
@@ -142,15 +142,25 @@ var Services = React.createClass({
     			</select>
 				</form>
 
+				<p>In addition to your base period, how many option periods would you like? We suggest no more than 3.</p>
+				<form className="form-inline">
+    			<input type="text" className="form-control short-response" placeholder="enter a number" value={this.state.optionPeriods} onChange={this.handleChange.bind(this, "optionPeriods")}></input>
+				</form>				
+
+
+
+				<p>How long will each iteration within a period of performance be? We recommend 2-3 weeks per iteration</p>
+
+
 				<div className="resulting-text">Resulting Text</div>
-				<p>The Period of Performance for this {this.state.docType} shall be a base period of <b>{this.state.periodDurationNumber} {this.state.periodDurationUnit}</b>, with <b>one (1) {this.state.periodDuration}</b> Award Term Incentive. <b>Two (2)</b> additional <b>6 month</b> Award Term Options will be included for a total potential period of performance of up to two (2) years as described in section 2.
+				<p>The Period of Performance for this {this.state.docType} shall be a base period of <b>{this.state.periodDurationNumber} {this.state.periodDurationUnit}</b>. <b>2</b> additional <b>6 month</b> Option Periods will be included for a total potential period of performance of up to 2 years as described in section 2.
 				</p>
 
 				<h5>NAICS and FAR Justification Codes</h5>
-				<div className="sub-text">We have provided a NAICS code that commonly applies to the acquisition of software development services. If you believe your requirement is not covered under this NAICS code you may search under <a href="http://www.census.gov/eos/www/naics/" target="_blank">this link</a> to select a different one.</div>
+				<div className="sub-text">We have provided a NAICS code that commonly applies to the acquisition of software development services. If you believe your requirement is not covered under this NAICS code you may search under <a href="http://www.census.gov/eos/www/naics/" target="_blank">this link</a> to select a different one; please edit the text below accordingly.</div>
 
 				<div className="edit" onClick={this.toggleEdit.bind(this, 'codes')}>Edit</div>
-				
+				@TODO 
 				{this.state.edit === "codes"? <textarea className="form-control" rows="4" defaultValue={this.state.codesText}></textarea> :
 				<div><p>{this.state.docType} against [GSA Alliant Small Business (SB) GWAC] – Firm Fixed Price</p>
 				<p id="naics-far-text1">This requirement will be solicited under the following North American Industrial Classification System (NAICS) Code: 541512, Computer Systems Design Services, $27.5 million. This Task Order will be made in accordance with FAR 16.505 which governs orders placed under Indefinite Delivery contracts as detailed in the GSA GWAC Ordering guide.</p></div>
@@ -202,7 +212,7 @@ var Services = React.createClass({
 					</thead>
 					<tbody>
 						<tr>
-							<td>Award Term 02/Option Term: (6 months, period of performance)</td>
+							<td>Option Period 1 (6 months, period of performance)</td>
 						</tr>
 						<tr>
 							<td>CLIN 0002, FFP- Completion - The Contractor shall provide services for the Government in accordance with the Performance Work Statement (PWS)</td>
@@ -330,7 +340,7 @@ var Services = React.createClass({
 				
 				<br />
 
-				<div className="sub-heading">Award Term Incentive</div>
+				<div className="sub-heading">Awards and Incentives</div>
 				<h5>Would you like to include an award or an incentive?</h5>
 				<div className="radio">
 				  <label>
@@ -351,7 +361,6 @@ var Services = React.createClass({
 				  </label>
 				</div>
 
-				<p>This Task Order shall be Firm Fixed Price/Award Term Incentive. The purpose of the Award Term Incentive is to incentivize superior performance and delivery by offering an additional period of performance. Following the base period, the Government will offer one (1) Award Term Incentive and two (2) additional options pending availability of funds.</p>
 			</div>
 		);
 	},

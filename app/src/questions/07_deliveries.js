@@ -20,6 +20,11 @@ var Deliveries = React.createClass({
    	 });
 		}
 	},
+	updateLocation: function(event) {
+		this.setState({
+			locationText: event.target.value,
+		});
+	},
 	toggleTravel: function(responseText) {
 		if (responseText === "yes") {
 			this.setState({
@@ -31,11 +36,6 @@ var Deliveries = React.createClass({
   	    travelRequirement: false,
    	 });
 		}
-	},
-	updateLocation: function(event) {
-		this.setState({
-			locationText: event.target.value,
-		});
 	},
 	handleChange: function(key, event) {
 		switch(key) {
@@ -67,31 +67,6 @@ var Deliveries = React.createClass({
 	render: function() {
 		return (
 			<div>
-
-
-				<div className="sub-heading">Place of Performance</div>
-				<p>Will you require the contractor to have a full-time working staff presence onsite at a specific location?</p>
-				<div className="sub-text">Ex: SBA headquarters in Washington, DC</div>
-					<div className="radio">
-					  <label>
-					    <input type="radio" value="yes" onChange={this.toggleLocation.bind(this, "yes")} checked={this.state.locationRequirement}></input>
-					    Yes
-					  </label>
-					</div>
-					<div className="radio">
-					  <label>
-					    <input type="radio" value="no" onChange={this.toggleLocation.bind(this, "no")} checked={!this.state.locationRequirement}></input>
-					    No
-					  </label>
-					</div>
-					{this.state.locationRequirement? <div><input type="text" className="form-control short-response" placeholder="ex: Washington, DC" value={this.state.locationText} onChange={this.handleChange.bind(this, "locationText")}></input><br /></div> : null}
-
-
-				<div className="resulting-text">Resulting Text</div>
-				{this.state.locationRequirement ? <p>The contractor shall have a full-time working staff presence at {this.state.locationText}. Contractor shall have additional facilities to perform contract functions as necessary.</p> : null}
-				
-				<p>Any off-site development and test environments need to be compliant with {this.state.agency} and federal security guidelines as detailed in the Appendix.</p>
-				
 				<p className="new-content">Any work with the Government staff shall not take place on Federal holidays or weekends unless directed by the Contracting Officer (CO). All federal holidays by year are listed on the <a href="www.opm.gov" target="_blank">OPM website</a>.</p>
 
 				<div className="sub-heading">Travel</div>

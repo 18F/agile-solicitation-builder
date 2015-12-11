@@ -28,6 +28,7 @@ numbers = [
     },
 ]
 
+# var defaultStakeholdersText = "Stakeholders for this project include, but are not limited to, ___, ___, the Contracting Officer’s Representative (COR) and the Contracting Officer.";
 content_components = [
     {
         "name": "setasides",

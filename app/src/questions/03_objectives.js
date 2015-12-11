@@ -33,6 +33,23 @@ var Objective = React.createClass({
 			maxBudget: 0,
 		};
 	},
+	toggleLocation: function(responseText) {
+		if (responseText === "yes") {
+			this.setState({
+  	    locationRequirement: true,
+   	 });
+		}
+		if (responseText === "no") {
+			this.setState({
+  	    locationRequirement: false,
+   	 });
+		}
+	},
+	updateLocation: function(event) {
+		this.setState({
+			locationText: event.target.value,
+		});
+	},
 	componentDidMount: function() {
     get_value("max_budget", function(content){ 
       this.setState({
@@ -55,6 +72,11 @@ var Objective = React.createClass({
 			case "userResearch":
 				this.setState({
 					userResearch : event.target.value,
+				});
+				break;
+			case "locationText":
+		  	this.setState({
+					locationText: event.target.value,
 				});
 				break;
 		}
@@ -156,16 +178,6 @@ var Objective = React.createClass({
 				<p>The primary users of this digital service will include X, Y, Z.</p>
 
 				<p>To ensure the system supports interoperability,  must be followed. (see section). To ensure the user interface is X, Y (playbook language) @TODO</p>
-				<p>The contractor shall ensure we understand the different ways people will interact with the services, including the actions they take online, through a mobile application, on a phone, or in person. Every encounter — whether it's online or offline — should move the user closer towards their goal.</p>
-
-				<p>In delivery of this effort the contractor shall:</p>
-
-				<ol>
-					<li>Understand the different points at which people will interact with the service – both online and in person</li>
-					<li>Identify pain points in the current way users interact with the service, and prioritize these according to user needs</li>
-					<li>Design the digital parts of the service so that they are integrated with the offline touch points people use to interact with the service</li>
-					<li>Develop metrics that will measure how well the service is meeting user needs at each step of the service</li>
-				</ol>
 
 				
 				{(this.state.userResearch === "vendor")?
@@ -180,6 +192,14 @@ var Objective = React.createClass({
 							<li>Share findings with the team and agency leadership</li>
 							<li>Create a prioritized list of tasks the user is trying to accomplish, also known as "user stories"</li>
 							<li>As the digital service is being built, regularly test it with potential users to ensure it meets people’s needs</li>
+						</ol>
+					<p>The contractor shall ensure we understand the different ways people will interact with the services, including the actions they take online, through a mobile application, on a phone, or in person. Every encounter — whether it's online or offline — should move the user closer towards their goal.</p>
+						<p>In delivery of this effort the contractor shall:</p>
+						<ol>
+							<li>Understand the different points at which people will interact with the service – both online and in person</li>
+							<li>Identify pain points in the current way users interact with the service, and prioritize these according to user needs</li>
+							<li>Design the digital parts of the service so that they are integrated with the offline touch points people use to interact with the service</li>
+							<li>Develop metrics that will measure how well the service is meeting user needs at each step of the service</li>
 						</ol>
 					</div> : null
 			}
@@ -199,23 +219,23 @@ var Objective = React.createClass({
 				<li>Use language that is familiar to the user and easy to understand</li>
 				<li>Use language and design consistently throughout the service, including online and offline touch points</li>
 			</ol>
-Use data to drive decisions
 
-At every stage of a project, the contractor shall measure how well our service is working for our users. This includes measuring how well a system performs and how people are interacting with it in real-time. These metrics shall be reported to the Program Managers to find issues and identify which bug fixes and improvements should be prioritized. Along with monitoring tools, a feedback mechanism should be in place for people to report issues directly.
+			<div className="sub-heading">Use data to drive decisions</div>
 
-Requirements Checklist:
+			<p>At every stage of a project, the contractor shall measure how well our service is working for our users. This includes measuring how well a system performs and how people are interacting with it in real-time. These metrics shall be reported to the Program Managers to find issues and identify which bug fixes and improvements should be prioritized. Along with monitoring tools, a feedback mechanism should be in place for people to report issues directly.</p>
 
-In delivery of this effort the contractor shall:
-
-1. Monitor system-level resource utilization in real time
-2. Monitor system performance in real-time (e.g. response time, latency, throughput, and error rates)
-3. Ensure monitoring can measure median, 95th percentile, and 98th percentile performance
-4. Create automated alerts based on this monitoring
-5. Track concurrent users in real-time, and monitor user behaviors in the aggregate to determine how well the service meets user needs
-6. Provide metrics which may be published internally
-7. Provide Metrics which may be published externally
-8. Use an experimentation tool that supports multivariate testing in production
-
+			<p>In delivery of this effort the contractor shall:</p>
+			<ol>
+				<li>Monitor system-level resource utilization in real time <b>Suggest tools</b></li>
+				<li>Monitor system performance in real-time (e.g. response time, latency, throughput, and error rates)</li>				
+				<li>Ensure monitoring can measure median, 95th percentile, and 98th percentile performance</li>
+				<li>Create automated alerts based on this monitoring</li>
+				<li>Track concurrent users in real-time, and monitor user behaviors in the aggregate to determine how well the service meets user needs</li>
+				<li>Provide metrics which may be published internally</li>
+				<li>Provide Metrics which may be published externally</li>
+				<li>Use an experimentation tool that supports multivariate testing in production</li>
+				<li><b>Provide goverment employees access to these monitoring systems</b></li>
+			</ol>
 
 
 				<div className="sub-heading">Specific Tasks and Deliverables</div>
@@ -225,19 +245,14 @@ In delivery of this effort the contractor shall:
 
 				<p>These functional Requirements will be translated into Epics and User Stories that will be used to populate the Product Backlog.</p>
 
+				<div className="sub-heading">Backlog Section</div>
+				<textarea lines="10"></textarea>
+
 				<div className="sub-heading">Deliverables</div>
 				<p>A deliverable will be considered complete and acceptable when it meets the contractor's "Definition of Done".</p>
 				<p>Each deliverable shall incorporate agency IT requirements as detailed in the Appendix of this document and the <a href="https://playbook.cio.gov" target="_blank">United States Digital Service Playbook</a> standards and be compliant with Section 508. (see <a>here</a>)</p>
-				<div>Deliverables - https://quip.com/SFN4AAN4NA2F</div>
 
-
-				<div className="sub-heading">Stakeholders</div>
-				<p>Feel free to add additional stakeholders as is relevant to your project.</p>
-				<textarea className="form-control" rows="4" value={this.state.stakeholders} onChange={this.handleChange.bind(this, "stakeholders")}>
-				</textarea>
-
-				<div className="sub-heading">Agile Development Management Plan (ADMP) and Key Personnel</div>
-				<p>Offerors shall propose an Agile Development Management Plan (ADMP) which demonstrates how the Offeror intends to manage, develop, implement, and maintain the requirements described in this SOO and the RFQ. The plan shall include, at a minimum:</p>
+				<div className="sub-heading">Agile Development Management Plan (ADMP) and Key Personnel @TODO bye bye </div>
 				<p>The performance work statement will include:</p>
 				<ul>
 					<li>Contact information for all senior leaders and an organizational chart showing the Offeror’s organizational hierarchy and reporting structure, with specific designation of individuals as Key Personnel;
@@ -251,11 +266,32 @@ In delivery of this effort the contractor shall:
 				</ul>
 				<p>The ADMP and the listing of Key Personnel shall become part of the {this.state.docType} upon award.</p>
 
-				<div className="sub-heading">Kick-Off Meeting/Post-Award Conference</div>
-				<p>Is there a required place of performance? What region the work will be done?</p>
+				<div className="sub-heading">Place of Performance</div>
+				<p>Will you require the contractor to have a full-time working staff presence onsite at a specific location?</p>
+				<div className="sub-text">Ex: SBA headquarters in Washington, DC</div>
+					<div className="radio">
+					  <label>
+					    <input type="radio" value="yes" onChange={this.toggleLocation.bind(this, "yes")} checked={this.state.locationRequirement}></input>
+					    Yes
+					  </label>
+					</div>
+					<div className="radio">
+					  <label>
+					    <input type="radio" value="no" onChange={this.toggleLocation.bind(this, "no")} checked={!this.state.locationRequirement}></input>
+					    No
+					  </label>
+					</div>
+					{this.state.locationRequirement? <div><input type="text" className="form-control short-response" placeholder="ex: Washington, DC" value={this.state.locationText} onChange={this.handleChange.bind(this, "locationText")}></input><br /></div> : null}
 
-				<p>@TODO Move location question in section 7 to here and add follow up question</p>
-				<p>The agency's relevant personnel, Contracting Officer, and COR shall hold a Kick-Off meeting/Post-Award Conference in Washington, DC with contractor’s team and other relevant Government staff to review and clarify the project’s objectives, expectations from the Government, and address any questions the Contractor may have.</p>
+
+				<div className="resulting-text">Resulting Text</div>
+				{this.state.locationRequirement ? <p>The contractor shall have a full-time working staff presence at {this.state.locationText}. Contractor shall have additional facilities to perform contract functions as necessary.</p> : null}
+				
+				<p>Any off-site development and test environments need to be compliant with {this.state.agency} and federal security guidelines as detailed in the Appendix.</p>
+				
+				<div className="sub-heading">Kick-Off Meeting/Post-Award Conference</div>
+				
+				<p>The agency's relevant personnel, Contracting Officer, and COR shall hold a Kick-Off meeting/Post-Award Conference in {this.state.locationText} with contractor’s team and other relevant Government staff to review and clarify the project’s objectives, expectations from the Government, and address any questions the Contractor may have.</p>
 				<p>The Contractor shall provide and collaborate with the COR on an agenda for this meeting. Discussion topics shall include, but not be limited to: introduction of the Contractor and Government Staff; understanding of the specific tasks and subtasks; project management expectations; agreement on meeting schedules; and agreement on initial delivery dates.</p>
 				<p>The Kick-Off meeting/Post-Award Conference will take place within 10 days from award and will be scheduled by the Contracting Officer.</p>
 
@@ -278,7 +314,6 @@ In delivery of this effort the contractor shall:
 				</ul>
 
 				<p className="new-content">Furthermore, documentation should be updated with each iteration. This includes technical documentation including but not limited to setup instructions in the README.md, user reseach findings etc. All documents should be stored electronically such that the CO, PM, and any other relevant government employees who have been granted permissions can access them at any time.</p>
-
 			</div>
 		);
 	},
