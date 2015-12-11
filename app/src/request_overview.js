@@ -54,6 +54,20 @@ var RequestOverview = React.createClass({
 		localStorage.setItem("agency", event.target.value);
 		this.setState({agency: event.target.value});
 	},
+	handleCreateRFQ: function() {
+		createRFQ({
+			docType: this.state.docType,
+			agency: this.state.agency,
+		}, function(err, data) {
+			if(err) {
+				// TODO fix this!
+				alert(err);
+				return;
+			}
+			// go to /rfp/"+rfqID+"/question/1"
+			
+		});
+	},
 	handleChange: function(key, event) {		
 		var value = event.target.value;
 		switch(key) {
@@ -159,13 +173,12 @@ var RequestOverview = React.createClass({
 
 				</div>
 
-				<Link to={"/rfp/"+this.props.params.id+"/question/1"}>	
-					<Button bsStyle="primary" disabled={continueDisabled}>{"Let's go!"}</Button>				
-				</Link>
+					<Button bsStyle="primary" onClick={this.handleCreateRFQ} disabled={continueDisabled}>{"Let's go!"}</Button>				
 			</div>
 		);
 	},
 });
-// <Link to={"/rfp/"+this.props.params.id+"/question/1"}>			
+// <Link to={"/rfp/"+this.props.params.id+"/question/1"}>		submit ajax request
+	// if successful go to next page
 
 module.exports = RequestOverview;

@@ -3,8 +3,8 @@
 numbers = [
     {
         "name": "base_number",
-        "value": 3,
-        "section": 2,
+        "value": 0,
+        "section": 0,
     },
     {
         "name": "option_periods",

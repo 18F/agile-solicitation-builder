@@ -6,6 +6,7 @@ from flask_sqlalchemy import SQLAlchemy
 from pprint import pprint
 
 import os
+import sys
 import config
 
 from docx import Document
@@ -40,8 +41,7 @@ class Agencies(Resource):
     def get(self):
         session = Session()
         agencies = session.query(Agency).order_by(Agency.full_name).all()
-        dump()
-        return jsonify(agencies)
+        return jsonify(data=[a.to_dict() for a in agencies])
 
 class Data(Resource):
 
@@ -49,13 +49,22 @@ class Data(Resource):
         print "content key! " + content_key
         session = Session()
         content = session.query(ContentComponent).filter_by(name=content_key)
-        return jsonify(content)
+        return content[0].text
 
     def put(self, content_key):
         data = request.get_json()
         content = data['text']
+        print content
         print "content '" + content + "'"
-        DATA[content_key] = content
+        # DATA[content_key] = content
+
+class Value(Resource):
+
+    def get(self, value_key):        
+        print "value key! " + value_key
+        session = Session()
+        content = session.query(ValueComponent).filter_by(name=value_key)
+        return content[0].text
 
 class Create(Resource):
 
@@ -107,6 +116,7 @@ class Results(Resource):
 
 api.add_resource(Agencies, '/agencies')
 api.add_resource(Data, '/get_content/<string:content_key>')
+api.add_resource(Value, '/get_value/<string:value_key>')
 api.add_resource(Create, '/rfqs')
 api.add_resource(Workon, '/rfqs/<int:rfq_id>')
 api.add_resource(Sections, '/rfqs/<int:rfq_id>/sections/<int:section_id>')
@@ -179,6 +189,9 @@ def create_tables():
 
 
 if __name__ == "__main__":
-    create_tables()
-    app.run(debug=True)
+    if len(sys.argv) > 1 and sys.argv[1] == "init":
+        create_tables()
+    else:
+        app.run(debug=True)
+
 

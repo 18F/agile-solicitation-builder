@@ -12,6 +12,21 @@ function get_data(key, callback){
 	});
 }
 
+function get_value(key, callback){
+	$.ajax({
+		type: "GET",
+		url: "/api/get_value/" + key,
+		dataType: 'json',
+		success: function(data){
+			console.log(data);
+			if (callback){
+				callback(data);
+			}
+		}
+	});
+}
+
+
 function put_data(key, content, callback){	
 	$.ajax({
 		type: "PUT",		

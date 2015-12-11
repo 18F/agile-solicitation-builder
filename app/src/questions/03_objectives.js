@@ -19,6 +19,12 @@ var DELIVERABLES = {
 	"14": "Training of end users on the systems"
 }
 
+USER_RESEARCH = {			
+	"done": "Research has already been conducted, either internally or by another vendor. (proceed to product/program vision questionnaire)",
+	"internal": "We intend to conduct user research internally prior to the start date of this engagement.",
+ 	"vendor": "The vendor will be responsible for the user research."
+}
+
 var Objective = React.createClass({
 	getInitialState: function() {
 		return {
@@ -28,7 +34,7 @@ var Objective = React.createClass({
 		};
 	},
 	componentDidMount: function() {
-    get_data("max_budget", function(content){ 
+    get_value("max_budget", function(content){ 
       this.setState({
         maxBudget: content,
       });
@@ -46,6 +52,11 @@ var Objective = React.createClass({
 					stakeholders : event.target.value,
 				});
 				break;
+			case "userResearch":
+				this.setState({
+					userResearch : event.target.value,
+				});
+				break;
 		}
 	},
 	save: function(cb) {
@@ -60,6 +71,17 @@ var Objective = React.createClass({
 				<div className="checkbox">
 					<label>
 						<input type="checkbox" value={key} />{ DELIVERABLES[key] }
+				  </label>
+				</div>
+			);
+		}
+
+		var userResearchOptions = [];
+		for(var key in USER_RESEARCH) {
+			userResearchOptions.push(
+				<div className="radio">
+					<label>
+						<input type="radio" value={key} />{ USER_RESEARCH[key] }
 				  </label>
 				</div>
 			);
@@ -100,105 +122,114 @@ var Objective = React.createClass({
 					<p>The primary users of this X are:</p>
 					<div className="checkbox">
 					  <label>
-					    <input type="checkbox" value=""></input>
+					    <input type="checkbox" value="internal_p"></input>
 					    Internal (people)
 					  </label>
 					</div>
 					<div className="checkbox">
 					  <label>
-					    <input type="checkbox" value=""></input>
+					    <input type="checkbox" value="external_p"></input>
 					    External (people)
 					  </label>
 					</div>
 					<div className="checkbox">
 					  <label>
-					    <input type="checkbox" value=""></input>
-					    Internal (systems)
+					    <input type="checkbox" value="internal_s"></input>
+					    Internal (systems, developers)
 					  </label>
 					</div>
 					<div className="checkbox">
 					  <label>
-					    <input type="checkbox" value=""></input>
+					    <input type="checkbox" value="external_s"></input>
 					    External (systems, developers)
 					  </label>
 					</div>
 
-				<p>Has anyone working on this project done any user research? (Learn more <a href="https://playbook.cio.gov/#play1" target="_blank">here</a>!)</p>
-
-				<div className="checkbox">
-					  <label>
-					    <input type="checkbox" value=""></input>
-					    Yes
-					  </label>
-					</div>
-					<div className="checkbox">
-					  <label>
-					    <input type="checkbox" value=""></input>
-					    No, but our team intends to
-					  </label>
-					</div>
-					<div className="checkbox">
-					  <label>
-					    <input type="checkbox" value=""></input>
-					    No, this will be carried out by the vendor
-					  </label>
-					</div>
-
-					<p>The (group responsible) for this contract commit to support the vendor in the user research process, and will provide the vendor with access to the government employees who will be the users of the product.</p>
-
-					<p>The primary users of this [XXX] will include X, Y, Z. To ensure the system supports interoperability, XX must be followed. (see section). To ensure the user interface is X, Y (playbook language) @TODO</p>
-					<ol>
-						<li>Early in the project, spend time with current and prospective users of the service</li>
-						<li>Use a range of qualitative and quantitative research methods to determine people’s goals, needs, and behaviors; be thoughtful about the time spent</li>
-						<li>Test prototypes of solutions with real people, in the field if possible</li>
-						<li>Document the findings about user goals, needs, behaviors, and preferences</li>
-						<li>Share findings with the team and agency leadership</li>
-						<li>Create a prioritized list of tasks the user is trying to accomplish, also known as "user stories"</li>
-						<li>As the digital service is being built, regularly test it with potential users to ensure it meets people’s needs</li>
-					</ol>
-
 				<p>What is your User Research Strategy?</p>
-			
-					<div className="radio">
-					  <label>
-					    <input type="radio" value=""></input>
-							Research has already been conducted, either internally or by another vendor. (proceed to product/program vision questionnaire)
-					  </label>
-					</div>
-					<div className="radio">
-					  <label>
-					    <input type="radio" value=""></input>
-					    We intend to conduct user research internally prior to the start date of this engagement.
-					  </label>
-					</div>
-					<div className="radio">
-					  <label>
-					    <input type="radio" value=""></input>
-					    The vendor will be responsible for the user research. 
-					  </label>
-					</div>
-			
+
+				<radiogroup onChange={this.handleChange.bind(this, 'userResearch')}>
+					{userResearchOptions}
+				</radiogroup>
+
+				<p>The team within {this.state.agency} managing this contract commit to support the vendor in the user research process, and will provide the vendor with access to the government employees who will be the users of the product.</p>
+
+				<p>The primary users of this digital service will include X, Y, Z.</p>
+
+				<p>To ensure the system supports interoperability,  must be followed. (see section). To ensure the user interface is X, Y (playbook language) @TODO</p>
+				<p>The contractor shall ensure we understand the different ways people will interact with the services, including the actions they take online, through a mobile application, on a phone, or in person. Every encounter — whether it's online or offline — should move the user closer towards their goal.</p>
+
+				<p>In delivery of this effort the contractor shall:</p>
+
+				<ol>
+					<li>Understand the different points at which people will interact with the service – both online and in person</li>
+					<li>Identify pain points in the current way users interact with the service, and prioritize these according to user needs</li>
+					<li>Design the digital parts of the service so that they are integrated with the offline touch points people use to interact with the service</li>
+					<li>Develop metrics that will measure how well the service is meeting user needs at each step of the service</li>
+				</ol>
+
+				
+				{(this.state.userResearch === "vendor")?
+					<div>
+						<p>The vendor services will include exploring and pinpointing the needs of the people who will use the service, and the ways the service will fit into their lives. The vendor shall continually test the products with real people to ensure delivery is focused on what is important.</p>
+						<p>As a part of this effort, the vendor will:</p>
+						<ol>
+							<li>Early in the project, spend time with current and prospective users of the service</li>
+							<li>Use a range of qualitative and quantitative research methods to determine people’s goals, needs, and behaviors; be thoughtful about the time spent</li>
+							<li>Test prototypes of solutions with real people, in the field if possible</li>
+							<li>Document the findings about user goals, needs, behaviors, and preferences</li>
+							<li>Share findings with the team and agency leadership</li>
+							<li>Create a prioritized list of tasks the user is trying to accomplish, also known as "user stories"</li>
+							<li>As the digital service is being built, regularly test it with potential users to ensure it meets people’s needs</li>
+						</ol>
+					</div> : null
+			}
+
+			<div className="sub-heading">Make it simple and intuitive</div>
+
+			<p>Successful delivery of this contract requires that the services of and products delivered will not be stressful, confusing, or daunting. Therefore the contractor shall build services that are simple and intuitive enough that users succeed the first time, unaided.</p>
+
+			<p>In delivery of this effort the contractor shall:</p>
+
+			<ol>
+				<li>Use a simple and flexible design style guide for the service. Use the U.S. Web Design Standards (https://playbook.cio.gov/designstandards) as a default</li>
+				<li>Use the design style guide consistently for related digital services</li>
+				<li>Give users clear information about where they are in each step of the process</li>
+				<li>Follow accessibility best practices to ensure all people can use the service</li>
+				<li>Provide users with a way to exit and return later to complete the process</li>
+				<li>Use language that is familiar to the user and easy to understand</li>
+				<li>Use language and design consistently throughout the service, including online and offline touch points</li>
+			</ol>
+Use data to drive decisions
+
+At every stage of a project, the contractor shall measure how well our service is working for our users. This includes measuring how well a system performs and how people are interacting with it in real-time. These metrics shall be reported to the Program Managers to find issues and identify which bug fixes and improvements should be prioritized. Along with monitoring tools, a feedback mechanism should be in place for people to report issues directly.
+
+Requirements Checklist:
+
+In delivery of this effort the contractor shall:
+
+1. Monitor system-level resource utilization in real time
+2. Monitor system performance in real-time (e.g. response time, latency, throughput, and error rates)
+3. Ensure monitoring can measure median, 95th percentile, and 98th percentile performance
+4. Create automated alerts based on this monitoring
+5. Track concurrent users in real-time, and monitor user behaviors in the aggregate to determine how well the service meets user needs
+6. Provide metrics which may be published internally
+7. Provide Metrics which may be published externally
+8. Use an experimentation tool that supports multivariate testing in production
+
+
 
 				<div className="sub-heading">Specific Tasks and Deliverables</div>
-				<p>Deliverables may include:</p>
+				<p>Which of the following do you anticipate your project will need?</p>
+				<div className="sub-text">We have already checked certain components that the USDS Playbook suggests be required for all projects.</div>
 					{deliverables}
 
+				<p>These functional Requirements will be translated into Epics and User Stories that will be used to populate the Product Backlog.</p>
+
 				<div className="sub-heading">Deliverables</div>
-				<p>Would you like to use ...?</p>
-				<p>A deliverably will be considered complete and acceptable when it meets the contractor's "Definition of Done".</p>
+				<p>A deliverable will be considered complete and acceptable when it meets the contractor's "Definition of Done".</p>
 				<p>Each deliverable shall incorporate agency IT requirements as detailed in the Appendix of this document and the <a href="https://playbook.cio.gov" target="_blank">United States Digital Service Playbook</a> standards and be compliant with Section 508. (see <a>here</a>)</p>
 				<div>Deliverables - https://quip.com/SFN4AAN4NA2F</div>
-				<p>Functional Requirements, translated into Epics and User Stories that will be used to populate the Product Backlog may include, but are not limited to:
-					  UX requirements gathering
-					•	Initial application design and implementation
-					•	System configuration to support business processes
-					•	Integration for input and output methods
-					•	Workflow design and implementation
-					•	Overall collaboration of applications
-					•	Enhancements, patches, and updates to applications, data, or cloud systems
-					•	Data import of records collected from legacy systems
-					•	Automated testing
-					•	Training of end users on the systems</p>
+
 
 				<div className="sub-heading">Stakeholders</div>
 				<p>Feel free to add additional stakeholders as is relevant to your project.</p>

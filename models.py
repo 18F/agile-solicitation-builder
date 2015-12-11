@@ -8,7 +8,7 @@ from sqlalchemy.orm import sessionmaker, relationship
 import seed
 
 
-engine = create_engine('sqlite:///:memory:', echo=True)
+engine = create_engine('sqlite:///playbook.db', echo=True)
 Session = sessionmaker(bind=engine)
 
 Base = declarative_base()
@@ -20,12 +20,15 @@ class Agency(Base):
     __tablename__ = 'agencies'
 
     id = Column(Integer, primary_key=True)
-    full_name = Column(String)
-    abbreviation = Column(String)
+    full_name = Column(String, unique=True)
+    abbreviation = Column(String, unique=True)
 
     def __repr__(self):
         return "<Agency(id='%d', full_name='%s', abbreviation='%s')>" % (self.id, self.full_name, self.abbreviation)
 
+    def to_dict(self):
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+        
 
 class RFQ(Base):
     __tablename__ = 'rfqs'

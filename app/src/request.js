@@ -108,7 +108,7 @@ var Request = React.createClass({
 				</View>
 				<View className="col-md-1">					
 				</View>
-				<View className="col-md-2">
+				<View className="col-md-2 sidebar-nav">
 					<Sidebar width={200} currentPage={this.props.location.pathname} rfpId={this.props.params.id} />
 				</View>
 				<View className="col-md-1">					
