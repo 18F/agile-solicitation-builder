@@ -49,6 +49,7 @@ class Data(Resource):
         print "content key! " + content_key
         session = Session()
         content = session.query(ContentComponent).filter_by(name=content_key)
+        print content
         return content[0].text
 
     def put(self, content_key):

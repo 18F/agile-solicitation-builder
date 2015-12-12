@@ -8,23 +8,6 @@ var Deliveries = React.createClass({
 		localStorage.setItem("travelBudget", this.state.travelBudget);
 		setTimeout(cb, 500);
 	},
-	toggleLocation: function(responseText) {
-		if (responseText === "yes") {
-			this.setState({
-  	    locationRequirement: true,
-   	 });
-		}
-		if (responseText === "no") {
-			this.setState({
-  	    locationRequirement: false,
-   	 });
-		}
-	},
-	updateLocation: function(event) {
-		this.setState({
-			locationText: event.target.value,
-		});
-	},
 	toggleTravel: function(responseText) {
 		if (responseText === "yes") {
 			this.setState({
@@ -44,11 +27,6 @@ var Deliveries = React.createClass({
       		travelBudget: event.target.value,
 		    });
 		    break;
-		  case "locationText":
-		  	this.setState({
-					locationText: event.target.value,
-				});
-				break;
 		}
 	},
   getInitialState: function() {
@@ -56,8 +34,6 @@ var Deliveries = React.createClass({
     	performancePeriod: null,
     	periodDuration: null,
       agency: localStorage.getItem("agency"),
-      locationRequirement: false,
-      locationText: null,
       docType: localStorage.getItem("docType"),
       travelBudget: localStorage.getItem("travelBudget"),
       travelRequirement: false,

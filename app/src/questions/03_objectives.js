@@ -31,6 +31,7 @@ var Objective = React.createClass({
 			docType: localStorage.getItem("docType"),
 			agency: localStorage.getItem("agency"),
 			maxBudget: 0,
+			userResearch: "none",
 		};
 	},
 	toggleLocation: function(responseText) {
@@ -103,7 +104,7 @@ var Objective = React.createClass({
 			userResearchOptions.push(
 				<div className="radio">
 					<label>
-						<input type="radio" value={key} />{ USER_RESEARCH[key] }
+						<input type="radio" value={key} checked={key == this.state.userResearch} />{ USER_RESEARCH[key] }
 				  </label>
 				</div>
 			);
