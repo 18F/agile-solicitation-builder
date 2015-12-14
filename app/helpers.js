@@ -26,6 +26,24 @@ function get_value(key, callback){
 	});
 }
 
+// function createRFQ(key, callback){
+function createRFQ(dataDict, callback){
+	console.log(dataDict);
+	$.ajax({
+		type: "POST",
+		url: "/api/rfqs",
+		data: dataDict,
+		dataType: 'json',
+		success: function(data){
+			console.log(data);
+			if (callback){
+				console.log(data);
+				callback(data);
+			}
+		}
+	});
+}
+
 
 function put_data(key, content, callback){	
 	$.ajax({

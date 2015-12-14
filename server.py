@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import Flask, send_from_directory, request, jsonify
+from flask import Flask, send_from_directory, request, jsonify, redirect
 from flask_restful import Resource, Api, reqparse
 from flask_sqlalchemy import SQLAlchemy
 
@@ -69,18 +69,20 @@ class Value(Resource):
 
 class Create(Resource):
 
-     def post(self):
+     def post(self, **kwargs):
         # get agency, doc_type, setaside values
         # need to figure out how to transfer values from request in args
         args = parser.parse_args()
         agency = args['agency']
         doc_type = args['doc_type']
         setaside = args['setaside']
+        print agency, doc_type, setaside
 
         rfq = RFQ(agency=agency, doc_type=doc_type, setaside=setaside)
+        session = Session()
         session.add(rfq)
-        session.commit()
-        return redirect("/rfp/1/question/1")
+        # session.commit()
+        return redirect("/#/rfp/1/question/1")
 
 class Workon(Resource):
     

@@ -37,18 +37,21 @@ class RFQ(Base):
     agency = Column(String)
     doc_type = Column(String)
     setaside = Column(String)
+    base_number = Column(String)
     components = relationship("ContentComponent")
 
     def __repr__(self):
         return "<RFQ(id='%d', agency='%s', doc_type='%s')>" % (self.id, self.agency, self.doc_type)
 
-    def __init__(self, agency, doc_type):
+    def __init__(self, agency, doc_type, setaside, base_number=None):
         # working-with-related-objects
 
         # seed each section of the new document with the template content
         # check for variables
         self.agency = agency
         self.doc_type = doc_type
+        self.setaside = setaside
+        self.base_number = base_number
         self.components = [ContentComponent(**section) for section in content_components]
 
 

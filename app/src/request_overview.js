@@ -55,17 +55,24 @@ var RequestOverview = React.createClass({
 		this.setState({agency: event.target.value});
 	},
 	handleCreateRFQ: function() {
-		createRFQ({
+		var dict = {
 			docType: this.state.docType,
 			agency: this.state.agency,
+			setaside: this.state.setaside,
+		}
+		console.log('hi');
+		console.log(dict);
+		createRFQ({
+			doc_type: this.state.docType,
+			agency: this.state.agency,
+			setaside: this.state.setaside,
 		}, function(err, data) {
 			if(err) {
 				// TODO fix this!
 				alert(err);
 				return;
 			}
-			// go to /rfp/"+rfqID+"/question/1"
-			
+			// go to /rfp/"+rfqID+"/question/1"			
 		});
 	},
 	handleChange: function(key, event) {		
