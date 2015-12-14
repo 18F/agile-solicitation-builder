@@ -58,12 +58,12 @@ ReactDOM.render(
 	<Router>
 		<Route path="/" component={App}>
 			<IndexRoute component={Welcome} />
-			<Route path="rfp/:id" component={Request}>
-				<IndexRoute component={RequestOverview} />
-				<Route path="question/:qid" component={Question} />
-				<Route path="results" component={Results} />
+			<Route path="rfp" component={RequestOverview} />
+				<Route path="rfp/:id" component={Request}>
+					<Route path="question/:qid" component={Question} />
+					<Route path="results" component={Results} />
+				</Route>
 			</Route>
-		</Route>
 	</Router>,
 	document.getElementById('mount')
 );

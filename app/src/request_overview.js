@@ -55,24 +55,15 @@ var RequestOverview = React.createClass({
 		this.setState({agency: event.target.value});
 	},
 	handleCreateRFQ: function() {
-		var dict = {
-			docType: this.state.docType,
-			agency: this.state.agency,
-			setaside: this.state.setaside,
-		}
-		console.log('hi');
-		console.log(dict);
 		createRFQ({
 			doc_type: this.state.docType,
 			agency: this.state.agency,
 			setaside: this.state.setaside,
-		}, function(err, data) {
-			if(err) {
-				// TODO fix this!
-				alert(err);
-				return;
-			}
-			// go to /rfp/"+rfqID+"/question/1"			
+		}, function(data) {
+			// TODO add error option
+			var rfqId = data.id;
+			var url = '#/rfp/' + rfqId + '/question/1';
+			window.location.replace(url);
 		});
 	},
 	handleChange: function(key, event) {		

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import Flask, send_from_directory, request, jsonify, redirect
+from flask import Flask, send_from_directory, request, jsonify, make_response
 from flask_restful import Resource, Api, reqparse
 from flask_sqlalchemy import SQLAlchemy
 
@@ -81,8 +81,10 @@ class Create(Resource):
         rfq = RFQ(agency=agency, doc_type=doc_type, setaside=setaside)
         session = Session()
         session.add(rfq)
+
+        return jsonify({'id': '1'})
         # session.commit()
-        return redirect("/#/rfp/1/question/1")
+        # return redirect("/#/rfp/1/question/1")
 
 class Workon(Resource):
     
@@ -146,6 +148,7 @@ def send_js(path):
 
 @app.route('/download/<int:rfq_id>')
 def download(rfq_id):
+    # send_file?
     document = Document()
 
     session = Session()

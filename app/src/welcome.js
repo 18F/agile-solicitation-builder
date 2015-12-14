@@ -15,8 +15,6 @@ var Welcome = React.createClass({
 		localStorage.clear();
 		localStorage.setItem("definitions", termsText);
 		localStorage.setItem("performancePeriod", null);
-		localStorage.setItem("agency", null);
-		localStorage.setItem("docType", "");
     localStorage.setItem("periodDuration", null);
     localStorage.setItem("locationRequirement", false);
     localStorage.setItem("locationText", null);
@@ -45,7 +43,7 @@ var Welcome = React.createClass({
 						<li>All documents should be approved by a warranted contracting officer and in consultation with your legal council as required.</li>
 					</ul>
 				</div>
-				<IndexLink to="/rfp/1">
+				<IndexLink to="/rfp">
 					<Button bsStyle="primary">
 						Start		
 					</Button>
