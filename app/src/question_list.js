@@ -8,4 +8,5 @@ module.exports = [
 	{code: "7", key: "7", title: "Deliveries & Performance", component: require('./questions/07_deliveries')},
 	{code: "8", key: "8", title: "Roles and Responsibilities", component: require('./questions/08_contracting_officer')},
 	{code: "9", key: "9", title: "Special Requirements", component: require('./questions/09_special_requirements')},
+	{code: "9", key: "9", title: "Contract Clauses", component: require('./questions/10_contract_clauses')},
 ];

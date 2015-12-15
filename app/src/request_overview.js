@@ -47,8 +47,17 @@ var RequestOverview = React.createClass({
 			setaside: localStorage.getItem("setaside") || "none",
 			baseNumber: localStorage.getItem("baseNumber") || "",
 			baseNumberNeeded: localStorage.getItem("baseNumber") || false,
+			rfqs: "",
 		};
 	},
+	componentDidMount: function() {
+    getRFQs(function(content){ 
+    	window.rfqs = content['data'];
+      this.setState({
+        rfqs: content['data'],
+      });
+    }.bind(this));
+   },
 	setAgency: function(event) {
 		localStorage.agencyFullname = "U.S. " + AGENCY_NAMES[event.target.value];
 		localStorage.setItem("agency", event.target.value);
@@ -61,7 +70,7 @@ var RequestOverview = React.createClass({
 			setaside: this.state.setaside,
 			base_number: this.state.baseNumber,
 		}, function(data) {
-			// TODO add error option
+			// TODO add error handler
 			var rfqId = data.id;
 			var url = '#/rfp/' + rfqId + '/question/1';
 			window.location.replace(url);
@@ -138,6 +147,8 @@ var RequestOverview = React.createClass({
 		return (
 			<div>
 				<div>
+					<div className="sub-heading">Resume RFQ</div>
+					{this.state.rfqs}
 					<div className="sub-heading">Preliminary Questions</div>
 					<p>You're on your way to writing an awesome RFQ or RFP!</p>
 					<p>We'll ask you some questions to understand what you want to build,

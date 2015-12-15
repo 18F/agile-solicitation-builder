@@ -85,6 +85,12 @@ content_components = [
         "variables": True,
         "section": 8,
     },
+    {
+        "name": "contract_clauses",
+        "text": "",
+        "variables": False,
+        "section": 8,
+    },
 ]
 
 agencies = {
