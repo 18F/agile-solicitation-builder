@@ -52,7 +52,6 @@ var RequestOverview = React.createClass({
 	},
 	componentDidMount: function() {
     getRFQs(function(content){ 
-    	window.rfqs = content['data'];
       this.setState({
         rfqs: content['data'],
       });
@@ -140,6 +139,17 @@ var RequestOverview = React.createClass({
 			);
 		}
 
+		var rfqs = [];
+		for (rfq in this.state.rfqs) {
+			var this_rfq = this.state.rfqs[rfq];
+			var url = '#/rfp/' + this_rfq['id'] + '/question/1';
+			rfqs.push(
+				<li>
+					<a href={url}>#{this_rfq['id']}, {this_rfq['doc_type']} for {this_rfq['agency']}</a>
+				</li>
+			);
+		}
+
 		var validAgency = this.state.agency != "null" && this.state.agency != "none";
 		var validDocType = this.state.docType != "";
 		var continueDisabled = !(validAgency && validDocType);
@@ -148,7 +158,9 @@ var RequestOverview = React.createClass({
 			<div>
 				<div>
 					<div className="sub-heading">Resume RFQ</div>
-					{this.state.rfqs}
+					<ul>
+						{rfqs}
+					</ul>
 					<div className="sub-heading">Preliminary Questions</div>
 					<p>You're on your way to writing an awesome RFQ or RFP!</p>
 					<p>We'll ask you some questions to understand what you want to build,
