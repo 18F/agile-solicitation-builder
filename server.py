@@ -36,6 +36,7 @@ parser = reqparse.RequestParser()
 parser.add_argument('agency')
 parser.add_argument('doc_type')
 parser.add_argument('setaside')
+parser.add_argument('base_number')
 
 class Agencies(Resource):
     def get(self):
@@ -76,9 +77,10 @@ class Create(Resource):
         agency = args['agency']
         doc_type = args['doc_type']
         setaside = args['setaside']
-        print agency, doc_type, setaside
+        base_number = args['base_number']
+        print agency, doc_type, setaside, base_number
 
-        rfq = RFQ(agency=agency, doc_type=doc_type, setaside=setaside)
+        rfq = RFQ(agency=agency, doc_type=doc_type, setaside=setaside, base_number=base_number)
         session = Session()
         session.add(rfq)
 

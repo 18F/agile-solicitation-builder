@@ -45,13 +45,16 @@ class RFQ(Base):
 
     def __init__(self, agency, doc_type, setaside, base_number=None):
         # working-with-related-objects
+        base_number_value = None
+        if len(base_number) > 0:
+            base_number_value = base_number
 
         # seed each section of the new document with the template content
         # check for variables
         self.agency = agency
         self.doc_type = doc_type
         self.setaside = setaside
-        self.base_number = base_number
+        self.base_number = base_number_value
         self.components = [ContentComponent(**section) for section in content_components]
 
 

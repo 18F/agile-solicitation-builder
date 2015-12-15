@@ -43,6 +43,8 @@ var Deliveries = React.createClass({
 	render: function() {
 		return (
 			<div>
+				<div className="main-heading">Deliveries and Performance</div>
+				<div className="sub-heading">Other</div>
 				<p className="new-content">Any work with the Government staff shall not take place on Federal holidays or weekends unless directed by the Contracting Officer (CO). All federal holidays by year are listed on the <a href="www.opm.gov" target="_blank">OPM website</a>.</p>
 
 				<div className="sub-heading">Travel</div>

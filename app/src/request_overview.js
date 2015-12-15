@@ -59,6 +59,7 @@ var RequestOverview = React.createClass({
 			doc_type: this.state.docType,
 			agency: this.state.agency,
 			setaside: this.state.setaside,
+			base_number: this.state.baseNumber,
 		}, function(data) {
 			// TODO add error option
 			var rfqId = data.id;
