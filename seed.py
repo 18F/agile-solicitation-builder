@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # name, text, section
-numbers = [
+value_components = [
     {
         "name": "option_periods",
         "value": 3,
@@ -12,18 +12,22 @@ numbers = [
         "section": 2,
     },
     {
+        "name": "iteration_pop_number",
+        "value": 2,
+        "section": 2,
+    },
+    {
         "name": "travel_budget",
         "value": 0,
         "section": 2,
     },
     {
         "name": "max_budget",
-        "text": 0,
+        "value": 0,
         "section": 3,
     },
 ]
 
-# var defaultStakeholdersText = "Stakeholders for this project include, but are not limited to, ___, ___, the Contracting Officer’s Representative (COR) and the Contracting Officer.";
 content_components = [
     {
         "name": "setasides",
@@ -56,8 +60,14 @@ content_components = [
         "section": 2,
     },
     {
+        "name": "iteration_pop_unit",
+        "text": "weeks",
+        "variables": False,
+        "section": 2,
+    },
+    {
         "name": "naics_codes",
-        "text": "This requirement will be solicited under the following North American Industrial Classification System (NAICS) Code: 541512, Computer Systems Design Services, $27.5 million. This Task Order will be made in accordance with FAR 16.505 which governs orders placed under Indefinite Delivery contracts as detailed in the GSA GWAC Ordering guide.",
+        "text": "This is a Firm Fixed Price [doctype] against [GSA Alliant Small Business (SB) GWAC] – Firm Fixed Price<This requirement will be solicited under the following North American Industrial Classification System (NAICS) Code: 541512, Computer Systems Design Services, $27.5 million. This [doctype] will be made in accordance with FAR 16.505 which governs orders placed under Indefinite Delivery contracts as detailed in the GSA GWAC Ordering guide.",
         "variables": True,
         "section": 2,
     },

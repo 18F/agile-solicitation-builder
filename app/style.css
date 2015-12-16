@@ -17,9 +17,31 @@ button.add {
 	margin-bottom: 10px;
 }
 
+.row.clin {
+	border: 1px solid;
+}
+
+.fake-table {
+	margin-top: 5px;
+	margin-bottom: 10px;
+}
+
+.row + .row {
+	border-top:0;
+}
+
+.table-content {
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
 .yes-no {
 	margin-right: 5px;
 	margin-left: 5px;
+}
+
+.table-wrapper {
+	border: solid 1px;
 }
 
 .sidebar-nav{

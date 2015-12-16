@@ -23,7 +23,7 @@ var Sidebar = React.createClass({
 	render: function() {
 		var baseURL = "/rfp/" + this.props.rfpId;
 
-		var prefixLinks = [{link: baseURL, title: "Overview"}];
+		var prefixLinks = [{link: "/rfp", title: "Overview"}];
 		var postfixLinks = [{link: baseURL+"/results", title: "Results"}];
 
 		// Generate subpages

@@ -15,6 +15,7 @@ Base = declarative_base()
 
 
 content_components = seed.content_components
+value_components = seed.value_components
 
 class Agency(Base):
     __tablename__ = 'agencies'
@@ -38,7 +39,8 @@ class RFQ(Base):
     doc_type = Column(String)
     setaside = Column(String)
     base_number = Column(String)
-    components = relationship("ContentComponent")
+    content_components = relationship("ContentComponent")
+    value_components = relationship("ValueComponent")
 
     def to_dict(self):
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}
@@ -59,7 +61,8 @@ class RFQ(Base):
         self.doc_type = doc_type
         self.setaside = setaside
         self.base_number = base_number_value
-        self.components = [ContentComponent(**section) for section in content_components]
+        self.content_components = [ContentComponent(**section) for section in content_components]
+        self.value_components = [ValueComponent(**section) for section in value_components]
 
 
 class ContentComponent(Base):

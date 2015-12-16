@@ -42,21 +42,13 @@ var SETASIDES = {
 var RequestOverview = React.createClass({
 	getInitialState: function() {
 		return {
-			docType: localStorage.getItem("docType"),
+			docType: localStorage.getItem("docType") || "none",
 			agency: localStorage.getItem("agency") || "none",
 			setaside: localStorage.getItem("setaside") || "none",
 			baseNumber: localStorage.getItem("baseNumber") || "",
-			baseNumberNeeded: localStorage.getItem("baseNumber") || false,
-			rfqs: "",
+			baseNumberNeeded: localStorage.getItem("baseNumber") || false,			
 		};
 	},
-	componentDidMount: function() {
-    getRFQs(function(content){ 
-      this.setState({
-        rfqs: content['data'],
-      });
-    }.bind(this));
-   },
 	setAgency: function(event) {
 		localStorage.agencyFullname = "U.S. " + AGENCY_NAMES[event.target.value];
 		localStorage.setItem("agency", event.target.value);
@@ -139,28 +131,13 @@ var RequestOverview = React.createClass({
 			);
 		}
 
-		var rfqs = [];
-		for (rfq in this.state.rfqs) {
-			var this_rfq = this.state.rfqs[rfq];
-			var url = '#/rfp/' + this_rfq['id'] + '/question/1';
-			rfqs.push(
-				<li>
-					<a href={url}>#{this_rfq['id']}, {this_rfq['doc_type']} for {this_rfq['agency']}</a>
-				</li>
-			);
-		}
-
 		var validAgency = this.state.agency != "null" && this.state.agency != "none";
 		var validDocType = this.state.docType != "";
 		var continueDisabled = !(validAgency && validDocType);
 
 		return (
-			<div>
+			<div className="main col-md-8">
 				<div>
-					<div className="sub-heading">Resume RFQ</div>
-					<ul>
-						{rfqs}
-					</ul>
 					<div className="sub-heading">Preliminary Questions</div>
 					<p>You're on your way to writing an awesome RFQ or RFP!</p>
 					<p>We'll ask you some questions to understand what you want to build,

@@ -1,7 +1,5 @@
 var React = require('react');
 
-var defaultStakeholdersText = "Stakeholders for this project include, but are not limited to, ___, ___, the Contracting Officer’s Representative (COR) and the Contracting Officer.";
-
 var DELIVERABLES = {
 	"1": "Research, Insights, and Synthesis",
 	"2": "Prototype Design Solutions",
