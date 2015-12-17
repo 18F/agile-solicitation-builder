@@ -10,9 +10,10 @@ var React = require('react');
 
 var CLIN_CONTENT = {
 	"CLIN 0001": "Base Period",
-	"CLIN 0002": "Award Term Incentive",
-	"CLIN 1001": "Award Term 02/Option Term",
-	"CLIN 1002": "Award Term 03/Option Term",
+	"CLIN 1001": "Option Period 1",
+	"CLIN 1001": "Option Period 2",
+	"CLIN 2001": "Option Period 3",
+	// "CLIN 3001": "Option Period 4",
 };
 
 var Services = React.createClass({
@@ -129,43 +130,48 @@ var Services = React.createClass({
 
 
 		var CLINS = [];
+		var counter = 0;
+		var optionPeriods = $('#optionPeriods')[0];
+
 		for (var key in CLIN_CONTENT) {
-			CLINS.push(
-				<div className="container fake-table col-md-12">
-					<div className="row clin">
-						<div className="col-md-12 table-content">{CLIN_CONTENT[key]}: {PoP}
+			// if (counter < optionPeriods) {
+				CLINS.push(
+					<div className="container fake-table col-md-12">
+						<div className="row clin">
+							<div className="col-md-12 table-content">{CLIN_CONTENT[key]}: {PoP}
+							</div>
+						</div>
+						<div className="row clin">
+							<div className="col-md-12 table-content">{key}, FFP- Completion - The Contractor shall provide services for the Government in accordance with the Performance Work Statement (PWS)
+							</div>
+						</div>
+						<div className="row clin">
+							<div className="col-md-6 table-content">Iteration PoP
+							</div>
+							<div className="col-md-6 table-content">{iPoP}
+							</div>
+						</div>
+						<div className="row clin">
+							<div className="col-md-6 table-content">Price Per Iteration
+							</div>
+							<div className="col-md-6 table-content">$XXXXXXX (vendor completes)
+							</div>
+						</div>
+						<div className="row clin">
+							<div className="col-md-6 table-content">Period of Performance
+							</div>
+							<div className="col-md-6 table-content">{PoP}
+							</div>
+						</div>
+						<div className="row clin">
+							<div className="col-md-6 table-content">Firm Fixed Price (Completion):
+							</div>
+							<div className="col-md-6 table-content">$XXXXXXX (vendor completes)
+							</div>
 						</div>
 					</div>
-					<div className="row clin">
-						<div className="col-md-12 table-content">{key}, FFP- Completion - The Contractor shall provide services for the Government in accordance with the Performance Work Statement (PWS)
-						</div>
-					</div>
-					<div className="row clin">
-						<div className="col-md-6 table-content">Iteration PoP
-						</div>
-						<div className="col-md-6 table-content">{iPoP}
-						</div>
-					</div>
-					<div className="row clin">
-						<div className="col-md-6 table-content">Price Per Iteration
-						</div>
-						<div className="col-md-6 table-content">$XXXXXXX (vendor completes)
-						</div>
-					</div>
-					<div className="row clin">
-						<div className="col-md-6 table-content">Period of Performance
-						</div>
-						<div className="col-md-6 table-content">{PoP}
-						</div>
-					</div>
-					<div className="row clin">
-						<div className="col-md-6 table-content">Firm Fixed Price (Completion):
-						</div>
-						<div className="col-md-6 table-content">$XXXXXXX (vendor completes)
-						</div>
-					</div>
-				</div>
-			)
+				)
+			// }
 		}
 
 
@@ -173,7 +179,10 @@ var Services = React.createClass({
 			<div>
 				<div className="main-heading">Services and Prices</div>
 
+				<p>This is a Firm Fixed Price {this.state.docType}.</p>
+
 				<div className="sub-heading">Brief Description of Services</div>
+				<div className="sub-text">Ex: Services required under this {localStorage.getItem("docType")} are to assist the Dept. of Education with the design and implementation of systems to support the ED Program for X.</div>
 								<textarea className="form-control" rows="4" placeholder="1-2 sentences"></textarea>				
 
 				<div className="sub-heading">Type of Contract</div>
@@ -192,15 +201,28 @@ var Services = React.createClass({
 				  </label>
 				</div>
 
-				<p>This is a Firm Fixed Price {this.state.docType}.</p>
-
 				<h5>NAICS and FAR Justification Codes</h5>
 				<div className="sub-text">We have provided a NAICS code that commonly applies to the acquisition of software development services. If you believe your requirement is not covered under this NAICS code you may search under <a href="http://www.census.gov/eos/www/naics/" target="_blank">this link</a> to select a different one; please edit the text below accordingly.</div>
+
+				<h5>Under which section of the FAR do you intend to compete this?</h5>
+				<div className="radio">
+				  <label>
+				    <input type="radio" value={this.state.awardFee} onChange={this.addFee.bind(this, "awardFee")}></input>
+				    FAR 8.4 - Federal Supply Schedules
+				  </label>
+				</div>
+				<div className="radio">
+				  <label>
+				    <input type="radio" value={this.state.awardFee} onChange={this.addFee.bind(this, "incentiveFee")}></input>
+				    FAR 16.504 - Indefinite Quantity
+				  </label>
+				</div>
+
 
 				<div className="edit" onClick={this.toggleEdit.bind(this, 'codes')}>Edit</div>
 				{this.state.edit === "codes"? <textarea className="form-control" rows="4" defaultValue={this.state.codesText}></textarea> :
 				<div>
-				<p id="naics-far-text1">This requirement will be solicited under the following North American Industrial Classification System (NAICS) Code: 541512, Computer Systems Design Services, $27.5 million. This Task Order will be made in accordance with FAR 16.505 which governs orders placed under Indefinite Delivery contracts as detailed in the GSA GWAC Ordering guide.</p></div>
+				<p id="naics-far-text1">This requirement will be solicited under the following North American Industrial Classification System (NAICS) Code: 541512, Computer Systems Design Services, $27.5 million. This Task Order will be awarded under [FAR 8.4 , FAR 16.504] which governs orders placed under [Indefinite Delivery] contracts.</p></div>
 				}
 
 				<div className="sub-heading">Period of Performance</div>
@@ -218,7 +240,7 @@ var Services = React.createClass({
 
 				<p>In addition to your base period, how many option periods would you like? We suggest no more than 3.</p>
 				<form className="form-inline">
-    			<input type="text" className="form-control short-response" placeholder="enter a number" value={this.state.optionPeriods} onChange={this.handleChange.bind(this, "optionPeriods")}></input>
+    			<input type="text" id="optionPeriods" className="form-control short-response" placeholder="enter a number" value={this.state.optionPeriods} onChange={this.handleChange.bind(this, "optionPeriods")}></input>
 				</form>
 
 
@@ -275,17 +297,16 @@ var Services = React.createClass({
 				</div>
 				<div className="radio">
 				  <label>
-				    <input type="radio" onChange={this.addFee.bind(this, "incentiveFee")}></input>
+				    <input type="radio" value={this.state.awardFee} onChange={this.addFee.bind(this, "incentiveFee")}></input>
 				    Incentive Fee
 				  </label>
 				</div>
 				<div className="radio">
 				  <label>
-				    <input type="radio" onChange={this.addFee.bind(this, "noFee")}></input>
+				    <input type="radio" value={this.state.awardFee} onChange={this.addFee.bind(this, "noFee")}></input>
 				    Neither
 				  </label>
 				</div>
-
 			</div>
 		);
 	},
@@ -294,67 +315,6 @@ var Services = React.createClass({
 // award subjective - specific criteria ex: product is quality, the form works
 // incentive fee = objective assessment, ex: stuck to schedule, defect rate was < 5%
 // (Jonathan doesn't like...)
-
-					// <table className="table table-bordered table-striped">
-					// 	<thead>
-					// 	</thead>
-					// 	<tbody>
-					// 		<tr>
-					// 			<td>Base Period: (6 months, period of performance)</td>
-					// 		</tr>
-					// 		<tr>
-					// 			<td>CLIN 0001, FFP- Completion - The Contractor shall provide services for the Government in accordance with the Performance Work Statement (PWS)</td>
-					// 		</tr>
-					// 	</tbody>
-					// </table>
-					// <table className="table table-bordered">
-					// 	<thead>
-					// 		<tr>
-					// 			<td>Base Period: 6 months</td>
-					// 			<td></td>
-					// 		</tr>
-					// 		<tr>
-					// 			<td>CLIN 0001, FFP- Completion - The Contractor shall provide services for the Government in accordance with the Performance Work Statement (PWS)</td>
-					// 			<td></td>
-					// 		</tr>
-					// 	</thead>
-					// 	<tbody>
-					// 		<tr>
-					// 			<td>Iteration PoP</td>
-					// 			<td><input type="text"></input> Weeks</td>			
-					// 		</tr>
-					// 		<tr>
-					// 			<td>Price Per Iteration</td>
-					// 			<td>$<input type="text"></input></td>			
-					// 		</tr>
-					// 		<tr>
-					// 			<td>Other Direct Costs</td>
-					// 			<td>NTE Ceiling $100,000.00</td>			
-					// 		</tr>
-					// 		<tr>
-					// 			<td>Period of Performance:</td>
-					// 			<td>(period of performance)</td>			
-					// 		</tr>
-					// 		<tr>
-					// 			<td>Firm Fixed Price (Completion):</td>
-					// 			<td>$<input type="text"></input></td>
-					// 		</tr>						
-					// 	</tbody>
-					// </table>
-
-
-
-						// <table className="table table-bordered table-striped">
-						// 	<thead>		
-
-						// 	</thead>
-						// 	<tbody>
-						// 		<tr>					
-						// 			<td>Option Period 1, 6 months</td>																	
-						// 		</tr>
-						// 		<tr>
-						// 			<th>CLIN 0002, FFP- Completion - The Contractor shall provide services for the Government in accordance with the Performance Work Statement (PWS)</th>
-						// 		</tr>
 
 
 module.exports = Services;

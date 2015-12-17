@@ -1,5 +1,11 @@
 var React = require('react');
 
+				// <div className="sub-heading">Backlog Section</div>
+				// <br />
+				// <div className="sub-text">The Initial Product Backlog (See Appendix) provides a detailed breakdown of the desired functionality as identified at this time. The Initial Product Backlog is not a binding document, but rather a representative sample of the functionality that is anticipated will be required to be delivered under this Task Order. The specific user stories will be identified through the agile development process as proposed in the Performance Work Statement (PWS). The Initial Product Backlog provides some guidance on specific objectives that should be included in each project.</div>
+				// <textarea className="form-control" rows="10"></textarea>
+
+
 var DELIVERABLES = {
 	"1": "Research, Insights, and Synthesis",
 	"2": "Prototype Design Solutions",
@@ -181,6 +187,7 @@ var Objective = React.createClass({
 				
 				{(this.state.userResearch === "vendor")?
 					<div>
+						<div className="sub-heading">Understand what people need</div>
 						<p>The vendor services will include exploring and pinpointing the needs of the people who will use the service, and the ways the service will fit into their lives. The vendor shall continually test the products with real people to ensure delivery is focused on what is important.</p>
 						<p>As a part of this effort, the vendor will:</p>
 						<ol>
@@ -239,16 +246,15 @@ var Objective = React.createClass({
 
 				<div className="sub-heading">Specific Tasks and Deliverables</div>
 				<p>Which of the following do you anticipate your project will need?</p>
+
 				<div className="sub-text">We have already checked certain components that the USDS Playbook suggests be required for all projects.</div>
 					{deliverables}
 
 				<p>These functional Requirements will be translated into Epics and User Stories that will be used to populate the Product Backlog.</p>
 
-				<div className="sub-heading">Backlog Section</div>
-				<textarea lines="10"></textarea>
 
 				<div className="sub-heading">Deliverables</div>
-				<p>A deliverable will be considered complete and acceptable when it meets the contractor's "Definition of Done".</p>
+				<p>A deliverable will be considered complete and acceptable when it meets the contractor's "Definition of Done" which are based on the contractor’s Agile Software Development methodology.</p>
 				<p>Each deliverable shall incorporate agency IT requirements as detailed in the Appendix of this document and the <a href="https://playbook.cio.gov" target="_blank">United States Digital Service Playbook</a> standards and be compliant with Section 508. (see <a>here</a>)</p>
 
 				<div className="sub-heading">Agile Development Management Plan (ADMP) and Key Personnel @TODO bye bye </div>
@@ -295,14 +301,14 @@ var Objective = React.createClass({
 				<p>The Kick-Off meeting/Post-Award Conference will take place within 10 days from award and will be scheduled by the Contracting Officer.</p>
 
 				<div className="sub-heading">System Documentation and Training</div>
-				<p>Do you believe training will be required? @TODO ask VA & 18F consulting</p>
-				<p>Would you like a collaborative workspace (phrasing)
-				strongly encourage the use of a collaborative environment, do you have one?
-				GSA - google drive, other places, ???
+				
+				
+				<div>Are you currently using a collaborative workspace?</div>
+				<div className="sub-text">Ex: Sharepoint, JIRA, Rally, Google Drive, Box, etc.</div>
+				<p>We strongly encourage the use of a collaborative environment</p>
 				check with agency policy to see which collaboration software is allowed. ex: box.com, google drive/google docs, 
 				code - version control, define what is, examples. (encourage certain options, but vendor will specify)
 				for documents is separate
-				</p>
 				<p>Github: version control</p>
 				<p>The Contractor shall:</p>
 				<ul>
@@ -312,10 +318,12 @@ var Objective = React.createClass({
 					<li>Consult with the COR to determine what is appropriate, effective, and essential for training.</li>
 				</ul>
 
-				<p className="new-content">Furthermore, documentation should be updated with each iteration. This includes technical documentation including but not limited to setup instructions in the README.md, user reseach findings etc. All documents should be stored electronically such that the CO, PM, and any other relevant government employees who have been granted permissions can access them at any time.</p>
+				<p>Furthermore, documentation should be updated with each iteration. This includes technical documentation including but not limited to setup instructions in the README.md, user reseach findings etc. All documents should be stored electronically such that the CO, PM, and any other relevant government employees who have been granted permissions can access them at any time.</p>
 			</div>
 		);
 	},
 });
 
+
+// <p>Do you believe training will be required? @TODO ask VA & 18F consulting</p>
 module.exports = Objective;

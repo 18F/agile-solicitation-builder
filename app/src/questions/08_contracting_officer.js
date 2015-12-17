@@ -72,7 +72,13 @@ var ContractingOfficer = React.createClass({
 				<div className="edit" onClick={this.toggleEdit.bind(this, 'cor')}>Edit</div>
 				{this.state.corText}</div>
 				}
+
+				<div className="sub-heading">Product Owner - editable title</div>
+				<p>Traci will give text</p>
+				
+				<button>add an additional role</button>
 				<br />
+
 			</div>
 		);
 	},

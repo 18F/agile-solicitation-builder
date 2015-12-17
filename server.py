@@ -58,7 +58,7 @@ class Value(Resource):
         print "value key! " + value_key
         session = Session()
         content = session.query(ValueComponent).filter_by(name=value_key)
-        return content[0].text
+        return content[0].value
 
 class Create(Resource):
 

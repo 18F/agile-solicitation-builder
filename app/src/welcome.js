@@ -6,6 +6,8 @@ var Button = require('react-bootstrap').Button;
 // Router stuff
 var IndexLink = require('react-router').IndexLink;
 
+// <a href="#" onClick={this.handleResumeRFQ(doctype, agency, url)} >#{this_rfq['id']}, {this_rfq['doc_type']} for {this_rfq['agency']}</a>
+
 var Welcome = React.createClass({
 	getInitialState: function() {
 		localStorage.clear();		
@@ -20,14 +22,24 @@ var Welcome = React.createClass({
       });
     }.bind(this));
    },
+  handleResumeRFQ: function(doctype, agency, url) {
+  	// alert(doctype, agency);
+   	localStorage.setItem("doctype", doctype);
+   	localStorage.setItem("agency", agency);
+   	// window.location.replace(url);
+   },
 	render: function() {
 		var rfqs = [];
 		for (rfq in this.state.rfqs) {
 			var this_rfq = this.state.rfqs[rfq];
+			var agency = this_rfq['agency'];
+			var doctype = this_rfq['doc_type'];
 			var url = '#/rfp/' + this_rfq['id'] + '/question/1';
 			rfqs.push(
 				<li>
-					<a href={url}>#{this_rfq['id']}, {this_rfq['doc_type']} for {this_rfq['agency']}</a>
+					<a href={url} >
+						#{this_rfq['id']}, {this_rfq['doc_type']} for {this_rfq['agency']}
+					</a>
 				</li>
 			);
 		}

@@ -20,7 +20,7 @@ var PostAward = React.createClass({
 	render: function() {
 		return (
 			<div>
-				<div className="sub-heading">Invoicing</div>
+				<div className="sub-heading">Invoicing & Funding</div>
 				<p>The Contractor shall bill for the ongoing operations as per the payment schedule documented in PWS and the corresponding cost proposal as associated with specific deliverables. 
 The {this.state.agency} will reject all nonconforming invoices.
 The Contracting Officer, working with the COR, is responsible for determining minimum requirements for the information to be provided on the invoice. For information on what constitutes a valid invoice, refer to FAR 32.905. The minimum information includes:

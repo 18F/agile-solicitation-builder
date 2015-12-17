@@ -78,6 +78,12 @@ content_components = [
         "section": 2,
     },
     {
+        "name": "fee",
+        "text": "",
+        "variables": False,
+        "section": 2,
+    },
+    {
         "name": "stakeholders",
         "text": "Stakeholders for this project include, but are not limited to, ___, ___, the Contracting Officer's Representative (COR) and the Contracting Officer.",
         "variables": False,

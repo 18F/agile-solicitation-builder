@@ -26,6 +26,7 @@ var DOC_TYPES = {
 };
 
 var SETASIDES = {
+	"Small Business": "Small Business",
 	"8(a) Business Development Participants": "8(a) Business Development Participants",
 	"HUBZone Small Business Concerns": "HUBZone Small Business Concerns",
 	"Service-disabled Veteran-owned Small Business Concerns": "Service-disabled Veteran-owned Small Business Concerns",
@@ -156,7 +157,7 @@ var RequestOverview = React.createClass({
 					</radiogroup>
 
 					{this.state.baseNumberNeeded?
-						<h5>Base award number:  
+						<h5>Vehicle Name:  
 							<input type="text" className="shot-response" value={this.state.baseNumber} onChange={this.handleChange.bind(this, "baseNumber")} />
 						</h5>	
 					 : null}

@@ -38,3 +38,5 @@ var ContractClauses = React.createClass({
 
 
 module.exports = ContractClauses;
+
+// data clauses, other agile specific clauses, NDA? 
