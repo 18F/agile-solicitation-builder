@@ -1,21 +1,7 @@
-function get_data(key, callback){
+function get_data(key, id, callback){
 	$.ajax({
 		type: "GET",
-		url: "/api/get_content/" + key,
-		dataType: 'json',
-		success: function(data){
-			console.log(data);
-			if (callback){
-				callback(data);
-			}
-		}
-	});
-}
-
-function get_value(key, callback){
-	$.ajax({
-		type: "GET",
-		url: "/api/get_value/" + key,
+		url: "/api/get_content/" + id + "/sections/" + key,
 		dataType: 'json',
 		success: function(data){
 			console.log(data);

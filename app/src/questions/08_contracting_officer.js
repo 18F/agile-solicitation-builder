@@ -45,6 +45,15 @@ var ContractingOfficer = React.createClass({
 			corText: defaultCorText,
 		};
 	},
+  componentDidMount: function() {
+    get_data(1, 1, function(content){
+      this.setState({
+        coText: content["data"][0]["text"],
+        corText: content["data"][1]["text"],
+        productOwner: content["data"][2]["text"],
+      });
+    }.bind(this));
+  },
 	render: function() {
 		return (
 			<div>
@@ -73,10 +82,11 @@ var ContractingOfficer = React.createClass({
 				{this.state.corText}</div>
 				}
 
-				<div className="sub-heading">Product Owner - editable title</div>
-				<p>Traci will give text</p>
+				<div className="sub-heading editable">Product Owner</div>
+				<p>[TBD]</p>
 				
 				<button>add an additional role</button>
+				<br />
 				<br />
 
 			</div>

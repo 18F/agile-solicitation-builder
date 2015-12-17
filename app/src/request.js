@@ -23,7 +23,7 @@ var Sidebar = React.createClass({
 	render: function() {
 		var baseURL = "/rfp/" + this.props.rfpId;
 
-		var prefixLinks = [{link: "/rfp", title: "Overview"}];
+		// var prefixLinks = [{link: "/rfp", title: "Overview"}];
 		var postfixLinks = [{link: baseURL+"/results", title: "Results"}];
 
 		// Generate subpages
@@ -33,7 +33,8 @@ var Sidebar = React.createClass({
 				title: question.title,
 			};
 		});
-		var subpages = prefixLinks.concat(questionLinks).concat(postfixLinks);
+		var subpages = questionLinks.concat(postfixLinks);
+		// var subpages = prefixLinks.concat(questionLinks).concat(postfixLinks);
 
 		var links = subpages.map(function(subpage, i) {
 			var active = (subpage.link == this.props.currentPage);

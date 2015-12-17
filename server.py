@@ -10,7 +10,7 @@ import sys
 import config
 
 from docx import Document
-from models import Agency, RFQ, ContentComponent, ValueComponent, Base, Session, engine
+from models import Agency, RFQ, ContentComponent, Base, Session, engine
 from seed import agencies
 
 
@@ -38,12 +38,10 @@ class Agencies(Resource):
 
 class Data(Resource):
 
-    def get(self, content_key):        
-        print "content key! " + content_key
+    def get(self, rfq_id, section_id):
         session = Session()
-        content = session.query(ContentComponent).filter_by(name=content_key)
-        print content
-        return content[0].text
+        content = session.query(ContentComponent).filter_by(document_id=rfq_id).filter_by(section=int(section_id))
+        return jsonify(data=[c.to_dict() for c in content])
 
     def put(self, content_key):
         data = request.get_json()
@@ -51,14 +49,6 @@ class Data(Resource):
         print content
         print "content '" + content + "'"
         # DATA[content_key] = content
-
-class Value(Resource):
-
-    def get(self, value_key):        
-        print "value key! " + value_key
-        session = Session()
-        content = session.query(ValueComponent).filter_by(name=value_key)
-        return content[0].value
 
 class Create(Resource):
 
@@ -69,10 +59,10 @@ class Create(Resource):
 
     def post(self, **kwargs):
         args = parser.parse_args()
-        agency = args['agency']
-        doc_type = args['doc_type']
-        setaside = args['setaside']
-        base_number = args['base_number']
+        agency = args['agency'].decode('latin-1').encode('utf8')
+        doc_type = args['doc_type'].decode('latin-1').encode('utf8')
+        setaside = args['setaside'].decode('latin-1').encode('utf8')
+        base_number = args['base_number'].decode('latin-1').encode('utf8')
         print agency, doc_type, setaside, base_number
 
         rfq = RFQ(agency=agency, doc_type=doc_type, setaside=setaside, base_number=base_number)
@@ -99,11 +89,11 @@ class Sections(Resource):
     def get(self, rfq_id, section_id):
         # Get the values for a specific section
         session = Session()
-        sections = session.query(ContentComponent).filter_by(section=section_id).all()
-        values = session.query(ValueComponent).filter_by(section=section_id).all()
+        sections = session.query(ContentComponent).filter_by(section=section_id).filter_by(document_id=rfq_id).all()
+            
         print type(sections)
-        print type(values)
-        return sections
+
+        return jsonify(data=[s.to_dict() for s in sections])
 
     def put(self, rfq_id, section_id):
         # Update the value for a specific section
@@ -117,8 +107,7 @@ class Results(Resource):
 
 
 api.add_resource(Agencies, '/agencies')
-api.add_resource(Data, '/get_content/<string:content_key>')
-api.add_resource(Value, '/get_value/<string:value_key>')
+api.add_resource(Data, '/get_content/<int:rfq_id>/sections/<int:section_id>')
 api.add_resource(Create, '/rfqs')
 api.add_resource(Workon, '/rfqs/<int:rfq_id>')
 api.add_resource(Sections, '/rfqs/<int:rfq_id>/sections/<int:section_id>')

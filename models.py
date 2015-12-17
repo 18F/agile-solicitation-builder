@@ -15,7 +15,6 @@ Base = declarative_base()
 
 
 content_components = seed.content_components
-value_components = seed.value_components
 
 class Agency(Base):
     __tablename__ = 'agencies'
@@ -40,7 +39,6 @@ class RFQ(Base):
     setaside = Column(String)
     base_number = Column(String)
     content_components = relationship("ContentComponent")
-    value_components = relationship("ValueComponent")
 
     def to_dict(self):
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}
@@ -61,8 +59,8 @@ class RFQ(Base):
         self.doc_type = doc_type
         self.setaside = setaside
         self.base_number = base_number_value
+
         self.content_components = [ContentComponent(**section) for section in content_components]
-        self.value_components = [ValueComponent(**section) for section in value_components]
 
 
 class ContentComponent(Base):
@@ -74,23 +72,9 @@ class ContentComponent(Base):
     variables = Column(Boolean, default=False)
 
     text = Column(Text)
-    
+
+    def to_dict(self):
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+
     def __repr__(self):
         return "<ContentComponent(name='%s', doc_id='%d', text='%s')>" % (self.name, self.document_id, self.text)
-
-
-class ValueComponent(Base):
-    __tablename__ = 'value_components'
-
-    document_id = Column(Integer, ForeignKey('rfqs.id'), primary_key=True)
-    section = Column(Integer, primary_key=True)
-    name = Column(String, primary_key=True)
-
-    value = Column(Integer)
-    
-    def __repr__(self):
-        return "<ValueComponent(name='%s', doc_id='%d', value='%d')>" % (self.name, self.document_id, self.value)
-
-            
-
-

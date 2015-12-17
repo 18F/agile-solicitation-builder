@@ -10,7 +10,7 @@ var IndexLink = require('react-router').IndexLink;
 
 var Welcome = React.createClass({
 	getInitialState: function() {
-		localStorage.clear();		
+		// localStorage.clear();		
 		return {
 			rfqs: "",
 		};

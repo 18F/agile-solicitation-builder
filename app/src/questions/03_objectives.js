@@ -5,6 +5,8 @@ var React = require('react');
 				// <div className="sub-text">The Initial Product Backlog (See Appendix) provides a detailed breakdown of the desired functionality as identified at this time. The Initial Product Backlog is not a binding document, but rather a representative sample of the functionality that is anticipated will be required to be delivered under this Task Order. The specific user stories will be identified through the agile development process as proposed in the Performance Work Statement (PWS). The Initial Product Backlog provides some guidance on specific objectives that should be included in each project.</div>
 				// <textarea className="form-control" rows="10"></textarea>
 
+				// end users public, end users government, 
+
 
 var DELIVERABLES = {
 	"1": "Research, Insights, and Synthesis",
@@ -56,9 +58,16 @@ var Objective = React.createClass({
 		});
 	},
 	componentDidMount: function() {
-    get_value("max_budget", function(content){ 
+    get_data(3, 1, function(content){
+    	var data = content["data"];
+    	window.c = data;
       this.setState({
-        maxBudget: content,
+      	generalBackground: data[0]["text"],
+      	locationRequirement: data[1]["text"],
+      	locationText: data[2]["text"],
+      	maxBudget: data[3]["text"],
+				programHistory: data[4]["text"],
+      	userResearchStrategy: data[5]["text"],
       });
     }.bind(this));
   },
@@ -67,11 +76,6 @@ var Objective = React.createClass({
 			case "maxBudget":
 				this.setState({
 					maxBudget : event.target.value,
-				});
-				break;
-			case "stakeholders":
-				this.setState({
-					stakeholders : event.target.value,
 				});
 				break;
 			case "userResearch":
@@ -87,7 +91,7 @@ var Objective = React.createClass({
 		}
 	},
 	save: function(cb) {
-		put_data("maxBudget", this.state.text);
+		// put_data("maxBudget", this.state.text);
 		setTimeout(cb, 500);
 	},
 	render: function() {
@@ -144,6 +148,16 @@ var Objective = React.createClass({
 
 				<p>The government is willing to invest a maximum budget of ${this.state.maxBudget} in this endeavor.</p>
 
+
+				<div className="sub-heading">Specific Tasks and Deliverables</div>
+				<p>Which of the following do you anticipate your project will need?</p>
+
+				<div className="sub-text">We have already checked certain components that the USDS Playbook suggests be required for all projects.</div>
+					{deliverables}
+
+				<p>These functional Requirements will be translated into Epics and User Stories that will be used to populate the Product Backlog.</p>
+
+
 				<div className="sub-heading">Overview </div>
 
 					<p>The primary users of this X are:</p>
@@ -156,19 +170,26 @@ var Objective = React.createClass({
 					<div className="checkbox">
 					  <label>
 					    <input type="checkbox" value="external_p"></input>
-					    External (people)
+					    External Public (people)
+					  </label>
+					</div>
+					<div className="checkbox">
+					  <label>
+					    <input type="checkbox" value="external_p"></input>
+					    External Public (people)
 					  </label>
 					</div>
 					<div className="checkbox">
 					  <label>
 					    <input type="checkbox" value="internal_s"></input>
-					    Internal (systems, developers)
+					    Internal IT employees (systems, developers)
 					  </label>
 					</div>
 					<div className="checkbox">
 					  <label>
 					    <input type="checkbox" value="external_s"></input>
 					    External (systems, developers)
+					    government IT customer, 
 					  </label>
 					</div>
 
@@ -179,12 +200,7 @@ var Objective = React.createClass({
 				</radiogroup>
 
 				<p>The team within {this.state.agency} managing this contract commit to support the vendor in the user research process, and will provide the vendor with access to the government employees who will be the users of the product.</p>
-
-				<p>The primary users of this digital service will include X, Y, Z.</p>
-
-				<p>To ensure the system supports interoperability,  must be followed. (see section). To ensure the user interface is X, Y (playbook language) @TODO</p>
-
-				
+	
 				{(this.state.userResearch === "vendor")?
 					<div>
 						<div className="sub-heading">Understand what people need</div>
@@ -232,7 +248,7 @@ var Objective = React.createClass({
 
 			<p>In delivery of this effort the contractor shall:</p>
 			<ol>
-				<li>Monitor system-level resource utilization in real time <b>Suggest tools</b></li>
+				<li>Monitor system-level resource utilization in real time <b>(Suggest tools)</b></li>
 				<li>Monitor system performance in real-time (e.g. response time, latency, throughput, and error rates)</li>				
 				<li>Ensure monitoring can measure median, 95th percentile, and 98th percentile performance</li>
 				<li>Create automated alerts based on this monitoring</li>
@@ -243,21 +259,11 @@ var Objective = React.createClass({
 				<li><b>Provide goverment employees access to these monitoring systems</b></li>
 			</ol>
 
-
-				<div className="sub-heading">Specific Tasks and Deliverables</div>
-				<p>Which of the following do you anticipate your project will need?</p>
-
-				<div className="sub-text">We have already checked certain components that the USDS Playbook suggests be required for all projects.</div>
-					{deliverables}
-
-				<p>These functional Requirements will be translated into Epics and User Stories that will be used to populate the Product Backlog.</p>
-
-
 				<div className="sub-heading">Deliverables</div>
 				<p>A deliverable will be considered complete and acceptable when it meets the contractor's "Definition of Done" which are based on the contractor’s Agile Software Development methodology.</p>
 				<p>Each deliverable shall incorporate agency IT requirements as detailed in the Appendix of this document and the <a href="https://playbook.cio.gov" target="_blank">United States Digital Service Playbook</a> standards and be compliant with Section 508. (see <a>here</a>)</p>
 
-				<div className="sub-heading">Agile Development Management Plan (ADMP) and Key Personnel @TODO bye bye </div>
+				<div className="sub-heading">Agile Development Management Plan (ADMP) and Key Personnel </div>
 				<p>The performance work statement will include:</p>
 				<ul>
 					<li>Contact information for all senior leaders and an organizational chart showing the Offeror’s organizational hierarchy and reporting structure, with specific designation of individuals as Key Personnel;
@@ -325,5 +331,5 @@ var Objective = React.createClass({
 });
 
 
-// <p>Do you believe training will be required? @TODO ask VA & 18F consulting</p>
+// <p>The primary users of this digital service will include X, Y, Z.</p> <p>To ensure the system supports interoperability,  must be followed. (see section). To ensure the user interface is X, Y (playbook language) @TODO</p><p>Do you believe training will be required? @TODO ask VA & 18F consulting</p>
 module.exports = Objective;

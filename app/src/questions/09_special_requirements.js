@@ -21,7 +21,9 @@ var SpecialRequirements = React.createClass({
 		return (
 			<div>
 				<div className="main-heading">Special Contract Requirements</div>
+				<br />
 				<button>Add Special Requirement</button>
+				<br />
 
 				<div className="sub-heading">Controlled Facilities and Information Systems Security</div>
 				<p>The contractor must adhere to the IT security requirements described in the Appendix, including all security requirements related to deliverables under this Task Order.</p>

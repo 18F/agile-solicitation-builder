@@ -1,32 +1,5 @@
 # -*- coding: utf-8 -*-
 # name, text, section
-value_components = [
-    {
-        "name": "option_periods",
-        "value": 3,
-        "section": 2,
-    },
-    {
-        "name": "period_duration_number",
-        "value": 6,
-        "section": 2,
-    },
-    {
-        "name": "iteration_pop_number",
-        "value": 2,
-        "section": 2,
-    },
-    {
-        "name": "travel_budget",
-        "value": 0,
-        "section": 2,
-    },
-    {
-        "name": "max_budget",
-        "value": 0,
-        "section": 3,
-    },
-]
 
 content_components = [
     {
@@ -54,21 +27,45 @@ content_components = [
         "section": 2,
     },
     {
+        "name": "far_code",
+        "text": "none",
+        "variables": False,
+        "section": 2,
+    },
+    {
+        "name": "naics_text",
+        "text": "This requirement will be solicited under the following North American Industrial Classification System (NAICS) Code: 541512, Computer Systems Design Services, $27.5 million. This [doctype] will be made in accordance with FAR 16.505 which governs orders placed under Indefinite Delivery contracts as detailed in the GSA GWAC Ordering guide.",
+        "variables": True,
+        "section": 2,
+    },
+    {
+        "name": "period_duration_number",
+        "text": "6",
+        "section": 2,
+        "variables": False,
+    },
+    {
         "name": "period_duration_unit",
         "text": "months",
         "variables": False,
         "section": 2,
     },
     {
+        "name": "option_periods",
+        "text": "3",
+        "section": 2,
+        "variables": False,
+    },
+    {
+        "name": "iteration_pop_number",
+        "text": "2",
+        "section": 2,
+        "variables": False,
+    },
+    {
         "name": "iteration_pop_unit",
         "text": "weeks",
         "variables": False,
-        "section": 2,
-    },
-    {
-        "name": "naics_codes",
-        "text": "This is a Firm Fixed Price [doctype] against [GSA Alliant Small Business (SB) GWAC] – Firm Fixed Price<This requirement will be solicited under the following North American Industrial Classification System (NAICS) Code: 541512, Computer Systems Design Services, $27.5 million. This [doctype] will be made in accordance with FAR 16.505 which governs orders placed under Indefinite Delivery contracts as detailed in the GSA GWAC Ordering guide.",
-        "variables": True,
         "section": 2,
     },
     {
@@ -84,10 +81,46 @@ content_components = [
         "section": 2,
     },
     {
-        "name": "stakeholders",
-        "text": "Stakeholders for this project include, but are not limited to, ___, ___, the Contracting Officer's Representative (COR) and the Contracting Officer.",
-        "variables": False,
+        "name": "general_background",
+        "text": "",
         "section": 3,
+        "variables": False,
+    },
+    {
+        "name": "program_history",
+        "text": "",
+        "section": 3,
+        "variables": False,
+    },
+    {
+        "name": "max_budget",
+        "text": "0",
+        "section": 3,
+        "variables": False,
+    },
+    {
+        "name": "user_research_strategy",
+        "text": "",
+        "section": 3,
+        "variables": False,
+    },
+    {
+        "name": "location_requirement",
+        "text": "no",
+        "section": 3,
+        "variables": False,
+    },
+    {
+        "name": "location_text",
+        "text": "",
+        "section": 3,
+        "variables": False,
+    },
+    {
+        "name": "travel_budget",
+        "text": "0",
+        "section": 7,
+        "variables": False,
     },
     {
         "name": "contracting_officer",
@@ -98,6 +131,12 @@ content_components = [
     {
         "name": "contracting_officer_representative",
         "text": "The Contracting Officer may designate additional technical personnel to serve in monitoring the work under this Task Order. The COR will coordinate and manage the activities under the Task Order.",
+        "variables": True,
+        "section": 8,
+    },
+    {
+        "name": "product_owner",
+        "text": "@TODO",
         "variables": True,
         "section": 8,
     },

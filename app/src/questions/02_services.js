@@ -16,34 +16,43 @@ var CLIN_CONTENT = {
 	// "CLIN 3001": "Option Period 4",
 };
 
-var Services = React.createClass({
-  componentDidMount: function() {
-    get_data("payment_schedule", function(content){ 
+
+
+var Services = React.createClass({	
+	getInitialState: function() {
+		return {
+			edit: null,
+			agency: localStorage.getItem('agency'),
+			docType: localStorage.getItem("docType"),
+    	descriptionOfServices: "",
+    	farCode: "",
+    	awardFee: "",
+    	iterationPoPNumber: "",
+			iterationPoPUnit: "",
+    	naicsText: "",
+    	optionPeriods: "",
+      paymentText: "",
+      periodDurationNumber: "",
+      periodDurationUnit: "",
+		};
+	},
+	componentDidMount: function() {
+    get_data(2, 1, function(content){
+    	var data = content["data"];
       this.setState({
-        paymentText: content,
-      });
-    }.bind(this));
-    get_data("naics_codes", function(content){ 
-      this.setState({
-        codesText: content,
+      	descriptionOfServices: data[0]["text"],
+      	farCode: data[1]["text"],
+      	awardFee: data[2]["text"],
+      	iterationPoPNumber: data[3]["text"],
+				iterationPoPUnit: data[4]["text"],
+      	naicsText: data[5]["text"],
+      	optionPeriods: data[6]["text"],
+        paymentText: data[7]["text"],
+        periodDurationNumber: data[8]["text"],
+        periodDurationUnit: data[9]["text"],
       });
     }.bind(this));
   },
-	getInitialState: function() {
-		return {
-			codesText: "",
-			totalBudget: localStorage.getItem("totalBudget"),
-			edit: null,
-			docType: localStorage.getItem("docType"),
-			awardFee: localStorage.getItem("awardFee") || false,
-			incentiveFee: localStorage.getItem("incentiveFee") || false,
-			optionPeriods: 3,
-			periodDurationNumber: localStorage.getItem("periodDurationNumber") || 6,
-			periodDurationUnit: localStorage.getItem("periodDurationUnit") || "months",
-			iterationPoPNumber: 2,
-			iterationPoPUnit: "weeks",
-		};
-	},
 	toggleEdit: function(key, event) {
 		if (this.state.edit === key){
 			this.setState({
@@ -111,11 +120,6 @@ var Services = React.createClass({
 				break;
 		}    
   },
-  updateBudget: function(event) {
-  	this.setState({totalBudget: event.target.value });
-  	var newText = document.getElementById('naics-far-text1');
-  	this.setState({codesText : newText.innerText });
-  },
 	save: function(cb) {
 		// TODO: save data
 		setTimeout(cb, 500);
@@ -179,7 +183,7 @@ var Services = React.createClass({
 			<div>
 				<div className="main-heading">Services and Prices</div>
 
-				<p>This is a Firm Fixed Price {this.state.docType}.</p>
+				<p>This is a Firm Fixed Price {this.state.docType} for {this.state.agency}.</p>
 
 				<div className="sub-heading">Brief Description of Services</div>
 				<div className="sub-text">Ex: Services required under this {localStorage.getItem("docType")} are to assist the Dept. of Education with the design and implementation of systems to support the ED Program for X.</div>
@@ -220,7 +224,7 @@ var Services = React.createClass({
 
 
 				<div className="edit" onClick={this.toggleEdit.bind(this, 'codes')}>Edit</div>
-				{this.state.edit === "codes"? <textarea className="form-control" rows="4" defaultValue={this.state.codesText}></textarea> :
+				{this.state.edit === "codes"? <textarea className="form-control" rows="4" defaultValue={this.state.naicsText}></textarea> :
 				<div>
 				<p id="naics-far-text1">This requirement will be solicited under the following North American Industrial Classification System (NAICS) Code: 541512, Computer Systems Design Services, $27.5 million. This Task Order will be awarded under [FAR 8.4 , FAR 16.504] which governs orders placed under [Indefinite Delivery] contracts.</p></div>
 				}
@@ -249,7 +253,7 @@ var Services = React.createClass({
 				<form className="form-inline">
     			<input type="text" className="form-control" placeholder="enter a number" onChange={this.handleChange.bind(this, "iterationPoPNumber")} value={this.state.iterationPoPNumber}/>
 
-    			<select className="form-control" onChange={this.handleChange.bind(this, "terationPoPUnit")} value={this.state.terationPoPUnit}>
+    			<select className="form-control" onChange={this.handleChange.bind(this, "iterationPoPUnit")} value={this.state.iterationPoPUnit}>
     				<option>months</option>
     				<option>weeks</option>
     			</select>
@@ -264,8 +268,6 @@ var Services = React.createClass({
 				<div className="sub-heading">Contract Line Item Number (CLIN) Format</div>							
 				<button className="add">Add CLIN</button>
 				<br />
-
-
 
 				{CLINS}
 
@@ -287,34 +289,34 @@ var Services = React.createClass({
 				
 				<br />
 
-				<div className="sub-heading">Awards and Incentives</div>
-				<h5>Would you like to include an award or an incentive?</h5>
-				<div className="radio">
-				  <label>
-				    <input type="radio" value={this.state.awardFee} onChange={this.addFee.bind(this, "awardFee")}></input>
-				    Award Fee
-				  </label>
-				</div>
-				<div className="radio">
-				  <label>
-				    <input type="radio" value={this.state.awardFee} onChange={this.addFee.bind(this, "incentiveFee")}></input>
-				    Incentive Fee
-				  </label>
-				</div>
-				<div className="radio">
-				  <label>
-				    <input type="radio" value={this.state.awardFee} onChange={this.addFee.bind(this, "noFee")}></input>
-				    Neither
-				  </label>
-				</div>
 			</div>
 		);
 	},
 });
 // if they click award fee or incentive fee - not to exceed X. utilize agency specific guidance regarding the [award fee]
-// award subjective - specific criteria ex: product is quality, the form works
+// 				<div className="sub-heading">Awards and Incentives</div>
+				// <h5>Would you like to include an award or an incentive?</h5>
+				// <div className="radio">
+				  // <label>
+				    // <input type="radio" value={this.state.awardFee} onChange={this.addFee.bind(this, "awardFee")}></input>
+				//     Award Fee
+				//   </label>
+				// </div>
+				// <div className="radio">
+				//   <label>
+				//     <input type="radio" value={this.state.awardFee} onChange={this.addFee.bind(this, "incentiveFee")}></input>
+				//     Incentive Fee
+				//   </label>
+				// </div>
+				// <div className="radio">
+				//   <label>
+				//     <input type="radio" value={this.state.awardFee} onChange={this.addFee.bind(this, "noFee")}></input>
+				//     Neither
+				//   </label>
+				// </div>award subjective - specific criteria ex: product is quality, the form works
 // incentive fee = objective assessment, ex: stuck to schedule, defect rate was < 5%
 // (Jonathan doesn't like...)
+
 
 
 module.exports = Services;

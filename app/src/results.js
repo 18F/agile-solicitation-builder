@@ -9,7 +9,7 @@ var Results = React.createClass({
 			agency: localStorage.getItem("agency"),
 			agencyFullName: localStorage.getItem("agencyFullname"),
 			docType: localStorage.getItem("docType"),
-			definitions01: localStorage.getItem("definitions"),
+			definitions: "",
 			services02: "",
 			objectives03: "",
 			requirements04: "",
@@ -27,6 +27,13 @@ var Results = React.createClass({
 			locationText: localStorage.getItem("locationText"),
 		};
 	},
+  componentDidMount: function() {
+    get_data("definitions", function(content){ 
+      this.setState({
+        definitions: content,
+      });
+    }.bind(this));
+  },
 	render: function() {
 		return (
 			<div>
@@ -36,7 +43,7 @@ var Results = React.createClass({
 				{this.state.locationRequirement? <div>This project will primarily take place in <b>{this.state.locationText}</b>.</div> : null}
 				
 				<div className="sub-heading">Definitions</div>
-				<div>{this.state.definitions01}</div>
+				<div>{this.state.definitions}</div>
 				
 				<div className="sub-heading">Services and Prices</div>
 
