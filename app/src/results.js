@@ -28,9 +28,9 @@ var Results = React.createClass({
 		};
 	},
   componentDidMount: function() {
-    get_data("definitions", function(content){ 
+    get_data(1, 1, function(content){ 
       this.setState({
-        definitions: content,
+        definitions: content["data"][0]["text"],
       });
     }.bind(this));
   },
@@ -38,6 +38,7 @@ var Results = React.createClass({
 		return (
 			<div>
 				<div className="main-heading">Resulting RFP/RFQ</div>
+				<button>Download</button>
 				<div>Results for RFP/RFQ {this.props.params.id}!</div>
 				<div>This is a <b>{this.state.docType}</b> for the {this.state.agencyFullName} ({this.state.agency}).</div>
 				{this.state.locationRequirement? <div>This project will primarily take place in <b>{this.state.locationText}</b>.</div> : null}

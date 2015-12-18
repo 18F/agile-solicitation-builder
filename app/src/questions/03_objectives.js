@@ -60,7 +60,6 @@ var Objective = React.createClass({
 	componentDidMount: function() {
     get_data(3, 1, function(content){
     	var data = content["data"];
-    	window.c = data;
       this.setState({
       	generalBackground: data[0]["text"],
       	locationRequirement: data[1]["text"],
@@ -164,19 +163,19 @@ var Objective = React.createClass({
 					<div className="checkbox">
 					  <label>
 					    <input type="checkbox" value="internal_p"></input>
-					    Internal (people)
+					    Internal/Government Employees
 					  </label>
 					</div>
 					<div className="checkbox">
 					  <label>
 					    <input type="checkbox" value="external_p"></input>
-					    External Public (people)
+					    External/The Public
 					  </label>
 					</div>
 					<div className="checkbox">
 					  <label>
 					    <input type="checkbox" value="external_p"></input>
-					    External Public (people)
+					    External IT 
 					  </label>
 					</div>
 					<div className="checkbox">

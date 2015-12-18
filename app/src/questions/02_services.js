@@ -190,7 +190,7 @@ var Services = React.createClass({
 								<textarea className="form-control" rows="4" placeholder="1-2 sentences"></textarea>				
 
 				<div className="sub-heading">Type of Contract</div>
-				<p>What time of contract will these be?</p>
+				<p>What type of contract will this be?</p>
 				<div className="sub-text">At the moment this tool only supports Firm Fixed Price as it better supports agile development.</div>
 				<div className="radio">
 				  <label>

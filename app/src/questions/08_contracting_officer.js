@@ -1,12 +1,17 @@
 var React = require('react');
 
-var defaultCOText = "The Contracting Officer is the only individual who can legally commit or obligate the Government for the expenditure of public funds. The technical administration of this " + localStorage.getItem("docType") + " shall not be construed to authorize the revision of the terms and conditions of this " + localStorage.getItem("docType") + ". Only the Contracting Officer can authorize any such revision in writing. The Contracting Officer shall promptly countermand any action that exceeds the authority of the COR.";
-
-
-var defaultCorText = "The Contracting Officer may designate additional technical personnel to serve in monitoring the work under this " + localStorage.getItem("docType") + ". The COR will coordinate and manage the activities under the " + localStorage.getItem("docType") + ".";
-
-
 var ContractingOfficer = React.createClass({
+	save: function() {
+		// collect final state values
+		var data = {};
+		data["contracting_officer"] = this.state.coText;
+		data["contracting_officer_representative"] = this.state.corText;
+		data["product_owner"] = this.state.productOwnerText;
+
+	  put_data(8, 1, data, function(content){
+      window.location.replace(content['url']);
+    }.bind(this));
+  },
 	toggleEdit: function(key, event) {
 		console.log(key);
 		if (this.state.edit === key){
@@ -27,30 +32,33 @@ var ContractingOfficer = React.createClass({
 				this.setState({
       		coText: event.target.value,
 		    });
-		    localStorage.setItem("coText", event.target.value);
 		    break;
 		  case "cor":
 				this.setState({
       		corText: event.target.value,
 		    });
-		    localStorage.setItem("corText", event.target.value);
+		    break;
+			case "po":
+				this.setState({
+      		productOwnerText: event.target.value,
+		    });
 		    break;
 		}
 	},
 	getInitialState: function() {
 		return {
 			edit: null,
-			docType: localStorage.getItem("docType"),
-			coText: defaultCOText,
-			corText: defaultCorText,
+			coText: "",
+			corText: "",
+			productOwnerText: "",
 		};
 	},
   componentDidMount: function() {
-    get_data(1, 1, function(content){
+    get_data(8, 1, function(content){
       this.setState({
         coText: content["data"][0]["text"],
         corText: content["data"][1]["text"],
-        productOwner: content["data"][2]["text"],
+        productOwnerText: content["data"][2]["text"],
       });
     }.bind(this));
   },
@@ -59,6 +67,9 @@ var ContractingOfficer = React.createClass({
 			<div>
 				<div className="main-heading">Roles and Responsibilities</div>
 				<p>We have already provided some recommended content for this section. To delete, modify, or add additional content click the "edit" above the section you wish to change.</p>
+
+				<button className="btn btn-default">+ Role</button>
+				<br />
 
 				<div className="sub-heading">Contracting Officer’s Authority</div>
 
@@ -82,12 +93,17 @@ var ContractingOfficer = React.createClass({
 				{this.state.corText}</div>
 				}
 
-				<div className="sub-heading editable">Product Owner</div>
-				<p>[TBD]</p>
+				<div className="sub-heading editable">Product Owner's Authority</div>
+				{this.state.edit === "po"? 
+				<div>
+				<div className="edit" onClick={this.toggleEdit.bind(this, 'po')}>Done</div>
+				<textarea className="form-control" rows="4" defaultValue={this.state.productOwnerText} onChange={this.handleChange.bind(this, 'po')}></textarea></div> :
+				<div>
+				<div className="edit" onClick={this.toggleEdit.bind(this, 'po')}>Edit</div>
+				{this.state.productOwnerText}</div>
+				}
 				
-				<button>add an additional role</button>
-				<br />
-				<br />
+				<br />				
 
 			</div>
 		);

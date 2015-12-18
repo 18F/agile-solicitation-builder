@@ -60,7 +60,12 @@ class RFQ(Base):
         self.setaside = setaside
         self.base_number = base_number_value
 
-        self.content_components = [ContentComponent(**section) for section in content_components]
+        for section in content_components:
+            if section['variables'] == True:
+                section['text'] = section['text'].replace("{AGENCY}", agency).replace("{DOC_TYPE}", doc_type)
+            self.content_components.append(ContentComponent(**section))
+
+        # self.content_components = [ContentComponent(**section) for section in content_components]
 
 
 class ContentComponent(Base):

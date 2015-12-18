@@ -34,7 +34,7 @@ content_components = [
     },
     {
         "name": "naics_text",
-        "text": "This requirement will be solicited under the following North American Industrial Classification System (NAICS) Code: 541512, Computer Systems Design Services, $27.5 million. This [doctype] will be made in accordance with FAR 16.505 which governs orders placed under Indefinite Delivery contracts as detailed in the GSA GWAC Ordering guide.",
+        "text": "This requirement will be solicited under the following North American Industrial Classification System (NAICS) Code: 541512, Computer Systems Design Services, $27.5 million. This {DOC_TYPE} will be made in accordance with FAR 16.505 which governs orders placed under Indefinite Delivery contracts as detailed in the GSA GWAC Ordering guide.",
         "variables": True,
         "section": 2,
     },
@@ -124,13 +124,13 @@ content_components = [
     },
     {
         "name": "contracting_officer",
-        "text": "The Contracting Officer is the only individual who can legally commit or obligate the Government for the expenditure of public funds. The technical administration of this Task Order shall not be construed to authorize the revision of the terms and conditions of this Task Order. Only the Contracting Officer can authorize any such revision in writing. The Contracting Officer shall promptly countermand any action that exceeds the authority of the COR.",
+        "text": "The Contracting Officer is the only individual who can legally commit or obligate the Government for the expenditure of public funds. The technical administration of this {DOC_TYPE} shall not be construed to authorize the revision of the terms and conditions of this {DOC_TYPE}. Only the Contracting Officer can authorize any such revision in writing. The Contracting Officer shall promptly countermand any action that exceeds the authority of the COR.",
         "variables": True,
         "section": 8,
     },
     {
         "name": "contracting_officer_representative",
-        "text": "The Contracting Officer may designate additional technical personnel to serve in monitoring the work under this Task Order. The COR will coordinate and manage the activities under the Task Order.",
+        "text": "The Contracting Officer may designate additional technical personnel to serve in monitoring the work under this {DOC_TYPE}. The COR will coordinate and manage the activities under the {DOC_TYPE}.",
         "variables": True,
         "section": 8,
     },
@@ -141,10 +141,16 @@ content_components = [
         "section": 8,
     },
     {
+        "name": "security",
+        "text": "The contractor must adhere to the IT security requirements described in the Appendix, including all security requirements related to deliverables under this {DOC_TYPE}.",
+        "variables": True,
+        "section": 9,
+    },
+    {
         "name": "contract_clauses",
         "text": "",
         "variables": False,
-        "section": 8,
+        "section": 10,
     },
 ]
 

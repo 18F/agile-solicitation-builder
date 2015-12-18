@@ -30,6 +30,8 @@ parser.add_argument('doc_type')
 parser.add_argument('setaside')
 parser.add_argument('base_number')
 
+parser.add_argument('data')
+
 class Agencies(Resource):
     def get(self):
         session = Session()
@@ -43,12 +45,22 @@ class Data(Resource):
         content = session.query(ContentComponent).filter_by(document_id=rfq_id).filter_by(section=int(section_id))
         return jsonify(data=[c.to_dict() for c in content])
 
-    def put(self, content_key):
-        data = request.get_json()
-        content = data['text']
-        print content
-        print "content '" + content + "'"
-        # DATA[content_key] = content
+    def put(self, rfq_id, section_id):
+        data = request.get_json()['data']
+        for key in data:
+            session = Session()
+            component = session.query(ContentComponent).filter_by(document_id=rfq_id).filter_by(name=key).first()
+            component.text = data[key]
+            session.merge(component)
+            session.commit()
+
+        # this needs to be done client side instead to allow for jumping between sections
+        if section_id < 10:
+            url =  '#/rfp/' + str(rfq_id) + '/question/' + str(int(section_id) + 1)
+        else:
+            url = "#/rfp/" + str(rfq_id) + "/results"
+        return jsonify({"url": url})
+
 
 class Create(Resource):
 
@@ -73,32 +85,6 @@ class Create(Resource):
         return jsonify({'id': '1'})
        
 
-class Workon(Resource):
-    
-    def get(self, rfq_id):
-        # get a specific RFQ    
-        pass
-
-
-    def put(self, rfq_id):
-        # update a specific RFQ
-        pass
-
-class Sections(Resource):
-
-    def get(self, rfq_id, section_id):
-        # Get the values for a specific section
-        session = Session()
-        sections = session.query(ContentComponent).filter_by(section=section_id).filter_by(document_id=rfq_id).all()
-            
-        print type(sections)
-
-        return jsonify(data=[s.to_dict() for s in sections])
-
-    def put(self, rfq_id, section_id):
-        # Update the value for a specific section
-        pass
-
 class Results(Resource):
 
     def get(self, rfq_id):
@@ -109,8 +95,6 @@ class Results(Resource):
 api.add_resource(Agencies, '/agencies')
 api.add_resource(Data, '/get_content/<int:rfq_id>/sections/<int:section_id>')
 api.add_resource(Create, '/rfqs')
-api.add_resource(Workon, '/rfqs/<int:rfq_id>')
-api.add_resource(Sections, '/rfqs/<int:rfq_id>/sections/<int:section_id>')
 api.add_resource(Results, '/rfqs/<int:rfq_id>/results')
 # api.add_resource(Downloads, '/rfqs/<int:rfq_id>/results/download')
 
