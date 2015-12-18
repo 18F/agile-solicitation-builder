@@ -13,10 +13,8 @@ var CLIN_CONTENT = {
 	"CLIN 1001": "Option Period 1",
 	"CLIN 1001": "Option Period 2",
 	"CLIN 2001": "Option Period 3",
-	// "CLIN 3001": "Option Period 4",
+	"CLIN 3001": "Option Period 4",
 };
-
-
 
 var Services = React.createClass({	
 	getInitialState: function() {
@@ -40,16 +38,16 @@ var Services = React.createClass({
     get_data(2, 1, function(content){
     	var data = content["data"];
       this.setState({
-      	descriptionOfServices: data[0]["text"],
-      	farCode: data[1]["text"],
-      	awardFee: data[2]["text"],
-      	iterationPoPNumber: data[3]["text"],
-				iterationPoPUnit: data[4]["text"],
-      	naicsText: data[5]["text"],
-      	optionPeriods: data[6]["text"],
-        paymentText: data[7]["text"],
-        periodDurationNumber: data[8]["text"],
-        periodDurationUnit: data[9]["text"],
+      	descriptionOfServices: data["description_of_services"],
+      	farCode: data["far_code"],
+      	awardFee: data["award_fee"],
+      	iterationPoPNumber: data["iteration_pop_number"],
+				iterationPoPUnit: data["iteration_pop_unit"],
+      	naicsText: data["naics_text"],
+      	optionPeriods: data["option_periods"],
+        paymentText: data["payment_text"],
+        periodDurationNumber: data["period_duration_number"],
+        periodDurationUnit: data["period_duration_unit"],
       });
     }.bind(this));
   },
@@ -65,7 +63,6 @@ var Services = React.createClass({
 	    });
 		}
 	},
-
 	addFee: function(key, event) {
 		// awardFee, incentiveFee, noFee
 		switch(key) {
@@ -177,7 +174,6 @@ var Services = React.createClass({
 				)
 			// }
 		}
-
 
 		return (
 			<div>

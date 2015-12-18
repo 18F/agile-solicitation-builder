@@ -21,9 +21,9 @@ var Definition = React.createClass({
     },
 
     componentDidMount: function() {
-      get_data(1, 1, function(content){
+      get_data(1, 1, function(data){
         this.setState({
-          definitions: content["data"][0]["text"],
+          definitions: data["data"]["definitions"],
         });
       }.bind(this));
     },

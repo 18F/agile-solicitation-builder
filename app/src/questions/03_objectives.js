@@ -1,11 +1,9 @@
 var React = require('react');
 
-				// <div className="sub-heading">Backlog Section</div>
-				// <br />
-				// <div className="sub-text">The Initial Product Backlog (See Appendix) provides a detailed breakdown of the desired functionality as identified at this time. The Initial Product Backlog is not a binding document, but rather a representative sample of the functionality that is anticipated will be required to be delivered under this Task Order. The specific user stories will be identified through the agile development process as proposed in the Performance Work Statement (PWS). The Initial Product Backlog provides some guidance on specific objectives that should be included in each project.</div>
-				// <textarea className="form-control" rows="10"></textarea>
-
-				// end users public, end users government, 
+// <div className="sub-heading">Backlog Section</div>
+// <br />
+// <div className="sub-text">The Initial Product Backlog (See Appendix) provides a detailed breakdown of the desired functionality as identified at this time. The Initial Product Backlog is not a binding document, but rather a representative sample of the functionality that is anticipated will be required to be delivered under this Task Order. The specific user stories will be identified through the agile development process as proposed in the Performance Work Statement (PWS). The Initial Product Backlog provides some guidance on specific objectives that should be included in each project.</div>
+// <textarea className="form-control" rows="10"></textarea>
 
 
 var DELIVERABLES = {
@@ -22,10 +20,14 @@ var DELIVERABLES = {
 	"11": "Enhancements, patches, and updates to applications, data, or cloud systems",
 	"12": "Data import of records collected from legacy systems",
 	"13": "Automated testing",
-	"14": "Training of end users on the systems"
+	"14": "Training of end users on the systems",
+	"15": "Native mobile application(s)",
+	"16": "Mobile responsive web application(s)",
+	"17": "Application capable of supporting high user traffic",
+	"18": "Devops, continuous integration and continuous deployment"
 }
 
-USER_RESEARCH = {			
+var USER_RESEARCH = {			
 	"done": "Research has already been conducted, either internally or by another vendor. (proceed to product/program vision questionnaire)",
 	"internal": "We intend to conduct user research internally prior to the start date of this engagement.",
  	"vendor": "The vendor will be responsible for the user research."
@@ -37,7 +39,7 @@ var Objective = React.createClass({
 			docType: localStorage.getItem("docType"),
 			agency: localStorage.getItem("agency"),
 			maxBudget: 0,
-			userResearch: "none",
+			userResearchStrategy: "none",
 		};
 	},
 	toggleLocation: function(responseText) {
@@ -61,12 +63,13 @@ var Objective = React.createClass({
     get_data(3, 1, function(content){
     	var data = content["data"];
       this.setState({
-      	generalBackground: data[0]["text"],
-      	locationRequirement: data[1]["text"],
-      	locationText: data[2]["text"],
-      	maxBudget: data[3]["text"],
-				programHistory: data[4]["text"],
-      	userResearchStrategy: data[5]["text"],
+      	generalBackground: data["general_background"],
+      	locationRequirement: data["location_requirement"],
+      	locationText: data["location_text"],
+      	maxBudget: data["max_budget"],
+				programHistory: data["program_history"],
+      	userResearchStrategy: data["user_research_strategy"],
+      	userAccess: data["user_access"],
       });
     }.bind(this));
   },
@@ -77,9 +80,9 @@ var Objective = React.createClass({
 					maxBudget : event.target.value,
 				});
 				break;
-			case "userResearch":
+			case "userResearchStrategy":
 				this.setState({
-					userResearch : event.target.value,
+					userResearchStrategy : event.target.value,
 				});
 				break;
 			case "locationText":
@@ -111,7 +114,7 @@ var Objective = React.createClass({
 			userResearchOptions.push(
 				<div className="radio">
 					<label>
-						<input type="radio" value={key} checked={key == this.state.userResearch} />{ USER_RESEARCH[key] }
+						<input type="radio" value={key} checked={key == this.state.userResearchStrategy} />{ USER_RESEARCH[key] }
 				  </label>
 				</div>
 			);
@@ -194,13 +197,13 @@ var Objective = React.createClass({
 
 				<p>What is your User Research Strategy?</p>
 
-				<radiogroup onChange={this.handleChange.bind(this, 'userResearch')}>
+				<radiogroup onChange={this.handleChange.bind(this, 'userResearchStrategy')}>
 					{userResearchOptions}
 				</radiogroup>
 
-				<p>The team within {this.state.agency} managing this contract commit to support the vendor in the user research process, and will provide the vendor with access to the government employees who will be the users of the product.</p>
+				<p>{this.state.userAccess}</p>
 	
-				{(this.state.userResearch === "vendor")?
+				{(this.state.userResearchStrategy === "vendor")?
 					<div>
 						<div className="sub-heading">Understand what people need</div>
 						<p>The vendor services will include exploring and pinpointing the needs of the people who will use the service, and the ways the service will fit into their lives. The vendor shall continually test the products with real people to ensure delivery is focused on what is important.</p>
@@ -238,7 +241,7 @@ var Objective = React.createClass({
 				<li>Follow accessibility best practices to ensure all people can use the service</li>
 				<li>Provide users with a way to exit and return later to complete the process</li>
 				<li>Use language that is familiar to the user and easy to understand</li>
-				<li>Use language and design consistently throughout the service, including online and offline touch points</li>
+				<li>Apply <b>these language and design standards consistently</b> throughout the service, including online and offline touch points</li>
 			</ol>
 
 			<div className="sub-heading">Use data to drive decisions</div>
@@ -260,7 +263,7 @@ var Objective = React.createClass({
 
 				<div className="sub-heading">Deliverables</div>
 				<p>A deliverable will be considered complete and acceptable when it meets the contractor's "Definition of Done" which are based on the contractor’s Agile Software Development methodology.</p>
-				<p>Each deliverable shall incorporate agency IT requirements as detailed in the Appendix of this document and the <a href="https://playbook.cio.gov" target="_blank">United States Digital Service Playbook</a> standards and be compliant with Section 508. (see <a>here</a>)</p>
+				<p>Each deliverable shall incorporate agency IT requirements as detailed in the Appendix of this document and the <a href="https://playbook.cio.gov" target="_blank">United States Digital Service Playbook</a> standards and be compliant with Section 508.</p>
 
 				<div className="sub-heading">Agile Development Management Plan (ADMP) and Key Personnel </div>
 				<p>The performance work statement will include:</p>
@@ -281,13 +284,13 @@ var Objective = React.createClass({
 				<div className="sub-text">Ex: SBA headquarters in Washington, DC</div>
 					<div className="radio">
 					  <label>
-					    <input type="radio" value="yes" onChange={this.toggleLocation.bind(this, "yes")} checked={this.state.locationRequirement}></input>
+					    <input type="radio" value="yes" onChange={this.toggleLocation.bind(this, "yes")} checked={this.state.locationRequirement === "yes"}></input>
 					    Yes
 					  </label>
 					</div>
 					<div className="radio">
 					  <label>
-					    <input type="radio" value="no" onChange={this.toggleLocation.bind(this, "no")} checked={!this.state.locationRequirement}></input>
+					    <input type="radio" value="no" onChange={this.toggleLocation.bind(this, "no")} checked={this.state.locationRequirement === "no"}></input>
 					    No
 					  </label>
 					</div>

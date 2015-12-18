@@ -9,7 +9,6 @@ var Requirement = React.createClass({
 		return {
 			docType: localStorage.getItem("docType"),
 			agency: localStorage.getItem("agency"),
-			maxBudget: 0,
 		};
 	},
 	render: function() {
@@ -19,9 +18,10 @@ var Requirement = React.createClass({
 				<p>This section has 7 components.</p>
 				<p><b>@TODO RECONCILE THE TWO VERSIONS OF THE TEXT BELOW</b></p>
 				<div className="sub-heading">Key Personnel</div>
-				<p>The vendor shall provide talented people who have experience creating modern digital services. This includes bringing in seasoned product managers, engineers, and designers.</p>
-				<p>What level of traffic/usage do you anticipate for your digital service?</p>
-				<p>Will you need a native mobile app?</p>
+				<p>The vendor shall provide talented people who have experience creating modern digital services. This includes bringing in seasoned product managers, engineers, UX researchers and designers.</p>
+
+				<p><b>@TODO How can we shift the focus of this text to performance?</b></p>
+				<p>Some key points to include: if government not happy then X happens. There needs to be a POC on contractor side who is responsible. If there will be delays because of things on the government side the contractor needs to communicate this ASAP and come up with new schedule with CO/PM.</p>	
 
 				<p>The following requirements related to personnel must be met:</p>
 				<ol>
@@ -43,19 +43,18 @@ var Requirement = React.createClass({
 					<li>Member(s) of the team have experience with modern development and operations (DevOps) techniques like continuous integration and continuous deployment</li>
 					<li>Member(s) of the team have experience securing digital services</li>
 				</ol>
-
-						<ol>
-							<li><b>@TODO please provide labor category and personnel name</b></li>
-							<li>At a minimum, a Project Manager must be identified and designated as Key Personnel. There may be more than one Project Manager. The Project Manager must be a senior staff member and is responsible for the supervision and management of the Contractor’s personnel, technical assistance, and interface and compliance with instructions from {this.state.agency}’s COR. Desired skills/experience for the Project Manager include:</li>
-							<li>Experience in technical leadership.</li>
-							<li>Ability to rapidly prioritize competing requirements.</li>
-							<li>Ability to understand and simplify customer requirements.</li>
-							<li>Ability to communicate end user feedback to technical and design leads.</li>
-							<li>Computer Science or Engineering degree or equivalent work experience.</li>
-							<li>Strong communication skills.</li>
-							<li>Proven knowledge of industry standards.</li>
-							<li>Proven knowledge of managing Agile Software Development efforts.</li>
-						</ol>
+				<ol>
+					<li><b>@TODO please provide labor category and personnel name</b></li>
+					<li>At a minimum, a Project Manager must be identified and designated as Key Personnel. There may be more than one Project Manager. The Project Manager must be a senior staff member and is responsible for the supervision and management of the Contractor’s personnel, technical assistance, and interface and compliance with instructions from {AGENCY}’s COR. Desired skills/experience for the Project Manager include:</li>
+					<li>Experience in technical leadership.</li>
+					<li>Ability to rapidly prioritize competing requirements.</li>
+					<li>Ability to understand and simplify customer requirements.</li>
+					<li>Ability to communicate end user feedback to technical and design leads.</li>
+					<li>Computer Science or Engineering degree or equivalent work experience.</li>
+					<li>Strong communication skills.</li>
+					<li>Proven knowledge of industry standards.</li>
+					<li>Proven knowledge of managing Agile Software Development efforts.</li>
+				</ol>
 				</ol>
 				<div className="sub-heading">Transition Plan</div>
 				<p><b>CAN WE REWRITE THIS???</b></p>
@@ -63,16 +62,13 @@ var Requirement = React.createClass({
 				<ol>
 					<li>Ensure that all deliverables, products, licenses, designs, data, documentation, tests, user research notes, source code, configuration settings and files, and materials developed throughout this Task Order will be the property of the U.S. Government.
 					</li>
+					<li>From day ONE the CO should be reviewing the reference/inventory documents to ensure everything is accessible. If anything is unclear CO should bring this to the attention of the contractor ASAP. </li>
 					<li>Reference section that talks about documents.
 					All documentation shall be viewable at all times by all parties. 
 					includes code, monitoring systems, 
 					in support of an eventual transition reference sections X, Y, that talk about viewability, monitoring, code, user research. 
 					</li>
-					<li>Coordinate with the COR and potentially another vendor, and implement the Transition Plan according to the COR’s direction.
-					</li>
 					<li>Provide assistance to the COR and potentially another vendor to stand-up and ensure the applications, systems, databases, platform, and environments are tested and fully operational.
-					</li>
-					<li>Ensure the transition plan includes a detailed inventory of all files, materials, etc. that will be submitted along with detailed instructions to seamlessly set up the websites, applications, databases, systems, platform, etc. At that time, all files, materials, boxes, etc. shall be clearly labeled, packaged, and indexed according to the inventory.
 					</li>
 				</ol>
 
@@ -81,9 +77,9 @@ var Requirement = React.createClass({
 				<div className="sub-heading">Transition Activities</div>
 
 				<ol>
-					<li>During the transition to the Government and/or a new contractor, the Contractor shall perform all necessary transition activities, including, but not limited to, continued full services to {this.state.agency} and other customers; participation, at discretion of COR in five or more meetings with the Government or new contractor to effect a smooth transition and provide detailed information on the operation of all deliverables; training of new personnel (contractor or Government) during transition period, in all system operation and maintenance functions; appropriate close-out of outstanding technical and related work.
+					<li>During the transition to the Government and/or a new contractor, the Contractor shall perform all necessary transition activities, including, but not limited to, continued full services to {AGENCY}; participation, at discretion of COR in five or more meetings with the Government or new contractor to effect a smooth transition and provide detailed information on the operation of all deliverables; training of new personnel (contractor or Government) during transition period, in all system operation and maintenance functions; appropriate close-out of outstanding technical and related work. Should be available to answer questions. 
 					</li>
-					<li>Final report should include list of accomplishments, documentation, and customized code developed for {this.state.agency}. Should the Contractor be terminated prior to the end of the scheduled base period, the Contractor shall transfer all project materials to the COR within two weeks of the COR’s request.
+					<li>Information such as the list of accomplishments, documentation, and customized code developed for {AGENCY} should be available to the Government in the collaborative workspace established from contract initiation. Should the Contractor be terminated prior to the end of the scheduled base period, the Contractor shall work with the Government to ensure they retain access to this information within two weeks from the termination date.
 					</li>
 				</ol>
 				

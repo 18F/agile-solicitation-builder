@@ -54,15 +54,13 @@ class RFQ(Base):
             base_number_value = base_number
 
         # seed each section of the new document with the template content
-        # check for variables
         self.agency = agency
         self.doc_type = doc_type
         self.setaside = setaside
         self.base_number = base_number_value
 
         for section in content_components:
-            if section['variables'] == True:
-                section['text'] = section['text'].replace("{AGENCY}", agency).replace("{DOC_TYPE}", doc_type)
+            section['text'] = section['text'].replace("{AGENCY}", agency).replace("{DOC_TYPE}", doc_type)
             self.content_components.append(ContentComponent(**section))
 
         # self.content_components = [ContentComponent(**section) for section in content_components]
@@ -74,7 +72,6 @@ class ContentComponent(Base):
     document_id = Column(Integer, ForeignKey('rfqs.id'), primary_key=True)
     section = Column(Integer, primary_key=True)
     name = Column(String, primary_key=True)
-    variables = Column(Boolean, default=False)
 
     text = Column(Text)
 

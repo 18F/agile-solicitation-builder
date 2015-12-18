@@ -56,9 +56,9 @@ var ContractingOfficer = React.createClass({
   componentDidMount: function() {
     get_data(8, 1, function(content){
       this.setState({
-        coText: content["data"][0]["text"],
-        corText: content["data"][1]["text"],
-        productOwnerText: content["data"][2]["text"],
+        coText: content["data"]["contracting_officer"],
+        corText: content["data"]["contracting_officer_representative"],
+        productOwnerText: content["data"]["product_owner"],
       });
     }.bind(this));
   },

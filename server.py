@@ -32,6 +32,13 @@ parser.add_argument('base_number')
 
 parser.add_argument('data')
 
+def dicts_to_dict(dicts, key):
+    new_dict = {}
+    for i, d in enumerate(dicts):
+        new_key = d[key]
+        new_dict[new_key] = dicts[i]['text']
+    return new_dict
+
 class Agencies(Resource):
     def get(self):
         session = Session()
@@ -43,7 +50,7 @@ class Data(Resource):
     def get(self, rfq_id, section_id):
         session = Session()
         content = session.query(ContentComponent).filter_by(document_id=rfq_id).filter_by(section=int(section_id))
-        return jsonify(data=[c.to_dict() for c in content])
+        return jsonify(data=dicts_to_dict([c.to_dict() for c in content], "name"))
 
     def put(self, rfq_id, section_id):
         data = request.get_json()['data']
