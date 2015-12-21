@@ -85,6 +85,11 @@ var Objective = React.createClass({
 					userResearchStrategy : event.target.value,
 				});
 				break;
+			case "locationRequirement":
+				this.setState({
+					locationRequirement: event.target.value,
+				});
+				break;
 			case "locationText":
 		  	this.setState({
 					locationText: event.target.value,
@@ -284,17 +289,17 @@ var Objective = React.createClass({
 				<div className="sub-text">Ex: SBA headquarters in Washington, DC</div>
 					<div className="radio">
 					  <label>
-					    <input type="radio" value="yes" onChange={this.toggleLocation.bind(this, "yes")} checked={this.state.locationRequirement === "yes"}></input>
+					    <input type="radio" value="yes" onChange={this.handleChange.bind(this, "locationRequirement")} checked={this.state.locationRequirement === "yes"}></input>
 					    Yes
 					  </label>
 					</div>
 					<div className="radio">
 					  <label>
-					    <input type="radio" value="no" onChange={this.toggleLocation.bind(this, "no")} checked={this.state.locationRequirement === "no"}></input>
+					    <input type="radio" value="no" onChange={this.handleChange.bind(this, "locationRequirement")} checked={this.state.locationRequirement === "no"}></input>
 					    No
 					  </label>
 					</div>
-					{this.state.locationRequirement? <div><input type="text" className="form-control short-response" placeholder="ex: Washington, DC" value={this.state.locationText} onChange={this.handleChange.bind(this, "locationText")}></input><br /></div> : null}
+					{(this.state.locationRequirement === "yes")? <div><input type="text" className="form-control short-response" placeholder="ex: Washington, DC" value={this.state.locationText} onChange={this.handleChange.bind(this, "locationText")}></input><br /></div> : null}
 
 
 				<div className="resulting-text">Resulting Text</div>

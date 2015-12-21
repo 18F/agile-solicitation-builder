@@ -3,25 +3,24 @@ var React = require('react');
 // <p>If you believe you need additional CLINs, 6 total, 2 per year, 3 years</p>
 // <p>@TODO CLIN number is editable ("0001"), as many boxes as there are periods of performance. Option to add a completely empty box if they want. </p>
 
-// this is a firm fixed price {call/etc.} against [78fhjh].
-// move to beginning of services and prices
-
 // <p>Ex: Services required under this {localStorage.getItem("docType")} are to assist the {localStorage.getItem("agencyFullname")} ({localStorage.getItem("agency")}) with the design and implementation of systems to support the {localStorage.getItem("agency")}’s Program for X.</p>
 
 var CLIN_CONTENT = {
-	"CLIN 0001": "Base Period",
 	"CLIN 1001": "Option Period 1",
-	"CLIN 1001": "Option Period 2",
-	"CLIN 2001": "Option Period 3",
-	"CLIN 3001": "Option Period 4",
+	"CLIN 2001": "Option Period 2",
+	"CLIN 3001": "Option Period 3",
+	"CLIN 4001": "Option Period 4",
+	"CLIN 5001": "Option Period 5",
+	"CLIN 6001": "Option Period 6",
+	"CLIN 7001": "Option Period 7",
+	"CLIN 8001": "Option Period 8",
 };
 
 var Services = React.createClass({	
 	getInitialState: function() {
 		return {
 			edit: null,
-			agency: localStorage.getItem('agency'),
-			docType: localStorage.getItem("docType"),
+			summary: "",
     	descriptionOfServices: "",
     	farCode: "",
     	awardFee: "",
@@ -37,7 +36,9 @@ var Services = React.createClass({
 	componentDidMount: function() {
     get_data(2, 1, function(content){
     	var data = content["data"];
+    	window.d = data;
       this.setState({
+      	summary: data["summary"],
       	descriptionOfServices: data["description_of_services"],
       	farCode: data["far_code"],
       	awardFee: data["award_fee"],
@@ -45,9 +46,11 @@ var Services = React.createClass({
 				iterationPoPUnit: data["iteration_pop_unit"],
       	naicsText: data["naics_text"],
       	optionPeriods: data["option_periods"],
-        paymentText: data["payment_text"],
-        periodDurationNumber: data["period_duration_number"],
-        periodDurationUnit: data["period_duration_unit"],
+        paymentText: data["payment_schedule"],
+        basePeriodDurationNumber: data["base_period_duration_number"],
+        basePeriodDurationUnit: data["base_period_duration_unit"],
+        optionPeriodDurationNumber: data["option_period_duration_number"],
+        optionPeriodDurationUnit: data["option_period_duration_unit"],
       });
     }.bind(this));
   },
@@ -123,8 +126,8 @@ var Services = React.createClass({
 	},
 	render: function() {
 		// create CLIN tables
-
-		var PoP = <span>{this.state.periodDurationNumber} {this.state.periodDurationUnit}</span>;
+		var bPoP = <span>{this.state.basePeriodDurationNumber} {this.state.basePeriodDurationUnit}</span>;		
+		var oPoP = <span>{this.state.optionPeriodDurationNumber} {this.state.optionPeriodDurationUnit}</span>;
 
 		var iPoP = <span>{this.state.iterationPoPNumber} {this.state.iterationPoPUnit}</span>
 		var firmFixedPriceCompletion = "";
@@ -132,14 +135,14 @@ var Services = React.createClass({
 
 		var CLINS = [];
 		var counter = 0;
-		var optionPeriods = $('#optionPeriods')[0];
+		var optionPeriods = this.state.optionPeriods;
 
 		for (var key in CLIN_CONTENT) {
-			// if (counter < optionPeriods) {
+			if (counter < parseInt(optionPeriods, 10)) {
 				CLINS.push(
 					<div className="container fake-table col-md-12">
 						<div className="row clin">
-							<div className="col-md-12 table-content">{CLIN_CONTENT[key]}: {PoP}
+							<div className="col-md-12 table-content">{CLIN_CONTENT[key]}: {oPoP}
 							</div>
 						</div>
 						<div className="row clin">
@@ -161,7 +164,7 @@ var Services = React.createClass({
 						<div className="row clin">
 							<div className="col-md-6 table-content">Period of Performance
 							</div>
-							<div className="col-md-6 table-content">{PoP}
+							<div className="col-md-6 table-content">{oPoP}
 							</div>
 						</div>
 						<div className="row clin">
@@ -172,7 +175,8 @@ var Services = React.createClass({
 						</div>
 					</div>
 				)
-			// }
+			counter += 1;
+			}
 		}
 
 		return (
@@ -227,10 +231,21 @@ var Services = React.createClass({
 
 				<div className="sub-heading">Period of Performance</div>
 
-				<p>How long would you like each individual period of performance to be?</p>
-				<div className="sub-text">We suggest 6 months or less, per FAR 39.1.</div>
+				<p>How long would you like the period of performance for the <b>base period</b> to be?</p>
+				<div className="sub-text">We suggest 6 months or less.</div>
 				<form className="form-inline">
-    			<input type="text" className="form-control" placeholder="enter a number" onChange={this.handleChange.bind(this, "periodDurationNumber")} value={this.state.periodDurationNumber}/>
+    			<input type="text" className="form-control" placeholder="enter a number" onChange={this.handleChange.bind(this, "basePeriodDurationNumber")} value={this.state.periodDurationNumber}/>
+
+    			<select className="form-control" onChange={this.handleChange.bind(this, "periodDurationUnit")} value={this.state.periodDurationUnit}>
+    				<option>months</option>
+    				<option>weeks</option>
+    			</select>
+				</form>
+
+				<p>How long would you like period of performance for each <b>option period</b> to be?</p>
+				<div className="sub-text">We suggest 6 months or less.</div>
+				<form className="form-inline">
+    			<input type="text" className="form-control" placeholder="enter a number" onChange={this.handleChange.bind(this, "optionPeriodDurationNumber")} value={this.state.periodDurationNumber}/>
 
     			<select className="form-control" onChange={this.handleChange.bind(this, "periodDurationUnit")} value={this.state.periodDurationUnit}>
     				<option>months</option>
@@ -257,13 +272,48 @@ var Services = React.createClass({
 
 
 				<div className="resulting-text">Resulting Text</div>
-				<p>The Period of Performance for this {this.state.docType} shall be a base period of <b>{PoP}</b>. <b>2</b> additional <b>6 month</b> Option Periods will be included for a total potential period of performance of up to 2 years as described in section 2.
+				<p>The Period of Performance for this {this.state.docType} shall be a base period of <b>{bPoP}</b>. <b>{this.state.optionPeriods}</b> additional <b>{oPoP}</b> Option Periods will be included for a total potential period of performance of up to 2 years as described in section 2.
 				</p>
 
 
 				<div className="sub-heading">Contract Line Item Number (CLIN) Format</div>							
-				<button className="add">Add CLIN</button>
+				<button className="add btn btn-default">Add CLIN</button>
 				<br />
+
+				<div className="container fake-table col-md-12">
+					<div className="row clin">
+						<div className="col-md-12 table-content">Base Period: {bPoP}
+						</div>
+					</div>
+					<div className="row clin">
+						<div className="col-md-12 table-content">CLIN 0001, FFP - Completion - The Contractor shall provide services for the Government in accordance with the Performance Work Statement (PWS)
+						</div>
+					</div>
+					<div className="row clin">
+						<div className="col-md-6 table-content">Iteration PoP
+						</div>
+						<div className="col-md-6 table-content">{iPoP}
+						</div>
+					</div>
+					<div className="row clin">
+						<div className="col-md-6 table-content">Price Per Iteration
+						</div>
+						<div className="col-md-6 table-content">$XXXXXXX (vendor completes)
+						</div>
+					</div>
+					<div className="row clin">
+						<div className="col-md-6 table-content">Period of Performance
+						</div>
+						<div className="col-md-6 table-content">{bPoP}
+						</div>
+					</div>
+					<div className="row clin">
+						<div className="col-md-6 table-content">Firm Fixed Price (Completion):
+						</div>
+						<div className="col-md-6 table-content">$XXXXXXX (vendor completes)
+						</div>
+					</div>
+				</div>
 
 				{CLINS}
 

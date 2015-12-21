@@ -13,7 +13,6 @@ var ContractingOfficer = React.createClass({
     }.bind(this));
   },
 	toggleEdit: function(key, event) {
-		console.log(key);
 		if (this.state.edit === key){
 			this.setState({
       	edit: null,
