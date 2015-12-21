@@ -45,7 +45,7 @@ var Requirement = React.createClass({
 				</ol>
 				<ol>
 					<li><b>@TODO please provide labor category and personnel name</b></li>
-					<li>At a minimum, a Project Manager must be identified and designated as Key Personnel. There may be more than one Project Manager. The Project Manager must be a senior staff member and is responsible for the supervision and management of the Contractor’s personnel, technical assistance, and interface and compliance with instructions from {AGENCY}’s COR. Desired skills/experience for the Project Manager include:</li>
+					<li>At a minimum, a Project Manager must be identified and designated as Key Personnel. There may be more than one Project Manager. The Project Manager must be a senior staff member and is responsible for the supervision and management of the Contractor’s personnel, technical assistance, and interface and compliance with instructions from AGENCY’s COR. Desired skills/experience for the Project Manager include:</li>
 					<li>Experience in technical leadership.</li>
 					<li>Ability to rapidly prioritize competing requirements.</li>
 					<li>Ability to understand and simplify customer requirements.</li>
@@ -77,9 +77,9 @@ var Requirement = React.createClass({
 				<div className="sub-heading">Transition Activities</div>
 
 				<ol>
-					<li>During the transition to the Government and/or a new contractor, the Contractor shall perform all necessary transition activities, including, but not limited to, continued full services to {AGENCY}; participation, at discretion of COR in five or more meetings with the Government or new contractor to effect a smooth transition and provide detailed information on the operation of all deliverables; training of new personnel (contractor or Government) during transition period, in all system operation and maintenance functions; appropriate close-out of outstanding technical and related work. Should be available to answer questions. 
+					<li>During the transition to the Government and/or a new contractor, the Contractor shall perform all necessary transition activities, including, but not limited to, continued full services to AGENCY; participation, at discretion of COR in five or more meetings with the Government or new contractor to effect a smooth transition and provide detailed information on the operation of all deliverables; training of new personnel (contractor or Government) during transition period, in all system operation and maintenance functions; appropriate close-out of outstanding technical and related work. Should be available to answer questions. 
 					</li>
-					<li>Information such as the list of accomplishments, documentation, and customized code developed for {AGENCY} should be available to the Government in the collaborative workspace established from contract initiation. Should the Contractor be terminated prior to the end of the scheduled base period, the Contractor shall work with the Government to ensure they retain access to this information within two weeks from the termination date.
+					<li>Information such as the list of accomplishments, documentation, and customized code developed for AGENCY should be available to the Government in the collaborative workspace established from contract initiation. Should the Contractor be terminated prior to the end of the scheduled base period, the Contractor shall work with the Government to ensure they retain access to this information within two weeks from the termination date.
 					</li>
 				</ol>
 				

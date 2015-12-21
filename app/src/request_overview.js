@@ -43,17 +43,12 @@ var SETASIDES = {
 var RequestOverview = React.createClass({
 	getInitialState: function() {
 		return {
-			docType: localStorage.getItem("docType") || "none",
-			agency: localStorage.getItem("agency") || "none",
-			setaside: localStorage.getItem("setaside") || "none",
-			baseNumber: localStorage.getItem("baseNumber") || "",
-			baseNumberNeeded: localStorage.getItem("baseNumber") || false,			
+			docType: "",
+			agency: "",
+			setaside: "none",
+			baseNumber: "",
+			baseNumberNeeded: false,
 		};
-	},
-	setAgency: function(event) {
-		localStorage.agencyFullname = "U.S. " + AGENCY_NAMES[event.target.value];
-		localStorage.setItem("agency", event.target.value);
-		this.setState({agency: event.target.value});
 	},
 	handleCreateRFQ: function() {
 		createRFQ({
@@ -80,20 +75,21 @@ var RequestOverview = React.createClass({
 					docType: event.target.value,
 					baseNumberNeeded: base,
 				});
-				localStorage.setItem("docType", value);
-				localStorage.setItem("baseNumberNeeded", value);
 				break;
 			case "setaside":
 				this.setState({
 					setaside: event.target.value,					
 				});
-				localStorage.setItem("setaside", value);
 				break;
 			case "baseNumber":
 				this.setState({
 					baseNumber: event.target.value,					
 				});
-				localStorage.setItem("baseNumber", value);
+				break;
+			case "agency":
+				this.setState({
+					agency: event.target.value,
+				});
 				break;
 		}    
   },	
@@ -145,7 +141,7 @@ var RequestOverview = React.createClass({
 					and then let you download the generated documents.</p>
 					
 					<h5>Firstly, what agency is this for?</h5>
-					<select className="form-control medium-response" onChange={this.setAgency} value={this.state.agency}>
+					<select className="form-control medium-response" onChange={this.handleChange.bind(this, "agency")} value={this.state.agency}>
 						{agencyNameOptions}
 					</select>
 

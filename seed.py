@@ -103,6 +103,16 @@ content_components = [
         "section": 3,
     },
     {
+        "name": "inspection_overview",
+        "text": "The contractor shall ensure proper control and coordination of all deliverables to ensure they are on time. Unless otherwise stated, the Government will review deliverables and notify the contractor of acceptance or non-acceptance within 5 business days. Representatives of the contractor shall meet with the COR and other members of the Government as necessary to review status of deliverables.",
+        "section": 6,
+    },
+    {
+        "name": "late_delivery",
+        "text": "The Contractor shall notify the COR, or other authorized representative designated in each {DOC_TYPE}, as soon as it becomes apparent to the Contractor that a scheduled delivery will be late. The Contractor shall include in the notification the rationale for late delivery, the expected date for the delivery, and the project impact of the late delivery. Such notification in no way limits any Government contractual rights or remedies, including, but not limited to, termination.",
+        "section": 6,
+    },
+    {
         "name": "travel_budget",
         "text": "0",
         "section": 7,
