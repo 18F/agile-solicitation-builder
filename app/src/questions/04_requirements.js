@@ -1,6 +1,9 @@
 var React = require('react');
+var StateMixin = require("../state_mixin");
+
 
 var Requirement = React.createClass({
+	mixins: [StateMixin],
 	save: function(cb) {
 		// TODO: save data
 		setTimeout(cb, 500);

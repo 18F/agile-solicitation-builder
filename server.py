@@ -89,7 +89,7 @@ class Create(Resource):
         session.add(rfq)
         session.commit()
 
-        return jsonify({'id': '1'})
+        return jsonify({'id': rfq.id})
        
 
 class Results(Resource):

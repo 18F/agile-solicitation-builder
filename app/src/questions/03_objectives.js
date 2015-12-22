@@ -51,7 +51,8 @@ var Objective = React.createClass({
 		});
 	},
 	componentDidMount: function() {
-    get_data(3, 1, function(content){
+		var rfqId = get_id(window.location.hash);
+    get_data(3, rfqId, function(content){
     	var data = content["data"];
       this.setState({
       	generalBackground: data["general_background"],

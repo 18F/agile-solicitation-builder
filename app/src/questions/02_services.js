@@ -36,9 +36,9 @@ var Services = React.createClass({
 		};
 	},
 	componentDidMount: function() {
-    get_data(2, 1, function(content){
+		var rfqId = get_id(window.location.hash);
+    get_data(2, rfqId, function(content){
     	var data = content["data"];
-    	window.d = data;
       this.setState({
       	summary: data["summary"],
       	descriptionOfServices: data["description_of_services"],
@@ -56,72 +56,7 @@ var Services = React.createClass({
       });
     }.bind(this));
   },
-	toggleEdit: function(key, event) {
-		if (this.state.edit === key){
-			this.setState({
-      	edit: null,
-	    });
-		}
-		else {
-			this.setState({
-	      edit: key,
-	    });
-		}
-	},
-	addFee: function(key, event) {
-		// awardFee, incentiveFee, noFee
-		switch(key) {
-			case "awardFee":
-				this.setState({
-					"fee": "Award Fee",
-				});
-				break;
-			case "incentiveFee":
-				this.setState({
-					"fee": "Incentive Fee",
-				});
-				break;
-			case "noFee":
-				this.setState({
-					"fee": "none",
-				});
-				break;
-		}
-	},
-	// handleChange: function(key, event) {
-	// 	switch(key) {
-	// 		case "paymentText":
-	// 			this.setState({
-	// 				paymentText: event.target.value,
-	// 			});
-	// 			break;
-	// 		case "optionPeriods":
-	// 			this.setState({
-	// 				optionPeriods: event.target.value,
-	// 			});
-	// 			break;
-	// 		case "periodDurationNumber":
-	// 			this.setState({
-	// 				periodDurationNumber: event.target.value,
-	// 			});
-	// 			break;
-	// 		case "periodDurationUnit":
-	// 			this.setState({
-	// 				periodDurationUnit: event.target.value,
-	// 			});
-	// 			break;
-	// 		case "iterationPoPNumber":
-	// 			this.setState({
-	// 				"iterationPoPNumber": event.target.value,
-	// 			});
-	// 			break;
-	// 		case "iterationPoPUnit":
-	// 			this.setState({
-	// 				"iterationPoPUnit": event.target.value,
-	// 			});
-	// 			break;
-	// 	}    
- //  },
+
 	save: function(cb) {
 		// TODO: save data
 		setTimeout(cb, 500);
@@ -185,11 +120,11 @@ var Services = React.createClass({
 			<div>
 				<div className="main-heading">Services and Prices</div>
 
-				<p>This is a Firm Fixed Price {this.state.docType} for {this.state.agency}.</p>
+				<p>{this.state.summary}.</p>
 
 				<div className="sub-heading">Brief Description of Services</div>
 				<div className="sub-text">Ex: Services required under this {localStorage.getItem("docType")} are to assist the Dept. of Education with the design and implementation of systems to support the ED Program for X.</div>
-								<textarea className="form-control" rows="4" placeholder="1-2 sentences"></textarea>				
+				<textarea className="form-control" rows="4" placeholder="1-2 sentences"></textarea>				
 
 				<div className="sub-heading">Type of Contract</div>
 				<p>What type of contract will this be?</p>

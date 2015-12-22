@@ -1,3 +1,8 @@
+function get_id(url){
+	var number = url.split("#/rfp/")[1].split("/question")[0];
+	return parseInt(number);
+}
+
 function get_data(section, doc_id, callback){
 	$.ajax({
 		type: "GET",

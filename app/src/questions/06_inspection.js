@@ -1,6 +1,9 @@
 var React = require('react');
+var StateMixin = require("../state_mixin");
+
 
 var Inspection = React.createClass({
+	mixins: [StateMixin],
 	getInitialState: function() {
 		return {
 			inspectionOverview: "",
@@ -8,7 +11,8 @@ var Inspection = React.createClass({
 		};
 	},
 	componentDidMount: function() {
-    get_data(6, 1, function(content){
+		var rfqId = get_id(window.location.hash);
+    get_data(6, rfqId, function(content){
     	var data = content["data"];
       this.setState({
       	inspectionOverview: data["inspection_overview"],
@@ -16,32 +20,6 @@ var Inspection = React.createClass({
       });
     }.bind(this));
   },
-  toggleEdit: function(key, event) {
-		if (this.state.edit === key){
-			this.setState({
-      	edit: null,
-	    });
-		}
-		else {
-			this.setState({
-	      edit: key,
-	    });
-		}
-	},
-	handleChange: function(key, event) {
-		switch(key) {
-			case "inspectionOverview":
-				this.setState({
-					inspectionOverview : event.target.value,
-				});
-				break;
-			case "lateDelivery":
-				this.setState({
-					lateDelivery : event.target.value,
-				});
-				break;
-		}
-	},
 	render: function() {
 		return (
 			<div>

@@ -1,6 +1,8 @@
 var React = require('react');
+var StateMixin = require("../state_mixin");
 
 var ContractingOfficer = React.createClass({
+	mixins: [StateMixin],
 	save: function() {
 		// collect final state values
 		var data = {};
@@ -12,38 +14,6 @@ var ContractingOfficer = React.createClass({
       window.location.replace(content['url']);
     }.bind(this));
   },
-	toggleEdit: function(key, event) {
-		if (this.state.edit === key){
-			this.setState({
-      	edit: null,
-	    });
-		}
-		else {
-			this.setState({
-	      edit: key,
-	    });
-		}
-	},
-	handleChange: function(key, event) {
-		console.log(key);
-		switch(key) {
-			case "co":
-				this.setState({
-      		coText: event.target.value,
-		    });
-		    break;
-		  case "cor":
-				this.setState({
-      		corText: event.target.value,
-		    });
-		    break;
-			case "po":
-				this.setState({
-      		productOwnerText: event.target.value,
-		    });
-		    break;
-		}
-	},
 	getInitialState: function() {
 		return {
 			edit: null,
@@ -53,7 +23,8 @@ var ContractingOfficer = React.createClass({
 		};
 	},
   componentDidMount: function() {
-    get_data(8, 1, function(content){
+  	var rfqId = get_id(window.location.hash);
+    get_data(8, rfqId, function(content){
       this.setState({
         coText: content["data"]["contracting_officer"],
         corText: content["data"]["contracting_officer_representative"],

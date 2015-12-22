@@ -1,11 +1,9 @@
 var React = require('react');
+var StateMixin = require("../state_mixin");
 
 var Deliveries = React.createClass({
+	mixins: [StateMixin],
 	save: function(cb) {
-		localStorage.setItem("locationText", this.state.locationText);
-		localStorage.setItem("locationRequirement", this.state.locationRequirement);
-		localStorage.setItem("travelRequirement", this.state.travelRequirement);
-		localStorage.setItem("travelBudget", this.state.travelBudget);
 		setTimeout(cb, 500);
 	},
 	toggleTravel: function(responseText) {
@@ -18,15 +16,6 @@ var Deliveries = React.createClass({
 			this.setState({
   	    travelRequirement: false,
    	 });
-		}
-	},
-	handleChange: function(key, event) {
-		switch(key) {
-			case "travelBudget":
-				this.setState({
-      		travelBudget: event.target.value,
-		    });
-		    break;
 		}
 	},
   getInitialState: function() {

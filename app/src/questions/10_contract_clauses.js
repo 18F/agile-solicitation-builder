@@ -1,26 +1,22 @@
 var React = require('react');
+var StateMixin = require("../state_mixin");
 
 var ContractClauses = React.createClass({
+	mixins: [StateMixin],
 	getInitialState: function() {
-		return {};
+		return {
+			contractClauses: "",
+		};
 	},
-	handleChange: function(event) {
-    this.setState({
-        text: event.target.value,
-    });
-  },
   save: function(cb) {      
-    put_data("definitions", this.state.text);
-  },
-  getInitialState: function(){
-    return {
-      text: "",
-    };
+  	setTimeout(cb, 500);
   },
   componentDidMount: function() {
-	  get_data("contract_clauses", function(content){ 
+  	var rfqId = get_id(window.location.hash);
+	  get_data(10, rfqId, function(content){ 
+	  	var data = content["data"];
 	    this.setState({
-	      text: content,
+	      contractClauses: data["contract_clauses"],
 	    });
 	  }.bind(this));
 	},
@@ -30,7 +26,7 @@ var ContractClauses = React.createClass({
 				<div className="main-heading">Contract Clauses</div>
 	
 				<div className="sub-heading">Please feel free to add anything else specific to your contract.</div>
-				<textarea className="form-control" rows="20" value={this.state.text} onChange={this.handleChange}></textarea>
+				<textarea className="form-control" rows="20" value={this.state.contractClauses} onChange={this.handleChange.bind(this, 'contractClauses')}></textarea>
 			</div>
 		);
 	},
@@ -39,4 +35,4 @@ var ContractClauses = React.createClass({
 
 module.exports = ContractClauses;
 
-// data clauses, other agile specific clauses, NDA? 
+// data clauses, other agile specific clauses, NDA?

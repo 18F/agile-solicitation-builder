@@ -1,21 +1,11 @@
 var React = require('react');
+var StateMixin = require("../state_mixin");
+
 
 var PostAward = React.createClass({
+	mixins: [StateMixin],
 	getInitialState: function() {
 		return {};
-	},
-	toggleEdit: function(key, event) {
-		console.log(key);
-		if (this.state.edit === key){
-			this.setState({
-      	edit: null,
-	    });
-		}
-		else {
-			this.setState({
-	      edit: key,
-	    });
-		}
 	},
 	render: function() {
 		return (

@@ -59,6 +59,8 @@ var RequestOverview = React.createClass({
 		}, function(data) {
 			// TODO add error handler
 			var rfqId = data.id;
+			console.log("RFQID!!!");
+			console.log(rfqId);
 			var url = '#/rfp/' + rfqId + '/question/1';
 			window.location.replace(url);
 		});
