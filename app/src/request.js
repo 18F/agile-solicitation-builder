@@ -20,6 +20,16 @@ var Sidebar = React.createClass({
 		currentPage: React.PropTypes.string.isRequired,
 		width: React.PropTypes.number.isRequired,
 	},
+
+	componentDidMount: function() {
+		// Make menu affixed
+		$("#sidenav").affix({
+		  offset: {
+		    top: 93,
+		  }
+		});
+	},
+
 	render: function() {
 		var baseURL = "/rfp/" + this.props.rfpId;
 
@@ -50,7 +60,7 @@ var Sidebar = React.createClass({
 		};
 
 		return (
-			<Nav stacked style={style} bsStyle="pills">
+			<Nav id="sidenav" stacked style={style} bsStyle="pills">
 				{links}
 			</Nav>
 		);

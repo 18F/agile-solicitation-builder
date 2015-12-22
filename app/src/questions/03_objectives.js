@@ -1,4 +1,5 @@
 var React = require('react');
+var StateMixin = require("../state_mixin");
 
 // <div className="sub-heading">Backlog Section</div>
 // <br />
@@ -34,25 +35,15 @@ var USER_RESEARCH = {
 }
 
 var Objective = React.createClass({
+	mixins: [StateMixin],
 	getInitialState: function() {
 		return {
 			docType: localStorage.getItem("docType"),
 			agency: localStorage.getItem("agency"),
 			maxBudget: 0,
 			userResearchStrategy: "none",
+			offSiteDevelopmentCompliance: "",
 		};
-	},
-	toggleLocation: function(responseText) {
-		if (responseText === "yes") {
-			this.setState({
-  	    locationRequirement: true,
-   	 });
-		}
-		if (responseText === "no") {
-			this.setState({
-  	    locationRequirement: false,
-   	 });
-		}
 	},
 	updateLocation: function(event) {
 		this.setState({
@@ -66,6 +57,7 @@ var Objective = React.createClass({
       	generalBackground: data["general_background"],
       	locationRequirement: data["location_requirement"],
       	locationText: data["location_text"],
+      	offSiteDevelopmentCompliance: data["off_site_development_compliance"],
       	maxBudget: data["max_budget"],
 				programHistory: data["program_history"],
       	userResearchStrategy: data["user_research_strategy"],
@@ -73,30 +65,6 @@ var Objective = React.createClass({
       });
     }.bind(this));
   },
-	handleChange: function(key, event) {
-		switch(key) {
-			case "maxBudget":
-				this.setState({
-					maxBudget : event.target.value,
-				});
-				break;
-			case "userResearchStrategy":
-				this.setState({
-					userResearchStrategy : event.target.value,
-				});
-				break;
-			case "locationRequirement":
-				this.setState({
-					locationRequirement: event.target.value,
-				});
-				break;
-			case "locationText":
-		  	this.setState({
-					locationText: event.target.value,
-				});
-				break;
-		}
-	},
 	save: function(cb) {
 		// put_data("maxBudget", this.state.text);
 		setTimeout(cb, 500);
@@ -256,14 +224,14 @@ var Objective = React.createClass({
 			<p>In delivery of this effort the contractor shall:</p>
 			<ol>
 				<li>Monitor system-level resource utilization in real time <b>(Suggest tools)</b></li>
-				<li>Monitor system performance in real-time (e.g. response time, latency, throughput, and error rates)</li>				
+				<li>Monitor system performance in real-time (e.g. response time, latency, throughput, and error rates)</li>
 				<li>Ensure monitoring can measure median, 95th percentile, and 98th percentile performance</li>
 				<li>Create automated alerts based on this monitoring</li>
 				<li>Track concurrent users in real-time, and monitor user behaviors in the aggregate to determine how well the service meets user needs</li>
 				<li>Provide metrics which may be published internally</li>
-				<li>Provide Metrics which may be published externally</li>
+				<li>Provide metrics which may be published externally</li>
 				<li>Use an experimentation tool that supports multivariate testing in production</li>
-				<li><b>Provide goverment employees access to these monitoring systems</b></li>
+				<li>Provide goverment employees access to these monitoring systems</li>
 			</ol>
 
 				<div className="sub-heading">Deliverables</div>
@@ -282,7 +250,7 @@ var Objective = React.createClass({
 					<li>Details on the management of the Offeror’s team that will be on-site.
 					</li>
 				</ul>
-				<p>The ADMP and the listing of Key Personnel shall become part of the {this.state.docType} upon award.</p>
+				<p>The ADMP and the listing of Key Personnel shall become part of the DOC_TYPE upon award.</p>
 
 				<div className="sub-heading">Place of Performance</div>
 				<p>Will you require the contractor to have a full-time working staff presence onsite at a specific location?</p>
@@ -303,9 +271,9 @@ var Objective = React.createClass({
 
 
 				<div className="resulting-text">Resulting Text</div>
-				{this.state.locationRequirement ? <p>The contractor shall have a full-time working staff presence at {this.state.locationText}. Contractor shall have additional facilities to perform contract functions as necessary.</p> : null}
+				{(this.state.locationRequirement === "yes")? <p>The contractor shall have a full-time working staff presence at {this.state.locationText}. Contractor shall have additional facilities to perform contract functions as necessary.</p> : <p>The contractor is not required to have a full-time working staff presence on-site.</p>}
 				
-				<p>Any off-site development and test environments need to be compliant with {this.state.agency} and federal security guidelines as detailed in the Appendix.</p>
+				<p>{this.state.offSiteDevelopmentCompliance}</p>
 				
 				<div className="sub-heading">Kick-Off Meeting/Post-Award Conference</div>
 				
@@ -323,11 +291,12 @@ var Objective = React.createClass({
 				code - version control, define what is, examples. (encourage certain options, but vendor will specify)
 				for documents is separate
 				<p>Github: version control</p>
+				<p>Ideally, a well designed interface will not require additional training for users.</p>
 				<p>The Contractor shall:</p>
 				<ul>
-					<li>Provide all system documentation and training to {this.state.agency} staff (in-person, video, and via webinar).</li>
+					<li>Provide all system documentation and training to AGENCY staff (in-person, video, and via webinar).</li>
 					<li>Develop and provide effective training materials of all deliverables, including, but not limited to, “train the trainer” documentation.</li>
-					<li>Conduct “train the trainer” sessions for {this.state.agency} staff.</li>
+					<li>Conduct “train the trainer” sessions for AGENCY staff.</li>
 					<li>Consult with the COR to determine what is appropriate, effective, and essential for training.</li>
 				</ul>
 

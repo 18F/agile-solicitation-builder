@@ -103,3 +103,7 @@ p {
 textarea {
 	margin: 10px 0px;
 }
+
+#sidenav.affix {
+	top: 0px;
+}

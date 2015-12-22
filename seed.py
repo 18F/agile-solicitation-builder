@@ -118,6 +118,11 @@ content_components = [
         "section": 3,
     },
     {
+        "name": "off_site_development_compliance",
+        "text": "Any off-site development and test environments need to be compliant with {AGENCY} and federal security guidelines as detailed in the Appendix.",
+        "section": 3,
+    },
+    {
         "name": "inspection_overview",
         "text": "The contractor shall ensure proper control and coordination of all deliverables to ensure they are on time. Unless otherwise stated, the Government will review deliverables and notify the contractor of acceptance or non-acceptance within 5 business days. Representatives of the contractor shall meet with the COR and other members of the Government as necessary to review status of deliverables.",
         "section": 6,

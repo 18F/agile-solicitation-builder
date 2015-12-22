@@ -1,4 +1,5 @@
 var React = require('react');
+var StateMixin = require("../state_mixin");
 
 // <p>If you believe you need additional CLINs, 6 total, 2 per year, 3 years</p>
 // <p>@TODO CLIN number is editable ("0001"), as many boxes as there are periods of performance. Option to add a completely empty box if they want. </p>
@@ -16,7 +17,8 @@ var CLIN_CONTENT = {
 	"CLIN 8001": "Option Period 8",
 };
 
-var Services = React.createClass({	
+var Services = React.createClass({
+	mixins: [StateMixin],
 	getInitialState: function() {
 		return {
 			edit: null,
@@ -86,40 +88,40 @@ var Services = React.createClass({
 				break;
 		}
 	},
-	handleChange: function(key, event) {
-		switch(key) {
-			case "paymentText":
-				this.setState({
-					paymentText: event.target.value,
-				});
-				break;
-			case "optionPeriods":
-				this.setState({
-					optionPeriods: event.target.value,
-				});
-				break;
-			case "periodDurationNumber":
-				this.setState({
-					periodDurationNumber: event.target.value,
-				});
-				break;
-			case "periodDurationUnit":
-				this.setState({
-					periodDurationUnit: event.target.value,
-				});
-				break;
-			case "iterationPoPNumber":
-				this.setState({
-					"iterationPoPNumber": event.target.value,
-				});
-				break;
-			case "iterationPoPUnit":
-				this.setState({
-					"iterationPoPUnit": event.target.value,
-				});
-				break;
-		}    
-  },
+	// handleChange: function(key, event) {
+	// 	switch(key) {
+	// 		case "paymentText":
+	// 			this.setState({
+	// 				paymentText: event.target.value,
+	// 			});
+	// 			break;
+	// 		case "optionPeriods":
+	// 			this.setState({
+	// 				optionPeriods: event.target.value,
+	// 			});
+	// 			break;
+	// 		case "periodDurationNumber":
+	// 			this.setState({
+	// 				periodDurationNumber: event.target.value,
+	// 			});
+	// 			break;
+	// 		case "periodDurationUnit":
+	// 			this.setState({
+	// 				periodDurationUnit: event.target.value,
+	// 			});
+	// 			break;
+	// 		case "iterationPoPNumber":
+	// 			this.setState({
+	// 				"iterationPoPNumber": event.target.value,
+	// 			});
+	// 			break;
+	// 		case "iterationPoPUnit":
+	// 			this.setState({
+	// 				"iterationPoPUnit": event.target.value,
+	// 			});
+	// 			break;
+	// 	}    
+ //  },
 	save: function(cb) {
 		// TODO: save data
 		setTimeout(cb, 500);
@@ -234,9 +236,9 @@ var Services = React.createClass({
 				<p>How long would you like the period of performance for the <b>base period</b> to be?</p>
 				<div className="sub-text">We suggest 6 months or less.</div>
 				<form className="form-inline">
-    			<input type="text" className="form-control" placeholder="enter a number" onChange={this.handleChange.bind(this, "basePeriodDurationNumber")} value={this.state.periodDurationNumber}/>
+    			<input type="text" className="form-control" placeholder="enter a number" onChange={this.handleChange.bind(this, "basePeriodDurationNumber")} value={this.state.basePeriodDurationNumber}/>
 
-    			<select className="form-control" onChange={this.handleChange.bind(this, "periodDurationUnit")} value={this.state.periodDurationUnit}>
+    			<select className="form-control" onChange={this.handleChange.bind(this, "basePeriodDurationUnit")} value={this.state.basePeriodDurationUnit}>
     				<option>months</option>
     				<option>weeks</option>
     			</select>
@@ -245,9 +247,9 @@ var Services = React.createClass({
 				<p>How long would you like period of performance for each <b>option period</b> to be?</p>
 				<div className="sub-text">We suggest 6 months or less.</div>
 				<form className="form-inline">
-    			<input type="text" className="form-control" placeholder="enter a number" onChange={this.handleChange.bind(this, "optionPeriodDurationNumber")} value={this.state.periodDurationNumber}/>
+    			<input type="text" className="form-control" placeholder="enter a number" onChange={this.handleChange.bind(this, "optionPeriodDurationNumber")} value={this.state.optionPeriodDurationNumber}/>
 
-    			<select className="form-control" onChange={this.handleChange.bind(this, "periodDurationUnit")} value={this.state.periodDurationUnit}>
+    			<select className="form-control" onChange={this.handleChange.bind(this, "optionPeriodDurationUnit")} value={this.state.optionPeriodDurationUnit}>
     				<option>months</option>
     				<option>weeks</option>
     			</select>
