@@ -14,6 +14,13 @@ var Requirement = React.createClass({
 			agency: localStorage.getItem("agency"),
 		};
 	},
+	componentDidMount: function() {
+		var rfqId = get_id(window.location.hash);
+    get_data(4, rfqId, function(content){
+    	var data = content["data"];
+      this.setState({});
+    }.bind(this));
+  },
 	render: function() {
 		return (
 			<div>

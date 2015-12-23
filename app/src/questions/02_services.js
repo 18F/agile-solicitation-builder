@@ -17,6 +17,11 @@ var CLIN_CONTENT = {
 	"CLIN 8001": "Option Period 8",
 };
 
+var FAR_CODES = {
+	"FAR 8.4": "Federal Supply Schedules",
+	"FAR 16.504": "Indefinite Quantity",
+}
+
 var Services = React.createClass({
 	mixins: [StateMixin],
 	getInitialState: function() {
@@ -69,6 +74,16 @@ var Services = React.createClass({
 		var iPoP = <span>{this.state.iterationPoPNumber} {this.state.iterationPoPUnit}</span>
 		var firmFixedPriceCompletion = "";
 
+		var FARS = [];
+		for (var key in FAR_CODES) {
+			FARS.push(
+				<div className="radio">
+					<label>
+						<input type="radio" value={key} checked={key == this.state.farCode} />{key} - { FAR_CODES[key] }
+				  </label>
+				</div>
+			)
+		}
 
 		var CLINS = [];
 		var counter = 0;
@@ -120,7 +135,7 @@ var Services = React.createClass({
 			<div>
 				<div className="main-heading">Services and Prices</div>
 
-				<p>{this.state.summary}.</p>
+				<p>{this.state.summary}</p>
 
 				<div className="sub-heading">Brief Description of Services</div>
 				<div className="sub-text">Ex: Services required under this {localStorage.getItem("docType")} are to assist the Dept. of Education with the design and implementation of systems to support the ED Program for X.</div>
@@ -146,24 +161,14 @@ var Services = React.createClass({
 				<div className="sub-text">We have provided a NAICS code that commonly applies to the acquisition of software development services. If you believe your requirement is not covered under this NAICS code you may search under <a href="http://www.census.gov/eos/www/naics/" target="_blank">this link</a> to select a different one; please edit the text below accordingly.</div>
 
 				<h5>Under which section of the FAR do you intend to compete this?</h5>
-				<div className="radio">
-				  <label>
-				    <input type="radio" value={this.state.awardFee} onChange={this.addFee.bind(this, "awardFee")}></input>
-				    FAR 8.4 - Federal Supply Schedules
-				  </label>
-				</div>
-				<div className="radio">
-				  <label>
-				    <input type="radio" value={this.state.awardFee} onChange={this.addFee.bind(this, "incentiveFee")}></input>
-				    FAR 16.504 - Indefinite Quantity
-				  </label>
-				</div>
-
+				<radiogroup onChange={this.handleChange.bind(this, 'farCode')}>
+					{FARS}
+				</radiogroup>
 
 				<div className="edit" onClick={this.toggleEdit.bind(this, 'codes')}>Edit</div>
 				{this.state.edit === "codes"? <textarea className="form-control" rows="4" defaultValue={this.state.naicsText}></textarea> :
 				<div>
-				<p id="naics-far-text1">This requirement will be solicited under the following North American Industrial Classification System (NAICS) Code: 541512, Computer Systems Design Services, $27.5 million. This Task Order will be awarded under [FAR 8.4 , FAR 16.504] which governs orders placed under [Indefinite Delivery] contracts.</p></div>
+				<p id="naics-far-text1">This requirement will be solicited under the following North American Industrial Classification System (NAICS) Code: 541512, Computer Systems Design Services, $27.5 million. This Task Order will be awarded under {this.state.farCode} which governs orders placed under {FAR_CODES[this.state.farCode]} contracts.</p></div>
 				}
 
 				<div className="sub-heading">Period of Performance</div>

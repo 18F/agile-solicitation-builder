@@ -7,6 +7,13 @@ var SpecialRequirements = React.createClass({
 	getInitialState: function() {
 		return {};
 	},
+	componentDidMount: function() {
+		var rfqId = get_id(window.location.hash);
+    get_data(9, rfqId, function(content){
+    	var data = content["data"];
+      this.setState({});
+    }.bind(this));
+  },
 	render: function() {
 		return (
 			<div>

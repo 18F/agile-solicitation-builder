@@ -10,7 +10,6 @@ var IndexLink = require('react-router').IndexLink;
 
 var Welcome = React.createClass({
 	getInitialState: function() {
-		// localStorage.clear();		
 		return {
 			rfqs: "",
 		};
@@ -22,12 +21,12 @@ var Welcome = React.createClass({
       });
     }.bind(this));
    },
-  handleResumeRFQ: function(doctype, agency, url) {
-  	// alert(doctype, agency);
-   	localStorage.setItem("doctype", doctype);
-   	localStorage.setItem("agency", agency);
-   	// window.location.replace(url);
-   },
+  // handleResumeRFQ: function(doctype, agency, url) {
+  // 	// alert(doctype, agency);
+  //  	localStorage.setItem("doctype", doctype);
+  //  	localStorage.setItem("agency", agency);
+  //  	// window.location.replace(url);
+  //  },
 	render: function() {
 		var rfqs = [];
 		for (rfq in this.state.rfqs) {
@@ -43,6 +42,7 @@ var Welcome = React.createClass({
 				</li>
 			);
 		}
+		window.rfqs = rfqs;
 		return (
 			<div className="col-md-8">
 				<div>Welcome to Playbook in Action! Before you begin, please consider the following:</div>
@@ -61,10 +61,11 @@ var Welcome = React.createClass({
 						<li>All documents should be approved by a warranted contracting officer and in consultation with your legal council as required.</li>
 					</ul>
 				</div>
-				<div className="sub-heading">Resume RFQ</div>
+				{(rfqs.length > 0)? <div><div className="sub-heading">Resume RFQ</div>
 					<ul>
 						{rfqs}
-					</ul>
+					</ul></div> : null}
+			
 				<br />
 				<IndexLink to="/rfp">
 					<Button bsStyle="primary">

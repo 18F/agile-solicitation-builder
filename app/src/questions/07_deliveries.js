@@ -20,15 +20,17 @@ var Deliveries = React.createClass({
 	},
   getInitialState: function() {
     return {
-    	performancePeriod: null,
-    	periodDuration: null,
-      agency: localStorage.getItem("agency"),
-      docType: localStorage.getItem("docType"),
-      travelBudget: localStorage.getItem("travelBudget"),
+      travelBudget: "",
       travelRequirement: false,
     };
   },
-
+	componentDidMount: function() {
+		var rfqId = get_id(window.location.hash);
+    get_data(7, rfqId, function(content){
+    	var data = content["data"];
+      this.setState({});
+    }.bind(this));
+  },
 	render: function() {
 		return (
 			<div>

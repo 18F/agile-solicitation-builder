@@ -156,7 +156,7 @@ var RequestOverview = React.createClass({
 
 					{this.state.baseNumberNeeded?
 						<h5>Vehicle Name:  
-							<input type="text" className="shot-response" value={this.state.baseNumber} onChange={this.handleChange.bind(this, "baseNumber")} />
+							<input type="text" className="short-response" value={this.state.baseNumber} onChange={this.handleChange.bind(this, "baseNumber")} />
 						</h5>	
 					 : null}
 

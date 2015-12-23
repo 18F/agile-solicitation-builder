@@ -3,6 +3,11 @@
 
 content_components = [
     {
+        "name": "program_name",
+        "text": "",
+        "section": 0,
+    },
+    {
         "name": "setasides",
         "text": "none",
         "section": 0,
