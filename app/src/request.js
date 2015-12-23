@@ -49,7 +49,7 @@ var Sidebar = React.createClass({
 		var links = subpages.map(function(subpage, i) {
 			var active = (subpage.link == this.props.currentPage);
 			return (
-				<li className={active ? "active" : ""} ref={"link-"+i}>
+				<li className={active ? "active" : ""} key={i} ref={"link-"+i}>
 					<IndexLink to={subpage.link}>{subpage.title}</IndexLink>
 				</li>
 			);

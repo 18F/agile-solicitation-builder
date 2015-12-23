@@ -54,6 +54,7 @@ class Data(Resource):
 
     def put(self, rfq_id, section_id):
         data = request.get_json()['data']
+        print data
         for key in data:
             session = Session()
             component = session.query(ContentComponent).filter_by(document_id=rfq_id).filter_by(name=key).first()

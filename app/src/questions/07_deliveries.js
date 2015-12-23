@@ -28,7 +28,10 @@ var Deliveries = React.createClass({
 		var rfqId = get_id(window.location.hash);
     get_data(7, rfqId, function(content){
     	var data = content["data"];
-      this.setState({});
+      this.setState({
+      	travelRequirement: data["travel_requirement"],
+      	travelBudget: data["travel_budget"],
+      });
     }.bind(this));
   },
 	render: function() {
@@ -100,7 +103,5 @@ var Deliveries = React.createClass({
 		);
 	},
 });
-
-// All information and deliverables shall be delivered electronically to the COR, unless otherwise instructed, and shall be marked as follows: 1)	Name and Address of Contractor;	2)	{this.state.docType} Number;	3)	Description of item contained therein; and	4)	Consignee’s name and address.
 
 module.exports = Deliveries;

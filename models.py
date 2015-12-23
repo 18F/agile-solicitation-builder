@@ -54,13 +54,17 @@ class RFQ(Base):
             base_number_value = base_number
 
         # seed each section of the new document with the template content
+
         self.agency = agency
         self.doc_type = doc_type
         self.setaside = setaside
         self.base_number = base_number_value
 
+        session = Session()
+        agency_full_name = session.query(Agency).filter_by(abbreviation=agency).first().full_name
+
         for section in content_components:
-            section['text'] = section['text'].replace("{AGENCY}", agency).replace("{DOC_TYPE}", doc_type)
+            section['text'] = section['text'].replace("{AGENCY}", agency).replace("{DOC_TYPE}", doc_type).replace("{AGENCY_FULL_NAME}", agency_full_name)
             self.content_components.append(ContentComponent(**section))
 
         # self.content_components = [ContentComponent(**section) for section in content_components]

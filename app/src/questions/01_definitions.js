@@ -1,12 +1,15 @@
 var React = require('react');
 var StateMixin = require("../state_mixin");
 
+var rfqId = get_id(window.location.hash);
+
 var Definition = React.createClass({
     mixins: [StateMixin],
-    // Every question must implement a save() method
     save: function(cb) {
-        setTimeout(cb, 500);
-      // put_data("definitions", this.state.definitions);
+      data = {"definitions": this.state.definitions};
+      put_data(1, rfqId, data, function(response){
+        window.location.replace(response['url']);
+      }.bind(this));
     },
     // React functions
     getInitialState: function(){
@@ -15,7 +18,6 @@ var Definition = React.createClass({
       };
     },
     componentDidMount: function() {
-      var rfqId = get_id(window.location.hash);
       get_data(1, rfqId, function(data){
         this.setState({
           definitions: data["data"]["definitions"],

@@ -128,6 +128,11 @@ content_components = [
         "section": 3,
     },
     {
+        "name": "invoicing",
+        "text": "The Contractor shall bill for the ongoing operations as per the payment schedule documented in PWS and the corresponding cost proposal as associated with specific deliverables.\n\nThe {AGENCY_FULL_NAME} will reject all nonconforming invoices.\n\nThe Contracting Officer, working with the COR, is responsible for determining minimum requirements for the information to be provided on the invoice. For information on what constitutes a valid invoice, refer to FAR 32.905. The minimum information includes:\n\nDate of Invoice\n\nContract #\n\nRequisition #\n\nBilling Company name/address - as stated in the award (if this changes in www.SAM.gov at any time during the period of performance, notify the Contracting Officer to process a modification). \n\nMust include a 'Remit to' address (which is complete) as stated in the award. If this changes in www.SAM.gov at any time during the period of performance, notify the Contracting Officer to process a modification.\n\nPeriod of performance/services\n\nAmount Billed for specified work accomplished\n\nTotal Contract value\n\nCumulative Billed\n\nContract Line item number (CLIN) being billed, for each milestone achieved and list of deliverables as identified in the PWS\n\nNarrative of performance sufficient to justify the invoice\n\nExplanation of incentives/disincentives\n\nPoint of Contact for invoicing issues and phone number\n\nInvoices shall be mailed to the email address indicated in block 18a on the SF 1449 of the award documents. \n\nThe invoice will contain a statement signed by a responsible official of the Contractor substantially similar if not identical to the following:\n'I certify that the items above have been delivered in accordance with the {DOC_TYPE}, and that all charges are true, correct, and have not been previously billed.",
+        "section": 5,
+    },
+    {
         "name": "inspection_overview",
         "text": "The contractor shall ensure proper control and coordination of all deliverables to ensure they are on time. Unless otherwise stated, the Government will review deliverables and notify the contractor of acceptance or non-acceptance within 5 business days. Representatives of the contractor shall meet with the COR and other members of the Government as necessary to review status of deliverables.",
         "section": 6,
@@ -136,6 +141,11 @@ content_components = [
         "name": "late_delivery",
         "text": "The Contractor shall notify the COR, or other authorized representative designated in each {DOC_TYPE}, as soon as it becomes apparent to the Contractor that a scheduled delivery will be late. The Contractor shall include in the notification the rationale for late delivery, the expected date for the delivery, and the project impact of the late delivery. Such notification in no way limits any Government contractual rights or remedies, including, but not limited to, termination.",
         "section": 6,
+    },
+    {
+        "name": "travel_requirement",
+        "text": "false",
+        "section": 7,
     },
     {
         "name": "travel_budget",

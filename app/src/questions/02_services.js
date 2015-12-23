@@ -6,6 +6,22 @@ var StateMixin = require("../state_mixin");
 
 // <p>Ex: Services required under this {localStorage.getItem("docType")} are to assist the {localStorage.getItem("agencyFullname")} ({localStorage.getItem("agency")}) with the design and implementation of systems to support the {localStorage.getItem("agency")}’s Program for X.</p>
 
+var STATES = [
+	"summary",
+	"descriptionOfServices",
+	"farCode",
+	"awardFee",
+	"iterationPoPNumber",
+	"iterationPoPUnit",
+	"naicsText",
+	"optionPeriods",
+  "paymentText",
+  "basePeriodDurationNumber",
+  "basePeriodDurationUnit",
+  "optionPeriodDurationNumber",
+  "optionPeriodDurationUnit",
+]
+
 var CLIN_CONTENT = {
 	"CLIN 1001": "Option Period 1",
 	"CLIN 2001": "Option Period 2",
@@ -61,9 +77,20 @@ var Services = React.createClass({
       });
     }.bind(this));
   },
-
+  generateClin: function(){
+  	var clinString = '<div className="container fake-table col-md-12">';
+  	for (i=0; i < 2; i++){
+  		clinString += ('<div className="row clin"><div className="col-md-12 table-content"><input type="text" /></div></div>');
+  	}
+  	for (i=0; i < 4; i++){
+  		clinString += ('<div className="row clin"><div className="col-md-6 table-content"><input type="text" /></div><div className="col-md-6 table-content"><input type="text" /></div></div>');
+  	}
+  	clinString += "</div>";
+  	$("#additional-clins").append(clinString);
+  },
 	save: function(cb) {
 		// TODO: save data
+		// get data from FAR code section
 		setTimeout(cb, 500);
 	},
 	render: function() {
@@ -171,7 +198,7 @@ var Services = React.createClass({
 				<p id="naics-far-text1">This requirement will be solicited under the following North American Industrial Classification System (NAICS) Code: 541512, Computer Systems Design Services, $27.5 million. This Task Order will be awarded under {this.state.farCode} which governs orders placed under {FAR_CODES[this.state.farCode]} contracts.</p></div>
 				}
 
-				<div className="sub-heading">Period of Performance</div>
+				<div className="sub-heading">Base Periods</div>
 
 				<p>How long would you like the period of performance for the <b>base period</b> to be?</p>
 				<div className="sub-text">We suggest 6 months or less.</div>
@@ -184,22 +211,22 @@ var Services = React.createClass({
     			</select>
 				</form>
 
-				<p>How long would you like period of performance for each <b>option period</b> to be?</p>
-				<div className="sub-text">We suggest 6 months or less.</div>
-				<form className="form-inline">
-    			<input type="text" className="form-control" placeholder="enter a number" onChange={this.handleChange.bind(this, "optionPeriodDurationNumber")} value={this.state.optionPeriodDurationNumber}/>
 
-    			<select className="form-control" onChange={this.handleChange.bind(this, "optionPeriodDurationUnit")} value={this.state.optionPeriodDurationUnit}>
-    				<option>months</option>
-    				<option>weeks</option>
-    			</select>
-				</form>
-
+				<div className="sub-heading">Option Periods</div>
 				<p>In addition to your base period, how many option periods would you like? We suggest no more than 3.</p>
 				<form className="form-inline">
     			<input type="text" id="optionPeriods" className="form-control short-response" placeholder="enter a number" value={this.state.optionPeriods} onChange={this.handleChange.bind(this, "optionPeriods")}></input>
 				</form>
 
+				<p>How long would you like period of performance for each <b>option period</b> to be?</p>
+				<div className="sub-text">We suggest 6 months or less.</div>
+				<form className="form-inline">
+    			<input type="text" className="form-control" placeholder="enter a number" onChange={this.handleChange.bind(this, "optionPeriodDurationNumber")} value={this.state.optionPeriodDurationNumber}/>
+    			<select className="form-control" onChange={this.handleChange.bind(this, "optionPeriodDurationUnit")} value={this.state.optionPeriodDurationUnit}>
+    				<option>months</option>
+    				<option>weeks</option>
+    			</select>
+				</form>
 
 				<p>How long will each iteration within a period of performance be? </p>
 				<div className="sub-text">We recommend 2-3 weeks per iteration.</div>
@@ -217,10 +244,11 @@ var Services = React.createClass({
 				<p>The Period of Performance for this {this.state.docType} shall be a base period of <b>{bPoP}</b>. <b>{this.state.optionPeriods}</b> additional <b>{oPoP}</b> Option Periods will be included for a total potential period of performance of up to 2 years as described in section 2.
 				</p>
 
+				<div className="sub-heading">Funding</div>
+				<p>Funding for performance will be allocated and obligated for each exercised Contract Line Item (CLIN).</p>
+			
 
 				<div className="sub-heading">Contract Line Item Number (CLIN) Format</div>							
-				<button className="add btn btn-default">Add CLIN</button>
-				<br />
 
 				<div className="container fake-table col-md-12">
 					<div className="row clin">
@@ -258,6 +286,10 @@ var Services = React.createClass({
 				</div>
 
 				{CLINS}
+
+				<div id="additional-clins"></div>
+
+				<button className="add btn btn-default" onClick={this.generateClin}>Add CLIN</button>
 
 				<br />
 
