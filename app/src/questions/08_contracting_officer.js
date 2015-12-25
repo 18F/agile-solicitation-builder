@@ -32,13 +32,17 @@ var ContractingOfficer = React.createClass({
       });
     }.bind(this));
   },
+  addRole: function() {
+  	alert("added role!");
+  	$("#additional-roles").append('<div className="sub-heading"><input type="text"></div><textarea  className="form-control" rows="5"></textarea>');
+  },
 	render: function() {
 		return (
 			<div>
 				<div className="main-heading">Roles and Responsibilities</div>
 				<p>We have already provided some recommended content for this section. To delete, modify, or add additional content click the "edit" above the section you wish to change.</p>
 
-				<button className="btn btn-default">+ Role</button>
+				<button className="btn btn-default" onClick={this.addRole}>+ Role</button>
 				<br />
 
 				<div className="sub-heading">Contracting Officer’s Authority</div>
@@ -73,6 +77,7 @@ var ContractingOfficer = React.createClass({
 				{this.state.productOwnerText}</div>
 				}
 				
+				<div id="additional-roles"></div>
 				<br />				
 
 			</div>

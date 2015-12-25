@@ -39,7 +39,8 @@ content_components = [
     },
     {
         "name": "naics_text",
-        "text": "This requirement will be solicited under the following North American Industrial Classification System (NAICS) Code: 541512, Computer Systems Design Services, $27.5 million. This {DOC_TYPE} will be made in accordance with FAR 16.505 which governs orders placed under Indefinite Delivery contracts as detailed in the GSA GWAC Ordering guide.",
+        # "text": "This requirement will be solicited under the following North American Industrial Classification System (NAICS) Code: 541512, Computer Systems Design Services, $27.5 million. This {DOC_TYPE} will be made in accordance with FAR 16.505 which governs orders placed under Indefinite Delivery contracts as detailed in the GSA GWAC Ordering guide.",
+        "text": "",
         "section": 2,
     },
     {

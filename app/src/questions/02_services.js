@@ -38,6 +38,12 @@ var FAR_CODES = {
 	"FAR 16.504": "Indefinite Quantity",
 }
 
+var BASE_FEES = {
+	"base_award": "Award Fee",
+	"base_incentive": "Incentive Fee",
+	"none": "Neither",
+}
+
 var Services = React.createClass({
 	mixins: [StateMixin],
 	getInitialState: function() {
@@ -97,12 +103,21 @@ var Services = React.createClass({
 		// create CLIN tables
 		var bPoP = <span>{this.state.basePeriodDurationNumber} {this.state.basePeriodDurationUnit}</span>;		
 		var oPoP = <span>{this.state.optionPeriodDurationNumber} {this.state.optionPeriodDurationUnit}</span>;
-
 		var iPoP = <span>{this.state.iterationPoPNumber} {this.state.iterationPoPUnit}</span>
-		var firmFixedPriceCompletion = "";
 
 		var FARS = [];
 		for (var key in FAR_CODES) {
+			FARS.push(
+				<div className="radio">
+					<label>
+						<input type="radio" value={key} checked={key == this.state.farCode} />{key} - { FAR_CODES[key] }
+				  </label>
+				</div>
+			)
+		}
+
+		var base_fees = [];
+		for (var key in BAW) {
 			FARS.push(
 				<div className="radio">
 					<label>
@@ -210,6 +225,11 @@ var Services = React.createClass({
     				<option>weeks</option>
     			</select>
 				</form>
+
+				<p>Would you like to offer any of the following with the <b>base period</b>?</p>
+				<radiogroup>
+					{}
+				</radiogroup>
 
 
 				<div className="sub-heading">Option Periods</div>
