@@ -1,10 +1,22 @@
 var React = require('react');
 var StateMixin = require("../state_mixin");
 
+var AdditionalRole = React.createClass({
+	render: function() {
+		return (
+			<div>
+				<div className="sub-heading"><input type="text" className="medium-response"/></div>
+				<textarea className="form-control" rows="5"></textarea>
+			</div>
+		);
+	}
+});
+
 var ContractingOfficer = React.createClass({
 	mixins: [StateMixin],
 	save: function() {
 		// collect final state values
+		// also collect any new custom roles
 		var data = {};
 		data["contracting_officer"] = this.state.coText;
 		data["contracting_officer_representative"] = this.state.corText;
@@ -23,6 +35,7 @@ var ContractingOfficer = React.createClass({
 		};
 	},
   componentDidMount: function() {
+  	$("#additional-roles").hide();
   	var rfqId = get_id(window.location.hash);
     get_data(8, rfqId, function(content){
       this.setState({
@@ -33,8 +46,9 @@ var ContractingOfficer = React.createClass({
     }.bind(this));
   },
   addRole: function() {
-  	alert("added role!");
-  	$("#additional-roles").append('<div className="sub-heading"><input type="text"></div><textarea  className="form-control" rows="5"></textarea>');
+  	// @TODO do not add empty text box unless previous empty text box has been filled in
+  	$("#additional-roles").show();
+
   },
 	render: function() {
 		return (
@@ -77,8 +91,10 @@ var ContractingOfficer = React.createClass({
 				{this.state.productOwnerText}</div>
 				}
 				
-				<div id="additional-roles"></div>
-				<br />				
+				<div id="additional-roles">
+					<AdditionalRole />
+				</div>
+				<br />
 
 			</div>
 		);

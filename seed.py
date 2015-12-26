@@ -174,6 +174,16 @@ content_components = [
         "section": 9,
     },
     {
+        "name": "accessibility",
+        "text": "All deliverables (including, but not limited to, electronic and information technology (EIT)) procured through this Task Order must meet the applicable accessibility standards at 36 CFR § 1194, U.S. Architectural and Transportation Barriers Compliance Board (Access Board) under the authority of Section 508 of the Rehabilitation Act Amendment of 1998, unless an agency exception to this requirement exists. 36 CFR § 1194, U.S. Architectural and Transportation Barriers Compliance Board (Access Board) is viewable at http://www.section508.gov.  The Contractor shall indicate for each line item in the schedule whether each product or service is compliant or noncompliant with the accessibility standards at 36 CFR § 1194.  Further, the proposal must indicate where full details of compliance can be found (e.g., vendor’s website or other exact location).",
+        "section": 9,
+    },
+    {
+        "name": "non-disclosure",
+        "text": "The work to be performed by and the data released to the Contractor’s personnel shall be treated as sensitive and confidential in nature and is not to be discussed with or released to anyone except {AGENCY} employees assigned to work with the Contractor and other Contractor personnel working on the Task Order.</p><p>The Contractor is responsible for requiring all of its employees working under this Task Order, who have access to privileged information under this Task Order, to execute all Certifications required by the {AGENCY}. The {AGENCY}, as it deems appropriate, may require additional certifications be completed by the contractor at any time during Task Order performance.",
+        "section": 9,
+    },
+    {
         "name": "contract_clauses",
         "text": "",
         "section": 10,

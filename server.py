@@ -29,6 +29,7 @@ parser.add_argument('agency')
 parser.add_argument('doc_type')
 parser.add_argument('setaside')
 parser.add_argument('base_number')
+parser.add_argument('program_name')
 
 parser.add_argument('data')
 
@@ -81,11 +82,12 @@ class Create(Resource):
         args = parser.parse_args()
         agency = args['agency'].decode('latin-1').encode('utf8')
         doc_type = args['doc_type'].decode('latin-1').encode('utf8')
+        program_name = args['program_name'].decode('latin-1').encode('utf8')
         setaside = args['setaside'].decode('latin-1').encode('utf8')
         base_number = args['base_number'].decode('latin-1').encode('utf8')
         print agency, doc_type, setaside, base_number
 
-        rfq = RFQ(agency=agency, doc_type=doc_type, setaside=setaside, base_number=base_number)
+        rfq = RFQ(agency=agency, doc_type=doc_type, program_name=program_name, setaside=setaside, base_number=base_number)
         session = Session()
         session.add(rfq)
         session.commit()

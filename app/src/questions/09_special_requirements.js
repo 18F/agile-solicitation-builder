@@ -5,51 +5,54 @@ var StateMixin = require("../state_mixin");
 var SpecialRequirements = React.createClass({
 	mixins: [StateMixin],
 	getInitialState: function() {
-		return {};
+		return {
+			security: "",
+      accessibility: "",
+      nonDisclosure: "",
+		};
 	},
 	componentDidMount: function() {
 		var rfqId = get_id(window.location.hash);
     get_data(9, rfqId, function(content){
+    	window.c = content;
     	var data = content["data"];
-      this.setState({});
+      this.setState({
+      	security: data["security"],
+      	accessibility: data["accessibility"],
+      	nonDisclosure: data["non-disclosure"],
+      });
     }.bind(this));
   },
 	render: function() {
 		return (
 			<div>
 				<div className="main-heading">Special Contract Requirements</div>
-				<br />
-				<button>Add Special Requirement</button>
-				<br />
+				<button className="btn btn-default">Add Special Requirement</button>
 
 				<div className="sub-heading">Controlled Facilities and Information Systems Security</div>
+				<p>{this.state.security}</p>
 				<p>The contractor must adhere to the IT security requirements described in the Appendix, including all security requirements related to deliverables under this Task Order.</p>
 				<p>@TODO lookup agency specific security guidelines</p>
 				
-			<div className="sub-heading">Section 508 Accessibility Standards Notice (September 2009)</div>
-			<p>All deliverables (including, but not limited to, electronic and information technology (EIT)) procured through this Task Order must meet the applicable accessibility standards at 36 CFR § 1194, U.S. Architectural and Transportation Barriers Compliance Board (Access Board) under the authority of Section 508 of the Rehabilitation Act Amendment of 1998, unless an agency exception to this requirement exists. 36 CFR § 1194, U.S. Architectural and Transportation Barriers Compliance Board (Access Board) is viewable at http://www.section508.gov.  The Contractor shall indicate for each line item in the schedule whether each product or service is compliant or noncompliant with the accessibility standards at 36 CFR § 1194.  Further, the proposal must indicate where full details of compliance can be found (e.g., vendor’s website or other exact location).</p>
+				<div className="sub-heading">Section 508 Accessibility Standards Notice (September 2009)</div>
+				<p>{this.state.accessibility}</p>
+				<p>All deliverables (including, but not limited to, electronic and information technology (EIT)) procured through this Task Order must meet the applicable accessibility standards at 36 CFR § 1194, U.S. Architectural and Transportation Barriers Compliance Board (Access Board) under the authority of Section 508 of the Rehabilitation Act Amendment of 1998, unless an agency exception to this requirement exists. 36 CFR § 1194, U.S. Architectural and Transportation Barriers Compliance Board (Access Board) is viewable at http://www.section508.gov.  The Contractor shall indicate for each line item in the schedule whether each product or service is compliant or noncompliant with the accessibility standards at 36 CFR § 1194.  Further, the proposal must indicate where full details of compliance can be found (e.g., vendor’s website or other exact location).</p>
 
-			<div className="sub-heading">Non-Disclosure Policies</div>
-			<div className="sub-text"></div>
-			<p>The work to be performed by and the data released to the Contractor’s personnel shall be treated as sensitive and confidential in nature and is not to be discussed with or released to anyone except {this.state.agency} employees assigned to work with the Contractor and other Contractor personnel working on the Task Order.
-			</p>
-			<p>The Contractor is responsible for requiring all of its employees working under this Task Order, who have access to privileged information under this Task Order, to execute all Certifications required by the {this.state.agency}. The {this.state.agency}, as it deems appropriate, may require additional certifications be completed by the contractor at any time during Task Order performance.
-			</p>
+				<div className="sub-heading">Non-Disclosure Policies</div>
+				<p>{this.state.nonDisclosure}</p>
+				<p>The work to be performed by and the data released to the Contractor’s personnel shall be treated as sensitive and confidential in nature and is not to be discussed with or released to anyone except {this.state.agency} employees assigned to work with the Contractor and other Contractor personnel working on the Task Order.</p>
+				<p>The Contractor is responsible for requiring all of its employees working under this Task Order, who have access to privileged information under this Task Order, to execute all Certifications required by the {this.state.agency}. The {this.state.agency}, as it deems appropriate, may require additional certifications be completed by the contractor at any time during Task Order performance.</p>
 
-			<div className="sub-heading">Potential Organizational Conflicts of Interest</div>
-			<p>Offerors shall provide a signed statement which describes concisely all relevant facts concerning any past, present, or planned interest (financial, contractual, organizational, or otherwise) relating to the work to be performed under the proposed contract or task order and bearing on whether the Offeror has a possible organizational or personnel conflict of interest with respect to:
-			</p>
-			<ol>
-				<li>Being able to render impartial, technically sound, and objective assistance or advice, or
-				</li>
-				<li>Being given an unfair competitive advantage.
-				</li>
-			</ol>
-			<p>The Offeror may also provide relevant facts that show how its organizational structure and/or management systems limit its knowledge of possible organizational conflicts of interest relating to other divisions or sections of the organization and how that structure or system would avoid or mitigate such organizational conflict.
-			</p>
-			<p>No task order award shall be made until any potential conflict of interest has been neutralized or mitigated to the satisfaction of the Contracting Officer. The vendor will notify the Contracting Officer in writing as soon as any conflict of interest is identified and will propose steps for mitigating the conflict.</p>
-			<p>Refusal to provide the requested information or the willful misrepresentation of any relevant information by an Offeror shall disqualify the Offeror from further consideration for award of a task order under this solicitation.</p>
-			<p>If the Contracting Officer determines that a potential conflict can be avoided, effectively mitigated, or otherwise resolved through the inclusion of a special contract clause, the terms of the clause will be subject to negotiation.</p>
+				<div className="sub-heading">Potential Organizational Conflicts of Interest</div>
+				<p>Offerors shall provide a signed statement which describes concisely all relevant facts concerning any past, present, or planned interest (financial, contractual, organizational, or otherwise) relating to the work to be performed under the proposed contract or task order and bearing on whether the Offeror has a possible organizational or personnel conflict of interest with respect to:</p>
+				<ol>
+					<li>Being able to render impartial, technically sound, and objective assistance or advice, or</li>
+					<li>Being given an unfair competitive advantage.</li>
+				</ol>
+				<p>The Offeror may also provide relevant facts that show how its organizational structure and/or management systems limit its knowledge of possible organizational conflicts of interest relating to other divisions or sections of the organization and how that structure or system would avoid or mitigate such organizational conflict.</p>
+				<p>No task order award shall be made until any potential conflict of interest has been neutralized or mitigated to the satisfaction of the Contracting Officer. The vendor will notify the Contracting Officer in writing as soon as any conflict of interest is identified and will propose steps for mitigating the conflict.</p>
+				<p>Refusal to provide the requested information or the willful misrepresentation of any relevant information by an Offeror shall disqualify the Offeror from further consideration for award of a task order under this solicitation.</p>
+				<p>If the Contracting Officer determines that a potential conflict can be avoided, effectively mitigated, or otherwise resolved through the inclusion of a special contract clause, the terms of the clause will be subject to negotiation.</p>
 
 
 			<div className="sub-heading">Contractor Use of Commercial Computer Software, Including Open Source Software</div>

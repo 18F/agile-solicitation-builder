@@ -1,4 +1,5 @@
 var React = require('react');
+var StateMixin = require("./state_mixin");
 
 // Bootstrap
 var Button = require('react-bootstrap').Button;
@@ -41,6 +42,7 @@ var SETASIDES = {
 // This is an RFQ for an award under ID/IQ #XXXXX
 
 var RequestOverview = React.createClass({
+	mixins: [StateMixin],
 	getInitialState: function() {
 		return {
 			docType: "",
@@ -48,6 +50,7 @@ var RequestOverview = React.createClass({
 			setaside: "none",
 			baseNumber: "",
 			baseNumberNeeded: false,
+			programName: "",
 		};
 	},
 	handleCreateRFQ: function() {
@@ -56,6 +59,7 @@ var RequestOverview = React.createClass({
 			agency: this.state.agency,
 			setaside: this.state.setaside,
 			base_number: this.state.baseNumber,
+			program_name: this.state.programName,
 		}, function(data) {
 			// TODO add error handler
 			var rfqId = data.id;
@@ -65,36 +69,17 @@ var RequestOverview = React.createClass({
 			window.location.replace(url);
 		});
 	},
-	handleChange: function(key, event) {		
+	updateDocType: function(event) {
+		var base = false;
 		var value = event.target.value;
-		switch(key) {
-			case "docType":
-				var base = false;
-				if (value  === "Task Order" || value === "Call"){
-					base = true;
-				}
-				this.setState({
-					docType: event.target.value,
-					baseNumberNeeded: base,
-				});
-				break;
-			case "setaside":
-				this.setState({
-					setaside: event.target.value,					
-				});
-				break;
-			case "baseNumber":
-				this.setState({
-					baseNumber: event.target.value,					
-				});
-				break;
-			case "agency":
-				this.setState({
-					agency: event.target.value,
-				});
-				break;
-		}    
-  },	
+		if (value  === "Task Order" || value === "Call"){
+			base = true;
+		}
+		this.setState({
+			docType: event.target.value,
+			baseNumberNeeded: base,
+		});
+	},
 	render: function() {
 		// Create the agency names list
 		var agencyNameOptions = [(
@@ -149,8 +134,14 @@ var RequestOverview = React.createClass({
 
 					<br />
 
+					<h5>Program Name: </h5>
+					<input type="text" value={this.state.programName} onChange={this.handleChange.bind(this, "programName")} />
+
+					<br />
+					<br />
+
 					<h5>This will be ...</h5>
-					<radiogroup onChange={this.handleChange.bind(this, 'docType')}>
+					<radiogroup onChange={this.updateDocType}>
 						{docTypeOptions}
 					</radiogroup>
 
@@ -176,7 +167,5 @@ var RequestOverview = React.createClass({
 		);
 	},
 });
-// <Link to={"/rfp/"+this.props.params.id+"/question/1"}>		submit ajax request
-	// if successful go to next page
 
 module.exports = RequestOverview;

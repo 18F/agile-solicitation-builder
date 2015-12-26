@@ -38,7 +38,6 @@ function getRFQs(callback){
 		url: "/api/rfqs",
 		dataType: 'json',
 		success: function(data){
-			console.log(data);
 			if (callback){
 				callback(data);
 			}

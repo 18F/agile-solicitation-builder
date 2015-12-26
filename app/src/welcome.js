@@ -21,12 +21,6 @@ var Welcome = React.createClass({
       });
     }.bind(this));
    },
-  // handleResumeRFQ: function(doctype, agency, url) {
-  // 	// alert(doctype, agency);
-  //  	localStorage.setItem("doctype", doctype);
-  //  	localStorage.setItem("agency", agency);
-  //  	// window.location.replace(url);
-  //  },
 	render: function() {
 		var rfqs = [];
 		for (rfq in this.state.rfqs) {

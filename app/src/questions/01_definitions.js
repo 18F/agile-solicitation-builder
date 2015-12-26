@@ -1,7 +1,6 @@
 var React = require('react');
 var StateMixin = require("../state_mixin");
 
-var rfqId = get_id(window.location.hash);
 
 var Definition = React.createClass({
     mixins: [StateMixin],
@@ -18,6 +17,7 @@ var Definition = React.createClass({
       };
     },
     componentDidMount: function() {
+      var rfqId = get_id(window.location.hash);
       get_data(1, rfqId, function(data){
         this.setState({
           definitions: data["data"]["definitions"],
