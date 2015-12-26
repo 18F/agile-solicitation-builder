@@ -1,6 +1,24 @@
-function get_id(url){
+function getId(url){
 	var number = url.split("#/rfp/")[1].split("/question")[0];
 	return parseInt(number);
+}
+
+function getStates(states){
+	var statesDict = {"edit": null};
+	for (i=0; i < states.length; i++){
+		var state = states[i];
+		statesDict[state] = "";
+	}
+	return statesDict;
+}
+
+function getComponents(data, states){
+	componentStates = {};
+	for (i=0; i < states.length; i++){
+		var state = states[i];
+		componentStates[state] = data[state];
+	}
+	return componentStates;
 }
 
 function get_data(section, doc_id, callback){

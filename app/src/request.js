@@ -44,7 +44,6 @@ var Sidebar = React.createClass({
 			};
 		});
 		var subpages = questionLinks.concat(postfixLinks);
-		// var subpages = prefixLinks.concat(questionLinks).concat(postfixLinks);
 
 		var links = subpages.map(function(subpage, i) {
 			var active = (subpage.link == this.props.currentPage);

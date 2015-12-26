@@ -16,6 +16,7 @@ Base = declarative_base()
 
 content_components = seed.content_components
 
+
 class Agency(Base):
     __tablename__ = 'agencies'
 
@@ -65,8 +66,8 @@ class RFQ(Base):
         agency_full_name = session.query(Agency).filter_by(abbreviation=agency).first().full_name
 
         for section in content_components:
-            text = section['text'].decode("utf8")
-            section['text'] = text.replace("{AGENCY}", agency).replace("{DOC_TYPE}", doc_type).replace("{AGENCY_FULL_NAME}", agency_full_name)
+            text = str(section['text']).decode("utf8")
+            section['text'] = text.replace("{AGENCY}", agency).replace("{DOC_TYPE}", doc_type).replace("{AGENCY_FULL_NAME}", agency_full_name).replace("{PROGRAM_NAME}", program_name)
             self.content_components.append(ContentComponent(**section))
 
 
@@ -84,3 +85,23 @@ class ContentComponent(Base):
 
     def __repr__(self):
         return "<ContentComponent(name='%s', doc_id='%d', text='%s')>" % (self.name, self.document_id, self.text)
+
+
+class Clin(Base):
+    __tablename__ = 'clins'
+
+    id = Column(Integer, primary_key=True)
+    document_id = Column(Integer, ForeignKey('rfqs.id'), primary_key=True)
+    row1 = Column(Text)
+    row2 = Column(Text)
+    row3a = Column(Text)
+    row3b = Column(Text)
+    row4a = Column(Text)
+    row4b = Column(Text)
+    row5b = Column(Text)
+    row6a = Column(Text)
+    row6b = Column(Text)
+
+    def __repr__(self):
+        return "<Clin(id='%d', row1='%s', row2='%s', row3a='%s')>" % (self.document_id, self.row1, self.row2, self.row3a)
+

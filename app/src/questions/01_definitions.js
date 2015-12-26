@@ -2,9 +2,10 @@ var React = require('react');
 var StateMixin = require("../state_mixin");
 
 
-var Definition = React.createClass({
+var Definition = React.createClass({    
     mixins: [StateMixin],
     save: function(cb) {
+      var rfqId = getId(window.location.hash);
       data = {"definitions": this.state.definitions};
       put_data(1, rfqId, data, function(response){
         window.location.replace(response['url']);
@@ -17,7 +18,7 @@ var Definition = React.createClass({
       };
     },
     componentDidMount: function() {
-      var rfqId = get_id(window.location.hash);
+      var rfqId = getId(window.location.hash);
       get_data(1, rfqId, function(data){
         this.setState({
           definitions: data["data"]["definitions"],

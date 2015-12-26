@@ -36,7 +36,7 @@ var ContractingOfficer = React.createClass({
 	},
   componentDidMount: function() {
   	$("#additional-roles").hide();
-  	var rfqId = get_id(window.location.hash);
+  	var rfqId = getId(window.location.hash);
     get_data(8, rfqId, function(content){
       this.setState({
         coText: content["data"]["contracting_officer"],

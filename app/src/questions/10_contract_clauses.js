@@ -12,7 +12,7 @@ var ContractClauses = React.createClass({
   	setTimeout(cb, 500);
   },
   componentDidMount: function() {
-  	var rfqId = get_id(window.location.hash);
+  	var rfqId = getId(window.location.hash);
 	  get_data(10, rfqId, function(content){ 
 	  	var data = content["data"];
 	    this.setState({

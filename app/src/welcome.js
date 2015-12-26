@@ -6,7 +6,6 @@ var Button = require('react-bootstrap').Button;
 // Router stuff
 var IndexLink = require('react-router').IndexLink;
 
-// <a href="#" onClick={this.handleResumeRFQ(doctype, agency, url)} >#{this_rfq['id']}, {this_rfq['doc_type']} for {this_rfq['agency']}</a>
 
 var Welcome = React.createClass({
 	getInitialState: function() {
@@ -31,7 +30,7 @@ var Welcome = React.createClass({
 			rfqs.push(
 				<li>
 					<a href={url} >
-						#{this_rfq['id']}, {this_rfq['doc_type']} for {this_rfq['agency']}
+						#{this_rfq['id']}, {this_rfq['doc_type']} for <b>{this_rfq['program_name']}</b> with {this_rfq['agency']}
 					</a>
 				</li>
 			);

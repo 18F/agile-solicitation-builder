@@ -88,6 +88,10 @@ button.add {
 	width: 300px;
 }
 
+.long-response{
+	width: 100%;
+}
+
 .new-content {
 	font-weight: 600;
 	font-color: red;

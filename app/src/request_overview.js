@@ -37,7 +37,6 @@ var SETASIDES = {
 };
 
 // IDIQ & BPA require 
-// please identify the base award number [input box]
 // This is an RFQ for the alliant BPA #XXXXX
 // This is an RFQ for an award under ID/IQ #XXXXX
 

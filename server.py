@@ -5,9 +5,10 @@ from flask_sqlalchemy import SQLAlchemy
 
 from pprint import pprint
 
-import os
+import os, shutil
 import sys
 import config
+import datetime
 
 from docx import Document
 from models import Agency, RFQ, ContentComponent, Base, Session, engine
@@ -19,10 +20,6 @@ app = Flask(__name__, static_folder='app')
 app.config['APP_SETTINGS'] = config.DevelopmentConfig
 db = SQLAlchemy(app)
 api = Api(app, prefix="/api")
-
-# def abort_if_content_doesnt_exist(content_key):
-#     if content_key not in DATA:
-#         abort(404, message="Content {} doesn't exist".format(key))
 
 parser = reqparse.RequestParser()
 parser.add_argument('agency')
@@ -63,7 +60,7 @@ class Data(Resource):
             session.merge(component)
             session.commit()
 
-        # this needs to be done client side instead to allow for jumping between sections
+        # this needs to be done client side to allow for jumping between sections
         if section_id < 10:
             url =  '#/rfp/' + str(rfq_id) + '/question/' + str(int(section_id) + 1)
         else:
@@ -93,20 +90,11 @@ class Create(Resource):
         session.commit()
 
         return jsonify({'id': rfq.id})
-       
-
-class Results(Resource):
-
-    def get(self, rfq_id):
-        # Get the results
-        pass
 
 
 api.add_resource(Agencies, '/agencies')
 api.add_resource(Data, '/get_content/<int:rfq_id>/sections/<int:section_id>')
 api.add_resource(Create, '/rfqs')
-api.add_resource(Results, '/rfqs/<int:rfq_id>/results')
-# api.add_resource(Downloads, '/rfqs/<int:rfq_id>/results/download')
 
 # map index.html to app/index.html, map /build/bundle.js to app/build.bundle.js
 @app.route('/initiate')
@@ -121,24 +109,32 @@ def index():
 def send_js(path):
     return send_from_directory("app", path)
 
-# @app.route('/downloads/<path:filename>', methods=['GET'])
-# def download(filename):
-#     uploads = os.path.join(current_app.root_folder, app.config['UPLOAD_FOLDER'])
-#     return send_from_directory(directory=uploads, filename=filename)
-
 @app.route('/download/<int:rfq_id>')
 def download(rfq_id):
-    # send_file?
-    document = Document()
 
     session = Session()
     rfq = session.query(RFQ).filter_by(id=rfq_id).first()
-    print rfq
 
+    document = Document()
+
+    # cover page - change agency to agency_full_name
+    document.add_heading(rfq.agency, 0)
+    doc_date = str(datetime.date.today())
+    document.add_heading(doc_date, level=1)
+    document.add_page_break()
+
+    # table of contents @TODO
+
+    # definitions
+    text = "Note: All sections of this RFQ will be incorporated into the contract except the Statement of Objectives, Instructions, and Evaluation Factors."
+    print dir(rfq)
     title = "RFQ for " + rfq.agency
-    document.add_heading('RFQ', 0)
 
-    p = document.add_paragraph('A plain paragraph having some ')
+    document.add_heading(title)
+
+    document.add_page_break()
+
+    p = document.add_paragraph(text)
     p.add_run('bold').bold = True
     p.add_run(' and some ')
     p.add_run('italic.').italic = True
@@ -154,13 +150,16 @@ def download(rfq_id):
     )
 
     doc_name = "RFQ_" + str(rfq_id) + ".docx"
-    file_path = os.path.join(doc_name, "downloads")
+    file_path = os.path.join("downloads", doc_name)
     document.save(file_path)
 
-    # download_folder = os.path.join(current_app.root_folder, "downloads")
     return send_from_directory(directory="downloads", filename=doc_name)
 
 def create_tables():
+
+    shutil.rmtree("downloads")
+    os.makedirs("downloads")
+
     Base.metadata.create_all(engine)
     session = Session()
 

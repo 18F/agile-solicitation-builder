@@ -1,18 +1,24 @@
 var React = require('react');
 var StateMixin = require("../state_mixin");
 
+var STATES = [
+	"security",
+	"accessibility",
+	"nonDisclosure",
+	"titleToMaterials",
+	"useOfData",
+	"smallBusinessStatus",
+	"orderOfPrecedence",
+]
 
 var SpecialRequirements = React.createClass({
 	mixins: [StateMixin],
 	getInitialState: function() {
-		return {
-			security: "",
-      accessibility: "",
-      nonDisclosure: "",
-		};
+		var initialStates = getStates(STATES);
+		return initialStates;
 	},
 	componentDidMount: function() {
-		var rfqId = get_id(window.location.hash);
+		var rfqId = getId(window.location.hash);
     get_data(9, rfqId, function(content){
     	window.c = content;
     	var data = content["data"];
@@ -20,6 +26,10 @@ var SpecialRequirements = React.createClass({
       	security: data["security"],
       	accessibility: data["accessibility"],
       	nonDisclosure: data["non-disclosure"],
+      	titleToMaterials: data["title-to-materials"],
+      	useOfData: data["use-of-data"],
+      	smallBusinessStatus: data["small-business-status"],
+      	orderOfPrecedence: data["order-of-precedence"],
       });
     }.bind(this));
   },
@@ -31,17 +41,12 @@ var SpecialRequirements = React.createClass({
 
 				<div className="sub-heading">Controlled Facilities and Information Systems Security</div>
 				<p>{this.state.security}</p>
-				<p>The contractor must adhere to the IT security requirements described in the Appendix, including all security requirements related to deliverables under this Task Order.</p>
-				<p>@TODO lookup agency specific security guidelines</p>
 				
 				<div className="sub-heading">Section 508 Accessibility Standards Notice (September 2009)</div>
-				<p>{this.state.accessibility}</p>
-				<p>All deliverables (including, but not limited to, electronic and information technology (EIT)) procured through this Task Order must meet the applicable accessibility standards at 36 CFR § 1194, U.S. Architectural and Transportation Barriers Compliance Board (Access Board) under the authority of Section 508 of the Rehabilitation Act Amendment of 1998, unless an agency exception to this requirement exists. 36 CFR § 1194, U.S. Architectural and Transportation Barriers Compliance Board (Access Board) is viewable at http://www.section508.gov.  The Contractor shall indicate for each line item in the schedule whether each product or service is compliant or noncompliant with the accessibility standards at 36 CFR § 1194.  Further, the proposal must indicate where full details of compliance can be found (e.g., vendor’s website or other exact location).</p>
+				<p>{this.state.accessibility}</p>			
 
 				<div className="sub-heading">Non-Disclosure Policies</div>
 				<p>{this.state.nonDisclosure}</p>
-				<p>The work to be performed by and the data released to the Contractor’s personnel shall be treated as sensitive and confidential in nature and is not to be discussed with or released to anyone except {this.state.agency} employees assigned to work with the Contractor and other Contractor personnel working on the Task Order.</p>
-				<p>The Contractor is responsible for requiring all of its employees working under this Task Order, who have access to privileged information under this Task Order, to execute all Certifications required by the {this.state.agency}. The {this.state.agency}, as it deems appropriate, may require additional certifications be completed by the contractor at any time during Task Order performance.</p>
 
 				<div className="sub-heading">Potential Organizational Conflicts of Interest</div>
 				<p>Offerors shall provide a signed statement which describes concisely all relevant facts concerning any past, present, or planned interest (financial, contractual, organizational, or otherwise) relating to the work to be performed under the proposed contract or task order and bearing on whether the Offeror has a possible organizational or personnel conflict of interest with respect to:</p>
@@ -78,31 +83,22 @@ var SpecialRequirements = React.createClass({
 				<li>A brief description of the technical use and implementing approach</li>
 				<li>A “yes/no” indication as to whether the Contractor has made, or will make, any modifications to the source code;</li>
 				<li>The software website; and,</li>
-				<li>An identification of the reason(s) that the Contractor was unable to make the determination in the paragraphs above.
-				</li>
+				<li>An identification of the reason(s) that the Contractor was unable to make the determination in the paragraphs above.</li>
 			</ol>
 
 	
 				<div className="sub-heading">Title to Materials Shall Vest in the Government</div>
-				<p>All hardware, software, materials, products, licenses, source code, data, and information produced and/or furnished to the Government under this Task Order shall become the property of and remain with the Government upon delivery and acceptance by the Government. This shall include but not be limited to the following: plans, systems analysis, design specifications, drawings, completed programs and documentation thereof, reports and listings, all tapes, disk files, and other items pertaining to the work and services to be performed pursuant to the Task Order. The Government shall have unlimited rights to use, disclose, reproduce, prepare derivative works, and distribute copies to the public of such hardware, software, materials, products, licenses, source code, data, and information in any manner and for any purpose, and to have or permit others to do so, without compensation to or approval from the Contractor.</p>
-
-				<p>All hardware, software, materials, products, licenses, source code, data, and information produced or acquired with Task Order funds, or under the Contractor’s control as Government Furnished Property or Materials, shall be turned over to the Government (or a new contractor, as applicable) in good condition. All data and supporting documentation shall be submitted or furnished to the Government, including the website, application, data files, analytic data files (with associated instructions and codebook listing and defining all variables), and public use data files with associated documentation. Analytic files (where source files are reduced in volume and tailored to specific analyses), data analytic programs and results produced under auspices of this project shall be property of the Government. All information and materials including data developed under this Task Order are the property of the Government and shall be delivered as part of the transition and turnover at the end of the Task Order.</p>
+				<p>{this.state.titleToMaterials}</p>
 
 				<div className="sub-heading">Limited Use of Data</div>
-				<p>Performance of this Task Order may require the contractor to access and use data and information proprietary to the Government, which is of such a nature that its dissemination or use, other than in performance of this Task Order, would be adverse to the interests of the Government.</p>
-				<p>The Contractor and/or contractor personnel shall not divulge or release data or information developed or obtained in performance of this Task Order until made public by the Government, except to authorized Government personnel or upon written approval by the Contracting Officer. The Contractor shall not use, disclose, or reproduce data identified as proprietary, other than as required in the performance of this Task Order. Nothing herein shall preclude the use of any data independently acquired by the contractor without such limitations or prohibit an agreement at no cost to the Government between the Contractor and the data owner which provides for greater rights to the Contractor.</p>
-				<p>The Contractor shall release all required deliverables and data or other works developed under this Task Order solely in accordance with the terms and conditions of this Task Order. All data collected and remaining in the custody of the Contractor at the close of this Task Order that permits identification of an individual or entity described in the data, or an individual supplying it, must be delivered to the COR or destroyed, in accordance with the terms of the Transition Plan. No copies or parts of data or derivative files (encrypted and/or individually identifiable) may be kept by the contractor.</p>
+				<p>{this.state.useOfData}</p>
 
 				<div className="sub-heading">Notice of Size Re-representation at the Task Order Level (will be conditional)</div>
-				<p>Offers are solicited only from Alliant Small Business GWAC prime contractors that qualify as small, in accordance with the size standard that corresponds to the North American Industry Classification System (NAICS) code assigned to this Task Order, as of the date that they submit their Stage Two proposals.  An Offeror must be small as of the date that it submits its proposal for Stage Two and its size status does not relate back to its size recertification under the Alliant Small Business GWAC that was required under FAR 52.219-28.</p>
-				<p>An Offeror shall represent its small business size status by validating or updating all of its representations in the Representations and Certifications section of the System for Award Management (SAM) and other data in SAM, as necessary, to ensure that these representations reflect the Offeror’s current size status.</p>
-				<p>Offerors who misrepresent their small business size status are subject to the penalties contained in 13 C.F.R. 121.108.</p>
+				<p>{this.state.smallBusinessStatus}</p>
+			
 
 				<div className="sub-heading">Order of Precedence</div>
-				<p>In the event of an inconsistency between the Special Contract Requirements and the FAR clauses provisions in the RFQ or the Task Order, the inconsistency shall be resolved by giving precedence in the following order:</p>
-
-				<p>1.	Special Contract Requirements (Section 9 of the RFQ)</p>
-				<p>2.	FAR Clauses contained in Section 10 of the RFQ</p>
+				{this.state.orderOfPrecedence}
 
 			</div>
 		);

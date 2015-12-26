@@ -2,12 +2,9 @@ var React = require('react');
 var StateMixin = require("../state_mixin");
 
 // <p>If you believe you need additional CLINs, 6 total, 2 per year, 3 years</p>
-// <p>@TODO CLIN number is editable ("0001"), as many boxes as there are periods of performance. Option to add a completely empty box if they want. </p>
-
-// <p>Ex: Services required under this {localStorage.getItem("docType")} are to assist the {localStorage.getItem("agencyFullname")} ({localStorage.getItem("agency")}) with the design and implementation of systems to support the {localStorage.getItem("agency")}’s Program for X.</p>
+// <p>@TODO CLIN number is editable ("0001"), as many boxes as there are periods of performance.
 
 var STATES = [
-	"summary",
 	"descriptionOfServices",
 	"farCode",
 	"awardFee",
@@ -15,11 +12,17 @@ var STATES = [
 	"iterationPoPUnit",
 	"naicsText",
 	"optionPeriods",
-  "paymentText",
+  "paymentSchedule",
   "basePeriodDurationNumber",
   "basePeriodDurationUnit",
+  "baseFee",
+  "baseFeeAmount",
   "optionPeriodDurationNumber",
   "optionPeriodDurationUnit",
+  "optionFee",
+  "optionFeeAmount",
+  "iterationPoPNumber",
+  "iterationPoPUnit",
 ]
 
 var CLIN_CONTENT = {
@@ -38,61 +41,72 @@ var FAR_CODES = {
 	"FAR 16.504": "Indefinite Quantity",
 }
 
-var BASE_FEES = {
+var FEES = {
 	"base_award": "Award Fee",
 	"base_incentive": "Incentive Fee",
 	"none": "Neither",
 }
 
+var Clin = React.createClass({
+	render: function() {
+		return (
+			<div className="container fake-table col-md-12">
+				<div className="row clin">
+					<div className="col-md-12 table-content">
+						<input type="text" className="long-response"/>
+					</div>
+				</div>
+				<div className="row clin">
+					<div className="col-md-12 table-content">
+						<input type="text" className="long-response"/>
+					</div>
+				</div>
+				<div className="row clin">
+					<div className="col-md-6 table-content"><input type="text" />
+					</div>
+					<div className="col-md-6 table-content"><input type="text" />
+					</div>
+				</div>
+				<div className="row clin">
+					<div className="col-md-6 table-content"><input type="text" />
+					</div>
+					<div className="col-md-6 table-content"><input type="text" />
+					</div>
+				</div>
+				<div className="row clin">
+					<div className="col-md-6 table-content"><input type="text" />
+					</div>
+					<div className="col-md-6 table-content"><input type="text" />
+					</div>
+				</div>
+				<div className="row clin">
+					<div className="col-md-6 table-content"><input type="text" />
+					</div>
+					<div className="col-md-6 table-content"><input type="text" />
+					</div>
+				</div>
+			</div>
+		);
+	}
+});
+
 var Services = React.createClass({
 	mixins: [StateMixin],
 	getInitialState: function() {
-		return {
-			edit: null,
-			summary: "",
-    	descriptionOfServices: "",
-    	farCode: "",
-    	awardFee: "",
-    	iterationPoPNumber: "",
-			iterationPoPUnit: "",
-    	naicsText: "",
-    	optionPeriods: "",
-      paymentText: "",
-      periodDurationNumber: "",
-      periodDurationUnit: "",
-		};
+		var initialStates = getStates(STATES);
+		window.is = initialStates;
+		return initialStates;
 	},
 	componentDidMount: function() {
-		var rfqId = get_id(window.location.hash);
+		var rfqId = getId(window.location.hash);
     get_data(2, rfqId, function(content){
     	var data = content["data"];
-      this.setState({
-      	summary: data["summary"],
-      	descriptionOfServices: data["description_of_services"],
-      	farCode: data["far_code"],
-      	awardFee: data["award_fee"],
-      	iterationPoPNumber: data["iteration_pop_number"],
-				iterationPoPUnit: data["iteration_pop_unit"],
-      	naicsText: data["naics_text"],
-      	optionPeriods: data["option_periods"],
-        paymentText: data["payment_schedule"],
-        basePeriodDurationNumber: data["base_period_duration_number"],
-        basePeriodDurationUnit: data["base_period_duration_unit"],
-        optionPeriodDurationNumber: data["option_period_duration_number"],
-        optionPeriodDurationUnit: data["option_period_duration_unit"],
-      });
+    	var componentStates = getComponents(data, STATES);
+      this.setState( componentStates );
     }.bind(this));
   },
   generateClin: function(){
-  	var clinString = '<div className="container fake-table col-md-12">';
-  	for (i=0; i < 2; i++){
-  		clinString += ('<div className="row clin"><div className="col-md-12 table-content"><input type="text" /></div></div>');
-  	}
-  	for (i=0; i < 4; i++){
-  		clinString += ('<div className="row clin"><div className="col-md-6 table-content"><input type="text" /></div><div className="col-md-6 table-content"><input type="text" /></div></div>');
-  	}
-  	clinString += "</div>";
-  	$("#additional-clins").append(clinString);
+  	console.log("add clin");
   },
 	save: function(cb) {
 		// TODO: save data
@@ -116,12 +130,23 @@ var Services = React.createClass({
 			)
 		}
 
-		var base_fees = [];
-		for (var key in BAW) {
-			FARS.push(
+		var BASE_FEES = [];
+		for (var key in FEES) {
+			BASE_FEES.push(
 				<div className="radio">
 					<label>
-						<input type="radio" value={key} checked={key == this.state.farCode} />{key} - { FAR_CODES[key] }
+						<input type="radio" value={key} checked={key == this.state.baseFee} />{ FEES[key] }
+				  </label>
+				</div>
+			)
+		}
+
+		var OPTION_FEES = [];
+		for (var key in FEES) {
+			OPTION_FEES.push(
+				<div className="radio">
+					<label>
+						<input type="radio" value={key} checked={key == this.state.optionFee} />{ FEES[key] }
 				  </label>
 				</div>
 			)
@@ -177,11 +202,9 @@ var Services = React.createClass({
 			<div>
 				<div className="main-heading">Services and Prices</div>
 
-				<p>{this.state.summary}</p>
-
 				<div className="sub-heading">Brief Description of Services</div>
-				<div className="sub-text">Ex: Services required under this {localStorage.getItem("docType")} are to assist the Dept. of Education with the design and implementation of systems to support the ED Program for X.</div>
-				<textarea className="form-control" rows="4" placeholder="1-2 sentences"></textarea>				
+				<div className="sub-text">Feel free to edit the example we have provided below.</div>
+				<textarea className="form-control" rows="4" value={this.state.descriptionOfServices} onChange={this.handleChange.bind(this, 'descriptionOfServices')}></textarea>				
 
 				<div className="sub-heading">Type of Contract</div>
 				<p>What type of contract will this be?</p>
@@ -227,16 +250,28 @@ var Services = React.createClass({
 				</form>
 
 				<p>Would you like to offer any of the following with the <b>base period</b>?</p>
-				<radiogroup>
-					{}
+				<radiogroup onChange={this.handleChange.bind(this, "baseFee")}>
+					{BASE_FEES}
 				</radiogroup>
 
+				<p>Not to exceed ...</p>
+				<input type="text" className="form-control short-response" value={this.state.baseFeeAmount} onChange={this.handleChange.bind(this, "baseFeeAmount")} />
+				<br />
 
 				<div className="sub-heading">Option Periods</div>
 				<p>In addition to your base period, how many option periods would you like? We suggest no more than 3.</p>
 				<form className="form-inline">
     			<input type="text" id="optionPeriods" className="form-control short-response" placeholder="enter a number" value={this.state.optionPeriods} onChange={this.handleChange.bind(this, "optionPeriods")}></input>
 				</form>
+
+				<p>Would you like to offer any of the following with each <b>option period</b>?</p>
+				<radiogroup onChange={this.handleChange.bind(this, 'optionFee')}>
+					{OPTION_FEES}
+				</radiogroup>
+
+				<p>Not to exceed ...</p>				
+				<input type="text" className="form-control short-response" value={this.state.optionFeeAmount} onChange={this.handleChange.bind(this, "optionFeeAmount")} />
+				<br />
 
 				<p>How long would you like period of performance for each <b>option period</b> to be?</p>
 				<div className="sub-text">We suggest 6 months or less.</div>
@@ -307,7 +342,9 @@ var Services = React.createClass({
 
 				{CLINS}
 
-				<div id="additional-clins"></div>
+				<div id="additional-clins">
+					<Clin />
+				</div>
 
 				<button className="add btn btn-default" onClick={this.generateClin}>Add CLIN</button>
 

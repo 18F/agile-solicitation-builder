@@ -51,7 +51,7 @@ var Objective = React.createClass({
 		});
 	},
 	componentDidMount: function() {
-		var rfqId = get_id(window.location.hash);
+		var rfqId = getId(window.location.hash);
     get_data(3, rfqId, function(content){
     	var data = content["data"];
       this.setState({
