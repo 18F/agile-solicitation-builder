@@ -1,11 +1,7 @@
 var React = require('react');
 var StateMixin = require("../state_mixin");
 
-// <div className="sub-heading">Backlog Section</div>
-// <br />
 // <div className="sub-text">The Initial Product Backlog (See Appendix) provides a detailed breakdown of the desired functionality as identified at this time. The Initial Product Backlog is not a binding document, but rather a representative sample of the functionality that is anticipated will be required to be delivered under this Task Order. The specific user stories will be identified through the agile development process as proposed in the Performance Work Statement (PWS). The Initial Product Backlog provides some guidance on specific objectives that should be included in each project.</div>
-// <textarea className="form-control" rows="10"></textarea>
-
 
 var DELIVERABLES = {
 	"1": "Research, Insights, and Synthesis",
@@ -34,40 +30,31 @@ var USER_RESEARCH = {
  	"vendor": "The vendor will be responsible for the user research."
 }
 
+var STATES = [
+	"generalBackground",
+	"locationRequirement",
+	"locationText",
+	"maxBudget",
+	"offSiteDevelopmentCompliance",
+	"programHistory",
+	"userAccess",
+	"userResearchStrategy",
+]
+
 var Objective = React.createClass({
 	mixins: [StateMixin],
 	getInitialState: function() {
-		return {
-			docType: localStorage.getItem("docType"),
-			agency: localStorage.getItem("agency"),
-			maxBudget: 0,
-			userResearchStrategy: "none",
-			offSiteDevelopmentCompliance: "",
-		};
-	},
-	updateLocation: function(event) {
-		this.setState({
-			locationText: event.target.value,
-		});
+		var initialStates = getStates(STATES);
+		return initialStates;
 	},
 	componentDidMount: function() {
 		var rfqId = getId(window.location.hash);
     get_data(3, rfqId, function(content){
-    	var data = content["data"];
-      this.setState({
-      	generalBackground: data["general_background"],
-      	locationRequirement: data["location_requirement"],
-      	locationText: data["location_text"],
-      	offSiteDevelopmentCompliance: data["off_site_development_compliance"],
-      	maxBudget: data["max_budget"],
-				programHistory: data["program_history"],
-      	userResearchStrategy: data["user_research_strategy"],
-      	userAccess: data["user_access"],
-      });
+    	var components = getComponents(content["data"]);
+      this.setState({ components });
     }.bind(this));
   },
 	save: function(cb) {
-		// put_data("maxBudget", this.state.text);
 		setTimeout(cb, 500);
 	},
 	render: function() {

@@ -2,13 +2,13 @@ var React = require('react');
 var StateMixin = require("../state_mixin");
 
 var STATES = [
-	"security",
 	"accessibility",
 	"nonDisclosure",
+	"orderOfPrecedence",
+	"security",
+	"smallBusinessStatus",
 	"titleToMaterials",
 	"useOfData",
-	"smallBusinessStatus",
-	"orderOfPrecedence",
 ]
 
 var SpecialRequirements = React.createClass({
@@ -20,17 +20,8 @@ var SpecialRequirements = React.createClass({
 	componentDidMount: function() {
 		var rfqId = getId(window.location.hash);
     get_data(9, rfqId, function(content){
-    	window.c = content;
-    	var data = content["data"];
-      this.setState({
-      	security: data["security"],
-      	accessibility: data["accessibility"],
-      	nonDisclosure: data["non-disclosure"],
-      	titleToMaterials: data["title-to-materials"],
-      	useOfData: data["use-of-data"],
-      	smallBusinessStatus: data["small-business-status"],
-      	orderOfPrecedence: data["order-of-precedence"],
-      });
+    	var componentStates = getComponents(content["data"]);
+      this.setState( componentStates );
     }.bind(this));
   },
 	render: function() {

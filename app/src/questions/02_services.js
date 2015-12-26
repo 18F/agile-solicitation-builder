@@ -1,8 +1,7 @@
 var React = require('react');
 var StateMixin = require("../state_mixin");
 
-// <p>If you believe you need additional CLINs, 6 total, 2 per year, 3 years</p>
-// <p>@TODO CLIN number is editable ("0001"), as many boxes as there are periods of performance.
+// <p>@TODO CLIN number is editable ("0001")
 
 var STATES = [
 	"descriptionOfServices",
@@ -23,6 +22,7 @@ var STATES = [
   "optionFeeAmount",
   "iterationPoPNumber",
   "iterationPoPUnit",
+  "addClin",
 ]
 
 var CLIN_CONTENT = {
@@ -92,24 +92,40 @@ var Clin = React.createClass({
 
 var Services = React.createClass({
 	mixins: [StateMixin],
-	getInitialState: function() {
-		var initialStates = getStates(STATES);
-		window.is = initialStates;
-		return initialStates;
-	},
 	componentDidMount: function() {
 		var rfqId = getId(window.location.hash);
     get_data(2, rfqId, function(content){
-    	var data = content["data"];
-    	var componentStates = getComponents(data, STATES);
+    	var componentStates = getComponents(content["data"]);
       this.setState( componentStates );
     }.bind(this));
   },
+	getInitialState: function() {
+		var initialStates = getStates(STATES);
+		initialStates["addClin"] = false;
+		window.is = initialStates;
+		return initialStates;
+	},
   generateClin: function(){
+  	if (this.state.addClin === true){
+  		// check to see that something has been filled in
+  		// if yes, save value and display as completed CLIN
+  		// if not, alert and return
+  		alert("Please add some text before saving!");
+  		return;
+  	}
+  	else {
+  		this.setState({addClin: true});
+  	}
+  	
   	console.log("add clin");
   },
 	save: function(cb) {
-		// TODO: save data
+		var data = {};
+		// access state data from variables?
+		for (i=0; i < STATES.length; i++){
+			// TODO: save data
+		}
+		
 		// get data from FAR code section
 		setTimeout(cb, 500);
 	},
@@ -256,6 +272,7 @@ var Services = React.createClass({
 
 				<p>Not to exceed ...</p>
 				<input type="text" className="form-control short-response" value={this.state.baseFeeAmount} onChange={this.handleChange.bind(this, "baseFeeAmount")} />
+				<p>Use agency specific guidance regarding specifics.</p>
 				<br />
 
 				<div className="sub-heading">Option Periods</div>
@@ -271,6 +288,7 @@ var Services = React.createClass({
 
 				<p>Not to exceed ...</p>				
 				<input type="text" className="form-control short-response" value={this.state.optionFeeAmount} onChange={this.handleChange.bind(this, "optionFeeAmount")} />
+				<p>Use agency specific guidance regarding specifics.</p>
 				<br />
 
 				<p>How long would you like period of performance for each <b>option period</b> to be?</p>
@@ -301,7 +319,6 @@ var Services = React.createClass({
 
 				<div className="sub-heading">Funding</div>
 				<p>Funding for performance will be allocated and obligated for each exercised Contract Line Item (CLIN).</p>
-			
 
 				<div className="sub-heading">Contract Line Item Number (CLIN) Format</div>							
 
@@ -342,11 +359,13 @@ var Services = React.createClass({
 
 				{CLINS}
 
-				<div id="additional-clins">
+				{ this.state.addClin? 
+				<div>
 					<Clin />
-				</div>
-
+					<button className="add btn btn-default" onClick={this.generateClin}>Save CLIN</button>
+				</div> :
 				<button className="add btn btn-default" onClick={this.generateClin}>Add CLIN</button>
+				}
 
 				<br />
 
@@ -355,12 +374,12 @@ var Services = React.createClass({
 				<p>We have pre-populated this section with the standard agile contracting text. However you are free to add to, modify or delete this text as you see fit.
 				</p>
 
-				{this.state.edit === "paymentText"?
-				<div><div className="edit" onClick={this.toggleEdit.bind(this, 'paymentText')}>Done</div>
-					<textarea className="form-control" rows="4" defaultValue={this.state.paymentText} onChange={this.handleChange.bind(this, 'paymentText')}></textarea></div>:
+				{this.state.edit === "paymentSchedule"?
+				<div><div className="edit" onClick={this.toggleEdit.bind(this, 'paymentSchedule')}>Done</div>
+					<textarea className="form-control" rows="4" defaultValue={this.state.paymentText} onChange={this.handleChange.bind(this, 'paymentSchedule')}></textarea></div>:
 				<div>
-					<div className="edit" onClick={this.toggleEdit.bind(this, 'paymentText')}>Edit</div>
-					{this.state.paymentText}
+					<div className="edit" onClick={this.toggleEdit.bind(this, 'paymentSchedule')}>Edit</div>
+					{this.state.paymentSchedule}
 				</div>
 				}	
 				
@@ -370,30 +389,6 @@ var Services = React.createClass({
 		);
 	},
 });
-// if they click award fee or incentive fee - not to exceed X. utilize agency specific guidance regarding the [award fee]
-// 				<div className="sub-heading">Awards and Incentives</div>
-				// <h5>Would you like to include an award or an incentive?</h5>
-				// <div className="radio">
-				  // <label>
-				    // <input type="radio" value={this.state.awardFee} onChange={this.addFee.bind(this, "awardFee")}></input>
-				//     Award Fee
-				//   </label>
-				// </div>
-				// <div className="radio">
-				//   <label>
-				//     <input type="radio" value={this.state.awardFee} onChange={this.addFee.bind(this, "incentiveFee")}></input>
-				//     Incentive Fee
-				//   </label>
-				// </div>
-				// <div className="radio">
-				//   <label>
-				//     <input type="radio" value={this.state.awardFee} onChange={this.addFee.bind(this, "noFee")}></input>
-				//     Neither
-				//   </label>
-				// </div>award subjective - specific criteria ex: product is quality, the form works
-// incentive fee = objective assessment, ex: stuck to schedule, defect rate was < 5%
-// (Jonathan doesn't like...)
-
 
 
 module.exports = Services;

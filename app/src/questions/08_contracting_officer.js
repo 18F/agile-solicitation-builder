@@ -1,6 +1,12 @@
 var React = require('react');
 var StateMixin = require("../state_mixin");
 
+var STATES = [
+	"contractingOfficer",
+	"contractingOfficerRepresentative",
+	"productOwner",
+]
+
 var AdditionalRole = React.createClass({
 	render: function() {
 		return (
@@ -18,36 +24,30 @@ var ContractingOfficer = React.createClass({
 		// collect final state values
 		// also collect any new custom roles
 		var data = {};
-		data["contracting_officer"] = this.state.coText;
-		data["contracting_officer_representative"] = this.state.corText;
-		data["product_owner"] = this.state.productOwnerText;
+		data["contractingOfficer"] = this.state.coText;
+		data["contractingOfficerRepresentative"] = this.state.corText;
+		data["productOwner"] = this.state.productOwnerText;
 
 	  put_data(8, 1, data, function(content){
       window.location.replace(content['url']);
     }.bind(this));
   },
-	getInitialState: function() {
-		return {
-			edit: null,
-			coText: "",
-			corText: "",
-			productOwnerText: "",
-		};
+	getInitialState: function() {		
+		var initialStates = getStates(STATES);
+		return initialStates;
 	},
   componentDidMount: function() {
-  	$("#additional-roles").hide();
+  	$('#additional-roles').hide();
   	var rfqId = getId(window.location.hash);
     get_data(8, rfqId, function(content){
-      this.setState({
-        coText: content["data"]["contracting_officer"],
-        corText: content["data"]["contracting_officer_representative"],
-        productOwnerText: content["data"]["product_owner"],
-      });
+    	var componentStates = getComponents(content["data"]);
+      this.setState( componentStates );      
     }.bind(this));
   },
   addRole: function() {
   	// @TODO do not add empty text box unless previous empty text box has been filled in
-  	$("#additional-roles").show();
+  	$('#additional-roles').show();
+  	console.log('add role');
 
   },
 	render: function() {
@@ -63,10 +63,10 @@ var ContractingOfficer = React.createClass({
 
 				{this.state.edit === "co"?
 				<div><div className="edit" onClick={this.toggleEdit.bind(this, 'co')}>Done</div>
-					<textarea className="form-control" rows="4" defaultValue={this.state.coText} onChange={this.handleChange.bind(this, 'co')}></textarea></div>:
+					<textarea className="form-control" rows="4" defaultValue={this.state.contractingOfficer} onChange={this.handleChange.bind(this, 'co')}></textarea></div>:
 				<div>
 					<div className="edit" onClick={this.toggleEdit.bind(this, 'co')}>Edit</div>
-					{this.state.coText}
+					{this.state.contractingOfficer}
 				</div>
 				}
 
@@ -75,20 +75,20 @@ var ContractingOfficer = React.createClass({
 				{this.state.edit === "cor"? 
 				<div>
 				<div className="edit" onClick={this.toggleEdit.bind(this, 'cor')}>Done</div>
-				<textarea className="form-control" rows="4" defaultValue={this.state.corText} onChange={this.handleChange.bind(this, 'cor')}></textarea></div> :
+				<textarea className="form-control" rows="4" defaultValue={this.state.contractingOfficerRepresentative} onChange={this.handleChange.bind(this, 'cor')}></textarea></div> :
 				<div>
 				<div className="edit" onClick={this.toggleEdit.bind(this, 'cor')}>Edit</div>
-				{this.state.corText}</div>
+				{this.state.contractingOfficerRepresentative}</div>
 				}
 
 				<div className="sub-heading editable">Product Owner's Authority</div>
 				{this.state.edit === "po"? 
 				<div>
 				<div className="edit" onClick={this.toggleEdit.bind(this, 'po')}>Done</div>
-				<textarea className="form-control" rows="4" defaultValue={this.state.productOwnerText} onChange={this.handleChange.bind(this, 'po')}></textarea></div> :
+				<textarea className="form-control" rows="4" defaultValue={this.state.productOwner} onChange={this.handleChange.bind(this, 'po')}></textarea></div> :
 				<div>
 				<div className="edit" onClick={this.toggleEdit.bind(this, 'po')}>Edit</div>
-				{this.state.productOwnerText}</div>
+				{this.state.productOwner}</div>
 				}
 				
 				<div id="additional-roles">

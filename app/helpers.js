@@ -12,8 +12,12 @@ function getStates(states){
 	return statesDict;
 }
 
-function getComponents(data, states){
-	componentStates = {};
+function getComponents(data){
+	states = Object.keys(data);
+	for (i=0; i < states.length; i++){
+		console.log('"' + states[i] + '",');
+	}
+	componentStates = {};	
 	for (i=0; i < states.length; i++){
 		var state = states[i];
 		componentStates[state] = data[state];

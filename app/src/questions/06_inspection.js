@@ -1,23 +1,22 @@
 var React = require('react');
 var StateMixin = require("../state_mixin");
 
+var STATES = [
+	"inspectionOverview",
+	"lateDelivery",
+];
 
 var Inspection = React.createClass({
 	mixins: [StateMixin],
 	getInitialState: function() {
-		return {
-			inspectionOverview: "",
-			lateDelivery: "",
-		};
+		var initialStates = getStates(STATES);
+		return initialStates;
 	},
 	componentDidMount: function() {
 		var rfqId = getId(window.location.hash);
     get_data(6, rfqId, function(content){
-    	var data = content["data"];
-      this.setState({
-      	inspectionOverview: data["inspection_overview"],
-      	lateDelivery: data["late_delivery"],
-      });
+    	var componentStates = getComponents(content["data"]);
+      this.setState( componentStates );      
     }.bind(this));
   },
 	render: function() {

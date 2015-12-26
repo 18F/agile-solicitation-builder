@@ -1,6 +1,7 @@
 var React = require('react');
 var StateMixin = require("../state_mixin");
 
+var STATES = [];
 
 var Requirement = React.createClass({
 	mixins: [StateMixin],
@@ -9,16 +10,14 @@ var Requirement = React.createClass({
 		setTimeout(cb, 500);
 	},
 	getInitialState: function() {
-		return {
-			docType: localStorage.getItem("docType"),
-			agency: localStorage.getItem("agency"),
-		};
+		var initialStates = getStates(STATES);
+		return initialStates;
 	},
 	componentDidMount: function() {
 		var rfqId = getId(window.location.hash);
     get_data(4, rfqId, function(content){
-    	var data = content["data"];
-      this.setState({});
+    	var componentStates = getComponents(content["data"]);
+      this.setState( componentStates );
     }.bind(this));
   },
 	render: function() {

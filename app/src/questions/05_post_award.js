@@ -1,21 +1,19 @@
 var React = require('react');
 var StateMixin = require("../state_mixin");
 
+var STATES = ['invoicing'];
 
 var PostAward = React.createClass({
 	mixins: [StateMixin],
 	getInitialState: function() {
-		return {
-			invoicing: "",
-		};
+		var initialStates = getStates(STATES);
+		return initialStates;
 	},
 	componentDidMount: function() {
 		var rfqId = getId(window.location.hash);
     get_data(5, rfqId, function(content){
-    	var data = content["data"];
-      this.setState({
-      	invoicing: data["invoicing"],
-      });
+    	var componentStates = getComponents(content["data"]);
+      this.setState( componentStates );
     }.bind(this));
   },
 	render: function() {
