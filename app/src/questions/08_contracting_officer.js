@@ -90,6 +90,9 @@ var ContractingOfficer = React.createClass({
 				<div className="edit" onClick={this.toggleEdit.bind(this, 'po')}>Edit</div>
 				{this.state.productOwner}</div>
 				}
+
+				<div className="sub-heading">Data/Analytics Owner</div>
+				<p>@TODO</p>
 				
 				<div id="additional-roles">
 					<AdditionalRole />

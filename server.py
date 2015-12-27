@@ -21,15 +21,6 @@ app.config['APP_SETTINGS'] = config.DevelopmentConfig
 db = SQLAlchemy(app)
 api = Api(app, prefix="/api")
 
-parser = reqparse.RequestParser()
-parser.add_argument('agency')
-parser.add_argument('doc_type')
-parser.add_argument('setaside')
-parser.add_argument('base_number')
-parser.add_argument('program_name')
-
-parser.add_argument('data')
-
 def dicts_to_dict(dicts, key):
     new_dict = {}
     for i, d in enumerate(dicts):
@@ -51,6 +42,8 @@ class Data(Resource):
         return jsonify(data=dicts_to_dict([c.to_dict() for c in content], "name"))
 
     def put(self, rfq_id, section_id):
+        parser = reqparse.RequestParser()
+        parser.add_argument('data')
         data = request.get_json()['data']
         print data
         for key in data:
@@ -67,6 +60,24 @@ class Data(Resource):
             url = "#/rfp/" + str(rfq_id) + "/results"
         return jsonify({"url": url})
 
+class Clin(Resource):
+
+    def get(self, rfq_id):
+        session = Session()
+        clins = session.query(AdditionalClin).filter_by(document_id=rfq_id).all()
+        return jsonify(data=to_dict(clins))
+
+    def post(self, rfq_id):
+        parser = reqparse.RequestParser()
+        clin_values = ["row1", "row2", "row3a", "row3b", "row4a", "row4b", "row5a", "row5b", "row6a", "row6b",]
+        parser.add_argument("row1")
+        parser.add_argument("row2")
+        # for value in clin_values:
+            # parser.add_argument(value)
+        
+        args = parser.parse_args()
+        pprint(args)
+
 
 class Create(Resource):
 
@@ -76,13 +87,20 @@ class Create(Resource):
         return jsonify(data=[r.to_dict() for r in rfqs])
 
     def post(self, **kwargs):
+        parser = reqparse.RequestParser()
+        parser.add_argument('agency')
+        parser.add_argument('doc_type')
+        parser.add_argument('setaside')
+        parser.add_argument('base_number')
+        parser.add_argument('program_name')
+
         args = parser.parse_args()
+
         agency = args['agency'].decode('latin-1').encode('utf8')
         doc_type = args['doc_type'].decode('latin-1').encode('utf8')
         program_name = args['program_name'].decode('latin-1').encode('utf8')
         setaside = args['setaside'].decode('latin-1').encode('utf8')
         base_number = args['base_number'].decode('latin-1').encode('utf8')
-        print agency, doc_type, setaside, base_number
 
         rfq = RFQ(agency=agency, doc_type=doc_type, program_name=program_name, setaside=setaside, base_number=base_number)
         session = Session()
@@ -95,6 +113,7 @@ class Create(Resource):
 api.add_resource(Agencies, '/agencies')
 api.add_resource(Data, '/get_content/<int:rfq_id>/sections/<int:section_id>')
 api.add_resource(Create, '/rfqs')
+api.add_resource(Clin, '/clins/<int:rfq_id>')
 
 # map index.html to app/index.html, map /build/bundle.js to app/build.bundle.js
 @app.route('/initiate')

@@ -25,6 +25,19 @@ var STATES = [
   "addClin",
 ]
 
+var ADD_CLIN = [
+  "row1",
+  "row2",
+  "row3a",
+  "row3b",
+  "row4a",
+  "row4b",
+  "row5a",
+  "row5b",
+  "row6a",
+  "row6b",
+]
+
 var CLIN_CONTENT = {
 	"CLIN 1001": "Option Period 1",
 	"CLIN 2001": "Option Period 2",
@@ -50,42 +63,44 @@ var FEES = {
 var Clin = React.createClass({
 	render: function() {
 		return (
-			<div className="container fake-table col-md-12">
-				<div className="row clin">
-					<div className="col-md-12 table-content">
-						<input type="text" className="long-response"/>
+			<form id="additional-clin">
+				<div className="container fake-table col-md-12">
+					<div className="row clin">
+						<div className="col-md-12 table-content">
+							<input type="text" className="long-response" id="row1"/>
+						</div>
+					</div>
+					<div className="row clin">
+						<div className="col-md-12 table-content">
+							<input type="text" className="long-response" id="row2" />
+						</div>
+					</div>
+					<div className="row clin">
+						<div className="col-md-6 table-content"><input type="text" id="row3a" />
+						</div>
+						<div className="col-md-6 table-content"><input type="text" id="row3b" />
+						</div>
+					</div>
+					<div className="row clin">
+						<div className="col-md-6 table-content"><input type="text" id="row4a" />
+						</div>
+						<div className="col-md-6 table-content"><input type="text" id="row4b"/>
+						</div>
+					</div>
+					<div className="row clin">
+						<div className="col-md-6 table-content"><input type="text" id="row5a" />
+						</div>
+						<div className="col-md-6 table-content"><input type="text" id="row5b" />
+						</div>
+					</div>
+					<div className="row clin">
+						<div className="col-md-6 table-content"><input type="text" id="row6a" />
+						</div>
+						<div className="col-md-6 table-content"><input type="text" id="row6b" />
+						</div>
 					</div>
 				</div>
-				<div className="row clin">
-					<div className="col-md-12 table-content">
-						<input type="text" className="long-response"/>
-					</div>
-				</div>
-				<div className="row clin">
-					<div className="col-md-6 table-content"><input type="text" />
-					</div>
-					<div className="col-md-6 table-content"><input type="text" />
-					</div>
-				</div>
-				<div className="row clin">
-					<div className="col-md-6 table-content"><input type="text" />
-					</div>
-					<div className="col-md-6 table-content"><input type="text" />
-					</div>
-				</div>
-				<div className="row clin">
-					<div className="col-md-6 table-content"><input type="text" />
-					</div>
-					<div className="col-md-6 table-content"><input type="text" />
-					</div>
-				</div>
-				<div className="row clin">
-					<div className="col-md-6 table-content"><input type="text" />
-					</div>
-					<div className="col-md-6 table-content"><input type="text" />
-					</div>
-				</div>
-			</div>
+			</form>
 		);
 	}
 });
@@ -107,11 +122,35 @@ var Services = React.createClass({
 	},
   generateClin: function(){
   	if (this.state.addClin === true){
+
   		// check to see that something has been filled in
+  		var inputFilled = false;
+  		for (i=0; i < ADD_CLIN.length; i++){
+  			var row = $("#" + ADD_CLIN[i])[0];
+  			if (row.value.length > 0) {
+  				inputFilled = true;
+  				break;
+  			}
+  		}
   		// if yes, save value and display as completed CLIN
+  		if (inputFilled){
+  			var rfqId = getId(window.location.hash);
+  			clinData = {};
+  			for (i=0; i < ADD_CLIN.length; i++){
+  				var row = ADD_CLIN[i];
+  				clinData[row] = $("#" + row)[0].value;
+  			}
+  			createCLIN({ clinData }, rfqId, function(data) {
+  				alert(data);
+  			});
+  		}
   		// if not, alert and return
-  		alert("Please add some text before saving!");
-  		return;
+  		else {
+				alert("Please add some text before saving!");
+  			return;
+  		}
+  		
+  		
   	}
   	else {
   		this.setState({addClin: true});

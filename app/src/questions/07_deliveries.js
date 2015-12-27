@@ -96,9 +96,6 @@ var Deliveries = React.createClass({
 
 				<p>The Government {this.state.travelRequirement? "anticipates" : "does not anticipate"} significant travel under this effort. Offices not located in the Washington, DC area require the Contractor to incur travel expenses. Travel must be pre-approved by the CO and Contracting Officer’s Representative (COR). Contractor travel will be made in accordance with FAR part 31.205-46, Travel costs. Each Contractor invoice must include copies of all receipts that VA119A-15-Q-0228 support the travel costs claimed in the invoice. Local travel within a 50-mile radius from the Contractor’s facility is considered the cost of doing business and will not be reimbursed. This includes travel, subsistence, and associated labor charges for travel time. Travel performed for personal convenience and daily travel to and from work at the Contractor’s facility will not be reimbursed. Travel will reimbursed up to ${this.state.travelBudget} NTE.</p>
 
-				<div className="sub-heading">Packaging and Marking of Deliverables</div>
-				<p className="new-content">To support the agile development process we recommend that the COR and vendor establish a secure file sharing system where information and deliverables can be stored and updated. Example services include Google Drive, Box.com, etc.</p>
-				<p className="new-content">Any software written should be stored using version control with the COR and any other relevant government employees will have at a minimum read-only access to.</p>				
 			</div>
 		);
 	},

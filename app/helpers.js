@@ -14,9 +14,9 @@ function getStates(states){
 
 function getComponents(data){
 	states = Object.keys(data);
-	for (i=0; i < states.length; i++){
-		console.log('"' + states[i] + '",');
-	}
+	// for (i=0; i < states.length; i++){
+	// 	console.log('"' + states[i] + '",');
+	// }
 	componentStates = {};	
 	for (i=0; i < states.length; i++){
 		var state = states[i];
@@ -80,5 +80,21 @@ function createRFQ(dataDict, callback){
 			}
 		}
 	});
+}
+
+function createCLIN(clinData, rfqId, callback){
+	console.log(clinData);
+	$.ajax({
+		type: "POST",
+		url: "/api/clins/" + rfqId,
+		data: clinData,
+		dataType: 'json',
+		success: function(data){
+			if (callback){				
+				callback(data);
+			}
+		}
+	});
+
 }
 

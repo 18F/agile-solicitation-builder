@@ -269,26 +269,7 @@ var Objective = React.createClass({
 				<p>The Contractor shall provide and collaborate with the COR on an agenda for this meeting. Discussion topics shall include, but not be limited to: introduction of the Contractor and Government Staff; understanding of the specific tasks and subtasks; project management expectations; agreement on meeting schedules; and agreement on initial delivery dates.</p>
 				<p>The Kick-Off meeting/Post-Award Conference will take place within 10 days from award and will be scheduled by the Contracting Officer.</p>
 
-				<div className="sub-heading">System Documentation and Training</div>
-				
-				
-				<div>Are you currently using a collaborative workspace?</div>
-				<div className="sub-text">Ex: Sharepoint, JIRA, Rally, Google Drive, Box, etc.</div>
-				<p>We strongly encourage the use of a collaborative environment</p>
-				check with agency policy to see which collaboration software is allowed. ex: box.com, google drive/google docs, 
-				code - version control, define what is, examples. (encourage certain options, but vendor will specify)
-				for documents is separate
-				<p>Github: version control</p>
-				<p>Ideally, a well designed interface will not require additional training for users.</p>
-				<p>The Contractor shall:</p>
-				<ul>
-					<li>Provide all system documentation and training to AGENCY staff (in-person, video, and via webinar).</li>
-					<li>Develop and provide effective training materials of all deliverables, including, but not limited to, “train the trainer” documentation.</li>
-					<li>Conduct “train the trainer” sessions for AGENCY staff.</li>
-					<li>Consult with the COR to determine what is appropriate, effective, and essential for training.</li>
-				</ul>
 
-				<p>Furthermore, documentation should be updated with each iteration. This includes technical documentation including but not limited to setup instructions in the README.md, user reseach findings etc. All documents should be stored electronically such that the CO, PM, and any other relevant government employees who have been granted permissions can access them at any time.</p>
 			</div>
 		);
 	},
