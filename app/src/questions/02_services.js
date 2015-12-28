@@ -108,6 +108,8 @@ var Clin = React.createClass({
 var Services = React.createClass({
 	mixins: [StateMixin],
 	componentDidMount: function() {
+		$("div#base-fee").hide();
+		$("div#option-fee").hide();
 		var rfqId = getId(window.location.hash);
     get_data(2, rfqId, function(content){
     	var componentStates = getComponents(content["data"]);
@@ -119,6 +121,16 @@ var Services = React.createClass({
 		initialStates["addClin"] = false;
 		window.is = initialStates;
 		return initialStates;
+	},
+	updateFee: function(key, event) {
+		var value = event.target.value;
+		if (key === "base-fee"){
+			console.log(value);
+			$("div#base-fee").show();
+		}
+		if (key === "option-fee"){
+			console.log(value);
+		}
 	},
   generateClin: function(){
   	if (this.state.addClin === true){
@@ -141,7 +153,9 @@ var Services = React.createClass({
   				clinData[row] = $("#" + row)[0].value;
   			}
   			createCLIN({ clinData }, rfqId, function(data) {
-  				alert(data);
+  				console.log(data);
+  				// reload (if it isn't happening automatically)
+  				this.setState({addClin: false});
   			});
   		}
   		// if not, alert and return
@@ -149,14 +163,10 @@ var Services = React.createClass({
 				alert("Please add some text before saving!");
   			return;
   		}
-  		
-  		
   	}
   	else {
   		this.setState({addClin: true});
-  	}
-  	
-  	console.log("add clin");
+  	}  
   },
 	save: function(cb) {
 		var data = {};
@@ -309,9 +319,12 @@ var Services = React.createClass({
 					{BASE_FEES}
 				</radiogroup>
 
-				<p>Not to exceed ...</p>
-				<input type="text" className="form-control short-response" value={this.state.baseFeeAmount} onChange={this.handleChange.bind(this, "baseFeeAmount")} />
-				<p>Use agency specific guidance regarding specifics.</p>
+				<div id="base-fee">
+					<p>Not to exceed ...</p>
+					<input type="text" className="form-control short-response" value={this.state.baseFeeAmount} onChange={this.updateFee.bind(this, "baseFeeAmount")} />
+					<p>Use agency specific guidance regarding details.</p>
+				</div>
+
 				<br />
 
 				<div className="sub-heading">Option Periods</div>
@@ -325,9 +338,12 @@ var Services = React.createClass({
 					{OPTION_FEES}
 				</radiogroup>
 
-				<p>Not to exceed ...</p>				
-				<input type="text" className="form-control short-response" value={this.state.optionFeeAmount} onChange={this.handleChange.bind(this, "optionFeeAmount")} />
-				<p>Use agency specific guidance regarding specifics.</p>
+				<div id="option-fee">
+					<p>Not to exceed ...</p>				
+					<input type="text" className="form-control short-response" id="option-fee" value={this.state.optionFeeAmount} onChange={this.updateFee.bind(this, "optionFeeAmount")} />
+					<p>Use agency specific guidance for details.</p>
+				</div>
+
 				<br />
 
 				<p>How long would you like period of performance for each <b>option period</b> to be?</p>

@@ -87,7 +87,7 @@ class ContentComponent(Base):
         return "<ContentComponent(name='%s', doc_id='%d', text='%s')>" % (self.name, self.document_id, self.text)
 
 
-class Clin(Base):
+class AdditionalClin(Base):
     __tablename__ = 'clins'
 
     id = Column(Integer, primary_key=True)

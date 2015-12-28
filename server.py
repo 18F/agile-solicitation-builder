@@ -70,11 +70,10 @@ class Clin(Resource):
     def post(self, rfq_id):
         parser = reqparse.RequestParser()
         clin_values = ["row1", "row2", "row3a", "row3b", "row4a", "row4b", "row5a", "row5b", "row6a", "row6b",]
-        parser.add_argument("row1")
-        parser.add_argument("row2")
-        # for value in clin_values:
-            # parser.add_argument(value)
-        
+
+        for value in clin_values:
+            parser.add_argument(value)
+
         args = parser.parse_args()
         pprint(args)
 

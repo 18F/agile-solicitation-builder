@@ -95,6 +95,5 @@ function createCLIN(clinData, rfqId, callback){
 			}
 		}
 	});
-
 }
 
