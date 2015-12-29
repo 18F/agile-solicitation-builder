@@ -1,8 +1,6 @@
 var React = require('react');
 var StateMixin = require("../state_mixin");
 
-// <p>@TODO CLIN number is editable ("0001")
-
 var STATES = [
 	"descriptionOfServices",
 	"farCode",
@@ -23,7 +21,7 @@ var STATES = [
   "iterationPoPNumber",
   "iterationPoPUnit",
   "addClin",
-]
+];
 
 var ADD_CLIN = [
   "row1",
@@ -47,7 +45,7 @@ var CLIN_CONTENT = {
 	"CLIN 6001": "Option Period 6",
 	"CLIN 7001": "Option Period 7",
 	"CLIN 8001": "Option Period 8",
-};
+}
 
 var FAR_CODES = {
 	"FAR 8.4": "Federal Supply Schedules",
@@ -108,13 +106,18 @@ var Clin = React.createClass({
 var Services = React.createClass({
 	mixins: [StateMixin],
 	componentDidMount: function() {
-		$("div#base-fee").hide();
-		$("div#option-fee").hide();
 		var rfqId = getId(window.location.hash);
     get_data(2, rfqId, function(content){
     	var componentStates = getComponents(content["data"]);
-      this.setState( componentStates );
+      this.setState( componentStates );      
     }.bind(this));
+    getCLINs(rfqId, function(clins){
+    	console.log(clins);
+      this.setState( clins );
+    }.bind(this));
+    // these components will only appear if a fee has been selected
+		$("div#base-fee").hide();
+		$("div#option-fee").hide();
   },
 	getInitialState: function() {
 		var initialStates = getStates(STATES);
@@ -126,6 +129,9 @@ var Services = React.createClass({
 		var value = event.target.value;
 		if (key === "base-fee"){
 			console.log(value);
+			if !(value === "none"){
+
+			}
 			$("div#base-fee").show();
 		}
 		if (key === "option-fee"){
@@ -156,7 +162,7 @@ var Services = React.createClass({
   				console.log(data);
   				// reload (if it isn't happening automatically)
   				this.setState({addClin: false});
-  			});
+  			}.bind(this));
   		}
   		// if not, alert and return
   		else {

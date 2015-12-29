@@ -51,7 +51,7 @@ var Objective = React.createClass({
 		var rfqId = getId(window.location.hash);
     get_data(3, rfqId, function(content){
     	var components = getComponents(content["data"]);
-      this.setState({ components });
+      this.setState( components );
     }.bind(this));
   },
 	save: function(cb) {

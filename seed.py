@@ -157,6 +157,11 @@ content_components = [
         "section": 6,
     },
     {
+        "name": "workspace",
+        "text": "none",
+        "section": 6,
+    },
+    {
         "name": "travelRequirement",
         "text": "false",
         "section": 7,
