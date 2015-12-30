@@ -11,8 +11,10 @@ var AdditionalRole = React.createClass({
 	render: function() {
 		return (
 			<div>
-				<div className="sub-heading"><input type="text" className="medium-response"/></div>
-				<textarea className="form-control" rows="5"></textarea>
+				<div className="sub-heading">
+					<input type="text" className="medium-response form-control" value={this.state.title} onChange={this.handleChange.bind(this, "title")} />
+				</div>
+				<textarea className="form-control" rows="5" value={this.state.text} onChange={this.handleChange.bind(this, "text")}></textarea>
 			</div>
 		);
 	}
@@ -34,10 +36,12 @@ var ContractingOfficer = React.createClass({
   },
 	getInitialState: function() {		
 		var initialStates = getStates(STATES);
+		initialStates["addRole"] = false;
+		initialStates["newTitle"] = "";
+		initialStates["newText"] = "";
 		return initialStates;
 	},
   componentDidMount: function() {
-  	$('#additional-roles').hide();
   	var rfqId = getId(window.location.hash);
     get_data(8, rfqId, function(content){
     	var componentStates = getComponents(content["data"]);
@@ -45,19 +49,26 @@ var ContractingOfficer = React.createClass({
     }.bind(this));
   },
   addRole: function() {
-  	// @TODO do not add empty text box unless previous empty text box has been filled in
-  	$('#additional-roles').show();
-  	console.log('add role');
-
+  	console.log(this.state.addRole);
+  	if (this.state.addRole){  		
+  		// check to see if info has been filled in
+  		if (this.state.title.length > 0 && this.state.text.length > 0){
+  			// send to new helpers function that will save the data
+  			// reload
+  		}
+  		else {
+  			alert("please fill out the title and text components of the form before saving the new role.");
+  		}
+  	}
+  	else {
+  		this.setState({ addRole: true });
+  	}
   },
 	render: function() {
 		return (
 			<div>
 				<div className="main-heading">Roles and Responsibilities</div>
 				<p>We have already provided some recommended content for this section. To delete, modify, or add additional content click the "edit" above the section you wish to change.</p>
-
-				<button className="btn btn-default" onClick={this.addRole}>+ Role</button>
-				<br />
 
 				<div className="sub-heading">Contracting Officer’s Authority</div>
 
@@ -90,13 +101,21 @@ var ContractingOfficer = React.createClass({
 				<div className="edit" onClick={this.toggleEdit.bind(this, 'po')}>Edit</div>
 				{this.state.productOwner}</div>
 				}
-
-				<div className="sub-heading">Data/Analytics Owner</div>
-				<p>@TODO</p>
 				
-				<div id="additional-roles">
-					<AdditionalRole />
-				</div>
+				{this.state.addRole? 
+					<div>
+						<div className="sub-heading">
+							<input type="text" className="medium-response form-control" value={this.state.title} onChange={this.handleChange.bind(this, "title")} />
+						</div>
+						<textarea className="form-control" rows="5" value={this.state.text} onChange={this.handleChange.bind(this, "text")}></textarea>
+						<button className="btn btn-default" onClick={this.addRole}>Save Role</button>
+					</div>
+					: <button className="add btn btn-default" onClick={this.addRole}>+ Role</button>
+				}
+				
+
+				<br />
+				<p>You may also add elaborate on these roles, or add additional roles in the generated RFQ.</p>
 				<br />
 
 			</div>

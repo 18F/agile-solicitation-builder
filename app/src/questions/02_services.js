@@ -52,6 +52,7 @@ var FAR_CODES = {
 	"FAR 16.504": "Indefinite Quantity",
 }
 
+
 var BASE_FEE_OPTIONS = {
 	"base_award": "Award Fee",
 	"base_incentive": "Incentive Fee",
@@ -115,7 +116,7 @@ var Services = React.createClass({
 		var rfqId = getId(window.location.hash);
     get_data(2, rfqId, function(content){
     	var componentStates = getComponents(content["data"]);
-      this.setState( componentStates );      
+      this.setState( componentStates );  
     }.bind(this));
     getCLINs(rfqId, function(clins){
     	console.log("clins");
@@ -129,20 +130,15 @@ var Services = React.createClass({
 	getInitialState: function() {
 		var initialStates = getStates(STATES);
 		initialStates["addClin"] = false;
-		window.is = initialStates;
 		return initialStates;
 	},
 	updateFee: function(key, event) {
 		var value = event.target.value;
-		console.log(value);
-		if (key === "base-fee"){
-			console.log(value);
-			if (value != "none"){
-				$("div#base-fee").show();
-			}
-			if (key === "option-fee"){
-				console.log(value);
-			}
+		if (key === "baseFee"){
+			this.setState({baseFee: value});
+		}
+		if (key === "optionFee"){
+			this.setState({optionFee: value});
 		}
 	},
   generateClin: function(){
@@ -210,10 +206,11 @@ var Services = React.createClass({
 
 		var BASE_FEES = [];
 		for (var key in BASE_FEE_OPTIONS) {
+			var value = BASE_FEE_OPTIONS[key];
 			BASE_FEES.push(
 				<div className="radio">
 					<label>
-						<input type="radio" value={key} checked={key == this.state.baseFee} />{ FEES[key] }
+						<input type="radio" value={key} checked={key == this.state.baseFee} />{ BASE_FEE_OPTIONS[key] }
 				  </label>
 				</div>
 			)
@@ -221,10 +218,11 @@ var Services = React.createClass({
 
 		var OPTION_FEES = [];
 		for (var key in OPTION_FEE_OPTIONS) {
+			var value = OPTION_FEE_OPTIONS[key];
 			OPTION_FEES.push(
 				<div className="radio">
 					<label>
-						<input type="radio" value={key} checked={key == this.state.optionFee} />{ FEES[key] }
+						<input type="radio" value={key} checked={key == this.state.optionFee} />{ OPTION_FEE_OPTIONS[key] }
 				  </label>
 				</div>
 			)
@@ -332,11 +330,13 @@ var Services = React.createClass({
 					{BASE_FEES}
 				</radiogroup>
 
-				<div id="base-fee">
-					<p>Not to exceed ...</p>
-					<input type="text" className="form-control short-response" value={this.state.baseFeeAmount} onChange={this.updateFee.bind(this, "baseFeeAmount")} />
-					<p>Use agency specific guidance regarding details.</p>
-				</div>
+				{(this.state.baseFee === "none")? null :
+					<div>
+						<p>Not to exceed ...</p>
+						<input type="text" className="form-control short-response" onChange={this.handleChange.bind(this, "baseFeeAmount")} value={this.state.baseFeeAmount} />
+						<p>Use agency specific guidance regarding details.</p>
+					</div>
+				}
 
 				<br />
 
@@ -351,11 +351,13 @@ var Services = React.createClass({
 					{OPTION_FEES}
 				</radiogroup>
 
-				<div id="option-fee">
-					<p>Not to exceed ...</p>				
-					<input type="text" className="form-control short-response" id="option-fee" value={this.state.optionFeeAmount} onChange={this.updateFee.bind(this, "optionFeeAmount")} />
-					<p>Use agency specific guidance for details.</p>
-				</div>
+				{(this.state.optionFee == "none")? null :
+					<div>
+						<p>Not to exceed ...</p>		
+						<input type="text" className="form-control short-response" onChange={this.handleChange.bind(this, "optionFeeAmount")} value={this.state.optionFeeAmount} />
+						<p>Use agency specific guidance for details.</p>
+					</div>
+				}
 
 				<br />
 
