@@ -7,12 +7,10 @@ from sqlalchemy.orm import sessionmaker, relationship
 
 import seed
 
-
 engine = create_engine('sqlite:///playbook.db', echo=True)
 Session = sessionmaker(bind=engine)
 
 Base = declarative_base()
-
 
 content_components = seed.content_components
 
@@ -88,7 +86,7 @@ class ContentComponent(Base):
 
 
 class AdditionalClin(Base):
-    __tablename__ = 'clins'
+    __tablename__ = 'additional_clins'
 
     id = Column(Integer, primary_key=True)
     document_id = Column(Integer, ForeignKey('rfqs.id'), primary_key=True)
@@ -102,6 +100,25 @@ class AdditionalClin(Base):
     row6a = Column(Text)
     row6b = Column(Text)
 
+    def to_dict(self):
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+        
+
     def __repr__(self):
         return "<Clin(id='%d', row1='%s', row2='%s', row3a='%s')>" % (self.document_id, self.row1, self.row2, self.row3a)
+
+class AdditionalComponent(Base):
+    __tablename__ = 'additional_component'
+
+    id = Column(Integer, primary_key=True)
+    document_id = Column(Integer, ForeignKey('rfqs.id'), primary_key=True)
+    title = Column(String)
+    text = Column(Text)
+    category = Column(String)
+    
+    def to_dict(self):
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}    
+
+    def __repr__(self):
+        return "<AdditionalComponent(id='%d', title='%s', text='%s', category='%s')>" % (self.document_id, self.title, self.category, self.text)
 

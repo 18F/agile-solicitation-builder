@@ -24,7 +24,6 @@ var Requirement = React.createClass({
 		return (
 			<div>
 				<div className="main-heading">Contractor Personnel</div>
-				<p><b>@TODO RECONCILE THE TWO VERSIONS OF THE TEXT BELOW</b></p>
 				<div className="sub-heading">Key Personnel</div>
 				<p>The vendor shall provide talented people who have experience creating modern digital services. This includes bringing in seasoned product managers, engineers, UX researchers and designers.</p>
 

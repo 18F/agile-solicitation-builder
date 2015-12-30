@@ -98,7 +98,7 @@ function createCLIN(clinData, rfqId, callback){
 	});
 }
 
-function getCLINs(rfqId){
+function getCLINs(rfqId, callback){
 	$.ajax({
 		type: "GET",
 		url: "/api/clins/" + rfqId,

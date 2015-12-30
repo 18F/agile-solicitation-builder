@@ -52,9 +52,15 @@ var FAR_CODES = {
 	"FAR 16.504": "Indefinite Quantity",
 }
 
-var FEES = {
+var BASE_FEE_OPTIONS = {
 	"base_award": "Award Fee",
 	"base_incentive": "Incentive Fee",
+	"none": "Neither",
+}
+
+var OPTION_FEE_OPTIONS = {
+	"option_award": "Award Fee",
+	"option_incentive": "Incentive Fee",
 	"none": "Neither",
 }
 
@@ -112,6 +118,7 @@ var Services = React.createClass({
       this.setState( componentStates );      
     }.bind(this));
     getCLINs(rfqId, function(clins){
+    	console.log("clins");
     	console.log(clins);
       this.setState( clins );
     }.bind(this));
@@ -127,15 +134,15 @@ var Services = React.createClass({
 	},
 	updateFee: function(key, event) {
 		var value = event.target.value;
+		console.log(value);
 		if (key === "base-fee"){
 			console.log(value);
-			if !(value === "none"){
-
+			if (value != "none"){
+				$("div#base-fee").show();
 			}
-			$("div#base-fee").show();
-		}
-		if (key === "option-fee"){
-			console.log(value);
+			if (key === "option-fee"){
+				console.log(value);
+			}
 		}
 	},
   generateClin: function(){
@@ -202,7 +209,7 @@ var Services = React.createClass({
 		}
 
 		var BASE_FEES = [];
-		for (var key in FEES) {
+		for (var key in BASE_FEE_OPTIONS) {
 			BASE_FEES.push(
 				<div className="radio">
 					<label>
@@ -213,7 +220,7 @@ var Services = React.createClass({
 		}
 
 		var OPTION_FEES = [];
-		for (var key in FEES) {
+		for (var key in OPTION_FEE_OPTIONS) {
 			OPTION_FEES.push(
 				<div className="radio">
 					<label>
@@ -321,7 +328,7 @@ var Services = React.createClass({
 				</form>
 
 				<p>Would you like to offer any of the following with the <b>base period</b>?</p>
-				<radiogroup onChange={this.handleChange.bind(this, "baseFee")}>
+				<radiogroup onChange={this.updateFee.bind(this, "baseFee")}>
 					{BASE_FEES}
 				</radiogroup>
 
@@ -340,7 +347,7 @@ var Services = React.createClass({
 				</form>
 
 				<p>Would you like to offer any of the following with each <b>option period</b>?</p>
-				<radiogroup onChange={this.handleChange.bind(this, 'optionFee')}>
+				<radiogroup onChange={this.updateFee.bind(this, 'optionFee')}>
 					{OPTION_FEES}
 				</radiogroup>
 
