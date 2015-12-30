@@ -10,6 +10,8 @@ import sys
 import config
 import datetime
 
+import create_document
+
 from docx import Document
 from models import Agency, RFQ, ContentComponent, AdditionalClin, AdditionalComponent, Base, Session, engine
 from seed import agencies
@@ -135,9 +137,7 @@ def send_js(path):
 @app.route('/download/<int:rfq_id>')
 def download(rfq_id):
 
-
-
-    
+    doc_name = create_document.create_document(rfq_id)
 
     return send_from_directory(directory="downloads", filename=doc_name)
 

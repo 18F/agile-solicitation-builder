@@ -107,8 +107,8 @@ var ContractingOfficer = React.createClass({
 						<div className="sub-heading">
 							<input type="text" className="medium-response form-control" value={this.state.title} onChange={this.handleChange.bind(this, "title")} />
 						</div>
-						<textarea className="form-control" rows="5" value={this.state.text} onChange={this.handleChange.bind(this, "text")}></textarea>
-						<button className="btn btn-default" onClick={this.addRole}>Save Role</button>
+						<textarea className="form-control" placeholder="Role Title" rows="5" value={this.state.text} onChange={this.handleChange.bind(this, "text")}></textarea>
+						<button className="btn btn-default" placeholder="Description of Role" onClick={this.addRole}>Save Role</button>
 					</div>
 					: <button className="add btn btn-default" onClick={this.addRole}>+ Role</button>
 				}
