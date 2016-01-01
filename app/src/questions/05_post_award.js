@@ -16,6 +16,9 @@ var PostAward = React.createClass({
       this.setState( componentStates );
     }.bind(this));
   },
+  save: function(cb) {
+  	cb();
+  },
 	render: function() {
 		return (
 			<div>

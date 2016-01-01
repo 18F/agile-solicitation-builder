@@ -73,14 +73,7 @@ class Clin(Resource):
         parser = reqparse.RequestParser()
         clin_values = ["row1", "row2", "row3a", "row3b", "row4a", "row4b", "row5a", "row5b", "row6a", "row6b",]
         data = request.get_json()
-        print data
-        print kwargs
-        # for value in clin_values:
-        #     parser.add_argument(value)
-        # parser.add_argument("clinData")
-
-        # args = parser.parse_args()
-        # pprint(args)
+        print data["data"]
 
         # save as AdditionalClin
 
@@ -136,9 +129,8 @@ def send_js(path):
 
 @app.route('/download/<int:rfq_id>')
 def download(rfq_id):
-
     doc_name = create_document.create_document(rfq_id)
-
+    print doc_name
     return send_from_directory(directory="downloads", filename=doc_name)
 
 def create_tables():

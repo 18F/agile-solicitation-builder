@@ -179,10 +179,17 @@ var Services = React.createClass({
   },
 	save: function(cb) {
 		var data = {};
+		
 		// access state data from variables?
 		for (i=0; i < STATES.length; i++){
-			// TODO: save data
+			var stateName = STATES[i];
+			data[stateName] = this.state[stateName];
 		}
+
+		var rfqId = getId(window.location.hash);
+    put_data(2, rfqId, data, function(response){
+      window.location.replace(response['url']);
+    }.bind(this));
 		
 		// get data from FAR code section
 		setTimeout(cb, 500);

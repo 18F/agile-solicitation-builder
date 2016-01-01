@@ -83,12 +83,13 @@ function createRFQ(dataDict, callback){
 }
 
 function createCLIN(clinData, rfqId, callback){
-	console.log(clinData);
+	console.log("clinData", clinData);
 	window.cd = clinData;
 	$.ajax({
 		type: "POST",
 		url: "/api/clins/" + rfqId,
 		data: JSON.stringify({data: clinData['clinData']}),
+		contentType: 'application/json',
 		dataType: 'json',
 		success: function(data){
 			if (callback){				

@@ -33,16 +33,19 @@ var Question = React.createClass({
 		}
 	},
 	handlePrev: function() {
-		this.refs.question.save(function() {
+		this.save(function() {
 			var prevLink = this.linkForOffset(-1);
 			this.history.pushState(null, prevLink, null);
 		}.bind(this));
 	},
 	handleNext: function() {
-		this.refs.question.save(function() {
+		this.save(function() {
 			var nextLink = this.linkForOffset(1);
 			this.history.pushState(null, nextLink, null);
 		}.bind(this));
+	},
+	save: function(callback) {
+		this.refs.question.save(callback);
 	},
 	getComponentForQuestionID: function(qid) {
 		for(var i = 0; i < questionList.length; i++) {
