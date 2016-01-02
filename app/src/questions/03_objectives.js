@@ -55,7 +55,16 @@ var Objective = React.createClass({
     }.bind(this));
   },
 	save: function(cb) {
-		setTimeout(cb, 500);
+		var data = {};
+		
+		for (i=0; i < STATES.length; i++){
+			var stateName = STATES[i];
+			data[stateName] = this.state[stateName];
+		}
+
+		// get data from FAR code section
+		var rfqId = getId(window.location.hash);
+    put_data(3, rfqId, data, cb);
 	},
 	render: function() {
 

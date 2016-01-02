@@ -6,8 +6,16 @@ var STATES = [];
 var Requirement = React.createClass({
 	mixins: [StateMixin],
 	save: function(cb) {
-		// TODO: save data
-		setTimeout(cb, 500);
+		var data = {};
+		
+		for (i=0; i < STATES.length; i++){
+			var stateName = STATES[i];
+			data[stateName] = this.state[stateName];
+		}
+
+		// get data from FAR code section
+		var rfqId = getId(window.location.hash);
+    put_data(4, rfqId, data, cb);
 	},
 	getInitialState: function() {
 		var initialStates = getStates(STATES);
