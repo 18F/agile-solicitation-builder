@@ -20,6 +20,19 @@ var Inspection = React.createClass({
       this.setState( componentStates );      
     }.bind(this));
   },
+  save: function(cb) {
+		var data = {};
+		
+		for (i=0; i < STATES.length; i++){
+			var stateName = STATES[i];
+			data[stateName] = this.state[stateName];
+		}
+
+		// get data from FAR code section
+		var rfqId = getId(window.location.hash);
+    put_data(6, rfqId, data, cb);
+		
+	},
 	render: function() {
 		return (
 			<div>
@@ -118,8 +131,6 @@ var Inspection = React.createClass({
 				code - version control, define what is, examples. (encourage certain options, but vendor will specify)
 				for documents is separate
 				<p>Github: version control</p>
-
-				
 			
 
 			</div>

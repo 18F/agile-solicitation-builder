@@ -49,8 +49,9 @@ class Data(Resource):
         data = request.get_json()['data']
         print data
         for key in data:
+            print key
             session = Session()
-            component = session.query(ContentComponent).filter_by(document_id=rfq_id).filter_by(name=key).first()
+            component = session.query(ContentComponent).filter_by(document_id=rfq_id).filter_by(name=key).first()            
             component.text = data[key]
             session.merge(component)
             session.commit()
@@ -72,11 +73,21 @@ class Clin(Resource):
     def post(self, rfq_id):
         parser = reqparse.RequestParser()
         clin_values = ["row1", "row2", "row3a", "row3b", "row4a", "row4b", "row5a", "row5b", "row6a", "row6b",]
-        data = request.get_json()
-        print data["data"]
+        data = request.get_json()["data"]        
 
-        # save as AdditionalClin
+        data_dict = {"document_id": int(rfq_id)}
+        for value in clin_values:
+            data_dict[value] = data[value]
+        r1 = data['row1']
+        r2 = data['row2']
 
+        print r1, r2
+
+        additional_clin = AdditionalClin(document_id=int(rfq_id), row1=r1, row2=r2)
+        session = Session()
+        session.add(additional_clin)
+        session.commit()
+        
 
 class Create(Resource):
 

@@ -30,6 +30,10 @@ button.add {
 	border-top:0;
 }
 
+div.btn-toolbar{
+	margin-top: 20px;
+}
+
 .table-content {
 	margin-top: 5px;
 	margin-bottom: 5px;

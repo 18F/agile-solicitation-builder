@@ -24,11 +24,23 @@ var SpecialRequirements = React.createClass({
       this.setState( componentStates );
     }.bind(this));
   },
+  save: function(cb) {
+		var data = {};
+		
+		for (i=0; i < STATES.length; i++){
+			var stateName = STATES[i];
+			data[stateName] = this.state[stateName];
+		}
+
+		// get data from FAR code section
+		var rfqId = getId(window.location.hash);
+    put_data(9, rfqId, data, cb);
+		
+	},
 	render: function() {
 		return (
 			<div>
-				<div className="main-heading">Special Contract Requirements</div>
-				<button className="btn btn-default">Add Special Requirement</button>
+				<div className="main-heading">Special Contract Requirements</div>				
 
 				<div className="sub-heading">Controlled Facilities and Information Systems Security</div>
 				<p>{this.state.security}</p>
@@ -91,6 +103,7 @@ var SpecialRequirements = React.createClass({
 				<div className="sub-heading">Order of Precedence</div>
 				{this.state.orderOfPrecedence}
 
+				<button className="btn btn-default">Add Special Requirement</button>
 			</div>
 		);
 	},

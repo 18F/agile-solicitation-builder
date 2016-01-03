@@ -1,5 +1,6 @@
 var React = require('react');
 var StateMixin = require("../state_mixin");
+var EditBox = require("../edit_box");
 
 var STATES = [
 	"contractingOfficer",
@@ -22,18 +23,22 @@ var AdditionalRole = React.createClass({
 
 var ContractingOfficer = React.createClass({
 	mixins: [StateMixin],
-	save: function() {
-		// collect final state values
-		// also collect any new custom roles
-		var data = {};
-		data["contractingOfficer"] = this.state.coText;
-		data["contractingOfficerRepresentative"] = this.state.corText;
-		data["productOwner"] = this.state.productOwnerText;
 
-	  put_data(8, 1, data, function(content){
-      window.location.replace(content['url']);
-    }.bind(this));
-  },
+	save: function(cb) {
+		var data = {};
+
+		// also collect any new custom roles if not already saved separately
+		
+		for (i=0; i < STATES.length; i++){
+			var stateName = STATES[i];
+			data[stateName] = this.state[stateName];
+		}
+
+		// get data from FAR code section
+		var rfqId = getId(window.location.hash);
+    put_data(8, rfqId, data, cb);
+		
+	},
 	getInitialState: function() {		
 		var initialStates = getStates(STATES);
 		initialStates["addRole"] = false;
@@ -70,18 +75,18 @@ var ContractingOfficer = React.createClass({
 				<div className="main-heading">Roles and Responsibilities</div>
 				<p>We have already provided some recommended content for this section. To delete, modify, or add additional content click the "edit" above the section you wish to change.</p>
 
-				<div className="sub-heading">Contracting Officer’s Authority</div>
+				<div className="sub-heading">Contracting Officer (CO)</div>
 
-				{this.state.edit === "co"?
-				<div><div className="edit" onClick={this.toggleEdit.bind(this, 'co')}>Done</div>
-					<textarea className="form-control" rows="4" defaultValue={this.state.contractingOfficer} onChange={this.handleChange.bind(this, 'co')}></textarea></div>:
-				<div>
-					<div className="edit" onClick={this.toggleEdit.bind(this, 'co')}>Edit</div>
-					{this.state.contractingOfficer}
-				</div>
-				}
+				<EditBox
+						text={this.state.contractingOfficer}
+						editing={this.state.edit == 'co'}
+						onStatusChange={this.toggleEdit.bind(this, 'co')}
+						onTextChange={this.handleChange.bind(this, 'contractingOfficer')}>
+				</EditBox>
 
-				<div className="sub-heading">Contracting Officer’s Representative (COR) Authority</div>
+
+
+				<div className="sub-heading">Contracting Officer’s Representative (COR)</div>
 				
 				{this.state.edit === "cor"? 
 				<div>
@@ -92,7 +97,7 @@ var ContractingOfficer = React.createClass({
 				{this.state.contractingOfficerRepresentative}</div>
 				}
 
-				<div className="sub-heading editable">Product Owner's Authority</div>
+				<div className="sub-heading editable">Product Owner</div>
 				{this.state.edit === "po"? 
 				<div>
 				<div className="edit" onClick={this.toggleEdit.bind(this, 'po')}>Done</div>
