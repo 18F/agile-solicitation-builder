@@ -292,6 +292,11 @@ content_components = [
         "section": 9,
     },
     {
+        "name": "federalHolidays",
+        "text": "Any work with the Government staff shall not take place on Federal holidays or weekends unless directed by the Contracting Officer (CO). All federal holidays by year are listed on the OPM website (www.opm.gov).",
+        "section": 9,
+    },
+    {
         "name": "contractClauses",
         "text": "",
         "section": 10,
@@ -299,13 +304,21 @@ content_components = [
 ]
 
 agencies = {
+    "USDA": "Department of Agriculture",
+    "DOC": "Department of Commerce",
+    "DOD": "Department of Defense",
     "ED": "Department of Education",
     "DOE": "Department of Energy",
-    "EPA": "Environmental Protection Agency",
-    "GSA": "General Services Administration",
+    "HHS": "Department of Health and Human Services",
+    "DHS": "Department of Homeland Security",
+    "HUD": "Department of Housing and Urban Development",
+    "DOJ": "Department of Justice",
     "DOL": "Department of Labor",
-    "NARA": "National Archives and Records Administration",
+    "State": "Department of State",
     "NASA": "National Aeronautics and Space Administration",
-    "OMB": "Office of Management and Budget",
-    "VA": "Department of Veteran Affairs"
+    "DOI": "Department of the Interior",
+    "Treasury": "Department of the Treasury",
+    "DOT": "Department of Transportation",
+    "VA": "Department of Veterans Affairs",
+    "EOP": "Executive Office of the President",
 }

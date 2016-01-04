@@ -10,6 +10,7 @@ var STATES = [
 	"smallBusinessStatus",
 	"titleToMaterials",
 	"useOfData",
+	"federalHolidays",
 ];
 
 var SpecialRequirements = React.createClass({
@@ -48,6 +49,14 @@ var SpecialRequirements = React.createClass({
 						editing={this.state.edit == 'security'}
 						onStatusChange={this.toggleEdit.bind(this, 'security')}
 						onTextChange={this.handleChange.bind(this, 'security')}>
+				</EditBox>
+
+				<div className="sub-heading">Federal Holidays</div>
+				<EditBox
+						text={this.state.federalHolidays}
+						editing={this.state.edit === 'federalHolidays'}
+						onStatusChange={this.toggleEdit.bind(this, 'federalHolidays')}
+						onTextChange={this.handleChange.bind(this, 'federalHolidays')}>
 				</EditBox>
 				
 				<div className="sub-heading">Section 508 Accessibility Standards Notice (September 2009)</div>

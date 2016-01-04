@@ -215,7 +215,7 @@ var Services = React.createClass({
 						<input type="radio" value={key} checked={key == this.state.farCode} />{key} - { FAR_CODES[key] }
 				  </label>
 				</div>
-			)
+			);
 		}
 
 		var BASE_FEES = [];
@@ -227,7 +227,7 @@ var Services = React.createClass({
 						<input type="radio" value={key} checked={key == this.state.baseFee} />{ BASE_FEE_OPTIONS[key] }
 				  </label>
 				</div>
-			)
+			);
 		}
 
 		var OPTION_FEES = [];
@@ -239,7 +239,7 @@ var Services = React.createClass({
 						<input type="radio" value={key} checked={key == this.state.optionFee} />{ OPTION_FEE_OPTIONS[key] }
 				  </label>
 				</div>
-			)
+			);
 		}
 
 		var ADDITIONAL_CLINS = [];

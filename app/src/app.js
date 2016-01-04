@@ -28,10 +28,10 @@ var Header = React.createClass({
 		};
 
 		return (
-			<div className="col-md-12 header">
+			<div className="col-md-12 header">				
 				<h1>
 					<IndexLink to="/" style={inheritStyle}>Playbook in Action</IndexLink>
-				</h1>
+				</h1>											
 			</div>
 		);
 	},
