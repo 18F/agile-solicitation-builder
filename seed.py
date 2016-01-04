@@ -28,7 +28,7 @@ content_components = [
     },
     {
         "name": "farCode",
-        "text": "Far 8.4",
+        "text": "FAR 8.4",
         "section": 2,
     },
     {
@@ -92,13 +92,23 @@ content_components = [
         "section": 2,
     },
     {
+        "name": "maxBudget",
+        "text": "0",
+        "section": 2,
+    },
+    {
         "name": "travelRequirement",
-        "text": "false",
+        "text": "no",
         "section": 2,
     },
     {
         "name": "travelBudget",
         "text": "0",
+        "section": 2,
+    },
+    {
+        "name": "travelLanguage",
+        "text": "Travel must be pre-approved by the CO and Contracting Officer’s Representative (COR). Contractor travel will be made in accordance with FAR part 31.205-46, Travel costs. Each Contractor invoice must include copies of all receipts that VA119A-15-Q-0228 support the travel costs claimed in the invoice. Local travel within a 50-mile radius from the Contractor’s facility is considered the cost of doing business and will not be reimbursed. This includes travel, subsistence, and associated labor charges for travel time. Travel performed for personal convenience and daily travel to and from work at the Contractor’s facility will not be reimbursed.",
         "section": 2,
     },
     {
@@ -132,8 +142,28 @@ content_components = [
         "section": 3,
     },
     {
-        "name": "maxBudget",
-        "text": "0",
+        "name": "internal_people",
+        "text": "false",
+        "section": 3,
+    },
+        {
+        "name": "internal_it",
+        "text": "false",
+        "section": 3,
+    },
+        {
+        "name": "external_people",
+        "text": "false",
+        "section": 3,
+    },
+        {
+        "name": "external_it",
+        "text": "false",
+        "section": 3,
+    },
+    {
+        "name": "deliverables",
+        "text": '["Automated Testing"]',
         "section": 3,
     },
     {
@@ -147,6 +177,11 @@ content_components = [
         "section": 3,
     },
     {
+        "name": "definitionOfDone",
+        "text": "A deliverable will be considered complete and acceptable when it meets the contractor's 'Definition of Done' which are based on the contractor’s Agile Software Development methodology.\n\nEach deliverable shall incorporate agency IT requirements as detailed in the Appendix of this document and the United States Digital Service Playbook (https://playbook.cio.gov) standards and be compliant with Section 508.",
+        "section": 3,
+    },
+    {
         "name": "locationRequirement",
         "text": "no",
         "section": 3,
@@ -154,6 +189,21 @@ content_components = [
     {
         "name": "locationText",
         "text": "",
+        "section": 3,
+    },
+    {
+        "name": "kickOffMeeting",
+        "text": "none",
+        "section": 3,
+    },
+    {
+        "name": "kickOffMeetingInPerson",
+        "text": "The agency's relevant personnel, Contracting Officer (CO), and COR shall hold an in-person Kick-Off meeting/Post-Award Conference at a time and location determined by the Contracting Officer with contractor’s team and other relevant Government staff to review and clarify the project’s objectives, expectations from the Government, and address any questions the Contractor may have.\n\nThe Contractor shall provide and collaborate with the COR on an agenda for this meeting. Discussion topics shall include, but not be limited to: introduction of the Contractor and Government Staff; understanding of the specific tasks and subtasks; project management expectations; agreement on meeting schedules; and agreement on initial delivery dates.\n\nThe Kick-Off meeting/Post-Award Conference will take place within 10 business days from award.",
+        "section": 3,
+    },
+    {
+        "name": "kickOffMeetingRemote",
+        "text": "The agency's relevant personnel, Contracting Officer (CO), and COR shall hold a remote Kick-Off meeting/Post-Award Conference at a time and with a meeting system determined by the Contracting Officer with contractor’s team and other relevant Government staff to review and clarify the project’s objectives, expectations from the Government, and address any questions the Contractor may have.\n\nThe Contractor shall provide and collaborate with the COR on an agenda for this meeting. Discussion topics shall include, but not be limited to: introduction of the Contractor and Government Staff; understanding of the specific tasks and subtasks; project management expectations; agreement on meeting schedules; and agreement on initial delivery dates.\n\nThe Kick-Off meeting/Post-Award Conference will take place within 10 business days from award.",
         "section": 3,
     },
     {

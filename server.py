@@ -47,10 +47,8 @@ class Data(Resource):
         parser = reqparse.RequestParser()
         parser.add_argument('data')
         data = request.get_json()['data']
-        print data
         for key in data:
             print key
-            print "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
             session = Session()
             component = session.query(ContentComponent).filter_by(document_id=rfq_id).filter_by(name=key).first()            
             component.text = data[key]

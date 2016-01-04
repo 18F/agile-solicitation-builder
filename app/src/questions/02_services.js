@@ -22,6 +22,7 @@ var STATES = [
   "iterationPoPUnit",
   "travelBudget",
   "travelRequirement",
+  "travelLanguage",
   "maxBudget",
 ];
 
@@ -36,7 +37,7 @@ var ADD_CLIN = [
   "row5b",
   "row6a",
   "row6b",
-]
+];
 
 var CLIN_CONTENT = {
 	"CLIN 1001": "Option Period 1",
@@ -47,25 +48,25 @@ var CLIN_CONTENT = {
 	"CLIN 6001": "Option Period 6",
 	"CLIN 7001": "Option Period 7",
 	"CLIN 8001": "Option Period 8",
-}
+};
 
 var FAR_CODES = {
 	"FAR 8.4": "Federal Supply Schedules",
 	"FAR 16.504": "Indefinite Quantity",
-}
+};
 
 
 var BASE_FEE_OPTIONS = {
 	"base_award": "Award Fee",
 	"base_incentive": "Incentive Fee",
 	"none": "Neither",
-}
+};
 
 var OPTION_FEE_OPTIONS = {
 	"option_award": "Award Fee",
 	"option_incentive": "Incentive Fee",
 	"none": "Neither",
-}
+};
 
 var Clin = React.createClass({
 	render: function() {
@@ -137,18 +138,6 @@ var Services = React.createClass({
 		}
 		if (key === "optionFee"){
 			this.setState({optionFee: value});
-		}
-	},
-	toggleTravel: function(responseText) {
-		if (responseText === "yes") {
-			this.setState({
-  	    travelRequirement: true,
-   	 });
-		}
-		if (responseText === "no") {
-			this.setState({
-  	    travelRequirement: false,
-   	 });
 		}
 	},
 	toggleLocation: function(responseText) {
@@ -393,61 +382,50 @@ var Services = React.createClass({
 
 				<p>The government is willing to invest a maximum budget of ${this.state.maxBudget} in this endeavor.</p>
 
-				<p>Do you anticipate any of the following kinds of travel will be required for this effort?</p>
+				<p>Will you reimburse contractor travel expenses?</p>
 
-				<div className="radio">
-				  <label>
-				    <input type="radio" value="yes" onChange={this.toggleTravel.bind(this, "yes")} checked={this.state.travelRequirement}></input>
-				    Yes
-				  </label>
-				</div>
-				<div className="radio">
-				  <label>
-				    <input type="radio" value="no" onChange={this.toggleTravel.bind(this, "no")} checked={!this.state.travelRequirement}></input>
-				    No
-				  </label>
-				</div>
+				<radiogroup>
+					<div className="radio">
+					  <label>
+					    <input type="radio" value="yes" onChange={this.handleChange.bind(this, "travelRequirement")} checked={this.state.travelRequirement == "yes"}></input>
+					    Yes
+					  </label>
+					</div>
+					<div className="radio">
+					  <label>
+					    <input type="radio" value="no" onChange={this.handleChange.bind(this, "travelRequirement")} checked={this.state.travelRequirement == "no"}></input>
+					    No
+					  </label>
+					</div>
+				</radiogroup>
 
-				{!this.state.travelRequirement? null : 
+				{(this.state.travelRequirement == "no")? null : 
 				<div>
-				<form className="form-horizontal">
-					<p>Which of the following kinds of travel will be reimbursed?</p>
-					<div className="checkbox">
-					  <label>
-					    <input type="checkbox" value="" onChange={this.toggleLocation.bind(this, "yes")} checked={this.state.locationRequirement}></input>
-					    Continental United States
-					  </label>
-					</div>
-					<div className="checkbox">
-					  <label>
-					    <input type="checkbox" value="" onChange={this.toggleLocation.bind(this, "no")} checked={!this.state.locationRequirement}></input>
-					    Continental International
-					  </label>
-					</div>
-					<div className="checkbox">
-					  <label>
-					    <input type="checkbox" value="" onChange={this.toggleLocation.bind(this, "no")} checked={!this.state.locationRequirement}></input>
-					    Cross-Continental International
-					  </label>
-					</div>
-				</form>
-
-				<p>What is the maximum amount you are willing to reimbuse for travel?</p>
-				<form className="form-inline">
-					<div className="form-group">
-						<div className="input-group">
-							<div className="input-group-addon">$</div>
-	    				<input type="text" className="form-control short-response" placeholder="ex: 400,000" value={this.state.travelBudget} onChange={this.handleChange.bind(this, "travelBudget")}></input>
-	    			</div>
-	    		</div>
-				</form>
+					<p>What is the maximum amount you are willing to reimbuse for travel?</p>
+					<form className="form-inline">
+						<div className="form-group">
+							<div className="input-group">
+								<div className="input-group-addon">$</div>
+		    				<input type="text" className="form-control short-response" placeholder="ex: 400,000" value={this.state.travelBudget} onChange={this.handleChange.bind(this, "travelBudget")}></input>
+		    			</div>
+		    		</div>
+					</form>
 				</div>
 			}
 
-				<p>The Government {this.state.travelRequirement? "anticipates" : "does not anticipate"} significant travel under this effort. Offices not located in the Washington, DC area require the Contractor to incur travel expenses. Travel must be pre-approved by the CO and Contracting Officer’s Representative (COR). Contractor travel will be made in accordance with FAR part 31.205-46, Travel costs. Each Contractor invoice must include copies of all receipts that VA119A-15-Q-0228 support the travel costs claimed in the invoice. Local travel within a 50-mile radius from the Contractor’s facility is considered the cost of doing business and will not be reimbursed. This includes travel, subsistence, and associated labor charges for travel time. Travel performed for personal convenience and daily travel to and from work at the Contractor’s facility will not be reimbursed. Travel will reimbursed up to ${this.state.travelBudget} NTE.</p>
+				<p>The Government {(this.state.travelRequirement == "yes")? "anticipates" : "does not anticipate"} significant travel under this effort.</p>
 
-
-
+				{(this.state.travelRequirement == "no")? null :
+				<div>
+					<p>Contractor travel expenses will reimbursed up to ${this.state.travelBudget} NTE.</p>
+					<EditBox
+							text={this.state.travelLanguage}
+							editing={this.state.edit === 'travelLanguage'}
+							onStatusChange={this.toggleEdit.bind(this, 'travelLanguage')}
+							onTextChange={this.handleChange.bind(this, 'travelLanguage')}>
+					</EditBox>
+				</div>
+			}
 
 				<div className="sub-heading">Base Periods</div>
 

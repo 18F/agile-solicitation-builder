@@ -10,7 +10,7 @@ var STATES = [
 	"smallBusinessStatus",
 	"titleToMaterials",
 	"useOfData",
-]
+];
 
 var SpecialRequirements = React.createClass({
 	mixins: [StateMixin],

@@ -23,23 +23,45 @@ var DELIVERABLES = {
 	"16": "Mobile responsive web application(s)",
 	"17": "Application capable of supporting high user traffic",
 	"18": "Devops, continuous integration and continuous deployment"
-}
+};
 
 var USER_RESEARCH = {			
 	"done": "Research has already been conducted, either internally or by another vendor. (proceed to product/program vision questionnaire)",
 	"internal": "We intend to conduct user research internally prior to the start date of this engagement.",
  	"vendor": "The vendor will be responsible for the user research."
-}
+};
+
+var KICK_OFF_MEETING = {
+	"remote": "Remote Meeting",
+	"in-person": "In-person Meeting",
+	"none": "No Meeting",
+};
+
+var USER_TYPES = {
+	"internal_people": "Internal/Government Employees",
+	"external_people": "External/The Public",
+	"internal_it": "Internal IT employees (systems, developers)",
+	"external_it": "External IT",
+};
 
 var STATES = [
+	"definitionOfDone",
+	"deliverables",
+	"external_it",
+	"external_people",
 	"generalBackground",
+	"internal_it",
+	"internal_people",
+	"kickOffMeeting",
+	"kickOffMeetingInPerson",
+	"kickOffMeetingRemote",
 	"locationRequirement",
-	"locationText",	
+	"locationText",
 	"offSiteDevelopmentCompliance",
 	"programHistory",
 	"userAccess",
 	"userResearchStrategy",
-]
+];
 
 var Objective = React.createClass({
 	mixins: [StateMixin],
@@ -53,6 +75,27 @@ var Objective = React.createClass({
     	var components = getComponents(content["data"]);
       this.setState( components );
     }.bind(this));
+  },
+  handleCheck: function(key, event) {
+  	var newState = {};
+  	var currentState = this.state[key];
+  	if (currentState == "false"){
+  		newState[key] = "true";
+  	}
+  	else{
+  		newState[key] = "false";
+  	}
+  	this.setState(newState);
+  },
+  getUsers: function(){
+  	var usersString = "";
+  	for (var key in USER_TYPES){
+  		if (this.state[key] == "true"){
+  			console.log('getting users?');
+  			usersString += USER_TYPES[key] + ", ";
+  		}
+  	}
+  	return usersString;
   },
 	save: function(cb) {
 		var data = {};
@@ -69,7 +112,7 @@ var Objective = React.createClass({
 	render: function() {
 
 		var deliverables = [];
-		for(var key in DELIVERABLES) {
+		for (var key in DELIVERABLES) {
 			deliverables.push(
 				<div className="checkbox">
 					<label>
@@ -79,8 +122,20 @@ var Objective = React.createClass({
 			);
 		}
 
+		var userTypesOptions = [];
+		for (var key in USER_TYPES){
+			userTypesOptions.push(
+				<div className="checkbox">
+				  <label>
+				    <input type="checkbox" onClick={this.handleCheck.bind(this, key)} checked={this.state[key] == "true"}></input>
+				    {USER_TYPES[key]}
+				  </label>
+				</div>
+			);
+		}
+
 		var userResearchOptions = [];
-		for(var key in USER_RESEARCH) {
+		for (var key in USER_RESEARCH) {
 			userResearchOptions.push(
 				<div className="radio">
 					<label>
@@ -89,6 +144,25 @@ var Objective = React.createClass({
 				</div>
 			);
 		}
+
+		var kickOffMeetingOptions = [];
+		for (var key in KICK_OFF_MEETING) {
+			kickOffMeetingOptions.push(
+				<div className="radio">
+					<label>
+						<input type="radio" value={key} checked={key == this.state.kickOffMeeting} />{ KICK_OFF_MEETING[key] }
+				  </label>
+				</div>
+			);
+		}
+
+		var usersString = "";
+		for (var key in USER_TYPES){
+  		if (this.state[key] == "true"){
+  			console.log('getting users?');
+  			usersString += USER_TYPES[key] + ", ";
+  		}
+  	}
 
 		return (
 			<div>
@@ -109,53 +183,32 @@ var Objective = React.createClass({
 				<p>Which of the following do you anticipate your project will need?</p>
 
 				<div className="sub-text">We have already checked certain components that the USDS Playbook suggests be required for all projects.</div>
-					{deliverables}
+				
+				{deliverables}
 
 				<p>These functional Requirements will be translated into Epics and User Stories that will be used to populate the Product Backlog.</p>
 
+				<div className="sub-heading">Users</div>
+				<p>The primary users of this X will be:</p>
 
-				<div className="sub-heading">Overview </div>
+					{userTypesOptions}
 
-					<p>The primary users of this X are:</p>
-					<div className="checkbox">
-					  <label>
-					    <input type="checkbox" value="internal_p"></input>
-					    Internal/Government Employees
-					  </label>
-					</div>
-					<div className="checkbox">
-					  <label>
-					    <input type="checkbox" value="external_p"></input>
-					    External/The Public
-					  </label>
-					</div>
-					<div className="checkbox">
-					  <label>
-					    <input type="checkbox" value="external_p"></input>
-					    External IT 
-					  </label>
-					</div>
-					<div className="checkbox">
-					  <label>
-					    <input type="checkbox" value="internal_s"></input>
-					    Internal IT employees (systems, developers)
-					  </label>
-					</div>
-					<div className="checkbox">
-					  <label>
-					    <input type="checkbox" value="external_s"></input>
-					    External (systems, developers)
-					    government IT customer, 
-					  </label>
-					</div>
+				{(usersString.length > 0)? 
+				<p>The users of the product will include {usersString}.</p> : null}
 
+				<div className="sub-heading">User Research</div>
 				<p>What is your User Research Strategy?</p>
 
 				<radiogroup onChange={this.handleChange.bind(this, 'userResearchStrategy')}>
 					{userResearchOptions}
 				</radiogroup>
 
-				<p>{this.state.userAccess}</p>
+				<EditBox
+						text={this.state.userAccess}
+						editing={this.state.edit === 'userAccess'}
+						onStatusChange={this.toggleEdit.bind(this, 'userAccess')}
+						onTextChange={this.handleChange.bind(this, 'userAccess')}>
+				</EditBox>
 	
 				{(this.state.userResearchStrategy === "vendor")?
 					<div>
@@ -216,22 +269,13 @@ var Objective = React.createClass({
 			</ol>
 
 				<div className="sub-heading">Deliverables</div>
-				<p>A deliverable will be considered complete and acceptable when it meets the contractor's "Definition of Done" which are based on the contractor’s Agile Software Development methodology.</p>
-				<p>Each deliverable shall incorporate agency IT requirements as detailed in the Appendix of this document and the <a href="https://playbook.cio.gov" target="_blank">United States Digital Service Playbook</a> standards and be compliant with Section 508.</p>
 
-				<div className="sub-heading">Agile Development Management Plan (ADMP) and Key Personnel </div>
-				<p>The performance work statement will include:</p>
-				<ul>
-					<li>Contact information for all senior leaders and an organizational chart showing the Offeror’s organizational hierarchy and reporting structure, with specific designation of individuals as Key Personnel;
-					</li>
-					<li>Management resources;
-					</li>
-					<li>Technical resources and skill sets required to develop, implement, and maintain the proposed solution; and
-					</li>
-					<li>Details on the management of the Offeror’s team that will be on-site.
-					</li>
-				</ul>
-				<p>The ADMP and the listing of Key Personnel shall become part of the DOC_TYPE upon award.</p>
+				<EditBox
+						text={this.state.definitionOfDone}
+						editing={this.state.edit === 'definitionOfDone'}
+						onStatusChange={this.toggleEdit.bind(this, 'definitionOfDone')}
+						onTextChange={this.handleChange.bind(this, 'definitionOfDone')}>
+				</EditBox>
 
 				<div className="sub-heading">Place of Performance</div>
 				<p>Will you require the contractor to have a full-time working staff presence onsite at a specific location?</p>
@@ -252,22 +296,50 @@ var Objective = React.createClass({
 
 
 				<div className="resulting-text">Resulting Text</div>
-				{(this.state.locationRequirement === "yes")? <p>The contractor shall have a full-time working staff presence at {this.state.locationText}. Contractor shall have additional facilities to perform contract functions as necessary.</p> : <p>The contractor is not required to have a full-time working staff presence on-site.</p>}
-				
-				<p>{this.state.offSiteDevelopmentCompliance}</p>
+				{(this.state.locationRequirement === "yes")? <p>The contractor shall have a full-time working staff presence at {this.state.locationText}. Contractor shall have additional facilities to perform contract functions as necessary.</p> : <p>The contractor is not required to have a full-time working staff presence on-site.</p>}		
+
+				<EditBox
+						text={this.state.offSiteDevelopmentCompliance}
+						editing={this.state.edit === 'offSiteDevelopmentCompliance'}
+						onStatusChange={this.toggleEdit.bind(this, 'offSiteDevelopmentCompliance')}
+						onTextChange={this.handleChange.bind(this, 'offSiteDevelopmentCompliance')}>
+				</EditBox>
 				
 				<div className="sub-heading">Kick-Off Meeting/Post-Award Conference</div>
+
+				<p>Will you require the contractor to attend a kick-off meeting?</p>
+				<radiogroup onChange={this.handleChange.bind(this, "kickOffMeeting")}>
+				{kickOffMeetingOptions}
+				</radiogroup>
 				
-				<p>The agency's relevant personnel, Contracting Officer, and COR shall hold a Kick-Off meeting/Post-Award Conference in {this.state.locationText} with contractor’s team and other relevant Government staff to review and clarify the project’s objectives, expectations from the Government, and address any questions the Contractor may have.</p>
-				<p>The Contractor shall provide and collaborate with the COR on an agenda for this meeting. Discussion topics shall include, but not be limited to: introduction of the Contractor and Government Staff; understanding of the specific tasks and subtasks; project management expectations; agreement on meeting schedules; and agreement on initial delivery dates.</p>
-				<p>The Kick-Off meeting/Post-Award Conference will take place within 10 days from award and will be scheduled by the Contracting Officer.</p>
+				{(this.state.kickOffMeeting == "in-person")? 
+				<div>
+					<EditBox
+							text={this.state.kickOffMeetingInPerson}
+							editing={this.state.edit === 'kickOffMeetingInPerson'}
+							onStatusChange={this.toggleEdit.bind(this, 'kickOffMeetingInPerson')}
+							onTextChange={this.handleChange.bind(this, 'kickOffMeetingInPerson')}>
+					</EditBox>
+				</div> : null}
 
+				{(this.state.kickOffMeeting == "remote")? 
+					<div>
+						<EditBox
+							text={this.state.kickOffMeetingRemote}
+							editing={this.state.edit === 'kickOffMeetingRemote'}
+							onStatusChange={this.toggleEdit.bind(this, 'kickOffMeetingRemote')}
+							onTextChange={this.handleChange.bind(this, 'kickOffMeetingRemote')}>
+					</EditBox>
+					</div>: null}
 
+				{(this.state.kickOffMeeting === "none")?
+				<p>A formal kick-off meeting will not be required.</p> : null
+				}
 			</div>
 		);
 	},
 });
 
 
-// <p>The primary users of this digital service will include X, Y, Z.</p> <p>To ensure the system supports interoperability,  must be followed. (see section). To ensure the user interface is X, Y (playbook language) @TODO</p><p>Do you believe training will be required? @TODO ask VA & 18F consulting</p>
+// to ensure the system supports interoperability,  must be followed. (see section). To ensure the user interface is X, Y (playbook language)
 module.exports = Objective;

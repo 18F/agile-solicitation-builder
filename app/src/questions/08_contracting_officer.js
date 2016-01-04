@@ -6,7 +6,7 @@ var STATES = [
 	"contractingOfficer",
 	"contractingOfficerRepresentative",
 	"productOwner",
-]
+];
 
 var AdditionalRole = React.createClass({
 	render: function() {

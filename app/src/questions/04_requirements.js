@@ -48,6 +48,20 @@ var Requirement = React.createClass({
 				<p><b>@TODO How can we shift the focus of this text to performance?</b></p>
 				<p>Some key points to include: if government not happy then X happens. There needs to be a POC on contractor side who is responsible. If there will be delays because of things on the government side the contractor needs to communicate this ASAP and come up with new schedule with CO/PM.</p>	
 
+				<div className="sub-heading">Agile Development Management Plan (ADMP) and Key Personnel </div>
+				<p>The performance work statement will include:</p>
+				<ul>
+					<li>Contact information for all senior leaders and an organizational chart showing the Offeror’s organizational hierarchy and reporting structure, with specific designation of individuals as Key Personnel;
+					</li>
+					<li>Management resources;
+					</li>
+					<li>Technical resources and skill sets required to develop, implement, and maintain the proposed solution; and
+					</li>
+					<li>Details on the management of the Offeror’s team that will be on-site.
+					</li>
+				</ul>
+				<p>The ADMP and the listing of Key Personnel shall become part of the DOC_TYPE upon award.</p>
+
 				<p>The following requirements related to personnel must be met:</p>
 					<ol>
 						<li>If awarded this Task Order, the Contractor shall assign to perform this Task Order those persons whose résumés are submitted with its proposal and who are identified in the Contractor’s proposal as Key Personnel. Not all contractor employees assigned to perform this Task Order will be Key Personnel.</li>
