@@ -21,6 +21,10 @@ button.add {
 	border: 1px solid;
 }
 
+.edit-box {
+	margin-bottom: 10px;
+}
+
 .fake-table {
 	margin-top: 5px;
 	margin-bottom: 10px;

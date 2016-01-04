@@ -7,6 +7,28 @@ import sys
 import config
 import datetime
 
+def overview():
+    # table of contents & basic info
+    pass
+
+def definitions():
+    pass
+
+def services():
+    pass
+
+def objectives():
+    pass
+
+def requirements():
+    pass
+
+def special_requirements():
+    pass
+
+def contract_clauses():
+    pass
+
 def create_document(rfq_id):
 
     session = Session()
@@ -20,7 +42,6 @@ def create_document(rfq_id):
     document.add_heading(doc_date, level=1)
     document.add_page_break()
 
-    # table of contents @TODO
 
     # definitions
     text = "Note: All sections of this RFQ will be incorporated into the contract except the Statement of Objectives, Instructions, and Evaluation Factors."

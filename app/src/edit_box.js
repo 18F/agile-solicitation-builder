@@ -20,14 +20,14 @@ var EditBox = React.createClass({
 	render: function() {
 		if(this.props.editing) {
 			return (
-				<div>
+				<div className="edit-box">
 					<div className="edit" onClick={this.toggleEdit.bind(this, false)}>Done</div>
 					<textarea className="form-control" rows="4" defaultValue={this.props.text} onChange={this.handleChange}></textarea>
 				</div>
 			);
 		} else {
 			return (
-				<div>
+				<div className="edit-box">
 					<div className="edit" onClick={this.toggleEdit.bind(this, true)}>Edit</div>
 					{this.props.text}
 				</div>

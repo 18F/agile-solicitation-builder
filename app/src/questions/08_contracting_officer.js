@@ -26,7 +26,6 @@ var ContractingOfficer = React.createClass({
 
 	save: function(cb) {
 		var data = {};
-
 		// also collect any new custom roles if not already saved separately
 		
 		for (i=0; i < STATES.length; i++){
@@ -34,7 +33,6 @@ var ContractingOfficer = React.createClass({
 			data[stateName] = this.state[stateName];
 		}
 
-		// get data from FAR code section
 		var rfqId = getId(window.location.hash);
     put_data(8, rfqId, data, cb);
 		
@@ -76,37 +74,31 @@ var ContractingOfficer = React.createClass({
 				<p>We have already provided some recommended content for this section. To delete, modify, or add additional content click the "edit" above the section you wish to change.</p>
 
 				<div className="sub-heading">Contracting Officer (CO)</div>
-
 				<EditBox
 						text={this.state.contractingOfficer}
-						editing={this.state.edit == 'co'}
-						onStatusChange={this.toggleEdit.bind(this, 'co')}
+						editing={this.state.edit == 'contractingOfficer'}
+						onStatusChange={this.toggleEdit.bind(this, 'contractingOfficer')}
 						onTextChange={this.handleChange.bind(this, 'contractingOfficer')}>
 				</EditBox>
 
-
-
 				<div className="sub-heading">Contracting Officer’s Representative (COR)</div>
-				
-				{this.state.edit === "cor"? 
-				<div>
-				<div className="edit" onClick={this.toggleEdit.bind(this, 'cor')}>Done</div>
-				<textarea className="form-control" rows="4" defaultValue={this.state.contractingOfficerRepresentative} onChange={this.handleChange.bind(this, 'cor')}></textarea></div> :
-				<div>
-				<div className="edit" onClick={this.toggleEdit.bind(this, 'cor')}>Edit</div>
-				{this.state.contractingOfficerRepresentative}</div>
-				}
+				<EditBox
+						text={this.state.contractingOfficerRepresentative}
+						editing={this.state.edit === 'contractingOfficerRepresentative'}
+						onStatusChange={this.toggleEdit.bind(this, 'contractingOfficerRepresentative')}
+						onTextChange={this.handleChange.bind(this, 'contractingOfficerRepresentative')}>
+				</EditBox>
 
 				<div className="sub-heading editable">Product Owner</div>
-				{this.state.edit === "po"? 
-				<div>
-				<div className="edit" onClick={this.toggleEdit.bind(this, 'po')}>Done</div>
-				<textarea className="form-control" rows="4" defaultValue={this.state.productOwner} onChange={this.handleChange.bind(this, 'po')}></textarea></div> :
-				<div>
-				<div className="edit" onClick={this.toggleEdit.bind(this, 'po')}>Edit</div>
-				{this.state.productOwner}</div>
-				}
-				
+				<EditBox
+						text={this.state.productOwner}
+						editing={this.state.edit === 'productOwner'}
+						onStatusChange={this.toggleEdit.bind(this, 'productOwner')}
+						onTextChange={this.handleChange.bind(this, 'productOwner')}>
+				</EditBox>
+
+				<br />
+
 				{this.state.addRole? 
 					<div>
 						<div className="sub-heading">

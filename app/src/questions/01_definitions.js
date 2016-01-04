@@ -1,5 +1,6 @@
 var React = require('react');
 var StateMixin = require("../state_mixin");
+var EditBox = require("../edit_box");
 
 
 var Definition = React.createClass({    

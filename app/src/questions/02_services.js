@@ -1,10 +1,10 @@
 var React = require('react');
 var StateMixin = require("../state_mixin");
+var EditBox = require("../edit_box");
 
 var STATES = [
 	"descriptionOfServices",
 	"farCode",
-	"awardFee",
 	"iterationPoPNumber",
 	"iterationPoPUnit",
 	"naicsText",
@@ -20,7 +20,9 @@ var STATES = [
   "optionFeeAmount",
   "iterationPoPNumber",
   "iterationPoPUnit",
-  "addClin",
+  "travelBudget",
+  "travelRequirement",
+  "maxBudget",
 ];
 
 var ADD_CLIN = [
@@ -116,20 +118,16 @@ var Services = React.createClass({
 		var rfqId = getId(window.location.hash);
     get_data(2, rfqId, function(content){
     	var componentStates = getComponents(content["data"]);
-      this.setState( componentStates );  
+      this.setState( componentStates );
     }.bind(this));
     getCLINs(rfqId, function(clins){
-    	console.log("clins");
-    	console.log(clins);
-      this.setState( clins );
+      this.setState({clins: clins["data"] });
     }.bind(this));
-    // these components will only appear if a fee has been selected
-		$("div#base-fee").hide();
-		$("div#option-fee").hide();
   },
 	getInitialState: function() {
 		var initialStates = getStates(STATES);
 		initialStates["addClin"] = false;
+		initialStates["clin"] = null;
 		return initialStates;
 	},
 	updateFee: function(key, event) {
@@ -139,6 +137,30 @@ var Services = React.createClass({
 		}
 		if (key === "optionFee"){
 			this.setState({optionFee: value});
+		}
+	},
+	toggleTravel: function(responseText) {
+		if (responseText === "yes") {
+			this.setState({
+  	    travelRequirement: true,
+   	 });
+		}
+		if (responseText === "no") {
+			this.setState({
+  	    travelRequirement: false,
+   	 });
+		}
+	},
+	toggleLocation: function(responseText) {
+		if (responseText === "yes") {
+			this.setState({
+  	    locationRequirement: true,
+   	 });
+		}
+		if (responseText === "no") {
+			this.setState({
+  	    locationRequirement: false,
+   	 });
 		}
 	},
   generateClin: function(){
@@ -231,6 +253,47 @@ var Services = React.createClass({
 			)
 		}
 
+		var ADDITIONAL_CLINS = [];
+		for (var clin in this.state.clins){
+			var this_clin = this.state.clins[clin];
+			ADDITIONAL_CLINS.push(
+				<div className="container fake-table col-md-12">
+					<div className="row clin">
+						<div className="col-md-12 table-content">{this_clin["row1"]}
+						</div>
+					</div>
+					<div className="row clin">
+						<div className="col-md-12 table-content">{this_clin["row2"]}
+						</div>
+					</div>
+					<div className="row clin">
+						<div className="col-md-6 table-content">{this_clin["row3a"]}
+						</div>
+						<div className="col-md-6 table-content">{this_clin["row3b"]}
+						</div>
+					</div>
+					<div className="row clin">
+						<div className="col-md-6 table-content">{this_clin["row4a"]}
+						</div>
+						<div className="col-md-6 table-content">{this_clin["row4b"]}
+						</div>
+					</div>
+					<div className="row clin">
+						<div className="col-md-6 table-content">{this_clin["row5a"]}
+						</div>
+						<div className="col-md-6 table-content">{this_clin["row5b"]}
+						</div>
+					</div>
+					<div className="row clin">
+						<div className="col-md-6 table-content">{this_clin["row6a"]}
+						</div>
+						<div className="col-md-6 table-content">{this_clin["row"]}
+						</div>
+					</div>
+				</div>
+			);
+		}
+
 		var CLINS = [];
 		var counter = 0;
 		var optionPeriods = this.state.optionPeriods;
@@ -282,7 +345,7 @@ var Services = React.createClass({
 				<div className="main-heading">Services and Prices</div>
 
 				<div className="sub-heading">Brief Description of Services</div>
-				<div className="sub-text">Feel free to edit the example we have provided below.</div>
+				<div className="sub-text">Feel free to edit the sample we have provided below.</div>
 				<textarea className="form-control" rows="4" value={this.state.descriptionOfServices} onChange={this.handleChange.bind(this, 'descriptionOfServices')}></textarea>				
 
 				<div className="sub-heading">Type of Contract</div>
@@ -315,6 +378,77 @@ var Services = React.createClass({
 				<p id="naics-far-text1">This requirement will be solicited under the following North American Industrial Classification System (NAICS) Code: 541512, Computer Systems Design Services, $27.5 million. This Task Order will be awarded under {this.state.farCode} which governs orders placed under {FAR_CODES[this.state.farCode]} contracts.</p></div>
 				}
 
+				<div className="sub-heading">Budget</div>
+				<p>Note: The Statement of Objectives will be removed at time of award and replaced with the Offeror’s Performance Work Statement. All listed objectives and requirements shall be included as part of the Offeror’s Performance Work Statement.</p>
+
+				<p>What is the maximum budget for your project?</p>
+				<form className="form-inline">
+					<div className="form-group">
+						<div className="input-group">
+							<div className="input-group-addon">$</div>
+	    				<input type="text" className="form-control short-response" placeholder="ex: 10,000,000" value={this.state.maxBudget} onChange={this.handleChange.bind(this, "maxBudget")}></input>
+	    			</div>
+	    		</div>
+				</form>
+
+				<p>The government is willing to invest a maximum budget of ${this.state.maxBudget} in this endeavor.</p>
+
+				<p>Do you anticipate any of the following kinds of travel will be required for this effort?</p>
+
+				<div className="radio">
+				  <label>
+				    <input type="radio" value="yes" onChange={this.toggleTravel.bind(this, "yes")} checked={this.state.travelRequirement}></input>
+				    Yes
+				  </label>
+				</div>
+				<div className="radio">
+				  <label>
+				    <input type="radio" value="no" onChange={this.toggleTravel.bind(this, "no")} checked={!this.state.travelRequirement}></input>
+				    No
+				  </label>
+				</div>
+
+				{!this.state.travelRequirement? null : 
+				<div>
+				<form className="form-horizontal">
+					<p>Which of the following kinds of travel will be reimbursed?</p>
+					<div className="checkbox">
+					  <label>
+					    <input type="checkbox" value="" onChange={this.toggleLocation.bind(this, "yes")} checked={this.state.locationRequirement}></input>
+					    Continental United States
+					  </label>
+					</div>
+					<div className="checkbox">
+					  <label>
+					    <input type="checkbox" value="" onChange={this.toggleLocation.bind(this, "no")} checked={!this.state.locationRequirement}></input>
+					    Continental International
+					  </label>
+					</div>
+					<div className="checkbox">
+					  <label>
+					    <input type="checkbox" value="" onChange={this.toggleLocation.bind(this, "no")} checked={!this.state.locationRequirement}></input>
+					    Cross-Continental International
+					  </label>
+					</div>
+				</form>
+
+				<p>What is the maximum amount you are willing to reimbuse for travel?</p>
+				<form className="form-inline">
+					<div className="form-group">
+						<div className="input-group">
+							<div className="input-group-addon">$</div>
+	    				<input type="text" className="form-control short-response" placeholder="ex: 400,000" value={this.state.travelBudget} onChange={this.handleChange.bind(this, "travelBudget")}></input>
+	    			</div>
+	    		</div>
+				</form>
+				</div>
+			}
+
+				<p>The Government {this.state.travelRequirement? "anticipates" : "does not anticipate"} significant travel under this effort. Offices not located in the Washington, DC area require the Contractor to incur travel expenses. Travel must be pre-approved by the CO and Contracting Officer’s Representative (COR). Contractor travel will be made in accordance with FAR part 31.205-46, Travel costs. Each Contractor invoice must include copies of all receipts that VA119A-15-Q-0228 support the travel costs claimed in the invoice. Local travel within a 50-mile radius from the Contractor’s facility is considered the cost of doing business and will not be reimbursed. This includes travel, subsistence, and associated labor charges for travel time. Travel performed for personal convenience and daily travel to and from work at the Contractor’s facility will not be reimbursed. Travel will reimbursed up to ${this.state.travelBudget} NTE.</p>
+
+
+
+
 				<div className="sub-heading">Base Periods</div>
 
 				<p>How long would you like the period of performance for the <b>base period</b> to be?</p>
@@ -341,8 +475,6 @@ var Services = React.createClass({
 					</div>
 				}
 
-				<br />
-
 				<div className="sub-heading">Option Periods</div>
 				<p>In addition to your base period, how many option periods would you like? We suggest no more than 3.</p>
 				<form className="form-inline">
@@ -361,8 +493,6 @@ var Services = React.createClass({
 						<p>Use agency specific guidance for details.</p>
 					</div>
 				}
-
-				<br />
 
 				<p>How long would you like period of performance for each <b>option period</b> to be?</p>
 				<div className="sub-text">We suggest 6 months or less.</div>
@@ -384,7 +514,6 @@ var Services = React.createClass({
     				<option>weeks</option>
     			</select>
 				</form>
-
 
 				<div className="resulting-text">Resulting Text</div>
 				<p>The Period of Performance for this {this.state.docType} shall be a base period of <b>{bPoP}</b>. <b>{this.state.optionPeriods}</b> additional <b>{oPoP}</b> Option Periods will be included for a total potential period of performance of up to 2 years as described in section 2.
@@ -431,8 +560,9 @@ var Services = React.createClass({
 				</div>
 
 				{CLINS}
+				{ADDITIONAL_CLINS}
 
-				{ this.state.addClin? 
+				{ (this.state.addClin === true)?
 				<div>
 					<Clin />
 					<button className="add btn btn-default" onClick={this.generateClin}>Save CLIN</button>
@@ -447,16 +577,12 @@ var Services = React.createClass({
 				<p>We have pre-populated this section with the standard agile contracting text. However you are free to add to, modify or delete this text as you see fit.
 				</p>
 
-				{this.state.edit === "paymentSchedule"?
-				<div><div className="edit" onClick={this.toggleEdit.bind(this, 'paymentSchedule')}>Done</div>
-					<textarea className="form-control" rows="4" defaultValue={this.state.paymentText} onChange={this.handleChange.bind(this, 'paymentSchedule')}></textarea></div>:
-				<div>
-					<div className="edit" onClick={this.toggleEdit.bind(this, 'paymentSchedule')}>Edit</div>
-					{this.state.paymentSchedule}
-				</div>
-				}	
-				
-				<br />
+				<EditBox
+						text={this.state.paymentSchedule}
+						editing={this.state.edit === 'paymentSchedule'}
+						onStatusChange={this.toggleEdit.bind(this, 'paymentSchedule')}
+						onTextChange={this.handleChange.bind(this, 'paymentSchedule')}>
+				</EditBox>
 
 			</div>
 		);

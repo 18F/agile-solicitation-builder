@@ -1,5 +1,6 @@
 var React = require('react');
 var StateMixin = require("../state_mixin");
+var EditBox = require("../edit_box");
 
 var STATES = [
 	"accessibility",
@@ -32,7 +33,6 @@ var SpecialRequirements = React.createClass({
 			data[stateName] = this.state[stateName];
 		}
 
-		// get data from FAR code section
 		var rfqId = getId(window.location.hash);
     put_data(9, rfqId, data, cb);
 		
@@ -40,16 +40,32 @@ var SpecialRequirements = React.createClass({
 	render: function() {
 		return (
 			<div>
-				<div className="main-heading">Special Contract Requirements</div>				
+				<div className="main-heading">Special Contract Requirements</div>
 
 				<div className="sub-heading">Controlled Facilities and Information Systems Security</div>
-				<p>{this.state.security}</p>
+				<EditBox
+						text={this.state.security}
+						editing={this.state.edit == 'security'}
+						onStatusChange={this.toggleEdit.bind(this, 'security')}
+						onTextChange={this.handleChange.bind(this, 'security')}>
+				</EditBox>
 				
 				<div className="sub-heading">Section 508 Accessibility Standards Notice (September 2009)</div>
-				<p>{this.state.accessibility}</p>			
+				<EditBox
+						text={this.state.accessibility}
+						editing={this.state.edit == 'accessibility'}
+						onStatusChange={this.toggleEdit.bind(this, 'accessibility')}
+						onTextChange={this.handleChange.bind(this, 'accessibility')}>
+				</EditBox>
 
 				<div className="sub-heading">Non-Disclosure Policies</div>
-				<p>{this.state.nonDisclosure}</p>
+				<EditBox
+						text={this.state.nonDisclosure}
+						editing={this.state.edit == 'nonDisclosure'}
+						onStatusChange={this.toggleEdit.bind(this, 'nonDisclosure')}
+						onTextChange={this.handleChange.bind(this, 'nonDisclosure')}>
+				</EditBox>
+
 
 				<div className="sub-heading">Potential Organizational Conflicts of Interest</div>
 				<p>Offerors shall provide a signed statement which describes concisely all relevant facts concerning any past, present, or planned interest (financial, contractual, organizational, or otherwise) relating to the work to be performed under the proposed contract or task order and bearing on whether the Offeror has a possible organizational or personnel conflict of interest with respect to:</p>
@@ -91,17 +107,37 @@ var SpecialRequirements = React.createClass({
 
 	
 				<div className="sub-heading">Title to Materials Shall Vest in the Government</div>
-				<p>{this.state.titleToMaterials}</p>
+				<EditBox
+						text={this.state.titleToMaterials}
+						editing={this.state.edit == 'titleToMaterials'}
+						onStatusChange={this.toggleEdit.bind(this, 'titleToMaterials')}
+						onTextChange={this.handleChange.bind(this, 'titleToMaterials')}>
+				</EditBox>
 
 				<div className="sub-heading">Limited Use of Data</div>
-				<p>{this.state.useOfData}</p>
+				<EditBox
+						text={this.state.useOfData}
+						editing={this.state.edit == 'useOfData'}
+						onStatusChange={this.toggleEdit.bind(this, 'useOfData')}
+						onTextChange={this.handleChange.bind(this, 'useOfData')}>
+				</EditBox>
 
 				<div className="sub-heading">Notice of Size Re-representation at the Task Order Level (will be conditional)</div>
-				<p>{this.state.smallBusinessStatus}</p>
+				<EditBox
+						text={this.state.smallBusinessStatus}
+						editing={this.state.edit == 'smallBusinessStatus'}
+						onStatusChange={this.toggleEdit.bind(this, 'smallBusinessStatus')}
+						onTextChange={this.handleChange.bind(this, 'smallBusinessStatus')}>
+				</EditBox>
 			
 
 				<div className="sub-heading">Order of Precedence</div>
-				{this.state.orderOfPrecedence}
+				<EditBox
+						text={this.state.orderOfPrecedence}
+						editing={this.state.edit == 'orderOfPrecedence'}
+						onStatusChange={this.toggleEdit.bind(this, 'orderOfPrecedence')}
+						onTextChange={this.handleChange.bind(this, 'orderOfPrecedence')}>
+				</EditBox>
 
 				<button className="btn btn-default">Add Special Requirement</button>
 			</div>

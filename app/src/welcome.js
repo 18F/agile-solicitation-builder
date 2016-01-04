@@ -35,7 +35,6 @@ var Welcome = React.createClass({
 				</li>
 			);
 		}
-		window.rfqs = rfqs;
 		return (
 			<div className="col-md-8">
 				<div>Welcome to Playbook in Action! Before you begin, please consider the following:</div>

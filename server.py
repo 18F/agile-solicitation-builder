@@ -50,6 +50,7 @@ class Data(Resource):
         print data
         for key in data:
             print key
+            print "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
             session = Session()
             component = session.query(ContentComponent).filter_by(document_id=rfq_id).filter_by(name=key).first()            
             component.text = data[key]

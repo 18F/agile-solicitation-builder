@@ -1,5 +1,6 @@
 var React = require('react');
 var StateMixin = require("../state_mixin");
+var EditBox = require("../edit_box");
 
 // <div className="sub-text">The Initial Product Backlog (See Appendix) provides a detailed breakdown of the desired functionality as identified at this time. The Initial Product Backlog is not a binding document, but rather a representative sample of the functionality that is anticipated will be required to be delivered under this Task Order. The specific user stories will be identified through the agile development process as proposed in the Performance Work Statement (PWS). The Initial Product Backlog provides some guidance on specific objectives that should be included in each project.</div>
 
@@ -33,8 +34,7 @@ var USER_RESEARCH = {
 var STATES = [
 	"generalBackground",
 	"locationRequirement",
-	"locationText",
-	"maxBudget",
+	"locationText",	
 	"offSiteDevelopmentCompliance",
 	"programHistory",
 	"userAccess",
@@ -93,33 +93,17 @@ var Objective = React.createClass({
 		return (
 			<div>
 				<div className="main-heading">Statement of Objectives</div>
-				<p>This section has many components.</p>
+				<p>This section has many components!</p>
 
 				<div className="sub-heading">General Background</div>
 				<p>Please provide several paragraphs about your project's history, mission, and current state.</p>
 
-				<textarea className="form-control" rows="9"></textarea>
+				<textarea className="form-control" rows="9" value={this.state.generalBackground} onChange={this.handleChange.bind(this, 'generalBackground')}></textarea>
 
 				<div className="sub-heading">Program History</div>
 				<p>If you have any information about the current vendors and specific technology being used please provide it here.</p>
 
-				<textarea className="form-control" rows="10"></textarea>
-
-				<div className="sub-heading">Objectives</div>
-				<p>Note: The Statement of Objectives will be removed at time of award and replaced with the Offeror’s Performance Work Statement. All listed objectives and requirements shall be included as part of the Offeror’s Performance Work Statement.</p>
-
-				<p>What is the maximum budget for your project?</p>
-				<form className="form-inline">
-					<div className="form-group">
-						<div className="input-group">
-							<div className="input-group-addon">$</div>
-	    				<input type="text" className="form-control short-response" placeholder="ex: 10,000,000" value={this.state.maxBudget} onChange={this.handleChange.bind(this, "maxBudget")}></input>
-	    			</div>
-	    		</div>
-				</form>
-
-				<p>The government is willing to invest a maximum budget of ${this.state.maxBudget} in this endeavor.</p>
-
+				<textarea className="form-control" rows="10" value={this.state.programHistory} onChange={this.handleChange.bind(this, 'programHistory')}></textarea>
 
 				<div className="sub-heading">Specific Tasks and Deliverables</div>
 				<p>Which of the following do you anticipate your project will need?</p>

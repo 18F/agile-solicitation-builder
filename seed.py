@@ -92,6 +92,16 @@ content_components = [
         "section": 2,
     },
     {
+        "name": "travelRequirement",
+        "text": "false",
+        "section": 2,
+    },
+    {
+        "name": "travelBudget",
+        "text": "0",
+        "section": 2,
+    },
+    {
         "name": "paymentSchedule",
         "text": "The contractor shall be paid upon the completion of each iteration upon its acceptance and verification by the Contracting Officer's Representative (COR). Invoices shall be submitted at the end of each iteration in accordance with the delivery schedule as established in the Performance Work Statement.",
         "section": 2,
@@ -99,6 +109,16 @@ content_components = [
     {
         "name": "fee",
         "text": "",
+        "section": 2,
+    },
+    {
+        "name": "addClin",
+        "text": "false",
+        "section": 2,
+    },
+    {
+        "name": "clin",
+        "text": "null",
         "section": 2,
     },
     {
@@ -218,7 +238,7 @@ content_components = [
     },
     {
         "name": "orderOfPrecedence",
-        "text": "In the event of an inconsistency between the Special Contract Requirements and the FAR clauses provisions in the RFQ or the {DOC_TYPE}, the inconsistency shall be resolved by giving precedence in the following order:\n\n1. Special Contract Requirements \n\n2. FAR Clauses",
+        "text": "In the event of an inconsistency between the Special Contract Requirements and the FAR clauses provisions in the RFQ or the {DOC_TYPE}, the inconsistency shall be resolved by giving precedence in the following order:\n1. Special Contract Requirements \n2. FAR Clauses",
         "section": 9,
     },
     {
