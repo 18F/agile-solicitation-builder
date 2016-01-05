@@ -227,8 +227,18 @@ content_components = [
         "section": 6,
     },
     {
-        "name": "workspace",
+        "name": "transitionActivities",
+        "text": "During the transition to the Government and/or a new contractor, the Contractor shall perform all necessary transition activities, including, but not limited to, continued full services to {AGENCY}; participation, at discretion of COR in five or more meetings with the Government or new contractor to effect a smooth transition and provide detailed information on the operation of all deliverables; training of new personnel (contractor or Government) during transition period, in all system operation and maintenance functions; appropriate close-out of outstanding technical and related work. Should be available to answer questions.\n\nInformation such as the list of accomplishments, documentation, and customized code developed for {AGENCY} should be available to the Government in the collaborative workspace established from contract's initiation. Should the Contractor be terminated prior to the end of the scheduled base period, the Contractor shall work with the Government to ensure they retain access to this information within two weeks from the termination date.",
+        "section": 6,
+    },
+    {
+        "name": "workspaceExists",
         "text": "none",
+        "section": 6,
+    },
+    {
+        "name": "workspaceName",
+        "text": "",
         "section": 6,
     },
     {

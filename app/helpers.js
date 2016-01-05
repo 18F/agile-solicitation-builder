@@ -82,8 +82,7 @@ function createRFQ(dataDict, callback){
 	});
 }
 
-function createRole(roleData, rfqId, sectionId, callback){
-	console.log("roleData", roleData);
+function createComponent(roleData, rfqId, sectionId, callback){
 	$.ajax({
 		type: "POST",
 		url: "/api/custom_component/" + rfqId + "/section/" + sectionId,
@@ -92,6 +91,19 @@ function createRole(roleData, rfqId, sectionId, callback){
 		dataType: 'json',
 		success: function(data){
 			if (callback){				
+				callback(data);
+			}
+		}
+	});
+}
+
+function getCustomComponents(rfqId, sectionId, callback){
+	$.ajax({
+		type: "GET",
+		url: "/api/custom_component/" + rfqId + '/section/' + sectionId,
+		dataType: 'json',
+		success: function(data){
+			if (callback){
 				callback(data);
 			}
 		}
@@ -107,7 +119,7 @@ function createCLIN(clinData, rfqId, callback){
 		data: JSON.stringify({data: clinData['clinData']}),
 		contentType: 'application/json',
 		dataType: 'json',
-		success: function(data){
+		success: function(data){			
 			if (callback){				
 				callback(data);
 			}

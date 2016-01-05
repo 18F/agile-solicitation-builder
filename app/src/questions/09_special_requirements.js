@@ -17,6 +17,10 @@ var SpecialRequirements = React.createClass({
 	mixins: [StateMixin],
 	getInitialState: function() {
 		var initialStates = getStates(STATES);
+		initialStates["addRequirement"] = false;
+		initialStates["requirementsData"] = [];
+		initialStates["title"] = "";
+		initialStates["description"] = "";
 		return initialStates;
 	},
 	componentDidMount: function() {
@@ -25,6 +29,36 @@ var SpecialRequirements = React.createClass({
     	var componentStates = getComponents(content["data"]);
       this.setState( componentStates );
     }.bind(this));
+    getCustomComponents(rfqId, 9, function(data){
+    	console.log(data);
+    	this.setState({requirementsData: data["data"]});
+    }.bind(this));
+  },
+  addRequirement: function() {
+  	if (this.state.addRequirement){  		
+  		// check to see if info has been filled in
+  		if (this.state.title.length > 0 && this.state.description.length > 0){
+  			var rfqId = getId(window.location.hash);
+  			var requirementData = {};
+  			requirementData["title"] = this.state.title;
+  			requirementData["description"] = this.state.description;
+
+  			// save the data
+  			createComponent(requirementData, rfqId, 9, function(data){
+  				this.setState({
+  					addRequirement: false,
+  					requirementsData: data["data"],
+  				});
+  			}.bind(this));
+  			
+  		}
+  		else {
+  			alert("Please fill out the title and text components of the form before saving the new role.");
+  		}
+  	}
+  	else {
+  		this.setState({ addRequirement: true });
+  	}
   },
   save: function(cb) {
 		var data = {};
@@ -39,6 +73,16 @@ var SpecialRequirements = React.createClass({
 		
 	},
 	render: function() {
+		var additionalRequirements = [];
+		for (i=0; i < this.state.requirementsData.length; i++){
+			var role = this.state.requirementsData[i];
+			additionalRequirements.push(
+				<div key={i}>
+					<div className="sub-heading">{role['title']}</div>
+					<p>{role['description']}</p>
+				</div>
+			);
+		}
 		return (
 			<div>
 				<div className="main-heading">Special Contract Requirements</div>
@@ -148,7 +192,19 @@ var SpecialRequirements = React.createClass({
 						onTextChange={this.handleChange.bind(this, 'orderOfPrecedence')}>
 				</EditBox>
 
-				<button className="btn btn-default">Add Special Requirement</button>
+				{additionalRequirements}
+
+				{this.state.addRequirement? 
+					<div>
+						<div className="sub-heading">
+							<input type="text" className="medium-response form-control" placeholder="Requirement Title" value={this.state.title} onChange={this.handleChange.bind(this, "title")} />
+						</div>
+						<textarea className="form-control" rows="5" placeholder="Requirement Text" value={this.state.description} onChange={this.handleChange.bind(this, "description")}></textarea>
+						<button className="btn btn-default" onClick={this.addRequirement}>Save Requirement</button>
+					</div>
+					: <button className="add btn btn-default" onClick={this.addRequirement}>Add Requirement</button>
+				}
+
 			</div>
 		);
 	},

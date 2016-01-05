@@ -13,8 +13,6 @@ var Requirement = React.createClass({
 			var stateName = STATES[i];
 			data[stateName] = this.state[stateName];
 		}
-
-		// get data from FAR code section
 		var rfqId = getId(window.location.hash);
     put_data(4, rfqId, data, cb);
 	},
@@ -41,7 +39,7 @@ var Requirement = React.createClass({
 					<li>UX</li>
 					<li>Backend Web Engineer</li>
 					<li>Frontend Web Developer</li>
-					<li>Devops?</li>
+					<li>Devops</li>
 					<li></li>
 				</ul>
 
@@ -71,29 +69,26 @@ var Requirement = React.createClass({
 						<li>All requests for substitutions/additions of Key Personnel must include a detailed explanation of the circumstances necessitating the proposed substitution or addition, a complete résumé for the proposed substitute or addition including skills, experience, education, training, and security level. As determined by the Contracting Officer, all proposed substitutes/additions must have qualifications that meet or exceed the qualifications of the person to be replaced.</li>
 						<li>The Contracting Officer or his/her authorized representatives will evaluate the request(s) for substitutions/additions of Key Personnel and the Contracting Officer will notify the Contractor, in writing, of approval or disapproval. Disapproval of the proposed individual(s) shall not provide grounds for nonperformance by the Contractor or form the basis of any claim for monies, delivery schedule extension, or any other equitable adjustment.</li>
 						<li>The personnel set forth below as proposed by the Contractor for this Task Order, or identified in the Contractor’s proposals as Key Personnel, shall comprise the list of Key Personnel required to perform under this Task Order. The list may be  modified in accordance with the above, to substitute or add personnel:</li>
-						<input type="text"/>
-						<p>2 columns "labor category", "key personnel name", 3 rows, </p>
-							<ol>
-								<li>Member(s) of the team have experience building popular, high-traffic digital services</li>
-								<li>Member(s) of the team have experience building scalable digital services</li>
-								<li>Member(s) of the team have experience designing native mobile</li>
-								<li>mobile responsive web applications</li>
-								<li>Member(s) of the team have experience using automated testing frameworks</li>
-								<li>Member(s) of the team have experience with modern development and operations (DevOps) techniques like continuous integration and continuous deployment</li>
-								<li>Member(s) of the team have experience securing digital services</li>
-							</ol>
-							<ol>
-								<li><b>@TODO please provide labor category and personnel name</b></li>
-								<li>At a minimum, a Project Manager must be identified and designated as Key Personnel. There may be more than one Project Manager. The Project Manager must be a senior staff member and is responsible for the supervision and management of the Contractor’s personnel, technical assistance, and interface and compliance with instructions from AGENCY’s COR. Desired skills/experience for the Project Manager include:</li>
-								<li>Experience in technical leadership.</li>
-								<li>Ability to rapidly prioritize competing requirements.</li>
-								<li>Ability to understand and simplify customer requirements.</li>
-								<li>Ability to communicate end user feedback to technical and design leads.</li>
-								<li>Computer Science or Engineering degree or equivalent work experience.</li>
-								<li>Strong communication skills.</li>
-								<li>Proven knowledge of industry standards.</li>
-								<li>Proven knowledge of managing Agile Software Development efforts.</li>
-							</ol>
+						<ol>
+							<li>Member(s) of the team have experience building popular, high-traffic digital services</li>
+							<li>Member(s) of the team have experience building scalable digital services</li>
+							<li>Member(s) of the team have experience designing native mobile</li>
+							<li>mobile responsive web applications</li>
+							<li>Member(s) of the team have experience using automated testing frameworks</li>
+							<li>Member(s) of the team have experience with modern development and operations (DevOps) techniques like continuous integration and continuous deployment</li>
+							<li>Member(s) of the team have experience securing digital services</li>
+						</ol>
+						<ol>
+							<li>At a minimum, a Project Manager must be identified and designated as Key Personnel. There may be more than one Project Manager. The Project Manager must be a senior staff member and is responsible for the supervision and management of the Contractor’s personnel, technical assistance, and interface and compliance with instructions from AGENCY’s COR. Desired skills/experience for the Project Manager include:</li>
+							<li>Experience in technical leadership.</li>
+							<li>Ability to rapidly prioritize competing requirements.</li>
+							<li>Ability to understand and simplify customer requirements.</li>
+							<li>Ability to communicate end user feedback to technical and design leads.</li>
+							<li>Computer Science or Engineering degree or equivalent work experience.</li>
+							<li>Strong communication skills.</li>
+							<li>Proven knowledge of industry standards.</li>
+							<li>Proven knowledge of managing Agile Software Development efforts.</li>
+						</ol>
 					</ol>
 				
 			</div>

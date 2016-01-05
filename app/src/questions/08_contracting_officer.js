@@ -26,7 +26,6 @@ var ContractingOfficer = React.createClass({
 
 	save: function(cb) {
 		var data = {};
-		// also collect any new custom roles if not already saved separately
 		
 		for (i=0; i < STATES.length; i++){
 			var stateName = STATES[i];
@@ -42,6 +41,7 @@ var ContractingOfficer = React.createClass({
 		initialStates["addRole"] = false;
 		initialStates["title"] = "";
 		initialStates["description"] = "";
+		initialStates["rolesData"] = [];
 		return initialStates;
 	},
   componentDidMount: function() {
@@ -50,6 +50,9 @@ var ContractingOfficer = React.createClass({
     	var componentStates = getComponents(content["data"]);
       this.setState( componentStates );      
     }.bind(this));
+		getCustomComponents(rfqId, 8, function(data){ 
+			this.setState({rolesData: data["data"]});
+		}.bind(this));
   },
   addRole: function() {
   	console.log(this.state.addRole);
@@ -62,7 +65,7 @@ var ContractingOfficer = React.createClass({
   			roleData["description"] = this.state.description;
 
   			// save the data
-  			createRole(roleData, rfqId, 8, function(data){
+  			createComponent(roleData, rfqId, 8, function(data){
   				alert(data);
   			}.bind(this));
   			this.setState( {addRole: false});
@@ -77,7 +80,16 @@ var ContractingOfficer = React.createClass({
   	}
   },
 	render: function() {
-		additionalRoles = [];
+		var additionalRoles = [];
+		for (i=0; i < this.state.rolesData.length; i++){
+			var role = this.state.rolesData[i];
+			additionalRoles.push(
+				<div>
+					<div className="sub-heading">{role['title']}</div>
+					<p>{role['description']}</p>
+				</div>
+			);
+		}
 		return (
 			<div>
 				<div className="main-heading">Roles and Responsibilities</div>
@@ -122,7 +134,6 @@ var ContractingOfficer = React.createClass({
 					: <button className="add btn btn-default" onClick={this.addRole}>Add Role</button>
 				}
 				
-
 				<br />
 				<p>You may also add elaborate on these roles, or add additional roles in the generated RFQ.</p>
 				<br />

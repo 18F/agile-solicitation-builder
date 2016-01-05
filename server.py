@@ -89,11 +89,11 @@ class Clin(Resource):
         session.add(additional_clin)
         session.commit()
         
-class CustomComponent(Resource):
+class AddComponent(Resource):
 
     def get(self, rfq_id, section_id):
         session = Session()
-        components = session.query(CustomComponent).filter_by(document_id=rfq_id).filter_by(section_id=section_id).all()
+        components = session.query(CustomComponent).filter_by(document_id=rfq_id).filter_by(section=section_id).all()
         return jsonify(data=[c.to_dict() for c in components])
 
     def post(self, rfq_id, section_id):
@@ -146,7 +146,7 @@ api.add_resource(Agencies, '/agencies')
 api.add_resource(Data, '/get_content/<int:rfq_id>/sections/<int:section_id>')
 api.add_resource(Create, '/rfqs')
 api.add_resource(Clin, '/clins/<int:rfq_id>')
-api.add_resource(CustomComponent, '/custom_component/<int:rfq_id>/section/<int:section_id>')
+api.add_resource(AddComponent, '/custom_component/<int:rfq_id>/section/<int:section_id>')
 
 # map index.html to app/index.html, map /build/bundle.js to app/build.bundle.js
 @app.route('/initiate')

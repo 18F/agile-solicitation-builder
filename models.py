@@ -108,18 +108,17 @@ class AdditionalClin(Base):
 
 
 class CustomComponent(Base):
-    __tablename__ = 'additional_component'
+    __tablename__ = 'custom_components'
 
     id = Column(Integer, primary_key=True)
-    document_id = Column(Integer, ForeignKey('rfqs.id'), primary_key=True)
+    document_id = Column(Integer)
     title = Column(String)
     description = Column(Text)
-    category = Column(String)
     section = Column(Integer)
     
     def to_dict(self):
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}    
 
     def __repr__(self):
-        return "<AdditionalComponent(id='%d', title='%s', text='%s', category='%s')>" % (self.document_id, self.title, self.category, self.text)
+        return "<AdditionalComponent(id='%d', title='%s', text='%s')>" % (self.document_id, self.title, self.category, self.text)
 

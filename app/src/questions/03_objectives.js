@@ -189,7 +189,7 @@ var Objective = React.createClass({
 				<p>These functional Requirements will be translated into Epics and User Stories that will be used to populate the Product Backlog.</p>
 
 				<div className="sub-heading">Users</div>
-				<p>The primary users of this X will be:</p>
+				<p>The primary users will be:</p>
 
 					{userTypesOptions}
 

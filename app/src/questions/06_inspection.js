@@ -5,7 +5,9 @@ var EditBox = require("../edit_box");
 var STATES = [
 	"inspectionOverview",
 	"lateDelivery",
-	"workspace",
+	"workspaceExists",
+	"workspaceName",
+	"transitionActivities",
 ];
 
 var Inspection = React.createClass({
@@ -52,30 +54,22 @@ var Inspection = React.createClass({
 
 				<div className="sub-heading">Delivery & Timing</div>
 
-				{this.state.edit === "inspectionOverview"?
-				<div><div className="edit" onClick={this.toggleEdit.bind(this, 'inspectionOverview')}>Done</div>
-					<textarea className="form-control" rows="4" defaultValue={this.state.inspectionOverview} onChange={this.handleChange.bind(this, 'inspectionOverview')}></textarea></div>:
-				<div>
-					<div className="edit" onClick={this.toggleEdit.bind(this, 'inspectionOverview')}>Edit</div>
-					{this.state.inspectionOverview}
-				</div>
-				}
-
-				<br />
+				<EditBox
+						text={this.state.inspectionOverview}
+						editing={this.state.edit === 'inspectionOverview'}
+						onStatusChange={this.toggleEdit.bind(this, 'inspectionOverview')}
+						onTextChange={this.handleChange.bind(this, 'inspectionOverview')}>
+				</EditBox>
 
 
 				<div className="sub-heading">Notice Regarding Late Delivery</div>
-				{this.state.edit === "lateDelivery"?
-				<div>
-					<div className="edit" onClick={this.toggleEdit.bind(this, 'lateDelivery')}>Done</div>
-					<textarea className="form-control" rows="4" defaultValue={this.state.lateDelivery} onChange={this.handleChange.bind(this, 'lateDelivery')}></textarea>
-				</div>:
-				<div>
-					<div className="edit" onClick={this.toggleEdit.bind(this, 'lateDelivery')}>Edit</div>
-					{this.state.lateDelivery}
-				</div>
-				}
-				<br />
+
+				<EditBox
+						text={this.state.lateDelivery}
+						editing={this.state.edit === 'lateDelivery'}
+						onStatusChange={this.toggleEdit.bind(this, 'lateDelivery')}
+						onTextChange={this.handleChange.bind(this, 'lateDelivery')}>
+				</EditBox>
 
 				<div className="sub-heading">Delivering Deliverables</div>
 
@@ -84,19 +78,22 @@ var Inspection = React.createClass({
 				<p>Is your team currently using a collaborative workspace?</p>
 				<div className="sub-text">Ex: Sharepoint, JIRA, Rally, Google Drive, Box, etc.</div>
 
-				<radiogroup>
+				<radiogroup onChange={this.handleChange.bind(this, "workspaceExists")}>
 					<div className="radio">
 						<label>
-							<input type="radio" value="yes" checked={"yes" == this.state.workspace} />Yes
+							<input type="radio" value="yes" checked={"yes" == this.state.workspaceExists} />Yes
 					  </label>
 					</div>
 					<div className="radio">
 						<label>
-							<input type="radio" value="no" checked={"no" == this.state.workspace} />No
+							<input type="radio" value="no" checked={"no" == this.state.workspaceExists} />No
 					  </label>
 					</div>
 				</radiogroup>
 
+				<p>This information should also include any systems documentation and training materials developed over the course of the engagement.</p>
+				<p>The US Digital Service Playbook strongly recommends the use of a version control system such as Github, or something similar for storing code and system documentation.</p>
+		
 	
 				<p>The Contractor shall:</p>
 				<ol>
@@ -118,21 +115,14 @@ var Inspection = React.createClass({
 
 				<div className="sub-heading">Transition Activities</div>
 
-				<ol>
-					<li>During the transition to the Government and/or a new contractor, the Contractor shall perform all necessary transition activities, including, but not limited to, continued full services to AGENCY; participation, at discretion of COR in five or more meetings with the Government or new contractor to effect a smooth transition and provide detailed information on the operation of all deliverables; training of new personnel (contractor or Government) during transition period, in all system operation and maintenance functions; appropriate close-out of outstanding technical and related work. Should be available to answer questions. 
-					</li>
-					<li>Information such as the list of accomplishments, documentation, and customized code developed for AGENCY should be available to the Government in the collaborative workspace established from contract initiation. Should the Contractor be terminated prior to the end of the scheduled base period, the Contractor shall work with the Government to ensure they retain access to this information within two weeks from the termination date.
-					</li>
-				</ol>
+				<EditBox
+						text={this.state.transitionActivities}
+						editing={this.state.edit === 'transitionActivities'}
+						onStatusChange={this.toggleEdit.bind(this, 'transitionActivities')}
+						onTextChange={this.handleChange.bind(this, 'transitionActivities')}>
+				</EditBox>
 
-				<div className="sub-heading">System Documentation and Training</div>				
 
-				<div className="sub-text">Ex: Sharepoint, JIRA, Rally, Google Drive, Box, etc.</div>
-				<p>We strongly encourage the use of a collaborative environment</p>
-				code - version control, define what is, examples. (encourage certain options, but vendor will specify)
-				for documents is separate
-				<p>Github: version control</p>
-			
 
 			</div>
 
