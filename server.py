@@ -99,8 +99,6 @@ class AddComponent(Resource):
     def post(self, rfq_id, section_id):
         parser = reqparse.RequestParser()
         data = request.get_json()["data"]
-        print "!!!!!!!"
-        print data
         title = data['title']
         description = data['description']
 

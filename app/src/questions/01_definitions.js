@@ -30,7 +30,13 @@ var Definition = React.createClass({
             <div>
                 <div className="main-heading">Definitions</div>
                 <p>These are the standard definitions for agile development terms in alignment with the USDS Playbook. You can also modify the definitions and add additional terms. When you are done click the "Next" button at the bottom of the page.</p>
-                <textarea className="form-control" rows="15" value={this.state.definitions} onChange={this.handleChange.bind(this, "definitions")}></textarea>
+                <EditBox
+                    text={this.state.definitions}
+                    editing={this.state.edit === 'definitions'}
+                    onStatusChange={this.toggleEdit.bind(this, 'definitions')}
+                    onTextChange={this.handleChange.bind(this, 'definitions')}>
+                </EditBox>
+
             </div>
         );
     },
