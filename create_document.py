@@ -7,6 +7,8 @@ import sys
 import config
 import datetime
 
+from pprint import pprint
+
 session = Session()
 SUB_HEADING = 2
 user_dict = {
@@ -15,6 +17,16 @@ user_dict = {
     "internal_people": "Internal People/Government Employees",
     "internal_it": "Internal IT/Developers",
 }
+
+playbook1 = [
+    "Early in the project, spend time with current and prospective users of the service",
+    "Use a range of qualitative and quantitative research methods to determine people’s goals, needs, and behaviors; be thoughtful about the time spent",
+    "Test prototypes of solutions with real people, in the field if possible",
+    "Document the findings about user goals, needs, behaviors, and preferences",
+    "Share findings with the team and agency leadership",
+    "Create a prioritized list of tasks the user is trying to accomplish, also known as 'user stories'",
+    "As the digital service is being built, regularly test it with potential users to ensure it meets people’s needs",
+]
 
 def make_dict(components):
     component_dict = {}
@@ -131,7 +143,7 @@ def objectives(document, rfq):
 
     document.add_heading("Users")
     user_types = ["external_people", "external_it", "internal_people", "internal_it"]
-    users = get_users(cc)
+    users = get_users(cc, user_types)
     if len(users) == 0:
         document.add_paragraph("The primary users MAY include the following:")
         for user in user_dict:
@@ -144,20 +156,55 @@ def objectives(document, rfq):
 
     document.add_paragraph("The requirements described below will be customized to the types of users specified.")
 
+    document.add_heading("User Research")
+    user_research_options = {
+        "done": "Research has already been conducted, either internally or by another vendor. (proceed to product/program vision questionnaire)",
+        "internal": "We intend to conduct user research internally prior to the start date of this engagement.",
+        "vendor": "The vendor will be responsible for the user research.",
+    }
+
+    if cc["userResearchStrategy"] != "none":
+        document.add_paragraph(user_research_options[cc["userResearchStrategy"]])
+
+    document.add_paragraph(cc['userAccess'])
+
+    document.add_heading("Understand What People Need")
+    document.add_paragraph("The vendor services will include exploring and pinpointing the needs of the people who will use the service, and the ways the service will fit into their lives. The vendor shall continually test the products with real people to ensure delivery is focused on what is important.")
+    document.add_paragraph("As a part of this effort, the vendor will:")
+    for item in playbook1:
+        document.add_paragraph(item, style="ListNumber")
+
+
     document.add_heading("Deliverables", level=SUB_HEADING)
     document.add_paragraph(cc["deliverables"])
 
     document.add_heading("Place of Performance", level=SUB_HEADING)
-    document.add_paragraph("")
+    if cc['locationRequirement'] == "no":
+        document.add_paragraph("The contractor is not required to have a full-time working staff presence on-site.")
+
+    else:
+        if len(cc['locationText']) > 0:
+            location = cc["locationText"]
+        else:
+            location = "[INSERT LOCATION HERE]"
+    location_text = "The contractor shall have a full-time working staff presence at " + location + ". Contractor shall have additional facilities to perform contract functions as necessary."
+    document.add_paragraph(location_text)
+    document.add_paragraph(cc["offSiteDevelopmentCompliance"])
 
     document.add_heading("Kick Off Meeting", level=SUB_HEADING)
-    document.add_paragraph("")
+    kickoff_text = ""
+    if cc["kickOffMeeting"] == "none":
+        kickoff_text = "A formal kick-off meeting will not be required."
+    if cc["kickOffMeeting"] == "in-person":
+        kickoff_text = cc["kickOffMeetingInPerson"]
+    if cc["kickOffMeeting"] == "remote":
+        kickoff_text = cc["kickOffMeetingRemote"]
 
+    document.add_paragraph(kickoff_text)
 
     return document
 
 def requirements():
-    print fish
     pass
 
 def inspection_and_delivery(document, rfq):
@@ -183,22 +230,6 @@ def create_document(rfq_id):
     document = services(document, rfq)
     document = objectives(document, rfq)
     document = requirements()
-
-
-    # p = document.add_paragraph(text)
-    # p.add_run('bold').bold = True
-    # p.add_run(' and some ')
-    # p.add_run('italic.').italic = True
-
-    # document.add_heading('Heading, level 1', level=1)
-    # document.add_paragraph('Intense quote', style='IntenseQuote')
-
-    # document.add_paragraph(
-    #     'first item in unordered list', style='ListBullet'
-    # )
-    # document.add_paragraph(
-    #     'first item in ordered list', style='ListNumber'
-    # )
 
     doc_name = "RFQ_" + str(rfq_id) + ".docx"
     file_path = os.path.join("downloads", doc_name)
