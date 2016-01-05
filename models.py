@@ -75,7 +75,6 @@ class ContentComponent(Base):
     document_id = Column(Integer, ForeignKey('rfqs.id'), primary_key=True)
     section = Column(Integer, primary_key=True)
     name = Column(String, primary_key=True)
-
     text = Column(Text)
 
     def to_dict(self):
@@ -108,14 +107,15 @@ class AdditionalClin(Base):
 
 
 
-class AdditionalComponent(Base):
+class CustomComponent(Base):
     __tablename__ = 'additional_component'
 
     id = Column(Integer, primary_key=True)
     document_id = Column(Integer, ForeignKey('rfqs.id'), primary_key=True)
     title = Column(String)
-    text = Column(Text)
+    description = Column(Text)
     category = Column(String)
+    section = Column(Integer)
     
     def to_dict(self):
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}    

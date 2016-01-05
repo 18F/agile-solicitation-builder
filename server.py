@@ -13,7 +13,7 @@ import datetime
 import create_document
 
 from docx import Document
-from models import Agency, RFQ, ContentComponent, AdditionalClin, AdditionalComponent, Base, Session, engine
+from models import Agency, RFQ, ContentComponent, AdditionalClin, CustomComponent, Base, Session, engine
 from seed import agencies
 
 
@@ -74,18 +74,41 @@ class Clin(Resource):
         clin_values = ["row1", "row2", "row3a", "row3b", "row4a", "row4b", "row5a", "row5b", "row6a", "row6b",]
         data = request.get_json()["data"]        
 
-        data_dict = {"document_id": int(rfq_id)}
-        for value in clin_values:
-            data_dict[value] = data[value]
-        r1 = data['row1']
-        r2 = data['row2']
+        row1 = data['row1']
+        row2 = data['row2']
+        row3a = data['row3a']
+        row3b = data['row3b']
+        row4a = data['row4a']
+        row4b = data['row4b']
+        row5b = data['row5b']
+        row6a = data['row6a']
+        row6b = data['row6b']
 
-        print r1, r2
-
-        additional_clin = AdditionalClin(document_id=int(rfq_id), row1=r1, row2=r2)
+        additional_clin = AdditionalClin(document_id=int(rfq_id), row1=row1, row2=row2, row3a=row3a, row3b=row3b, row4a=row4a, row4b=row4b, row5a=row5a, row5b=row5b, row6a=row6a, row6b=row6b)
         session = Session()
         session.add(additional_clin)
         session.commit()
+        
+class CustomComponent(Resource):
+
+    def get(self, rfq_id, section_id):
+        session = Session()
+        components = session.query(CustomComponent).filter_by(document_id=rfq_id).filter_by(section_id=section_id).all()
+        return jsonify(data=[c.to_dict() for c in components])
+
+    def post(self, rfq_id, section_id):
+        parser = reqparse.RequestParser()
+        data = request.get_json()["data"]
+        print "!!!!!!!"
+        print data
+        title = data['title']
+        description = data['description']
+
+        custom_component = CustomComponent(document_id=int(rfq_id), section=int(section_id), title=title, description=description)
+        session = Session()
+        session.add(custom_component)
+        session.commit()
+        return data
         
 
 class Create(Resource):
@@ -123,6 +146,7 @@ api.add_resource(Agencies, '/agencies')
 api.add_resource(Data, '/get_content/<int:rfq_id>/sections/<int:section_id>')
 api.add_resource(Create, '/rfqs')
 api.add_resource(Clin, '/clins/<int:rfq_id>')
+api.add_resource(CustomComponent, '/custom_component/<int:rfq_id>/section/<int:section_id>')
 
 # map index.html to app/index.html, map /build/bundle.js to app/build.bundle.js
 @app.route('/initiate')

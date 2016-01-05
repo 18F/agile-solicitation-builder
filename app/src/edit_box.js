@@ -25,12 +25,13 @@ var EditBox = React.createClass({
 	},
 	render: function() {
 		var returnText = [];
+		var liRe = /\n\d\./;
+		var myArray = liRe.exec(this.props.text);
 		var paragraphs = this.props.text.split("\n\n");
 		for (i=0; i < paragraphs.length; i++){
+			var paragraphText = paragraphs[i];
 			returnText.push(
-				<p>
-					{paragraphs[i]}
-				</p>
+				<p>{paragraphText}</p>
 			);
 		}
 

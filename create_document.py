@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from docx import Document
-from models import Agency, RFQ, ContentComponent, AdditionalClin, AdditionalComponent, Base, Session, engine
+from models import Agency, RFQ, ContentComponent, AdditionalClin, CustomComponent, Base, Session, engine
 
 import os, shutil
 import sys

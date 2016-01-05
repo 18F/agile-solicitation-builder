@@ -82,6 +82,22 @@ function createRFQ(dataDict, callback){
 	});
 }
 
+function createRole(roleData, rfqId, sectionId, callback){
+	console.log("roleData", roleData);
+	$.ajax({
+		type: "POST",
+		url: "/api/custom_component/" + rfqId + "/section/" + sectionId,
+		data: JSON.stringify({data: roleData}),
+		contentType: 'application/json',
+		dataType: 'json',
+		success: function(data){
+			if (callback){				
+				callback(data);
+			}
+		}
+	});
+}
+
 function createCLIN(clinData, rfqId, callback){
 	console.log("clinData", clinData);
 	window.cd = clinData;

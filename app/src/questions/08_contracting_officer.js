@@ -40,8 +40,8 @@ var ContractingOfficer = React.createClass({
 	getInitialState: function() {		
 		var initialStates = getStates(STATES);
 		initialStates["addRole"] = false;
-		initialStates["newTitle"] = "";
-		initialStates["newText"] = "";
+		initialStates["title"] = "";
+		initialStates["description"] = "";
 		return initialStates;
 	},
   componentDidMount: function() {
@@ -55,12 +55,21 @@ var ContractingOfficer = React.createClass({
   	console.log(this.state.addRole);
   	if (this.state.addRole){  		
   		// check to see if info has been filled in
-  		if (this.state.title.length > 0 && this.state.text.length > 0){
-  			// send to new helpers function that will save the data
+  		if (this.state.title.length > 0 && this.state.description.length > 0){
+  			var rfqId = getId(window.location.hash);
+  			var roleData = {};
+  			roleData["title"] = this.state.title;
+  			roleData["description"] = this.state.description;
+
+  			// save the data
+  			createRole(roleData, rfqId, 8, function(data){
+  				alert(data);
+  			}.bind(this));
+  			this.setState( {addRole: false});
   			// reload
   		}
   		else {
-  			alert("please fill out the title and text components of the form before saving the new role.");
+  			alert("Please fill out the title and text components of the form before saving the new role.");
   		}
   	}
   	else {
@@ -68,6 +77,7 @@ var ContractingOfficer = React.createClass({
   	}
   },
 	render: function() {
+		additionalRoles = [];
 		return (
 			<div>
 				<div className="main-heading">Roles and Responsibilities</div>
@@ -97,17 +107,19 @@ var ContractingOfficer = React.createClass({
 						onTextChange={this.handleChange.bind(this, 'productOwner')}>
 				</EditBox>
 
+				{additionalRoles}
+
 				<br />
 
 				{this.state.addRole? 
 					<div>
 						<div className="sub-heading">
-							<input type="text" className="medium-response form-control" value={this.state.title} onChange={this.handleChange.bind(this, "title")} />
+							<input type="text" className="medium-response form-control" placeholder="Title" value={this.state.title} onChange={this.handleChange.bind(this, "title")} />
 						</div>
-						<textarea className="form-control" placeholder="Role Title" rows="5" value={this.state.text} onChange={this.handleChange.bind(this, "text")}></textarea>
+						<textarea className="form-control" rows="5" placeholder="Description" value={this.state.description} onChange={this.handleChange.bind(this, "description")}></textarea>
 						<button className="btn btn-default" placeholder="Description of Role" onClick={this.addRole}>Save Role</button>
 					</div>
-					: <button className="add btn btn-default" onClick={this.addRole}>+ Role</button>
+					: <button className="add btn btn-default" onClick={this.addRole}>Add Role</button>
 				}
 				
 

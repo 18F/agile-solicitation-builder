@@ -19,6 +19,8 @@ var AGENCY_NAMES = {
 	"OMB": "Office of Management and Budget",
 	"VA": "Department of Veteran Affairs"
 };
+
+// var AGENCY_NAMES = getAgencies();
 // "Contact": "a new purchase under Far 15 (Contract)",
 var DOC_TYPES = {
 	"Purchase Order": "a new purchase under Far 13 (Purchase Order)",
