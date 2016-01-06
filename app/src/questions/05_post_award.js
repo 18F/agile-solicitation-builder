@@ -2,7 +2,7 @@ var React = require('react');
 var StateMixin = require("../state_mixin");
 var EditBox = require("../edit_box");
 
-var STATES = ['invoicing'];
+var STATES = ["invoicing", "test"];
 
 var PostAward = React.createClass({
 	mixins: [StateMixin],
@@ -16,6 +16,7 @@ var PostAward = React.createClass({
     	var componentStates = getComponents(content["data"]);
       this.setState( componentStates );
     }.bind(this));
+    this.setState({test: "test"});
   },
   save: function(cb) {
   	cb();
@@ -24,7 +25,13 @@ var PostAward = React.createClass({
 		return (
 			<div>
 				<div className="sub-heading">Invoicing & Funding</div>
-				<p>{this.state.invoicing}</p>
+				<p>Hi</p>
+					<EditBox
+							text={this.state.invoicing}
+							editing={this.state.edit === 'invoicing'}
+							onStatusChange={this.toggleEdit.bind(this, 'invoicing')}
+							onTextChange={this.handleChange.bind(this, 'invoicing')}>
+					</EditBox>
 			</div>
 		);
 	},
@@ -32,3 +39,4 @@ var PostAward = React.createClass({
 
 
 module.exports = PostAward;
+

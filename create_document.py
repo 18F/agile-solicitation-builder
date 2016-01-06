@@ -38,7 +38,7 @@ def get_users(cc, user_types):
     users = []
     for user in user_types:
         if cc[user] == "true":
-            users.append(cc[user])            
+            users.append(user)            
     return users
 
 def overview(document, rfq):
@@ -144,15 +144,17 @@ def objectives(document, rfq):
     document.add_heading("Users")
     user_types = ["external_people", "external_it", "internal_people", "internal_it"]
     users = get_users(cc, user_types)
-    if len(users) == 0:
-        document.add_paragraph("The primary users MAY include the following:")
-        for user in user_dict:
-            document.add_paragraph(user_dict[user], style='ListNumber')
+    # print users
+    # if len(users) == 0:
+    #     document.add_paragraph("The primary users MAY include the following:")
+    #     for user in user_dict:
+    #         print user, users
+    #         document.add_paragraph(user_dict[user], style='ListNumber')
 
-    else:
-        document.add_paragraph("The primary users will include the following:")
-        for user in users:
-            document.add_paragraph(user_dict[user], style='ListNumber')
+    # else:
+    #     document.add_paragraph("The primary users will include the following:")
+    #     for user in users:
+    #         document.add_paragraph(user_dict[user], style='ListNumber')
 
     document.add_paragraph("The requirements described below will be customized to the types of users specified.")
 
@@ -171,8 +173,8 @@ def objectives(document, rfq):
     document.add_heading("Understand What People Need")
     document.add_paragraph("The vendor services will include exploring and pinpointing the needs of the people who will use the service, and the ways the service will fit into their lives. The vendor shall continually test the products with real people to ensure delivery is focused on what is important.")
     document.add_paragraph("As a part of this effort, the vendor will:")
-    for item in playbook1:
-        document.add_paragraph(item, style="ListNumber")
+    # for item in playbook1:
+    #     document.add_paragraph(item.decode('latin-1').encode('utf8'), style="ListNumber")
 
 
     document.add_heading("Deliverables", level=SUB_HEADING)
@@ -229,11 +231,27 @@ def create_document(rfq_id):
     document = definitions(document, rfq)
     document = services(document, rfq)
     document = objectives(document, rfq)
-    document = requirements()
+    # document = requirements()
+
+
+    # p = document.add_paragraph(text)
+    # p.add_run('bold').bold = True
+    # p.add_run(' and some ')
+    # p.add_run('italic.').italic = True
+
+    # document.add_heading('Heading, level 1', level=1)
+    # document.add_paragraph('Intense quote', style='IntenseQuote')
+
+    # document.add_paragraph(
+    #     'first item in unordered list', style='ListBullet'
+    # )
+    # document.add_paragraph(
+    #     'first item in ordered list', style='ListNumber'
+    # )
 
     doc_name = "RFQ_" + str(rfq_id) + ".docx"
     file_path = os.path.join("downloads", doc_name)
     document.save(file_path)
 
-    # find a way to check if document was successfully saved
+    # @TODO find a way to check if document was successfully saved
     return doc_name

@@ -46,7 +46,7 @@ var Requirement = React.createClass({
 				<p><b>@TODO How can we shift the focus of this text to performance?</b></p>
 				<p>Some key points to include: if government not happy then X happens. There needs to be a POC on contractor side who is responsible. If there will be delays because of things on the government side the contractor needs to communicate this ASAP and come up with new schedule with CO/PM.</p>	
 
-				<div className="sub-heading">Agile Development Management Plan (ADMP) and Key Personnel </div>
+				<div className="sub-heading">Key Personnel </div>
 				<p>The performance work statement will include:</p>
 				<ul>
 					<li>Contact information for all senior leaders and an organizational chart showing the Offeror’s organizational hierarchy and reporting structure, with specific designation of individuals as Key Personnel;
