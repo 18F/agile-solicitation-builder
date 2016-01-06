@@ -1,7 +1,6 @@
 var React = require('react');
 
 // Dependencies
-var View = require('react-flexbox');
 
 // Bootstrap
 var Nav = require('react-bootstrap').Nav;
@@ -137,21 +136,21 @@ var Request = React.createClass({
 			paddingLeft: 16,
 		};
 		return (
-			<View row>
+			<div row>
 
-				<View className="main col-md-8" style={mainStyle}>
+				<div className="main col-md-8" style={mainStyle}>
 					<div>
 						{this.renderChildren()}
 					</div>
-				</View>
-				<View className="col-md-1">					
-				</View>
-				<View className="col-md-2 sidebar-nav">
+				</div>
+				<div className="col-md-1">					
+				</div>
+				<div className="col-md-2 sidebar-nav">
 					<Sidebar width={200} onChange={this.handleSidebarChange} currentPage={this.props.location.pathname} rfpId={this.props.params.id} />
-				</View>
-				<View className="col-md-1">					
-				</View>
-			</View>
+				</div>
+				<div className="col-md-1">					
+				</div>
+			</div>
 		);
 	},
 });

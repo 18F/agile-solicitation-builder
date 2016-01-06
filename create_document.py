@@ -144,17 +144,17 @@ def objectives(document, rfq):
     document.add_heading("Users")
     user_types = ["external_people", "external_it", "internal_people", "internal_it"]
     users = get_users(cc, user_types)
-    # print users
-    # if len(users) == 0:
-    #     document.add_paragraph("The primary users MAY include the following:")
-    #     for user in user_dict:
-    #         print user, users
-    #         document.add_paragraph(user_dict[user], style='ListNumber')
+    print users
+    if len(users) == 0:
+        document.add_paragraph("The primary users MAY include the following:")
+        for user in user_dict:
+            print user, users
+            document.add_paragraph(user_dict[user], style='ListNumber')
 
-    # else:
-    #     document.add_paragraph("The primary users will include the following:")
-    #     for user in users:
-    #         document.add_paragraph(user_dict[user], style='ListNumber')
+    else:
+        document.add_paragraph("The primary users will include the following:")
+        for user in users:
+            document.add_paragraph(user_dict[user], style='ListNumber')
 
     document.add_paragraph("The requirements described below will be customized to the types of users specified.")
 

@@ -3,7 +3,7 @@
   "description": "Playbook in Action",
   "main": "index.js",
   "authors": [
-    "Julia Winn <julia.winn@gsa.gov>"
+    "Julia Winn <julia.winn@gsa.gov>",
     "Tom Buckley <tbuckley89@gmail.com>"
   ],
   "license": "ISC",
