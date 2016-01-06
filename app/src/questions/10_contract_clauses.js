@@ -37,8 +37,8 @@ var ContractClauses = React.createClass({
 			<div>
 				<div className="main-heading">Contract Clauses</div>
 	
-				<div className="sub-heading">Please feel free to add anything else specific to your contract.</div>
-				<p>Please feel free to add anything else specific to your contract.</p>
+				<div className="sub-heading">Additional Clauses.</div>
+				<p>Please feel free to add anything else specific to your contract. You will also be able to edit the Microsoft Word document that is produced.</p>
 				<textarea className="form-control" rows="15" value={this.state.contractClauses} onChange={this.handleChange.bind(this, 'contractClauses')}></textarea>
 			</div>
 		);

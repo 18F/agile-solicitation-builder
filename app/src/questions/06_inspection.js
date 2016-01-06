@@ -3,11 +3,13 @@ var StateMixin = require("../state_mixin");
 var EditBox = require("../edit_box");
 
 var STATES = [
+	"guidingPrinciples",
 	"inspectionOverview",
 	"lateDelivery",
 	"workspaceExists",
 	"workspaceName",
 	"transitionActivities",
+	"deliveringDeliverables",
 ];
 
 var Inspection = React.createClass({
@@ -31,7 +33,6 @@ var Inspection = React.createClass({
 			data[stateName] = this.state[stateName];
 		}
 
-		// get data from FAR code section
 		var rfqId = getId(window.location.hash);
     put_data(6, rfqId, data, cb);
 		
@@ -43,14 +44,15 @@ var Inspection = React.createClass({
 				<div className="sub-heading">Overview</div>
 
 				<p>Under the agile methodology, the traditional transition process should not be necessary. Rather, the government should have access to all code and other relevant documents from day one in a clearly documented and organized electronically shared workspace.</p>
+
 				<p>Guiding Principles</p>
-				<ol>
-					<li>The progress of the product will be inspected by someone from government at the completion of each iteration.</li>
-					<li>All documents should be stored electronically such that the CO, PM, and any other relevant government employees who have been granted permissions can access them at any time.</li>
-					<li>The transition of materials will occur on an ongoing basis. All new materials produced during an iteration will be made available to the government at the end of that iteration.</li>					
-					<li>In addition to the code, documentation should be updated with each iteration. This includes technical documentation including but not limited to setup instructions in the README.md, user reseach findings etc.</li>
-					<li>A well designed interface will not require additional training for users. (see USDS playbook #2) and the need for training should be minimized with regular user testing.</li>
-				</ol>
+
+				<EditBox
+						text={this.state.guidingPrinciples}
+						editing={this.state.edit === 'guidingPrinciples'}
+						onStatusChange={this.toggleEdit.bind(this, 'guidingPrinciples')}
+						onTextChange={this.handleChange.bind(this, 'guidingPrinciples')}>
+				</EditBox>
 
 				<div className="sub-heading">Delivery & Timing</div>
 
@@ -96,22 +98,13 @@ var Inspection = React.createClass({
 		
 	
 				<p>The Contractor shall:</p>
-				<ol>
-					<li>Ensure that all deliverables, products, licenses, designs, data, documentation, tests, user research notes, source code, configuration settings and files, and materials developed throughout this Task Order will be the property of the U.S. Government.
-					</li>
-					<li>Work with the CO from launch to ensure all reference materials and other documents are accessible to the appropriate government personnel at all times. If anything is unclear the CO should bring this to the attention of the contractor immediately.
-					</li>
-					<li>This documentation may also include but is not limited to user research materials and findings.
-					</li>
-					<li>Ensure any software written should be stored using version control with the COR and any other relevant government employees will have read access to at a minimum.
-					</li>
-					<li>Any and all monitoring and analytics dashboards and tools will be accessible to the appropriate government personnel at all times.
-					</li>	
-					<li>Provide any necessary assistance to the COR and potentially another vendor to stand-up and ensure the applications, systems, databases, platform, and environments are tested and fully operational.
-					</li>
-					<li>Consult with the COR to determine what is appropriate, effective, and essential for training and provide the services the COR deems necessary.</li>
-					
-				</ol>
+
+				<EditBox
+						text={this.state.deliveringDeliverables}
+						editing={this.state.edit === 'deliveringDeliverables'}
+						onStatusChange={this.toggleEdit.bind(this, 'deliveringDeliverables')}
+						onTextChange={this.handleChange.bind(this, 'deliveringDeliverables')}>
+				</EditBox>
 
 				<div className="sub-heading">Transition Activities</div>
 

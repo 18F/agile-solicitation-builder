@@ -449,7 +449,29 @@ var Services = React.createClass({
 					<div>
 						<p>Not to exceed ...</p>
 						<input type="text" className="form-control short-response" onChange={this.handleChange.bind(this, "baseFeeAmount")} value={this.state.baseFeeAmount} />
+						<form className="form-inline">
+							<div className="form-group">
+								<div className="input-group">
+									<div className="input-group-addon">$</div>
+			    				<input type="text" className="form-control short-response" onChange={this.handleChange.bind(this, "baseFeeAmount")} value={this.state.baseFeeAmount}></input>
+			    			</div>
+			    		</div>
+						</form>
 						<p>Use agency specific guidance regarding details.</p>
+
+						<div className="container fake-table col-md-12">
+							<div className="row clin">
+								<div className="col-md-12 table-content">{BASE_FEE_OPTIONS[this.state.baseFee]} Based CLIN
+								</div>
+							</div>
+							<div className="row clin">
+								<div className="col-md-6 table-content">{BASE_FEE_OPTIONS[this.state.baseFee]}
+								</div>
+								<div className="col-md-6 table-content">$XXXXX (vendor completes)
+								</div>
+							</div>
+						</div>
+
 					</div>
 				}
 
@@ -469,7 +491,22 @@ var Services = React.createClass({
 						<p>Not to exceed ...</p>		
 						<input type="text" className="form-control short-response" onChange={this.handleChange.bind(this, "optionFeeAmount")} value={this.state.optionFeeAmount} />
 						<p>Use agency specific guidance for details.</p>
+	
+						<div className="container fake-table col-md-12">
+							<div className="row clin">
+								<div className="col-md-12 table-content">{OPTION_FEE_OPTIONS[this.state.optionFee]} Based CLIN
+								</div>
+							</div>
+							<div className="row clin">
+								<div className="col-md-6 table-content">{OPTION_FEE_OPTIONS[this.state.optionFee]}
+								</div>
+								<div className="col-md-6 table-content">$XXXXX (vendor completes)
+								</div>
+							</div>
+						</div>
+	
 					</div>
+					
 				}
 
 				<p>How long would you like period of performance for each <b>option period</b> to be?</p>

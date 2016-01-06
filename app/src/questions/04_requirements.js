@@ -34,6 +34,9 @@ var Requirement = React.createClass({
 				<div className="sub-heading">Key Personnel</div>
 				<p>The vendor shall provide talented people who have experience creating modern digital services. This includes bringing in seasoned product managers, engineers, UX researchers and designers.</p>
 
+				<p>do you want to require and evaluate key personnel? YES NO</p>
+
+				<p>Will any of the personnel require clearance? If so what level? Onsite vs offsite</p>
 				<p>Based on the deliverables described in the SOO, in addition to a project manager, skillsets/personnel needs will include the following:</p>
 				<ul>
 					<li>UX</li>

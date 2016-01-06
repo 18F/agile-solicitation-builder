@@ -45,8 +45,6 @@ def overview(document, rfq):
     # table of contents & basic info
 
     agency_full_name = session.query(Agency).filter_by(abbreviation=rfq.agency).first().full_name
-    print "AGENCIESSSS"
-    print agency_full_name
     title = "RFQ for the " + agency_full_name
     document.add_heading(title, level=1)
     doc_date = str(datetime.date.today())
@@ -103,6 +101,7 @@ def services(document, rfq):
     table.rows[1].cells[0].text = "CLIN 0001, FFP- Completion - The Contractor shall provide services for the Government in accordance with the Performance Work Statement (PWS)"
 
     table = document.add_table(rows=4, cols=2)
+    table.style = 'TableGrid'
     table.rows[0].cells[0].text = "Iteration Period of Performance"
     table.rows[0].cells[1].text = cc["iterationPoPNumber"] + ' ' + cc["iterationPoPUnit"]
     table.rows[1].cells[0].text = "Price Per Iteration"
@@ -206,18 +205,21 @@ def objectives(document, rfq):
 
     return document
 
-def requirements():
-    pass
+def requirements(document, rfq):
+    return document
 
 def inspection_and_delivery(document, rfq):
+    return document
+
+def special_requirements(document, rfq):
+    content_components = session.query(ContentComponent).filter_by(document_id=rfq.id).filter_by(section=9).all()
+    cc = make_dict(content_components)
+    # for component in content_components:
 
     return document
 
-def special_requirements():
-    pass
-
 def contract_clauses():
-    pass
+    print fish
 
 def create_document(rfq_id):
 
@@ -231,7 +233,9 @@ def create_document(rfq_id):
     document = definitions(document, rfq)
     document = services(document, rfq)
     document = objectives(document, rfq)
-    # document = requirements()
+    document = requirements()
+    document = special_requirements(document, rfq)
+    
 
 
     # p = document.add_paragraph(text)

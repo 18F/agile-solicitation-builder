@@ -107,14 +107,14 @@ var Request = React.createClass({
 		// Get child
 		var child = React.Children.only(this.props.children);
 
-		console.log(child);
+		// console.log(child);
 		if(child.type.displayName == "Question") {
 			// If child is question, call save() with the callback
-			console.log("saving the child! it's a question...");
+			// console.log("saving the child! it's a question...");
 			this._child.save(callback);
 		} else {
 			// Otherwise, call callback
-			console.log("ignore the child, it's not a question (it's worthless)");
+			// console.log("ignore the child, it's not a question (it's worthless)");
 			callback();
 		}
 	},

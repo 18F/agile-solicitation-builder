@@ -119,6 +119,8 @@ var ContractingOfficer = React.createClass({
 						onTextChange={this.handleChange.bind(this, 'productOwner')}>
 				</EditBox>
 
+				<p>encouraged to use data to drive decision, government position dedicated to that. do you have somebody who does this, do you want to add role</p>
+
 				{additionalRoles}
 
 				<br />

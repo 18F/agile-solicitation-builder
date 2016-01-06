@@ -2,8 +2,6 @@ var React = require('react');
 var StateMixin = require("../state_mixin");
 var EditBox = require("../edit_box");
 
-// <div className="sub-text">The Initial Product Backlog (See Appendix) provides a detailed breakdown of the desired functionality as identified at this time. The Initial Product Backlog is not a binding document, but rather a representative sample of the functionality that is anticipated will be required to be delivered under this Task Order. The specific user stories will be identified through the agile development process as proposed in the Performance Work Statement (PWS). The Initial Product Backlog provides some guidance on specific objectives that should be included in each project.</div>
-
 var DELIVERABLES = {
 	"1": "Research, Insights, and Synthesis",
 	"2": "Prototype Design Solutions",
@@ -40,7 +38,7 @@ var KICK_OFF_MEETING = {
 var USER_TYPES = {
 	"internal_people": "Internal/Government Employees",
 	"external_people": "External/The Public",
-	"internal_it": "Internal IT employees (systems, developers)",
+	"internal_it": "Internal Government IT",
 	"external_it": "External IT",
 };
 
@@ -61,6 +59,10 @@ var STATES = [
 	"programHistory",
 	"userAccess",
 	"userResearchStrategy",
+	"whatPeopleNeed",
+	"startToFinish",
+	"simpleAndIntuitive",
+	"dataDrivenDecisions",
 ];
 
 var Objective = React.createClass({
@@ -105,7 +107,6 @@ var Objective = React.createClass({
 			data[stateName] = this.state[stateName];
 		}
 
-		// get data from FAR code section
 		var rfqId = getId(window.location.hash);
     put_data(3, rfqId, data, cb);
 	},
@@ -213,69 +214,52 @@ var Objective = React.createClass({
 				{(this.state.userResearchStrategy === "vendor")?
 					<div>
 						<div className="sub-heading">Understand what people need</div>
-						<p>The vendor services will include exploring and pinpointing the needs of the people who will use the service, and the ways the service will fit into their lives. The vendor shall continually test the products with real people to ensure delivery is focused on what is important.</p>
-						<p>As a part of this effort, the vendor will:</p>
-						<ol>
-							<li>Early in the project, spend time with current and prospective users of the service</li>
-							<li>Use a range of qualitative and quantitative research methods to determine people’s goals, needs, and behaviors; be thoughtful about the time spent</li>
-							<li>Test prototypes of solutions with real people, in the field if possible</li>
-							<li>Document the findings about user goals, needs, behaviors, and preferences</li>
-							<li>Share findings with the team and agency leadership</li>
-							<li>Create a prioritized list of tasks the user is trying to accomplish, also known as "user stories"</li>
-							<li>As the digital service is being built, regularly test it with potential users to ensure it meets people’s needs</li>
-						</ol>
-					<p>The contractor shall ensure we understand the different ways people will interact with the services, including the actions they take online, through a mobile application, on a phone, or in person. Every encounter — whether it's online or offline — should move the user closer towards their goal.</p>
-						<p>In delivery of this effort the contractor shall:</p>
-						<ol>
-							<li>Understand the different points at which people will interact with the service – both online and in person</li>
-							<li>Identify pain points in the current way users interact with the service, and prioritize these according to user needs</li>
-							<li>Design the digital parts of the service so that they are integrated with the offline touch points people use to interact with the service</li>
-							<li>Develop metrics that will measure how well the service is meeting user needs at each step of the service</li>
-						</ol>
+						<EditBox
+								text={this.state.whatPeopleNeed}
+								editing={this.state.edit === 'whatPeopleNeed'}
+								onStatusChange={this.toggleEdit.bind(this, 'whatPeopleNeed')}
+								onTextChange={this.handleChange.bind(this, 'whatPeopleNeed')}>
+						</EditBox>
+
+
+						<div className="sub-heading">Address the whole experience, from start to finish</div>
+						<EditBox
+								text={this.state.startToFinish}
+								editing={this.state.edit === 'startToFinish'}
+								onStatusChange={this.toggleEdit.bind(this, 'startToFinish')}
+								onTextChange={this.handleChange.bind(this, 'startToFinish')}>
+						</EditBox>
+
 					</div> : null
 			}
 
 			<div className="sub-heading">Make it simple and intuitive</div>
 
-			<p>Successful delivery of this contract requires that the services of and products delivered will not be stressful, confusing, or daunting. Therefore the contractor shall build services that are simple and intuitive enough that users succeed the first time, unaided.</p>
+			<EditBox
+					text={this.state.simpleAndIntuitive}
+					editing={this.state.edit === 'simpleAndIntuitive'}
+					onStatusChange={this.toggleEdit.bind(this, 'simpleAndIntuitive')}
+					onTextChange={this.handleChange.bind(this, 'simpleAndIntuitive')}>
+			</EditBox>
 
-			<p>In delivery of this effort the contractor shall:</p>
-
-			<ol>
-				<li>Use a simple and flexible design style guide for the service. Use the U.S. Web Design Standards (https://playbook.cio.gov/designstandards) as a default</li>
-				<li>Use the design style guide consistently for related digital services</li>
-				<li>Give users clear information about where they are in each step of the process</li>
-				<li>Follow accessibility best practices to ensure all people can use the service</li>
-				<li>Provide users with a way to exit and return later to complete the process</li>
-				<li>Use language that is familiar to the user and easy to understand</li>
-				<li>Apply <b>these language and design standards consistently</b> throughout the service, including online and offline touch points</li>
-			</ol>
 
 			<div className="sub-heading">Use data to drive decisions</div>
 
-			<p>At every stage of a project, the contractor shall measure how well our service is working for our users. This includes measuring how well a system performs and how people are interacting with it in real-time. These metrics shall be reported to the Program Managers to find issues and identify which bug fixes and improvements should be prioritized. Along with monitoring tools, a feedback mechanism should be in place for people to report issues directly.</p>
+			<EditBox
+					text={this.state.dataDrivenDecisions}
+					editing={this.state.edit === 'dataDrivenDecisions'}
+					onStatusChange={this.toggleEdit.bind(this, 'dataDrivenDecisions')}
+					onTextChange={this.handleChange.bind(this, 'dataDrivenDecisions')}>
+			</EditBox>
 
-			<p>In delivery of this effort the contractor shall:</p>
-			<ol>
-				<li>Monitor system-level resource utilization in real time <b>(Suggest tools)</b></li>
-				<li>Monitor system performance in real-time (e.g. response time, latency, throughput, and error rates)</li>
-				<li>Ensure monitoring can measure median, 95th percentile, and 98th percentile performance</li>
-				<li>Create automated alerts based on this monitoring</li>
-				<li>Track concurrent users in real-time, and monitor user behaviors in the aggregate to determine how well the service meets user needs</li>
-				<li>Provide metrics which may be published internally</li>
-				<li>Provide metrics which may be published externally</li>
-				<li>Use an experimentation tool that supports multivariate testing in production</li>
-				<li>Provide goverment employees access to these monitoring systems</li>
-			</ol>
+			<div className="sub-heading">Deliverables</div>
 
-				<div className="sub-heading">Deliverables</div>
-
-				<EditBox
-						text={this.state.definitionOfDone}
-						editing={this.state.edit === 'definitionOfDone'}
-						onStatusChange={this.toggleEdit.bind(this, 'definitionOfDone')}
-						onTextChange={this.handleChange.bind(this, 'definitionOfDone')}>
-				</EditBox>
+			<EditBox
+					text={this.state.definitionOfDone}
+					editing={this.state.edit === 'definitionOfDone'}
+					onStatusChange={this.toggleEdit.bind(this, 'definitionOfDone')}
+					onTextChange={this.handleChange.bind(this, 'definitionOfDone')}>
+			</EditBox>
 
 				<div className="sub-heading">Place of Performance</div>
 				<p>Will you require the contractor to have a full-time working staff presence onsite at a specific location?</p>
