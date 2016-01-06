@@ -10,8 +10,13 @@ var STATES = [
 	"smallBusinessStatus",
 	"titleToMaterials",
 	"useOfData",
-	"federalHolidays",
+	"federalHolidays",	
 ];
+
+// "conflictOfInterest",
+
+var coi = "Offerors shall provide a signed statement which describes concisely all relevant facts concerning any past, present, or planned interest (financial, contractual, organizational, or otherwise) relating to the work to be performed under the proposed contract or task order and bearing on whether the Offeror has a possible organizational or personnel conflict of interest with respect to:\n\n  - Being able to render impartial, technically sound, and objective assistance or advice, or\n  - Being given an unfair competitive advantage.\n\nThe Offeror may also provide relevant facts that show how its organizational structure and/or management systems limit its knowledge of possible organizational conflicts of interest relating to other divisions or sections of the organization and how that structure or system would avoid or mitigate such organizational conflict.\n\nNo task order award shall be made until any potential conflict of interest has been neutralized or mitigated to the satisfaction of the Contracting Officer. The vendor will notify the Contracting Officer in writing as soon as any conflict of interest is identified and will propose steps for mitigating the conflict.\n\nRefusal to provide the requested information or the willful misrepresentation of any relevant information by an Offeror shall disqualify the Offeror from further consideration for award of a task order under this solicitation.\n\nIf the Contracting Officer determines that a potential conflict can be avoided, effectively mitigated, or otherwise resolved through the inclusion of a special contract clause, the terms of the clause will be subject to negotiation.";
+
 
 var SpecialRequirements = React.createClass({
 	mixins: [StateMixin],
@@ -21,6 +26,7 @@ var SpecialRequirements = React.createClass({
 		initialStates["requirementsData"] = [];
 		initialStates["title"] = "";
 		initialStates["description"] = "";
+		initialStates["conflictOfInterest"] = "";
 		return initialStates;
 	},
 	componentDidMount: function() {
@@ -33,6 +39,7 @@ var SpecialRequirements = React.createClass({
     	console.log(data);
     	this.setState({requirementsData: data["data"]});
     }.bind(this));
+    this.setState({conflictOfInterest: coi});
   },
   addRequirement: function() {
   	if (this.state.addRequirement){  		
@@ -121,15 +128,12 @@ var SpecialRequirements = React.createClass({
 
 
 				<div className="sub-heading">Potential Organizational Conflicts of Interest</div>
-				<p>Offerors shall provide a signed statement which describes concisely all relevant facts concerning any past, present, or planned interest (financial, contractual, organizational, or otherwise) relating to the work to be performed under the proposed contract or task order and bearing on whether the Offeror has a possible organizational or personnel conflict of interest with respect to:</p>
-				<ol>
-					<li>Being able to render impartial, technically sound, and objective assistance or advice, or</li>
-					<li>Being given an unfair competitive advantage.</li>
-				</ol>
-				<p>The Offeror may also provide relevant facts that show how its organizational structure and/or management systems limit its knowledge of possible organizational conflicts of interest relating to other divisions or sections of the organization and how that structure or system would avoid or mitigate such organizational conflict.</p>
-				<p>No task order award shall be made until any potential conflict of interest has been neutralized or mitigated to the satisfaction of the Contracting Officer. The vendor will notify the Contracting Officer in writing as soon as any conflict of interest is identified and will propose steps for mitigating the conflict.</p>
-				<p>Refusal to provide the requested information or the willful misrepresentation of any relevant information by an Offeror shall disqualify the Offeror from further consideration for award of a task order under this solicitation.</p>
-				<p>If the Contracting Officer determines that a potential conflict can be avoided, effectively mitigated, or otherwise resolved through the inclusion of a special contract clause, the terms of the clause will be subject to negotiation.</p>
+				<EditBox
+						text={this.state.conflictOfInterest}
+						editing={this.state.edit == 'conflictOfInterest'}
+						onStatusChange={this.toggleEdit.bind(this, 'conflictOfInterest')}
+						onTextChange={this.handleChange.bind(this, 'conflictOfInterest')}>
+				</EditBox>
 
 
 			<div className="sub-heading">Contractor Use of Commercial Computer Software, Including Open Source Software</div>
