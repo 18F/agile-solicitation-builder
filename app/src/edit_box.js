@@ -1,5 +1,21 @@
 var React = require('react');
 
+var marked = require('marked');
+marked.setOptions({
+  renderer: new marked.Renderer(),
+
+  // Enabled
+  sanitize: true, // Sanitize output
+  smartLists: true, // Smarter list behavior
+
+  // Disabled
+  gfm: false, // Github-flavored markdown
+  tables: false, // Github-flavored markdown tables
+  breaks: false, // Github-flavored markdown linebreaks (?)
+  pedantic: false, // Don't fix original markdown bugs
+  smartypants: false // Smart typographic punctuation
+});
+
 var EditBox = React.createClass({
 	propTypes: {
 		text: React.PropTypes.string.isRequired,
@@ -24,16 +40,7 @@ var EditBox = React.createClass({
 		return Math.max(rows, 4);
 	},
 	render: function() {
-		var returnText = [];
-		var liRe = /\n\d\./;
-		var myArray = liRe.exec(this.props.text);
-		var paragraphs = this.props.text.split("\n\n");
-		for (i=0; i < paragraphs.length; i++){
-			var paragraphText = paragraphs[i];
-			returnText.push(
-				<p>{paragraphText}</p>
-			);
-		}
+		var renderedMarkdown = {__html: marked(this.props.text)};
 
 		if(this.props.editing) {
 			return (
@@ -46,9 +53,7 @@ var EditBox = React.createClass({
 			return (
 				<div className="edit-box">
 					<div className="edit" onClick={this.toggleEdit.bind(this, true)}>Edit</div>
-					<div className="edit-content">
-						{returnText}
-					</div>
+					<div className="edit-content" dangerouslySetInnerHTML={renderedMarkdown}></div>
 				</div>
 			);
 		}

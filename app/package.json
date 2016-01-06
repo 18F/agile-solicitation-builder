@@ -13,6 +13,7 @@
     "babelify": "^7.2.0",
     "gulp-notify": "^2.2.0",
     "history": "^1.13.0",
+    "marked": "^0.3.5",
     "react": "^0.14.2",
     "react-bootstrap": "^0.27.3",
     "react-dom": "^0.14.2",
