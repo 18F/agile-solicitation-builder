@@ -9,14 +9,17 @@ var Results = React.createClass({
 	},
   componentDidMount: function() {
   },
+  deleteRFQ: function(){
+  	alert("This functionality is still being developed!");
+  },
 	render: function() {
 		var rfqId = window.location.hash.split("#/rfp/")[1].split("/results")[0];
-		console.log(rfqId);
 		var url = "/download/" + rfqId;
 		return (
 			<div>
 				<div className="main-heading">Resulting RFQ</div>
 				<a href={url}><button className="btn btn-default">Download</button></a>
+				<button onClick={this.deleteRFQ} className="btn btn-default">Delete this RFQ</button>
 			</div>
 		);
 	},

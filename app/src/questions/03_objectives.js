@@ -63,6 +63,7 @@ var STATES = [
 	"startToFinish",
 	"simpleAndIntuitive",
 	"dataDrivenDecisions",
+	"documentationAndTraining",
 ];
 
 var Objective = React.createClass({
@@ -88,16 +89,6 @@ var Objective = React.createClass({
   		newState[key] = "false";
   	}
   	this.setState(newState);
-  },
-  getUsers: function(){
-  	var usersString = "";
-  	for (var key in USER_TYPES){
-  		if (this.state[key] == "true"){
-  			console.log('getting users?');
-  			usersString += USER_TYPES[key] + ", ";
-  		}
-  	}
-  	return usersString;
   },
 	save: function(cb) {
 		var data = {};
@@ -158,17 +149,25 @@ var Objective = React.createClass({
 		}
 
 		var usersString = "";
+		var userTypes = [];
 		for (var key in USER_TYPES){
   		if (this.state[key] == "true"){
-  			console.log('getting users?');
-  			usersString += USER_TYPES[key] + ", ";
+  			userTypes.push(USER_TYPES[key]);  		
   		}
+  	}
+  	if (userTypes.length == 1){
+  		usersString = userTypes[0];
+  	}
+  	if (userTypes.length > 1){
+  		for (i=0; i < userTypes.length - 1; i++){
+  			usersString += userTypes[i] + ", ";
+  		}
+  		usersString += "and " + userTypes[userTypes.length-1];
   	}
 
 		return (
 			<div>
 				<div className="main-heading">Statement of Objectives</div>
-				<p>This section has many components!</p>
 
 				<div className="sub-heading">General Background</div>
 				<p>Please provide several paragraphs about your project's history, mission, and current state.</p>
@@ -192,7 +191,7 @@ var Objective = React.createClass({
 				<div className="sub-heading">Users</div>
 				<p>The primary users will be:</p>
 
-					{userTypesOptions}
+				{userTypesOptions}
 
 				{(usersString.length > 0)? 
 				<p>The users of the product will include {usersString}.</p> : null}
@@ -287,6 +286,14 @@ var Objective = React.createClass({
 						editing={this.state.edit === 'offSiteDevelopmentCompliance'}
 						onStatusChange={this.toggleEdit.bind(this, 'offSiteDevelopmentCompliance')}
 						onTextChange={this.handleChange.bind(this, 'offSiteDevelopmentCompliance')}>
+				</EditBox>
+
+				<div className="sub-heading">Documentation and Training</div>
+				<EditBox
+						text={this.state.documentationAndTraining}
+						editing={this.state.edit === 'documentationAndTraining'}
+						onStatusChange={this.toggleEdit.bind(this, 'documentationAndTraining')}
+						onTextChange={this.handleChange.bind(this, 'documentationAndTraining')}>
 				</EditBox>
 				
 				<div className="sub-heading">Kick-Off Meeting/Post-Award Conference</div>

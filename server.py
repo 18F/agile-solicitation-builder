@@ -72,7 +72,7 @@ class Clin(Resource):
     def post(self, rfq_id):
         parser = reqparse.RequestParser()
         clin_values = ["row1", "row2", "row3a", "row3b", "row4a", "row4b", "row5a", "row5b", "row6a", "row6b",]
-        data = request.get_json()["data"]        
+        data = request.get_json()["data"]
 
         row1 = data['row1']
         row2 = data['row2']
@@ -80,6 +80,7 @@ class Clin(Resource):
         row3b = data['row3b']
         row4a = data['row4a']
         row4b = data['row4b']
+        row5a = data['row5a']
         row5b = data['row5b']
         row6a = data['row6a']
         row6b = data['row6b']

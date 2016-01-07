@@ -140,6 +140,14 @@ var Services = React.createClass({
 			this.setState({optionFee: value});
 		}
 	},
+	updateNaicsText: function(event) {
+		var farCode = event.target.value;
+		var naicsText = "This requirement will be solicited under the following North American Industrial Classification System (NAICS) Code: 541512, Computer Systems Design Services, $27.5 million. This Task Order will be awarded under " + farCode + " which governs orders placed under " + FAR_CODES[farCode] + " contracts.";
+		this.setState({
+			naicsText: naicsText,
+			farCode: farCode,
+		});
+	},
 	toggleLocation: function(responseText) {
 		if (responseText === "yes") {
 			this.setState({
@@ -357,15 +365,16 @@ var Services = React.createClass({
 				<div className="sub-text">We have provided a NAICS code that commonly applies to the acquisition of software development services. If you believe your requirement is not covered under this NAICS code you may search under <a href="http://www.census.gov/eos/www/naics/" target="_blank">this link</a> to select a different one; please edit the text below accordingly.</div>
 
 				<h5>Under which section of the FAR do you intend to compete this?</h5>
-				<radiogroup onChange={this.handleChange.bind(this, 'farCode')}>
+				<radiogroup onChange={this.updateNaicsText}>
 					{FARS}
 				</radiogroup>
 
-				<div className="edit" onClick={this.toggleEdit.bind(this, 'codes')}>Edit</div>
-				{this.state.edit === "codes"? <textarea className="form-control" rows="4" defaultValue={this.state.naicsText}></textarea> :
-				<div>
-				<p id="naics-far-text1">This requirement will be solicited under the following North American Industrial Classification System (NAICS) Code: 541512, Computer Systems Design Services, $27.5 million. This Task Order will be awarded under {this.state.farCode} which governs orders placed under {FAR_CODES[this.state.farCode]} contracts.</p></div>
-				}
+				<EditBox
+						text={this.state.naicsText}
+						editing={this.state.edit === 'naicsText'}
+						onStatusChange={this.toggleEdit.bind(this, 'naicsText')}
+						onTextChange={this.handleChange.bind(this, 'naicsText')}>
+				</EditBox>
 
 				<div className="sub-heading">Budget</div>
 				<p>Note: The Statement of Objectives will be removed at time of award and replaced with the Offeror’s Performance Work Statement. All listed objectives and requirements shall be included as part of the Offeror’s Performance Work Statement.</p>
@@ -375,7 +384,7 @@ var Services = React.createClass({
 					<div className="form-group">
 						<div className="input-group">
 							<div className="input-group-addon">$</div>
-	    				<input type="text" className="form-control short-response" placeholder="ex: 10,000,000" value={this.state.maxBudget} onChange={this.handleChange.bind(this, "maxBudget")}></input>
+	    				<input type="text" className="form-control" placeholder="ex: 10,000,000" value={this.state.maxBudget} onChange={this.handleChange.bind(this, "maxBudget")}></input>
 	    			</div>
 	    		</div>
 				</form>
@@ -406,7 +415,7 @@ var Services = React.createClass({
 						<div className="form-group">
 							<div className="input-group">
 								<div className="input-group-addon">$</div>
-		    				<input type="text" className="form-control short-response" placeholder="ex: 400,000" value={this.state.travelBudget} onChange={this.handleChange.bind(this, "travelBudget")}></input>
+		    				<input type="text" className="form-control" placeholder="ex: 400,000" value={this.state.travelBudget} onChange={this.handleChange.bind(this, "travelBudget")}></input>
 		    			</div>
 		    		</div>
 					</form>
@@ -448,12 +457,11 @@ var Services = React.createClass({
 				{(this.state.baseFee === "none")? null :
 					<div>
 						<p>Not to exceed ...</p>
-						<input type="text" className="form-control short-response" onChange={this.handleChange.bind(this, "baseFeeAmount")} value={this.state.baseFeeAmount} />
 						<form className="form-inline">
 							<div className="form-group">
 								<div className="input-group">
 									<div className="input-group-addon">$</div>
-			    				<input type="text" className="form-control short-response" onChange={this.handleChange.bind(this, "baseFeeAmount")} value={this.state.baseFeeAmount}></input>
+			    				<input type="text" className="form-control" onChange={this.handleChange.bind(this, "baseFeeAmount")} value={this.state.baseFeeAmount}></input>
 			    			</div>
 			    		</div>
 						</form>
@@ -489,7 +497,14 @@ var Services = React.createClass({
 				{(this.state.optionFee == "none")? null :
 					<div>
 						<p>Not to exceed ...</p>		
-						<input type="text" className="form-control short-response" onChange={this.handleChange.bind(this, "optionFeeAmount")} value={this.state.optionFeeAmount} />
+						<form className="form-inline">
+							<div className="form-group">
+								<div className="input-group">
+									<div className="input-group-addon">$</div>
+			    				<input type="text" className="form-control" onChange={this.handleChange.bind(this, "optionFeeAmount")} value={this.state.optionFeeAmount}></input>
+			    			</div>
+			    		</div>
+						</form>
 						<p>Use agency specific guidance for details.</p>
 	
 						<div className="container fake-table col-md-12">

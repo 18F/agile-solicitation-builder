@@ -19,6 +19,7 @@ var Definition = React.createClass({
     componentDidMount: function() {
       var rfqId = getId(window.location.hash);
       get_data(1, rfqId, function(data){
+        console.log(data);
         this.setState({
           definitions: data["data"]["definitions"],
         });

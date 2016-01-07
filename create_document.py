@@ -10,7 +10,10 @@ import datetime
 from pprint import pprint
 
 session = Session()
+
+BIG_HEADING = 1
 SUB_HEADING = 2
+
 user_dict = {
     "external_people": "External People/The Public",
     "external_it": "External IT/Developers",
@@ -75,6 +78,7 @@ def definitions(document, rfq):
 def services(document, rfq):
     content_components = session.query(ContentComponent).filter_by(document_id=rfq.id).filter_by(section=2).all()
     # baseFee baseFeeAmount basePeriodDurationNumber basePeriodDurationUnit clin farCode fee iterationPoPNumber iterationPoPUnit maxBudget naicsText optionFee optionFeeAmount optionPeriodDurationNumber optionPeriodDurationUnit optionPeriods paymentSchedule travelBudget travelLanguage travelRequirement 
+    # include vendor number
     cc = make_dict(content_components)
     document.add_heading("Description of Services", level=SUB_HEADING)
     document.add_paragraph(cc["descriptionOfServices"])
@@ -110,6 +114,25 @@ def services(document, rfq):
     table.rows[2].cells[1].text = cc["basePeriodDurationNumber"] + cc["basePeriodDurationUnit"]
     table.rows[3].cells[0].text = "Firm Fixed Price (Completion):"
     table.rows[3].cells[1].text = "$XXXXX (Vendor Completes)"
+
+
+    # option periods
+    for i in (1, int(optionPeriods)+1):
+        table = document.add_table(rows=2, cols=1)
+        table.style = 'TableGrid'
+        table.rows[0].cells[0].text = "Option Period " + str(i) + ":"  + str(cc["optionPeriodDurationNumber"]) + ' ' + cc["optionPeriodDurationUnit"]
+        table.rows[1].cells[0].text = "CLIN 000" + str(i) + ", FFP- Completion - The Contractor shall provide services for the Government in accordance with the Performance Work Statement (PWS)"
+
+        table = document.add_table(rows=4, cols=2)
+        table.style = 'TableGrid'
+        table.rows[0].cells[0].text = "Iteration Period of Performance"
+        table.rows[0].cells[1].text = cc["iterationPoPNumber"] + ' ' + cc["iterationPoPUnit"]
+        table.rows[1].cells[0].text = "Price Per Iteration"
+        table.rows[1].cells[1].text = "$XXXXX (Vendor Completes)"
+        table.rows[2].cells[0].text = "Period of Performance"
+        table.rows[2].cells[1].text = cc["optionPeriodDurationNumber"] + cc["optionPeriodDurationUnit"]
+        table.rows[3].cells[0].text = "Firm Fixed Price (Completion):"
+        table.rows[3].cells[1].text = "$XXXXX (Vendor Completes)"
 
     document.add_heading("Payment Schedule", level=SUB_HEADING)
     document.add_paragraph(cc["paymentSchedule"])
@@ -159,26 +182,41 @@ def objectives(document, rfq):
 
     document.add_heading("User Research")
     user_research_options = {
-        "done": "Research has already been conducted, either internally or by another vendor. (proceed to product/program vision questionnaire)",
+        "done": "Research has already been conducted, either internally or by another vendor.",
         "internal": "We intend to conduct user research internally prior to the start date of this engagement.",
         "vendor": "The vendor will be responsible for the user research.",
     }
 
-    if cc["userResearchStrategy"] != "none":
-        document.add_paragraph(user_research_options[cc["userResearchStrategy"]])
-
     document.add_paragraph(cc['userAccess'])
 
-    document.add_heading("Understand What People Need")
-    document.add_paragraph("The vendor services will include exploring and pinpointing the needs of the people who will use the service, and the ways the service will fit into their lives. The vendor shall continually test the products with real people to ensure delivery is focused on what is important.")
-    document.add_paragraph("As a part of this effort, the vendor will:")
-    # for item in playbook1:
-    #     document.add_paragraph(item.decode('latin-1').encode('utf8'), style="ListNumber")
+    if cc["userResearchStrategy"] == "vendor":
+        document.add_paragraph(user_research_options["vendor"])
+        document.add_heading("Understand What People Need")
+        document.add_paragraph(cc["whatPeopleNeed"])
 
+        document.add_heading("Address the whole experience, from start to finish")
+        document.add_paragraph(cc["startToFinish"])
+
+    if cc["userResearchStrategy"] == "done":
+        document.add_paragraph(user_research_options["done"])
+
+
+    if cc["userResearchStrategy"] == "internal":
+        document.add_paragraph(user_research_options["internal"])
+
+    if cc["userResearchStrategy"] == "none":
+        pass
+
+    document.add_heading("Make it simple and intuitive", level=SUB_HEADING)
+    document.add_paragraph(cc["simpleAndIntuitive"])
+
+    document.add_heading("Use data to drive decisions", level=SUB_HEADING)
+    document.add_paragraph(cc["dataDrivenDecisions"])
 
     document.add_heading("Deliverables", level=SUB_HEADING)
     document.add_paragraph(cc["deliverables"])
 
+    
     document.add_heading("Place of Performance", level=SUB_HEADING)
     if cc['locationRequirement'] == "no":
         document.add_paragraph("The contractor is not required to have a full-time working staff presence on-site.")
@@ -187,10 +225,11 @@ def objectives(document, rfq):
         if len(cc['locationText']) > 0:
             location = cc["locationText"]
         else:
-            location = "[INSERT LOCATION HERE]"
-    location_text = "The contractor shall have a full-time working staff presence at " + location + ". Contractor shall have additional facilities to perform contract functions as necessary."
-    document.add_paragraph(location_text)
-    document.add_paragraph(cc["offSiteDevelopmentCompliance"])
+            location = "[LOCATION HERE]"
+
+        location_text = "The contractor shall have a full-time working staff presence at " + location + ". Contractor shall have additional facilities to perform contract functions as necessary."
+        document.add_paragraph(location_text)
+        document.add_paragraph(cc["offSiteDevelopmentCompliance"])
 
     document.add_heading("Kick Off Meeting", level=SUB_HEADING)
     kickoff_text = ""
@@ -205,21 +244,83 @@ def objectives(document, rfq):
 
     return document
 
-def requirements(document, rfq):
+def personnel(document, rfq):
+    document.add_heading("Key Personnel", level=SUB_HEADING)
+    intro_text = "The vendor shall provide talented people who have experience creating modern digital services. This includes bringing in seasoned product managers, engineers, UX researchers and designers."
+    document.add_paragraph(intro_text)
+
+    return document
+
+def invoicing(document, rfq):
+    content_component = session.query(ContentComponent).filter_by(document_id=rfq.id).filter_by(section=5).first()
+    document.add_heading("Invoicing & Funding", level=SUB_HEADING)
+    document.add_paragraph(content_component.text)
+
     return document
 
 def inspection_and_delivery(document, rfq):
+    content_components = session.query(ContentComponent).filter_by(document_id=rfq.id).filter_by(section=6).all()
+    
+    return document
+
+def government_roles(document, rfq):
+    content_components = session.query(ContentComponent).filter_by(document_id=rfq.id).filter_by(section=8).all()
+
+    document.add_heading("Contracting Officer", level=SUB_HEADING)
+    document.add_paragraph(cc["contractingOfficer"])
+
+    document.add_heading("Contracting Officer's Representative", level=SUB_HEADING)
+    document.add_paragraph(cc["contractingOfficerRepresentative"])
+
+    document.add_heading("Product Owner", level=SUB_HEADING)
+    document.add_paragraph(cc["productOwner"])
+
     return document
 
 def special_requirements(document, rfq):
     content_components = session.query(ContentComponent).filter_by(document_id=rfq.id).filter_by(section=9).all()
     cc = make_dict(content_components)
-    # for component in content_components:
+    document.add_heading("Special Requirements", level=BIG_HEADING)
+
+    document.add_heading("Controlled Facilities and Information Systems Security", level=SUB_HEADING)
+    document.add_paragraph(cc["security"])
+
+    document.add_heading("Federal Holidays", level=SUB_HEADING)
+    document.add_paragraph(cc["federalHolidays"])
+
+    document.add_heading("Section 508 Accessibility Standards Notice (September 2009)", level=SUB_HEADING)
+    document.add_paragraph(cc["accessibility"])
+
+    document.add_heading("Non-Disclosure Policies", level=SUB_HEADING)
+    document.add_paragraph(cc["nonDisclosure"])
+
+    document.add_heading("Potential Organizational Conflicts of Interest", level=SUB_HEADING)
+    document.add_paragraph(cc["conflictOfInterest"])
+
+    document.add_heading("Contractor Use of Commercial Computer Software, Including Open Source Software", level=SUB_HEADING)
+    document.add_paragraph(cc["commercialSoftware"])
+
+    document.add_heading("Title to Materials Shall Vest in the Government", level=SUB_HEADING)
+    document.add_paragraph(cc["titleToMaterials"])
+
+    document.add_heading("Limited Use of Data", level=SUB_HEADING)
+    document.add_paragraph(cc["useOfData"])
+
+    document.add_heading("Notice of Size Re-representation at the Task Order Level (will be conditional)")
+    document.add_paragraph(cc["smallBusinessStatus"])
+
+    document.add_heading("Order of Precedence", level=SUB_HEADING)
+    document.add_paragraph(cc["orderOfPrecedence"])
 
     return document
 
-def contract_clauses():
-    print fish
+def contract_clauses(document, rfq):
+    contract_clauses = session.query(ContentComponent).filter_by(document_id=rfq.id).filter_by(section=10).first()
+
+    document.add_heading("Additional Contract Clauses", level=SUB_HEADING)
+    document.add_paragraph(contract_clauses["text"])
+
+    return document
 
 def create_document(rfq_id):
 
@@ -228,30 +329,16 @@ def create_document(rfq_id):
 
     document = Document()
 
-    # cover page - change agency to agency_full_name
     document = overview(document, rfq)
     document = definitions(document, rfq)
     document = services(document, rfq)
     document = objectives(document, rfq)
-    document = requirements()
+    document = personnel(document, rfq)
+    document = invoicing(document, rfq)
+    document = inspection_and_delivery(document, rfq)
+    document = government_roles(document, rfq)
     document = special_requirements(document, rfq)
-    
-
-
-    # p = document.add_paragraph(text)
-    # p.add_run('bold').bold = True
-    # p.add_run(' and some ')
-    # p.add_run('italic.').italic = True
-
-    # document.add_heading('Heading, level 1', level=1)
-    # document.add_paragraph('Intense quote', style='IntenseQuote')
-
-    # document.add_paragraph(
-    #     'first item in unordered list', style='ListBullet'
-    # )
-    # document.add_paragraph(
-    #     'first item in ordered list', style='ListNumber'
-    # )
+    document = contract_clauses(document, rfq)
 
     doc_name = "RFQ_" + str(rfq_id) + ".docx"
     file_path = os.path.join("downloads", doc_name)

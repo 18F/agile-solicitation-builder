@@ -62,10 +62,10 @@ class RFQ(Base):
 
         session = Session()
         agency_full_name = session.query(Agency).filter_by(abbreviation=agency).first().full_name
-
+        vehicle = "(vehicle number " + base_number_value + ") "
         for section in content_components:
             text = str(section['text']).decode("utf8")
-            section['text'] = text.replace("{AGENCY}", agency).replace("{DOC_TYPE}", doc_type).replace("{AGENCY_FULL_NAME}", agency_full_name).replace("{PROGRAM_NAME}", program_name)
+            section['text'] = text.replace("{AGENCY}", agency).replace("{DOC_TYPE}", doc_type).replace("{AGENCY_FULL_NAME}", agency_full_name).replace("{PROGRAM_NAME}", program_name).replace("{VEHICLE}", vehicle)
             self.content_components.append(ContentComponent(**section))
 
 
@@ -95,6 +95,7 @@ class AdditionalClin(Base):
     row3b = Column(Text)
     row4a = Column(Text)
     row4b = Column(Text)
+    row5a = Column(Text)
     row5b = Column(Text)
     row6a = Column(Text)
     row6b = Column(Text)
@@ -105,6 +106,12 @@ class AdditionalClin(Base):
     def __repr__(self):
         return "<Clin(id='%d', row1='%s', row2='%s', row3a='%s')>" % (self.document_id, self.row1, self.row2, self.row3a)
 
+class SpecialRequirement(Base):
+    __tablename__ = "special_requirements"
+
+    id = Column(Integer, primary_key=True)
+    title = Column(String)
+    text = Column(Text)
 
 
 class CustomComponent(Base):

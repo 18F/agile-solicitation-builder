@@ -3,23 +3,13 @@ var StateMixin = require("../state_mixin");
 var EditBox = require("../edit_box");
 
 var STATES = [
+	"stakeholderIntro",
 	"contractingOfficer",
 	"contractingOfficerRepresentative",
 	"productOwner",
+	"endUsers",
+	"stakeholderIntro",
 ];
-
-var AdditionalRole = React.createClass({
-	render: function() {
-		return (
-			<div>
-				<div className="sub-heading">
-					<input type="text" className="medium-response form-control" value={this.state.title} onChange={this.handleChange.bind(this, "title")} />
-				</div>
-				<textarea className="form-control" rows="5" value={this.state.text} onChange={this.handleChange.bind(this, "text")}></textarea>
-			</div>
-		);
-	}
-});
 
 var ContractingOfficer = React.createClass({
 	mixins: [StateMixin],
@@ -93,7 +83,13 @@ var ContractingOfficer = React.createClass({
 		return (
 			<div>
 				<div className="main-heading">Roles and Responsibilities</div>
-				<p>We have already provided some recommended content for this section. To delete, modify, or add additional content click the "edit" above the section you wish to change.</p>
+
+				<EditBox
+						text={this.state.stakeholderIntro}
+						editing={this.state.edit == 'stakeholderIntro'}
+						onStatusChange={this.toggleEdit.bind(this, 'stakeholderIntro')}
+						onTextChange={this.handleChange.bind(this, 'stakeholderIntro')}>
+				</EditBox>
 
 				<div className="sub-heading">Contracting Officer (CO)</div>
 				<EditBox
@@ -119,7 +115,14 @@ var ContractingOfficer = React.createClass({
 						onTextChange={this.handleChange.bind(this, 'productOwner')}>
 				</EditBox>
 
-				<p>encouraged to use data to drive decision, government position dedicated to that. do you have somebody who does this, do you want to add role</p>
+				<div className="sub-heading editable">End Users</div>
+				<EditBox
+						text={this.state.endUsers}
+						editing={this.state.edit === 'endUsers'}
+						onStatusChange={this.toggleEdit.bind(this, 'endUsers')}
+						onTextChange={this.handleChange.bind(this, 'endUsers')}>
+				</EditBox>
+
 
 				{additionalRoles}
 

@@ -23,7 +23,7 @@ content_components = [
     },
     {
         "name": "descriptionOfServices",
-        "text": "Services required under this Firm Fixed Price {DOC_TYPE} are to assist the {AGENCY_FULL_NAME} ({AGENCY}) with the design and implementation of systems to support {AGENCY}’s Program for {PROGRAM_NAME}.",
+        "text": "Services required under this Firm Fixed Price {DOC_TYPE} {VEHICLE}are to assist the {AGENCY_FULL_NAME} ({AGENCY}) with the design and implementation of systems to support {AGENCY}’s Program for {PROGRAM_NAME}.",
         "section": 2,
     },
     {
@@ -33,7 +33,12 @@ content_components = [
     },
     {
         "name": "naicsText",
-        "text": "",
+        "text": "This requirement will be solicited under the following North American Industrial Classification System (NAICS) Code: 541512, Computer Systems Design Services, $27.5 million. This Task Order will be awarded under FAR 8.4 which governs orders placed under Federal Supply Schedules contracts.",
+        "section": 2,
+    },
+    {
+        "name": "naicsTextEdited",
+        "text": "no",
         "section": 2,
     },
     {
@@ -232,6 +237,41 @@ content_components = [
         "section": 3,
     },
     {
+        "name": "documentationAndTraining",
+        "text": "Objective: The contractor shall provide complete documentation for all systems and applications and provide training that will enable end users to utilize the system.\n\n  - The contractor shall provide comprehensive training materials for end users and system administrators for utilization and administration of the system.\n\n 1. Videos or self-guided training materials may be used\n 2. Training features built into the system are used to the greatest extent possible\n\n  - The contractor shall provide initial end-user training on a per-department basis during the initial on-boarding of users to the new system.\n  - The contractor shall provide “train-the-trainer“ classes for selected trainers and administrators.",
+        "section": 3,
+    },
+    {
+        "name": "keyPersonnelIntro",
+        "text": "The vendor shall provide talented people who have experience creating modern digital services. This includes bringing in seasoned product managers, engineers, UX researchers and designers.",
+        "section": 4,
+    },
+    {
+        "name": "clearanceRequired",
+        "text": "none",
+        "section": 4,
+    },
+    {
+        "name": "performanceWorkStatement",
+        "text": "The performance work statement will include:\n\n  - Contact information for all senior leaders and an organizational chart showing the Offeror’s organizational hierarchy and reporting structure, with specific designation of individuals as Key Personnel;\n  - Management resources;\n  - Technical resources and skill sets required to develop, implement, and maintain the proposed solution; and\n  - Details on the management of the Offeror’s team that will be on-site.\n\nThe listing of Key Personnel shall become part of the {DOC_TYPE} upon award.",
+        "section": 4,
+    },
+    {
+        "name": "keyPersonnelRequirements",
+        "text": "The following requirements related to personnel must be met:\n\n  - If awarded this {DOC_TYPE}, the Contractor shall assign to perform this {DOC_TYPE} those persons whose résumés are submitted with its proposal and who are identified in the Contractor’s proposal as Key Personnel. Not all contractor employees assigned to perform this {DOC_TYPE} will be Key Personnel.\n  - If an individual proposed as Key Personnel becomes unavailable during the course of the source selection process, the Offeror will notify the Contracting Officer immediately and provide a substitute and their résumé. The proposal of any Key Personnel not currently employed by the Offeror shall be accompanied by letters of intent signed by the proposed Key Personnel indicating their intent to be employed by the Offeror if the Offeror is awarded a {DOC_TYPE} under this RFQ.\n  - The Contractor agrees that during the first six (6) months of {DOC_TYPE} performance, no Key Personnel substitutions will be made unless necessitated by an individual’s sudden illness, death, or termination of employment. In any of these events, the Contractor shall promptly notify the Contracting Officer and provide the information required by paragraph (e) below on the proposed replacement for Government approval. No substitutions of Key Personnel shall be made except in accordance with this provision.\n  - After the initial six-month period of performance, the Contractor must obtain Government approval of any substitution of Key Personnel prior to removing the approved Key Personnel from performance. All proposed substitutions/additions must be submitted, in writing, to the Contracting Officer at least 30 days (60 days if security clearances are involved) in advance of the proposed substitution and provide the information required by paragraph (e) below.\n  - All requests for substitutions/additions of Key Personnel must include a detailed explanation of the circumstances necessitating the proposed substitution or addition, a complete résumé for the proposed substitute or addition including skills, experience, education, training, and security level. As determined by the Contracting Officer, all proposed substitutes/additions must have qualifications that meet or exceed the qualifications of the person to be replaced.\n  - The Contracting Officer or his/her authorized representatives will evaluate the request(s) for substitutions/additions of Key Personnel and the Contracting Officer will notify the Contractor, in writing, of approval or disapproval. Disapproval of the proposed individual(s) shall not provide grounds for nonperformance by the Contractor or form the basis of any claim for monies, delivery schedule extension, or any other equitable adjustment.\n  - The personnel set forth below as proposed by the Contractor for this {DOC_TYPE}, or identified in the Contractor’s proposals as Key Personnel, shall comprise the list of Key Personnel required to perform under this {DOC_TYPE}. The list may be  modified in accordance with the above, to substitute or add personnel.",
+        "section": 4,
+    },
+    {
+        "name": "onSiteRequired",
+        "text": "none",
+        "section": 4,
+    },
+    {
+        "name": "evaluateKeyPersonnel",
+        "text": "none",
+        "section": 4,
+    },
+    {
         "name": "invoicing",
         "text": "The Contractor shall bill for the ongoing operations as per the payment schedule documented in PWS and the corresponding cost proposal as associated with specific deliverables.\n\nThe {AGENCY_FULL_NAME} will reject all nonconforming invoices.\n\nThe Contracting Officer, working with the COR, is responsible for determining minimum requirements for the information to be provided on the invoice. For information on what constitutes a valid invoice, refer to FAR 32.905. The minimum information includes:\n\n  - Date of Invoice\n  - Contract #\n  - Requisition #\n  - Billing Company name/address - as stated in the award (if this changes in www.SAM.gov at any time during the period of performance, notify the Contracting Officer to process a modification). \n  - Must include a 'Remit to' address (which is complete) as stated in the award. If this changes in www.SAM.gov at any time during the period of performance, notify the Contracting Officer to process a modification.\n  - Period of performance/services\n  - Amount Billed for specified work accomplished\n  - Total Contract value\n  - Cumulative Billed\n  - Contract Line item number (CLIN) being billed, for each milestone achieved and list of deliverables as identified in the PWS\n  - Narrative of performance sufficient to justify the invoice\n  - Explanation of incentives/disincentives\n  - Point of Contact for invoicing issues and phone number\n  - Invoices shall be mailed to the email address indicated in block 18a on the SF 1449 of the award documents.\n  - The invoice will contain a statement signed by a responsible official of the Contractor substantially similar if not identical to the following: 'I certify that the items above have been delivered in accordance with the {DOC_TYPE}, and that all charges are true, correct, and have not been previously billed.",
         "section": 5,
@@ -282,6 +322,11 @@ content_components = [
         "section": 7,
     },
     {
+        "name": "stakeholderIntro",
+        "text": "For the completion of this task, the {AGENCY_FULL_NAME} will provide access to the following stakeholders:",
+        "section": 8,
+    },
+    {
         "name": "contractingOfficer",
         "text": "The Contracting Officer is the only individual who can legally commit or obligate the Government for the expenditure of public funds. The technical administration of this {DOC_TYPE} shall not be construed to authorize the revision of the terms and conditions of this {DOC_TYPE}. Only the Contracting Officer can authorize any such revision in writing. The Contracting Officer shall promptly countermand any action that exceeds the authority of the COR.",
         "section": 8,
@@ -293,7 +338,12 @@ content_components = [
     },
     {
         "name": "productOwner",
-        "text": "@TODO",
+        "text": "The Product Owner will manage designated products and communicate with the stakeholder community, are empowered to make business decisions rapidly, set work priorities within designated products, and will remove obstacles to product success. They help write user stories, manage a product’s backlog, and work with {AGENCY} management and partners as customers on a daily basis. Product owners make the final call on functionality and features for their products.",
+        "section": 8,
+    },
+    {
+        "name": "endUsers",
+        "text": "End Users may be used in this effort in usability testing and/or customer satisfaction surveying.",
         "section": 8,
     },
     {
@@ -338,7 +388,7 @@ content_components = [
     },
     {
         "name": "orderOfPrecedence",
-        "text": "In the event of an inconsistency between the Special Contract Requirements and the FAR clauses provisions in the RFQ or the {DOC_TYPE}, the inconsistency shall be resolved by giving precedence in the following order:\n1. Special Contract Requirements \n2. FAR Clauses",
+        "text": "In the event of an inconsistency between the Special Contract Requirements and the FAR clauses provisions in the RFQ or the {DOC_TYPE}, the inconsistency shall be resolved by giving precedence in the following order:\n\n  1. Special Contract Requirements \n  2. FAR Clauses",
         "section": 9,
     },
     {
