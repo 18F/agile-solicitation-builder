@@ -32,7 +32,6 @@ var SpecialRequirements = React.createClass({
       this.setState( componentStates );
     }.bind(this));
     getCustomComponents(rfqId, 9, function(data){
-    	console.log(data);
     	this.setState({requirementsData: data["data"]});
     }.bind(this));
   },
@@ -45,14 +44,15 @@ var SpecialRequirements = React.createClass({
   			requirementData["title"] = this.state.title;
   			requirementData["description"] = this.state.description;
 
-  			// save the data
+  			// save the data and update state to include new component
   			createComponent(requirementData, rfqId, 9, function(data){
   				this.setState({
   					addRequirement: false,
   					requirementsData: data["data"],
+  					title: "",
+  					description: "",
   				});
   			}.bind(this));
-  			
   		}
   		else {
   			alert("Please fill out the title and text components of the form before saving the new role.");

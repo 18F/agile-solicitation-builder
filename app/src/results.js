@@ -19,6 +19,8 @@ var Results = React.createClass({
 			<div>
 				<div className="main-heading">Resulting RFQ</div>
 				<a href={url}><button className="btn btn-default">Download</button></a>
+				<br />
+				<br />
 				<button onClick={this.deleteRFQ} className="btn btn-default">Delete this RFQ</button>
 			</div>
 		);

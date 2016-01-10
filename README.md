@@ -1,25 +1,25 @@
 This project uses the following node modules:
 
-babel-preset-react
-babelify
-browserify
-gulp
-gulp-notify
-gulp-rename
-history
-react
-react-bootstrap
-react-dom
-react-flexbox
-react-router
-reactify
-vinyl-source-stream
-watchify
+  - babel-preset-react
+  - babelify
+  - browserify
+  - gulp
+  - gulp-notify
+  - gulp-rename
+  - history
+  - react
+  - react-bootstrap
+  - react-dom
+  - react-flexbox
+  - react-router
+  - reactify
+  - vinyl-source-stream
+  - watchify
 
 This project uses the following bower components:
 
-jQuery
-Bootstrap
+  - jQuery
+  - Bootstrap
 
 The backend is built in python with Flask.
 

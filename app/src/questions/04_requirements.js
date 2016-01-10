@@ -72,12 +72,12 @@ var Requirement = React.createClass({
 				<radiogroup onChange={this.handleChange.bind(this, "onSiteRequired")}>
 					<div className="radio">
 						<label>
-							<input type="radio" value="yes" checked={level == this.state.onSiteRequired} />Yes
+							<input type="radio" value="yes" checked={"yes" == this.state.onSiteRequired} />Yes
 					  </label>
 					</div>
 					<div className="radio">
 						<label>
-							<input type="radio" value="no" checked={level == this.state.onSiteRequired} />No
+							<input type="radio" value="no" checked={"no" == this.state.onSiteRequired} />No
 					  </label>
 					</div>
 				</radiogroup>
@@ -88,40 +88,35 @@ var Requirement = React.createClass({
 				<radiogroup onChange={this.handleChange.bind(this, "evaluateKeyPersonnel")}>
 					<div className="radio">
 						<label>
-							<input type="radio" value="yes" checked={level == this.state.evaluateKeyPersonnel} />Yes
+							<input type="radio" value="yes" checked={"yes" == this.state.evaluateKeyPersonnel} />Yes
 					  </label>
 					</div>
 					<div className="radio">
 						<label>
-							<input type="radio" value="no" checked={level == this.state.evaluateKeyPersonnel} />No
+							<input type="radio" value="no" checked={"no" == this.state.evaluateKeyPersonnel} />No
 					  </label>
 					</div>
 				</radiogroup>
-				
-				<p>Based on the deliverables described in the SOO, in addition to a project manager, skillsets/personnel needs will include the following:</p>
-				<ul>
-					<li>UX</li>
-					<li>Backend Web Engineer</li>
-					<li>Frontend Web Developer</li>
-					<li>Devops</li>
-				</ul>
 
 				<p>Some key points to include: if government not happy then these will be the consequences. There needs to be a POC on contractor side who is responsible. If there will be delays because of things on the government side the contractor needs to communicate this ASAP and come up with new schedule with CO/PM.</p>	
 
-				<div className="sub-heading">Key Personnel</div>
+				{(this.state.evaluateKeyPersonnel === "yes")? 
+				<div>
+					<div className="sub-heading">Key Personnel</div>
+					<EditBox
+							text={this.state.keyPersonnelRequirements}
+							editing={this.state.edit === 'keyPersonnelRequirements'}
+							onStatusChange={this.toggleEdit.bind(this, 'keyPersonnelRequirements')}
+							onTextChange={this.handleChange.bind(this, 'keyPersonnelRequirements')}>
+					</EditBox>
+				</div> : null}
 
+				<div className="sub-heading">Performance Work Statement</div>
 				<EditBox
 						text={this.state.performanceWorkStatement}
 						editing={this.state.edit === 'performanceWorkStatement'}
 						onStatusChange={this.toggleEdit.bind(this, 'performanceWorkStatement')}
 						onTextChange={this.handleChange.bind(this, 'performanceWorkStatement')}>
-				</EditBox>
-
-				<EditBox
-						text={this.state.keyPersonnelRequirements}
-						editing={this.state.edit === 'keyPersonnelRequirements'}
-						onStatusChange={this.toggleEdit.bind(this, 'keyPersonnelRequirements')}
-						onTextChange={this.handleChange.bind(this, 'keyPersonnelRequirements')}>
 				</EditBox>
 
 			</div>
@@ -131,6 +126,12 @@ var Requirement = React.createClass({
 });
 
 
-
+//	<p>Based on the deliverables described in the SOO, in addition to a project manager, skillsets/personnel needs will include the following:</p>
+//	<ul>
+//		<li>UX</li>
+//		<li>Backend Web Engineer</li>
+//		<li>Frontend Web Developer</li>
+//		<li>Devops</li>
+//	</ul>
 
 module.exports = Requirement;

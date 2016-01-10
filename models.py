@@ -60,9 +60,12 @@ class RFQ(Base):
         self.setaside = setaside
         self.base_number = base_number_value
 
+        vehicle = ""
+
         session = Session()
         agency_full_name = session.query(Agency).filter_by(abbreviation=agency).first().full_name
-        vehicle = "(vehicle number " + base_number_value + ") "
+        if doc_type != "Purchase Order":
+            vehicle = "(vehicle number " + base_number_value + ") "
         for section in content_components:
             text = str(section['text']).decode("utf8")
             section['text'] = text.replace("{AGENCY}", agency).replace("{DOC_TYPE}", doc_type).replace("{AGENCY_FULL_NAME}", agency_full_name).replace("{PROGRAM_NAME}", program_name).replace("{VEHICLE}", vehicle)

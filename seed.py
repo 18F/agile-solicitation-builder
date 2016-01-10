@@ -23,7 +23,7 @@ content_components = [
     },
     {
         "name": "descriptionOfServices",
-        "text": "Services required under this Firm Fixed Price {DOC_TYPE} {VEHICLE}are to assist the {AGENCY_FULL_NAME} ({AGENCY}) with the design and implementation of systems to support {AGENCY}’s Program for {PROGRAM_NAME}.",
+        "text": "Services required under this Firm Fixed Price {DOC_TYPE} {VEHICLE}are to assist the {AGENCY_FULL_NAME} ({AGENCY}) with the design and implementation of digital services to support {AGENCY}’s Program for {PROGRAM_NAME}.",
         "section": 2,
     },
     {
@@ -33,7 +33,7 @@ content_components = [
     },
     {
         "name": "naicsText",
-        "text": "This requirement will be solicited under the following North American Industrial Classification System (NAICS) Code: 541512, Computer Systems Design Services, $27.5 million. This Task Order will be awarded under FAR 8.4 which governs orders placed under Federal Supply Schedules contracts.",
+        "text": "This requirement will be solicited under the following North American Industrial Classification System (NAICS) Code: 541512, Computer Systems Design Services, $27.5 million. This {DOC_TYPE} will be awarded under FAR 8.4 which governs orders placed under Federal Supply Schedules contracts.",
         "section": 2,
     },
     {
@@ -293,7 +293,7 @@ content_components = [
     },
     {
         "name": "deliveringDeliverables",
-        "text": "  1. Ensure that all deliverables, products, licenses, designs, data, documentation, tests, user research notes, source code, configuration settings and files, and materials developed throughout this Task Order will be the property of the U.S. Government.\n  2. Work with the CO from launch to ensure all reference materials and other documents are accessible to the appropriate government personnel at all times. If anything is unclear the CO should bring this to the attention of the contractor immediately.\n  3. This documentation may also include but is not limited to user research materials and findings.\n  4. Ensure any software written should be stored using version control with the COR and any other relevant government employees will have read access to at a minimum.\n  5. Any and all monitoring and analytics dashboards and tools will be accessible to the appropriate government personnel at all times.\n  6. Provide any necessary assistance to the COR and potentially another vendor to stand-up and ensure the applications, systems, databases, platform, and environments are tested and fully operational.\n  7. Consult with the COR to determine what is appropriate, effective, and essential for training and provide the services the COR deems necessary.",
+        "text": "  1. Ensure that all deliverables, products, licenses, designs, data, documentation, tests, user research notes, source code, configuration settings and files, and materials developed throughout this {DOC_TYPE} will be the property of the U.S. Government.\n  2. Work with the CO from launch to ensure all reference materials and other documents are accessible to the appropriate government personnel at all times. If anything is unclear the CO should bring this to the attention of the contractor immediately.\n  3. This documentation may also include but is not limited to user research materials and findings.\n  4. Ensure any software written should be stored using version control with the COR and any other relevant government employees will have read access to at a minimum.\n  5. Any and all monitoring and analytics dashboards and tools will be accessible to the appropriate government personnel at all times.\n  6. Provide any necessary assistance to the COR and potentially another vendor to stand-up and ensure the applications, systems, databases, platform, and environments are tested and fully operational.\n  7. Consult with the COR to determine what is appropriate, effective, and essential for training and provide the services the COR deems necessary.",
         "section": 6,
     },
     {
@@ -343,7 +343,7 @@ content_components = [
     },
     {
         "name": "endUsers",
-        "text": "End Users may be used in this effort in usability testing and/or customer satisfaction surveying.",
+        "text": "End Users may be used in this effort in usability testing and/or customer satisfaction surveying. The team within {AGENCY} managing this contract commit to support the vendor in the user research process, and will provide the vendor with access to the government employees who will be the users of the product.",
         "section": 8,
     },
     {
@@ -404,21 +404,25 @@ content_components = [
 ]
 
 agencies = {
-    "USDA": "Department of Agriculture",
-    "DOC": "Department of Commerce",
-    "DOD": "Department of Defense",
-    "ED": "Department of Education",
-    "DOE": "Department of Energy",
-    "HHS": "Department of Health and Human Services",
-    "DHS": "Department of Homeland Security",
-    "HUD": "Department of Housing and Urban Development",
-    "DOJ": "Department of Justice",
-    "DOL": "Department of Labor",
-    "State": "Department of State",
-    "NASA": "National Aeronautics and Space Administration",
-    "DOI": "Department of the Interior",
-    "Treasury": "Department of the Treasury",
-    "DOT": "Department of Transportation",
-    "VA": "Department of Veterans Affairs",
-    "EOP": "Executive Office of the President",
+    'CFPB': 'Consumer Financial Protection Bureau',
+    'DHS': 'Department of Homeland Security',
+    'DOC': 'Department of Commerce',
+    'DOD': 'Department of Defense',
+    'DOE': 'Department of Energy',
+    'DOI': 'Department of the Interior',
+    'DOJ': 'Department of Justice',
+    'DOL': 'Department of Labor',
+    'DOT': 'Department of Transportation',
+    'ED': 'Department of Education',
+    'EOP': 'Executive Office of the President',
+    'GSA': 'General Services Administration',
+    'HHS': 'Department of Health and Human Services',
+    'HUD': 'Department of Housing and Urban Development',
+    'NARA': 'National Archives and Records Administration',
+    'NASA': 'National Aeronautics and Space Administration',
+    'SBA': 'Small Business Administration',
+    'State': 'Department of State',
+    'Treasury': 'Department of the Treasury',
+    'USDA': 'Department of Agriculture',
+    'VA': 'Department of Veterans Affairs'
 }

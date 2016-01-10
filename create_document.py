@@ -80,6 +80,7 @@ def services(document, rfq):
     # baseFee baseFeeAmount basePeriodDurationNumber basePeriodDurationUnit clin farCode fee iterationPoPNumber iterationPoPUnit maxBudget naicsText optionFee optionFeeAmount optionPeriodDurationNumber optionPeriodDurationUnit optionPeriods paymentSchedule travelBudget travelLanguage travelRequirement 
     # include vendor number
     cc = make_dict(content_components)
+    optionPeriods = cc["optionPeriods"]
     document.add_heading("Description of Services", level=SUB_HEADING)
     document.add_paragraph(cc["descriptionOfServices"])
     document.add_paragraph(cc["naicsText"])
@@ -137,9 +138,6 @@ def services(document, rfq):
     document.add_heading("Payment Schedule", level=SUB_HEADING)
     document.add_paragraph(cc["paymentSchedule"])
 
-    document.add_heading("Type of Contract", level=SUB_HEADING)
-    document.add_paragraph()
-
     return document
 
 def objectives(document, rfq):
@@ -158,10 +156,10 @@ def objectives(document, rfq):
     else:
         document.add_paragraph("If you have any information about the current vendors and specific technology being used please provide it here.")
 
-    document.add_heading("Specific Tasks and Deliverables")
-    text = "This " + rfq.doc_type + " will require the following services:"
-    document.add_paragraph(text)
-    document.add_paragraph("@TODO")
+    # document.add_heading("Specific Tasks and Deliverables")
+    # text = "This " + rfq.doc_type + " will require the following services:"
+    # document.add_paragraph(text)
+    # document.add_paragraph("@TODO")
 
     document.add_heading("Users")
     user_types = ["external_people", "external_it", "internal_people", "internal_it"]
@@ -213,8 +211,8 @@ def objectives(document, rfq):
     document.add_heading("Use data to drive decisions", level=SUB_HEADING)
     document.add_paragraph(cc["dataDrivenDecisions"])
 
-    document.add_heading("Deliverables", level=SUB_HEADING)
-    document.add_paragraph(cc["deliverables"])
+    # document.add_heading("Deliverables", level=SUB_HEADING)
+    # document.add_paragraph(cc["deliverables"])
 
     
     document.add_heading("Place of Performance", level=SUB_HEADING)
@@ -260,12 +258,13 @@ def invoicing(document, rfq):
 
 def inspection_and_delivery(document, rfq):
     content_components = session.query(ContentComponent).filter_by(document_id=rfq.id).filter_by(section=6).all()
-    
+    cc = make_dict(content_components)
     return document
 
 def government_roles(document, rfq):
     content_components = session.query(ContentComponent).filter_by(document_id=rfq.id).filter_by(section=8).all()
-
+    cc = make_dict(content_components)
+    
     document.add_heading("Contracting Officer", level=SUB_HEADING)
     document.add_paragraph(cc["contractingOfficer"])
 
@@ -318,7 +317,8 @@ def contract_clauses(document, rfq):
     contract_clauses = session.query(ContentComponent).filter_by(document_id=rfq.id).filter_by(section=10).first()
 
     document.add_heading("Additional Contract Clauses", level=SUB_HEADING)
-    document.add_paragraph(contract_clauses["text"])
+    # print contract_clauses
+    # document.add_paragraph(contract_clauses["text"])
 
     return document
 

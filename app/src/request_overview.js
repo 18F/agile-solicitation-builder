@@ -7,20 +7,6 @@ var Button = require('react-bootstrap').Button;
 // Router stuff
 var Link = require('react-router').Link;
 
-
-var AGENCY_NAMES = {
-	"ED": "Department of Education",
-	"DOE": "Department of Energy",
-	"EPA": "Environmental Protection Agency",
-	"GSA": "General Services Administration",
-	"DOL": "Department of Labor",
-	"NARA": "National Archives and Records Administration",
-	"NASA": "National Aeronautics and Space Administration",
-	"OMB": "Office of Management and Budget",
-	"VA": "Department of Veteran Affairs"
-};
-
-// var AGENCY_NAMES = getAgencies();
 // "Contact": "a new purchase under Far 15 (Contract)",
 var DOC_TYPES = {
 	"Purchase Order": "a new purchase under Far 13 (Purchase Order)",
@@ -52,8 +38,14 @@ var RequestOverview = React.createClass({
 			baseNumber: "",
 			baseNumberNeeded: false,
 			programName: "",
+			agencies: [],
 		};
 	},
+	componentDidMount: function() {
+    getAgencies(function(content){
+      this.setState({ agencies: content["data"] });
+    }.bind(this));
+  },
 	handleCreateRFQ: function() {
 		createRFQ({
 			doc_type: this.state.docType,
@@ -84,9 +76,10 @@ var RequestOverview = React.createClass({
 		var agencyNameOptions = [(
 			<option value="none">-- Please select --</option>
 		)];
-		for(var key in AGENCY_NAMES) {
+		for (i=0; i < this.state.agencies.length; i++) {
+			var agency = this.state.agencies[i];
 			agencyNameOptions.push(
-				<option value={key}>{AGENCY_NAMES[key]} ({key})</option>
+				<option value={agency["abbreviation"]}>{agency["full_name"]} ({agency["abbreviation"]})</option>
 			);
 		}
 
@@ -145,9 +138,10 @@ var RequestOverview = React.createClass({
 					</radiogroup>
 
 					{this.state.baseNumberNeeded?
-						<h5>Vehicle Name:  
-							<input type="text" className="form-control short-response" value={this.state.baseNumber} onChange={this.handleChange.bind(this, "baseNumber")} />
-						</h5>	
+						<div>
+						<h5>Vehicle Name:</h5>
+							<input type="text" className="form-control medium-response" value={this.state.baseNumber} onChange={this.handleChange.bind(this, "baseNumber")} />
+						</div>
 					 : null}
 
 					<br />

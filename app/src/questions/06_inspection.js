@@ -75,7 +75,7 @@ var Inspection = React.createClass({
 
 				<div className="sub-heading">Delivering Deliverables</div>
 
-				<p className="new-content">To support the agile development process we recommend that the COR and vendor establish a collaborative workspace secure file sharing system where information and deliverables can be stored and updated. Example services include Google Drive, Box.com, etc.</p>
+				<p className="new-content">To support the agile development process we recommend that the COR and vendor establish a collaborative workspace secure file sharing system where information and deliverables can be stored and updated.</p>
 
 				<p>Is your team currently using a collaborative workspace?</p>
 				<div className="sub-text">Ex: Sharepoint, JIRA, Rally, Google Drive, Box, etc.</div>
@@ -93,9 +93,10 @@ var Inspection = React.createClass({
 					</div>
 				</radiogroup>
 
+				
 				<p>What workspace are you currently using?</p>
 				<input type="text" className="form-control short-response" onChange={this.handleChange.bind(this, "workspaceName")} value={this.state.workspaceName} />
-						
+
 				<p>This information should also include any systems documentation and training materials developed over the course of the engagement.</p>
 				<p>The US Digital Service Playbook strongly recommends the use of a version control system such as Github, or something similar for storing code and system documentation.</p>
 		

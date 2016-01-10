@@ -45,7 +45,6 @@ var ContractingOfficer = React.createClass({
 		}.bind(this));
   },
   addRole: function() {
-  	console.log(this.state.addRole);
   	if (this.state.addRole){  		
   		// check to see if info has been filled in
   		if (this.state.title.length > 0 && this.state.description.length > 0){
@@ -54,12 +53,15 @@ var ContractingOfficer = React.createClass({
   			roleData["title"] = this.state.title;
   			roleData["description"] = this.state.description;
 
-  			// save the data
+  			// save the data and update
   			createComponent(roleData, rfqId, 8, function(data){
-  				alert(data);
+  				this.setState({
+  					addRole: false,
+  					rolesData: data["data"],
+  					title: "",
+  					description: "",
+  				});
   			}.bind(this));
-  			this.setState( {addRole: false});
-  			// reload
   		}
   		else {
   			alert("Please fill out the title and text components of the form before saving the new role.");

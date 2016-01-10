@@ -181,9 +181,11 @@ var Services = React.createClass({
   				clinData[row] = $("#" + row)[0].value;
   			}
   			createCLIN({ clinData }, rfqId, function(data) {
-  				console.log(data);
-  				// reload (if it isn't happening automatically)
-  				this.setState({addClin: false});
+  				this.setState({
+  					addClin: false,
+  					clin: data["data"],
+  				});
+
   			}.bind(this));
   		}
   		// if not, alert and return
@@ -255,33 +257,33 @@ var Services = React.createClass({
 			var this_clin = this.state.clins[clin];
 			ADDITIONAL_CLINS.push(
 				<div className="container fake-table col-md-12">
-					<div className="row clin">
+					<div className="row clin additional">
 						<div className="col-md-12 table-content">{this_clin["row1"]}
 						</div>
 					</div>
-					<div className="row clin">
+					<div className="row clin additional">
 						<div className="col-md-12 table-content">{this_clin["row2"]}
 						</div>
 					</div>
-					<div className="row clin">
+					<div className="row clin additional">
 						<div className="col-md-6 table-content">{this_clin["row3a"]}
 						</div>
 						<div className="col-md-6 table-content">{this_clin["row3b"]}
 						</div>
 					</div>
-					<div className="row clin">
+					<div className="row clin additional">
 						<div className="col-md-6 table-content">{this_clin["row4a"]}
 						</div>
 						<div className="col-md-6 table-content">{this_clin["row4b"]}
 						</div>
 					</div>
-					<div className="row clin">
+					<div className="row clin additional">
 						<div className="col-md-6 table-content">{this_clin["row5a"]}
 						</div>
 						<div className="col-md-6 table-content">{this_clin["row5b"]}
 						</div>
 					</div>
-					<div className="row clin">
+					<div className="row clin additional">
 						<div className="col-md-6 table-content">{this_clin["row6a"]}
 						</div>
 						<div className="col-md-6 table-content">{this_clin["row"]}

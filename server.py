@@ -89,6 +89,9 @@ class Clin(Resource):
         session = Session()
         session.add(additional_clin)
         session.commit()
+
+        clins = session.query(AdditionalClin).filter_by(document_id=rfq_id).all()
+        return jsonify(data=[c.to_dict() for c in clins])
         
 class AddComponent(Resource):
 
@@ -107,7 +110,9 @@ class AddComponent(Resource):
         session = Session()
         session.add(custom_component)
         session.commit()
-        return data
+        
+        components = session.query(CustomComponent).filter_by(document_id=rfq_id).filter_by(section=int(section_id)).all()
+        return jsonify(data=[c.to_dict() for c in components])
         
 
 class Create(Resource):

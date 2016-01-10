@@ -67,6 +67,19 @@ function getRFQs(callback){
 	});
 }
 
+function getAgencies(callback){
+	$.ajax({
+		type: "GET",
+		url: "/api/agencies",
+		dataType: 'json',
+		success: function(data){
+			if (callback){
+				callback(data);
+			}
+		}
+	});
+}
+
 function createRFQ(dataDict, callback){
 	console.log(dataDict);
 	$.ajax({
