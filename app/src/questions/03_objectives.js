@@ -2,10 +2,12 @@ var React = require('react');
 var StateMixin = require("../state_mixin");
 var EditBox = require("../edit_box");
 
+// "1": "Research, Insights, and Synthesis",
+
 var DELIVERABLES = {
-	"1": "Research, Insights, and Synthesis",
-	"2": "Prototype Design Solutions",
-	"3": "Recommendations",
+	
+	"2": "Design Solutions Prototyping",
+	"3": "Process Improvement Recommendations",
 	"4": "Program Management and Stewardship",
 	"5": "UX requirements gathering",
 	"6": "Initial application design and implementation",
@@ -20,7 +22,9 @@ var DELIVERABLES = {
 	"15": "Native mobile application(s)",
 	"16": "Mobile responsive web application(s)",
 	"17": "Application capable of supporting high user traffic",
-	"18": "Devops, continuous integration and continuous deployment"
+	"18": "Devops, continuous integration and continuous deployment",
+	"19": "Workstations, data centers, server systems, and connectivity",
+	"20": "Supporting Legacy applications/systems",
 };
 
 var USER_RESEARCH = {			
@@ -63,7 +67,7 @@ var STATES = [
 	"startToFinish",
 	"simpleAndIntuitive",
 	"dataDrivenDecisions",
-	"documentationAndTraining",
+	"documentationAndTraining",	
 ];
 
 var Objective = React.createClass({

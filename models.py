@@ -13,6 +13,7 @@ Session = sessionmaker(bind=engine)
 Base = declarative_base()
 
 content_components = seed.content_components
+deliverables = seed.deliverables
 
 
 class Agency(Base):
@@ -39,6 +40,7 @@ class RFQ(Base):
     setaside = Column(String)
     base_number = Column(String)
     content_components = relationship("ContentComponent")
+    deliverables = relationship("Deliverable")
 
     def to_dict(self):
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}
@@ -71,6 +73,12 @@ class RFQ(Base):
             section['text'] = text.replace("{AGENCY}", agency).replace("{DOC_TYPE}", doc_type).replace("{AGENCY_FULL_NAME}", agency_full_name).replace("{PROGRAM_NAME}", program_name).replace("{VEHICLE}", vehicle)
             self.content_components.append(ContentComponent(**section))
 
+        for deliverable in deliverables:
+            # text = str(deliverable['text']).decode("utf8")
+            deliverable['value'] = True if (deliverable['value'] == "true") else False
+            # name = str(deliverable['name']).decode("utf8")
+            self.deliverables.append(Deliverable(**deliverable))
+
 
 class ContentComponent(Base):
     __tablename__ = 'content_components'
@@ -85,6 +93,21 @@ class ContentComponent(Base):
 
     def __repr__(self):
         return "<ContentComponent(name='%s', doc_id='%d', text='%s')>" % (self.name, self.document_id, self.text)
+
+
+class Deliverable(Base):
+    __tablename__ = 'deliverables'
+
+    document_id = Column(Integer, ForeignKey('rfqs.id'), primary_key=True)
+    name = Column(String, primary_key=True)
+    text = Column(String)
+    value = Column(String)
+
+    def to_dict(self):
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+
+    def __repr__(self):
+        return "<Deliverable(name='%s', doc_id='%d', text='%s', value='%s')>" % (self.name, self.document_id, self.text, self.value)
 
 
 class AdditionalClin(Base):
@@ -120,7 +143,7 @@ class SpecialRequirement(Base):
 class CustomComponent(Base):
     __tablename__ = 'custom_components'
 
-    id = Column(Integer, primary_key=True)
+    id = Column(Integer, ForeignKey('rfqs.id'), primary_key=True)
     document_id = Column(Integer)
     title = Column(String)
     description = Column(Text)

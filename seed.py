@@ -151,17 +151,17 @@ content_components = [
         "text": "false",
         "section": 3,
     },
-        {
+    {
         "name": "internal_it",
         "text": "false",
         "section": 3,
     },
-        {
+    {
         "name": "external_people",
         "text": "false",
         "section": 3,
     },
-        {
+    {
         "name": "external_it",
         "text": "false",
         "section": 3,
@@ -274,6 +274,16 @@ content_components = [
     {
         "name": "invoicing",
         "text": "The Contractor shall bill for the ongoing operations as per the payment schedule documented in PWS and the corresponding cost proposal as associated with specific deliverables.\n\nThe {AGENCY_FULL_NAME} will reject all nonconforming invoices.\n\nThe Contracting Officer, working with the COR, is responsible for determining minimum requirements for the information to be provided on the invoice. For information on what constitutes a valid invoice, refer to FAR 32.905. The minimum information includes:\n\n  - Date of Invoice\n  - Contract #\n  - Requisition #\n  - Billing Company name/address - as stated in the award (if this changes in www.SAM.gov at any time during the period of performance, notify the Contracting Officer to process a modification). \n  - Must include a 'Remit to' address (which is complete) as stated in the award. If this changes in www.SAM.gov at any time during the period of performance, notify the Contracting Officer to process a modification.\n  - Period of performance/services\n  - Amount Billed for specified work accomplished\n  - Total Contract value\n  - Cumulative Billed\n  - Contract Line item number (CLIN) being billed, for each milestone achieved and list of deliverables as identified in the PWS\n  - Narrative of performance sufficient to justify the invoice\n  - Explanation of incentives/disincentives\n  - Point of Contact for invoicing issues and phone number\n  - Invoices shall be mailed to the email address indicated in block 18a on the SF 1449 of the award documents.\n  - The invoice will contain a statement signed by a responsible official of the Contractor substantially similar if not identical to the following: 'I certify that the items above have been delivered in accordance with the {DOC_TYPE}, and that all charges are true, correct, and have not been previously billed.",
+        "section": 5,
+    },
+    {
+        "name": "billingAddress",
+        "text": "",
+        "section": 5,
+    },
+    {
+        "name": "duplicateInvoice",
+        "text": "A duplicate invoice with supporting documentation is sent to the COR who will confirm deliveries or performance made against the invoiced line items to ensure that the correct amounts have been billed and documents any price reductions.  The COR will then sign the invoice and complete the Receiving Report to authorize the {AGENCY} payment office to process payment of the invoices.",
         "section": 5,
     },
     {
@@ -400,6 +410,104 @@ content_components = [
         "name": "contractClauses",
         "text": "",
         "section": 10,
+    },
+]
+
+deliverables = [
+    {
+        "name": "d10",
+        "text": "Enhancements, patches, and updates to applications, data, or cloud systems",
+        "value": "no",
+    },
+    {
+        "name": "d9",
+        "text": "Overall collaboration of applications",
+        "value": "no",
+    },
+    {
+        "name": "d12",
+        "text": "Automated testing",
+        "value": "yes",
+    },
+    {
+        "name": "d11",
+        "text": "Data import of records collected from legacy systems",
+        "value": "no",
+    },
+    {
+        "name": "d14",
+        "text": "Native mobile application(s)",
+        "value": "no",
+    },
+    {
+        "name": "d13",
+        "text": "Training of end users on the systems",
+        "value": "yes",
+    },
+    {
+        "name": "d16",
+        "text": "Application capable of supporting high user traffic",        
+        "value": "no",
+    },
+    {
+        "name": "d15",
+        "text": "Mobile responsive web application(s)",
+        "value": "no",
+    },
+    {
+        "name": "d18",
+        "text": "Workstations, data centers, server systems, and connectivity",
+        "value": "no",
+    },
+    {
+        "name": "d17",
+        "text": "Devops, continuous integration and continuous deployment",
+        "value": "no",
+    },
+    {
+        "name": "d19",
+        "text": "Supporting Legacy applications/systems",
+        "value": "no",
+    },
+    {
+        "name": "d2",
+        "text": "Process Improvement Recommendations",
+        "value": "no",
+    },
+    {
+        "name": "d1",
+        "text": "Design Solutions Prototyping",
+        "value": "no",
+    },
+    {
+        "name": "d4",
+        "text": "UX requirements gathering",
+        "value": "no",
+    },
+    {
+        "name": "d3",
+        "text": "Program Management and Stewardship",
+        "value": "no",
+    },
+    {
+        "name": "d6",
+        "text": "System configuration to support business processes",
+        "value": "no",
+    },
+    {
+        "name": "d5",
+        "text": "Initial application design and implementation",
+        "value": "no",
+    },
+    {
+        "name": "d8",
+        "text": "Workflow design and implementation",
+        "value": "no",
+    },
+    {
+        "name": "d7",
+        "text": "Integration for input and output methods",
+        "value": "no",
     },
 ]
 

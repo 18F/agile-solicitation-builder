@@ -2,7 +2,11 @@ var React = require('react');
 var StateMixin = require("../state_mixin");
 var EditBox = require("../edit_box");
 
-var STATES = ["invoicing"];
+var STATES = [
+	"invoicing",
+	"billingAddress",
+	"duplicateInvoice",
+];
 
 var PostAward = React.createClass({
 	mixins: [StateMixin],
@@ -32,12 +36,27 @@ var PostAward = React.createClass({
 		return (
 			<div>
 				<div className="sub-heading">Invoicing & Funding</div>
+					<div className="sub-text">If you wish to add additional text you may do so in the resulting word document.</div>
+
 					<EditBox
 							text={this.state.invoicing}
 							editing={this.state.edit === 'invoicing'}
 							onStatusChange={this.toggleEdit.bind(this, 'invoicing')}
 							onTextChange={this.handleChange.bind(this, 'invoicing')}>
 					</EditBox>
+
+					<p>The Contractor shall submit an original invoice for payment to the following office:</p>
+					<div className="sub-text">Please include your agency's payment office mailing address, telephone number and fax number.</div>
+
+	    				<textarea rows="4" className="form-control" placeholder="Office Name & Mailing Address" value={this.state.billingAddress} onChange={this.handleChange.bind(this, "billingAddress")}></textarea>
+
+	    		<EditBox
+							text={this.state.duplicateInvoice}
+							editing={this.state.edit === 'duplicateInvoice'}
+							onStatusChange={this.toggleEdit.bind(this, 'duplicateInvoice')}
+							onTextChange={this.handleChange.bind(this, 'duplicateInvoice')}>
+					</EditBox>
+				
 			</div>
 		);
 	},

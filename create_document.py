@@ -21,16 +21,6 @@ user_dict = {
     "internal_it": "Internal IT/Developers",
 }
 
-playbook1 = [
-    "Early in the project, spend time with current and prospective users of the service",
-    "Use a range of qualitative and quantitative research methods to determine people’s goals, needs, and behaviors; be thoughtful about the time spent",
-    "Test prototypes of solutions with real people, in the field if possible",
-    "Document the findings about user goals, needs, behaviors, and preferences",
-    "Share findings with the team and agency leadership",
-    "Create a prioritized list of tasks the user is trying to accomplish, also known as 'user stories'",
-    "As the digital service is being built, regularly test it with potential users to ensure it meets people’s needs",
-]
-
 def make_dict(components):
     component_dict = {}
     for component in components:
@@ -143,7 +133,7 @@ def services(document, rfq):
 def objectives(document, rfq):
     content_components = session.query(ContentComponent).filter_by(document_id=rfq.id).filter_by(section=3).all()
     cc = make_dict(content_components)
-    # u'generalBackground',u'locationText', u'offSiteDevelopmentCompliance', u'internal_people', u'kickOffMeeting', u'external_it', u'deliverables', u'kickOffMeetingInPerson', u'internal_it', u'userResearchStrategy', u'userAccess', u'programHistory', u'definitionOfDone', u'kickOffMeetingRemote', u'locationRequirement'
+    #  u'deliverables', u'kickOffMeetingInPerson', u'userResearchStrategy', u'userAccess', u'programHistory', u'definitionOfDone', u'kickOffMeetingRemote', u'locationRequirement'
     document.add_heading("General Background")
     if len(cc["generalBackground"]) > 0:
         document.add_paragraph(cc["generalBackground"])
@@ -211,8 +201,8 @@ def objectives(document, rfq):
     document.add_heading("Use data to drive decisions", level=SUB_HEADING)
     document.add_paragraph(cc["dataDrivenDecisions"])
 
-    # document.add_heading("Deliverables", level=SUB_HEADING)
-    # document.add_paragraph(cc["deliverables"])
+    document.add_heading("Deliverables")
+    document.add_paragraph(cc["definitionOfDone"])
 
     
     document.add_heading("Place of Performance", level=SUB_HEADING)
@@ -239,6 +229,9 @@ def objectives(document, rfq):
         kickoff_text = cc["kickOffMeetingRemote"]
 
     document.add_paragraph(kickoff_text)
+
+    document.add_heading("Documentation and Training")
+    document.add_paragraph(cc["documentationAndTraining"])
 
     return document
 
