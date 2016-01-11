@@ -173,7 +173,7 @@ def download(rfq_id):
 
 def create_tables():
 
-    if os.direxists("downloads"):
+    if os.path.isdir("downloads"):
         shutil.rmtree("downloads")
     os.makedirs("downloads")
 
