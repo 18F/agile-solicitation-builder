@@ -110,7 +110,7 @@ class AddComponent(Resource):
         session = Session()
         session.add(custom_component)
         session.commit()
-        
+
         components = session.query(CustomComponent).filter_by(document_id=rfq_id).filter_by(section=int(section_id)).all()
         return jsonify(data=[c.to_dict() for c in components])
         
