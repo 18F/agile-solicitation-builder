@@ -173,7 +173,8 @@ def download(rfq_id):
 
 def create_tables():
 
-    shutil.rmtree("downloads")
+    if os.direxists("downloads"):
+        shutil.rmtree("downloads")
     os.makedirs("downloads")
 
     Base.metadata.create_all(engine)
