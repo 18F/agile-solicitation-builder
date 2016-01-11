@@ -25,6 +25,34 @@ function getComponents(data){
 	return componentStates;
 }
 
+function getDeliverables(doc_id, callback){
+	$.ajax({
+		type: "GET",
+		url: "/api/get_deliverables/" + doc_id,
+		dataType: 'json',
+		success: function(data){
+			if (callback){
+				callback(data);
+			}
+		}
+	});
+}
+
+function putDeliverables(doc_id, data, callback){
+	$.ajax({
+		type: "PUT",
+		url: "/api/get_deliverables/" + doc_id,
+		data: JSON.stringify({data: data}),
+		contentType: 'application/json',
+		dataType: 'json',
+		success: function(data){
+			if (callback){
+				callback(data);
+			}
+		}
+	});
+}
+
 function get_data(section, doc_id, callback){
 	$.ajax({
 		type: "GET",

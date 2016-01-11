@@ -68,6 +68,26 @@ var STATES = [
 	"simpleAndIntuitive",
 	"dataDrivenDecisions",
 	"documentationAndTraining",	
+	"deliverables",
+	"d10",
+	"d9",
+	"d12",
+	"d11",
+	"d14",
+	"d13",
+	"d16",
+	"d15",
+	"d18",
+	"d17",
+	"d19",
+	"d2",
+	"d1",
+	"d4",
+	"d3",
+	"d6",
+	"d5",
+	"d8",
+	"d7",
 ];
 
 var Objective = React.createClass({
@@ -81,6 +101,9 @@ var Objective = React.createClass({
     get_data(3, rfqId, function(content){
     	var components = getComponents(content["data"]);
       this.setState( components );
+    }.bind(this));
+    getDeliverables(rfqId, function(content){
+    	this.setState({ deliverables: content["data"]});
     }.bind(this));
   },
   handleCheck: function(key, event) {
@@ -108,11 +131,14 @@ var Objective = React.createClass({
 	render: function() {
 
 		var deliverables = [];
-		for (var key in DELIVERABLES) {
+		for (var key in this.state.deliverables) {
+			var deliverable = this.state.deliverables[key];
+			console.log('"' + deliverable["name"] + '",');
 			deliverables.push(
 				<div className="checkbox">
 					<label>
-						<input type="checkbox" value={key} />{ DELIVERABLES[key] }
+					<input type="checkbox" value={this.state[deliverable["value"]]} onClick={this.handleCheck.bind(this, deliverable["name"])} checked={this.state[deliverable["name"]] == "true"}></input>
+					{deliverable["text"]}
 				  </label>
 				</div>
 			);

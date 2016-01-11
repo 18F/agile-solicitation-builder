@@ -62,6 +62,24 @@ class Data(Resource):
             url = "#/rfp/" + str(rfq_id) + "/results"
         return jsonify({"url": url})
 
+class Deliverables(Resource):
+
+    def get(self, rfq_id):
+        session = Session()
+        deliverables = session.query(Deliverable).filter_by(document_id=rfq_id).all()
+        return jsonify(data=[d.to_dict() for d in deliverables])
+
+    def put(self, rfq_id):
+        data = request.get_json()['data']
+        for key in data:
+            print key
+            session = Session()
+            deliverable = session.query(Deliverable).filter_by(document_id=rfq_id).filter_by(name=name).first()
+            # check that this works
+            deliverable.value = data[key]
+            session.merge(deliverable)
+            session.commit()
+
 class Clin(Resource):
 
     def get(self, rfq_id):
@@ -148,6 +166,7 @@ class Create(Resource):
 
 api.add_resource(Agencies, '/agencies')
 api.add_resource(Data, '/get_content/<int:rfq_id>/sections/<int:section_id>')
+api.add_resource(Deliverables, '/get_deliverables/<int:rfq_id>')
 api.add_resource(Create, '/rfqs')
 api.add_resource(Clin, '/clins/<int:rfq_id>')
 api.add_resource(AddComponent, '/custom_component/<int:rfq_id>/section/<int:section_id>')

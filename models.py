@@ -79,7 +79,7 @@ class RFQ(Base):
 
         for deliverable in deliverables:
             # text = str(deliverable['text']).decode("utf8")
-            deliverable['value'] = True if (deliverable['value'] == "true") else False
+            deliverable['value'] = True if (deliverable['value'] == "yes") else False
             # name = str(deliverable['name']).decode("utf8")
             self.deliverables.append(Deliverable(**deliverable))
 
