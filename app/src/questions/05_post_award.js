@@ -48,7 +48,7 @@ var PostAward = React.createClass({
 					<p>The Contractor shall submit an original invoice for payment to the following office:</p>
 					<div className="sub-text">Please include your agency's payment office mailing address, telephone number and fax number.</div>
 
-	    				<textarea rows="4" className="form-control" placeholder="Office Name & Mailing Address" value={this.state.billingAddress} onChange={this.handleChange.bind(this, "billingAddress")}></textarea>
+	    		<textarea rows="5" className="form-control medium-response" placeholder="Office Name & Mailing Address" value={this.state.billingAddress} onChange={this.handleChange.bind(this, "billingAddress")}></textarea>
 
 	    		<EditBox
 							text={this.state.duplicateInvoice}

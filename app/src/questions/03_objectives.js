@@ -2,29 +2,28 @@ var React = require('react');
 var StateMixin = require("../state_mixin");
 var EditBox = require("../edit_box");
 
-// "1": "Research, Insights, and Synthesis",
+//d "1": "Research, Insights, and Synthesis",
 
 var DELIVERABLES = {
-	
-	"2": "Design Solutions Prototyping",
-	"3": "Process Improvement Recommendations",
-	"4": "Program Management and Stewardship",
-	"5": "UX requirements gathering",
-	"6": "Initial application design and implementation",
-	"7": "System configuration to support business processes",
-	"8": "Integration for input and output methods",
-	"9": "Workflow design and implementation",
-	"10": "Overall collaboration of applications",
-	"11": "Enhancements, patches, and updates to applications, data, or cloud systems",
-	"12": "Data import of records collected from legacy systems",
-	"13": "Automated testing",
-	"14": "Training of end users on the systems",
-	"15": "Native mobile application(s)",
-	"16": "Mobile responsive web application(s)",
-	"17": "Application capable of supporting high user traffic",
-	"18": "Devops, continuous integration and continuous deployment",
-	"19": "Workstations, data centers, server systems, and connectivity",
-	"20": "Supporting Legacy applications/systems",
+	"d1": "Training of end users on the systems",
+	"d2": "Design Solutions Prototyping",
+	"d3": "Process Improvement Recommendations",
+	"d4": "Program Management and Stewardship",
+	"d5": "UX requirements gathering",
+	"d6": "Initial application design and implementation",
+	"d7": "System configuration to support business processes",
+	"d8": "Integration for input and output methods",
+	"d9": "Workflow design and implementation",
+	"d10": "Overall collaboration of applications",
+	"d11": "Enhancements, patches, and updates to applications, data, or cloud systems",
+	"d12": "Data import of records collected from legacy systems",
+	"d13": "Automated testing",
+	"d14": "Supporting Legacy applications/systems",
+	"d15": "Native mobile application(s)",
+	"d16": "Mobile responsive web application(s)",
+	"d17": "Application capable of supporting high user traffic",
+	"d18": "Devops, continuous integration and continuous deployment",
+	"d19": "Workstations, data centers, server systems, and connectivity",
 };
 
 var USER_RESEARCH = {			
@@ -68,7 +67,6 @@ var STATES = [
 	"simpleAndIntuitive",
 	"dataDrivenDecisions",
 	"documentationAndTraining",	
-	"deliverables",
 	"d10",
 	"d9",
 	"d12",
@@ -102,9 +100,6 @@ var Objective = React.createClass({
     	var components = getComponents(content["data"]);
       this.setState( components );
     }.bind(this));
-    getDeliverables(rfqId, function(content){
-    	this.setState({ deliverables: content["data"]});
-    }.bind(this));
   },
   handleCheck: function(key, event) {
   	var newState = {};
@@ -131,14 +126,13 @@ var Objective = React.createClass({
 	render: function() {
 
 		var deliverables = [];
-		for (var key in this.state.deliverables) {
-			var deliverable = this.state.deliverables[key];
-			console.log('"' + deliverable["name"] + '",');
+		for (var key in DELIVERABLES) {
+			var deliverable = this.state[key];
 			deliverables.push(
 				<div className="checkbox">
 					<label>
-					<input type="checkbox" value={this.state[deliverable["value"]]} onClick={this.handleCheck.bind(this, deliverable["name"])} checked={this.state[deliverable["name"]] == "true"}></input>
-					{deliverable["text"]}
+					<input type="checkbox" value={this.state[key]} onClick={this.handleCheck.bind(this, deliverable["name"])} checked={this.state[key] == "true"}></input>
+					{DELIVERABLES[key]}
 				  </label>
 				</div>
 			);

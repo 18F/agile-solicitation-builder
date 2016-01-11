@@ -242,6 +242,101 @@ content_components = [
         "section": 3,
     },
     {
+        "name": "d1",
+        "text": "true",
+        "section": 3,
+    },
+    {
+        "name": "d2",
+        "text": "false",
+        "section": 3,
+    },
+    {
+        "name": "d3",
+        "text": "false",
+        "section": 3,
+    },
+    {
+        "name": "d4",
+        "text": "false",
+        "section": 3,
+    },
+    {
+        "name": "d5",
+        "text": "false",
+        "section": 3,
+    },
+    {
+        "name": "d6",
+        "text": "false",
+        "section": 3,
+    },
+    {
+        "name": "d7",
+        "text": "false",
+        "section": 3,
+    },
+    {
+        "name": "d8",
+        "text": "false",
+        "section": 3,
+    },
+    {
+        "name": "d9",
+        "text": "false",
+        "section": 3,
+    },
+    {
+        "name": "d10",
+        "text": "false",
+        "section": 3,
+    },
+    {
+        "name": "d11",
+        "text": "false",
+        "section": 3,
+    },
+    {
+        "name": "d12",
+        "text": "false",
+        "section": 3,
+    },
+    {
+        "name": "d13",
+        "text": "false",
+        "section": 3,
+    },
+    {
+        "name": "d14",
+        "text": "true",
+        "section": 3,
+    },
+    {
+        "name": "d15",
+        "text": "false",
+        "section": 3,
+    },
+    {
+        "name": "d16",
+        "text": "false",
+        "section": 3,
+    },
+    {
+        "name": "d17",
+        "text": "false",
+        "section": 3,
+    },
+    {
+        "name": "d18",
+        "text": "false",
+        "section": 3,
+    },
+    {
+        "name": "d19",
+        "text": "false",
+        "section": 3,
+    },
+    {
         "name": "keyPersonnelIntro",
         "text": "The vendor shall provide talented people who have experience creating modern digital services. This includes bringing in seasoned product managers, engineers, UX researchers and designers.",
         "section": 4,

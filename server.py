@@ -2,6 +2,15 @@
 from flask import Flask, send_from_directory, request, jsonify, make_response
 from flask_restful import Resource, Api, reqparse
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.engine import reflection
+from sqlalchemy.schema import (
+    MetaData,
+    Table,
+    DropTable,
+    ForeignKeyConstraint,
+    DropConstraint,
+    )
+
 
 from pprint import pprint
 
@@ -73,6 +82,7 @@ class Deliverables(Resource):
         data = request.get_json()['data']
         for key in data:
             print key
+            print data[key]
             session = Session()
             deliverable = session.query(Deliverable).filter_by(document_id=rfq_id).filter_by(name=name).first()
             # check that this works
@@ -190,14 +200,58 @@ def download(rfq_id):
     print doc_name
     return send_from_directory(directory="downloads", filename=doc_name)
 
+
+def drop_everything():
+    # https://bitbucket.org/zzzeek/sqlalchemy/wiki/UsageRecipes/DropEverything
+    conn = engine.connect()
+
+    # the transaction only applies if the DB supports
+    # transactional DDL, i.e. Postgresql, MS SQL Server
+    trans = conn.begin()
+
+    inspector = reflection.Inspector.from_engine(engine)
+
+    # gather all data first before dropping anything.
+    # some DBs lock after things have been dropped in 
+    # a transaction.
+
+    metadata = MetaData()
+
+    tbs = []
+    all_fks = []
+
+    for table_name in inspector.get_table_names():
+        fks = []
+        for fk in inspector.get_foreign_keys(table_name):
+            if not fk['name']:
+                continue
+            fks.append(
+                ForeignKeyConstraint((),(),name=fk['name'])
+                )
+        t = Table(table_name,metadata,*fks)
+        tbs.append(t)
+        all_fks.extend(fks)
+
+    for fkc in all_fks:
+        conn.execute(DropConstraint(fkc))
+
+    for table in tbs:
+        conn.execute(DropTable(table))
+
+    trans.commit()
+
 def create_tables():
+
+    # delete old records
+    drop_everything()
+
+    session = Session()
 
     if os.path.isdir("downloads"):
         shutil.rmtree("downloads")
     os.makedirs("downloads")
 
-    Base.metadata.create_all(engine)
-    session = Session()
+    Base.metadata.create_all(engine)    
 
     for agency in agencies:
         a = Agency(abbreviation=agency, full_name=agencies[agency])

@@ -51,14 +51,14 @@ var Welcome = React.createClass({
 						<li>This tool is not built to support waterfall development requirements documents.</li>
 
 						<li>All documents should be approved by a warranted contracting officer and in consultation with your legal council as required.</li>
-
-						<h4>Also please note that this product is only in alpha, therefore any of the following may occur:</h4>
-						<ul>
-							<li>Content may unexpectedly change.</li>
-							<li>Documents you have created may be deleted without warning.</li>
-							<li>Certain pages may not always be functioning. We recommend you refresh the page if this happens.</li>
-						</ul>
 					</ul>
+					<h4>Also please note that this product is only in alpha, therefore any of the following may occur:</h4>
+						<ul>
+							<li>Content may unexpectedly change</li>
+							<li>Documents you have created may be deleted without warning</li>
+							<li>Certain pages may not always be functioning. We recommend you refresh the page if this happens</li>
+							<li>Your RFQs will be visible to other visitors on the site</li>
+						</ul>
 				</div>
 				{(rfqs.length > 0)? <div><div className="sub-heading">Resume RFQ</div>
 					<ul>
