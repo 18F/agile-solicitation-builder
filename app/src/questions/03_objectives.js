@@ -131,7 +131,7 @@ var Objective = React.createClass({
 			deliverables.push(
 				<div className="checkbox">
 					<label>
-					<input type="checkbox" value={this.state[key]} onClick={this.handleCheck.bind(this, deliverable["name"])} checked={this.state[key] == "true"}></input>
+					<input type="checkbox" value={this.state[key]} onClick={this.handleCheck.bind(this, key)} checked={this.state[key] == "true"}></input>
 					{DELIVERABLES[key]}
 				  </label>
 				</div>

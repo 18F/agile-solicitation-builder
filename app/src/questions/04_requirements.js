@@ -11,7 +11,7 @@ var STATES = [
 	"onSiteRequired",
 ];
 
-var CLEARANCE_LEVELS = ["None", "Public Trust", "Confidential", "Secret", "Top Secret"];
+var CLEARANCE_LEVELS = ["None", "Confidential", "Secret", "Top Secret"];
 
 var Requirement = React.createClass({
 	mixins: [StateMixin],
@@ -98,8 +98,6 @@ var Requirement = React.createClass({
 					</div>
 				</radiogroup>
 
-				<p>Some key points to include: if government not happy then these will be the consequences. There needs to be a POC on contractor side who is responsible. If there will be delays because of things on the government side the contractor needs to communicate this ASAP and come up with new schedule with CO/PM.</p>	
-
 				{(this.state.evaluateKeyPersonnel === "yes")? 
 				<div>
 					<div className="sub-heading">Key Personnel</div>
@@ -125,13 +123,7 @@ var Requirement = React.createClass({
 	},
 });
 
+// <p>Some key points to include: if government not happy then these will be the consequences. There needs to be a POC on contractor side who is responsible. If there will be delays because of things on the government side the contractor needs to communicate this ASAP and come up with new schedule with CO/PM.</p>	
 
-//	<p>Based on the deliverables described in the SOO, in addition to a project manager, skillsets/personnel needs will include the following:</p>
-//	<ul>
-//		<li>UX</li>
-//		<li>Backend Web Engineer</li>
-//		<li>Frontend Web Developer</li>
-//		<li>Devops</li>
-//	</ul>
 
 module.exports = Requirement;

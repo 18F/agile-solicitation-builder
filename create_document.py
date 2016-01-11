@@ -71,7 +71,7 @@ def services(document, rfq):
     # include vendor number
     cc = make_dict(content_components)
     optionPeriods = cc["optionPeriods"]
-    document.add_heading("Description of Services", level=SUB_HEADING)
+    document.add_heading("Brief Description of Services & Type of Contract", level=SUB_HEADING)
     document.add_paragraph(cc["descriptionOfServices"])
     document.add_paragraph(cc["naicsText"])
 
@@ -90,6 +90,8 @@ def services(document, rfq):
     # @TODO make top column bold, add award fee/incentive information (if applicable)
     # base period
     document.add_heading("Contract Line Item Number (CLIN) Format", level=SUB_HEADING)
+    document.add_paragraph("\n")
+
     table = document.add_table(rows=2, cols=1)
     table.style = 'TableGrid'
     table.rows[0].cells[0].text = "Base Period: " + str(cc["basePeriodDurationNumber"]) + ' ' + cc["basePeriodDurationUnit"]
@@ -105,6 +107,8 @@ def services(document, rfq):
     table.rows[2].cells[1].text = cc["basePeriodDurationNumber"] + cc["basePeriodDurationUnit"]
     table.rows[3].cells[0].text = "Firm Fixed Price (Completion):"
     table.rows[3].cells[1].text = "$XXXXX (Vendor Completes)"
+
+    document.add_paragraph("\n")
 
 
     # option periods
@@ -124,6 +128,8 @@ def services(document, rfq):
         table.rows[2].cells[1].text = cc["optionPeriodDurationNumber"] + cc["optionPeriodDurationUnit"]
         table.rows[3].cells[0].text = "Firm Fixed Price (Completion):"
         table.rows[3].cells[1].text = "$XXXXX (Vendor Completes)"
+        
+        document.add_paragraph("\n")
 
     document.add_heading("Payment Schedule", level=SUB_HEADING)
     document.add_paragraph(cc["paymentSchedule"])
@@ -157,14 +163,14 @@ def objectives(document, rfq):
     print users
     if len(users) == 0:
         document.add_paragraph("The primary users MAY include the following:")
-        for user in user_dict:
+        for i, user in enumerate(user_dict):
             print user, users
-            document.add_paragraph(user_dict[user], style='ListNumber')
+            document.add_paragraph(str(i+1) + ".  " + user_dict[user])
 
     else:
         document.add_paragraph("The primary users will include the following:")
-        for user in users:
-            document.add_paragraph(user_dict[user], style='ListNumber')
+        for i, user in enumerate(users):
+            document.add_paragraph(str(i+1) + ".  " + user_dict[user])
 
     document.add_paragraph("The requirements described below will be customized to the types of users specified.")
 
@@ -310,8 +316,7 @@ def contract_clauses(document, rfq):
     contract_clauses = session.query(ContentComponent).filter_by(document_id=rfq.id).filter_by(section=10).first()
 
     document.add_heading("Additional Contract Clauses", level=SUB_HEADING)
-    # print contract_clauses
-    # document.add_paragraph(contract_clauses["text"])
+    document.add_paragraph(contract_clauses.text)
 
     return document
 
