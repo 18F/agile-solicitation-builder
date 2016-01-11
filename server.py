@@ -13,7 +13,7 @@ import datetime
 import create_document
 
 from docx import Document
-from models import Agency, RFQ, ContentComponent, AdditionalClin, CustomComponent, Base, Session, engine
+from models import Agency, RFQ, ContentComponent, AdditionalClin, CustomComponent, Base, Session, Deliverable, engine
 from seed import agencies
 
 

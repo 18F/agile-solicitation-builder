@@ -1,13 +1,17 @@
 # -*- coding: utf-8 -*-
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, Text, Boolean, String, ForeignKey
+from flask_sqlalchemy import SQLAlchemy
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, relationship
 
+import os
+
 import seed
 
-engine = create_engine('sqlite:///playbook.db', echo=True)
+engine = create_engine(os.environ["DATABASE_URL"])
+# 'postgres:///playbook.db', echo=True)
 Session = sessionmaker(bind=engine)
 
 Base = declarative_base()
