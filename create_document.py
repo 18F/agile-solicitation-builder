@@ -21,6 +21,28 @@ user_dict = {
     "internal_it": "Internal IT/Developers",
 }
 
+DELIVERABLES = {
+    "d1": "Training of end users on the systems",
+    "d2": "Design Solutions Prototyping",
+    "d3": "Process Improvement Recommendations",
+    "d4": "Program Management and Stewardship",
+    "d5": "UX requirements gathering",
+    "d6": "Initial application design and implementation",
+    "d7": "System configuration to support business processes",
+    "d8": "Integration for input and output methods",
+    "d9": "Workflow design and implementation",
+    "d10": "Overall collaboration of applications",
+    "d11": "Enhancements, patches, and updates to applications, data, or cloud systems",
+    "d12": "Data import of records collected from legacy systems",
+    "d13": "Automated testing",
+    "d14": "Supporting Legacy applications/systems",
+    "d15": "Native mobile application(s)",
+    "d16": "Mobile responsive web application(s)",
+    "d17": "Application capable of supporting high user traffic",
+    "d18": "Devops, continuous integration and continuous deployment",
+    "d19": "Workstations, data centers, server systems, and connectivity",
+}
+
 def make_dict(components):
     component_dict = {}
     for component in components:
@@ -39,7 +61,7 @@ def overview(document, rfq):
 
     agency_full_name = session.query(Agency).filter_by(abbreviation=rfq.agency).first().full_name
     title = "RFQ for the " + agency_full_name
-    document.add_heading(title, level=1)
+    document.add_heading(title, level=BIG_HEADING)
     doc_date = str(datetime.date.today())
     document.add_heading(doc_date, level=3)
 
@@ -58,7 +80,7 @@ def overview(document, rfq):
 
 def definitions(document, rfq):
 
-    document.add_heading("1. Definitions", level=1)
+    document.add_heading("1. Definitions", level=BIG_HEADING)
     all_definitions = session.query(ContentComponent).filter_by(document_id=rfq.id).filter_by(section=1).first()
     for definition in all_definitions.text.split("\n\n"):
         document.add_paragraph(definition)    
@@ -66,6 +88,7 @@ def definitions(document, rfq):
     return document
 
 def services(document, rfq):
+    document.add_heading("2. Services", level=BIG_HEADING)
     content_components = session.query(ContentComponent).filter_by(document_id=rfq.id).filter_by(section=2).all()
     # baseFee baseFeeAmount basePeriodDurationNumber basePeriodDurationUnit clin farCode fee iterationPoPNumber iterationPoPUnit maxBudget naicsText optionFee optionFeeAmount optionPeriodDurationNumber optionPeriodDurationUnit optionPeriods paymentSchedule travelBudget travelLanguage travelRequirement 
     # include vendor number
@@ -138,6 +161,7 @@ def services(document, rfq):
     return document
 
 def objectives(document, rfq):
+    document.add_heading("3. Objectives", level=BIG_HEADING)
     content_components = session.query(ContentComponent).filter_by(document_id=rfq.id).filter_by(section=3).all()
     cc = make_dict(content_components)
     #  u'kickOffMeetingInPerson', u'userResearchStrategy', u'userAccess',
@@ -156,10 +180,14 @@ def objectives(document, rfq):
     document.add_heading("Specific Tasks and Deliverables")
     text = "This " + rfq.doc_type + " will require the following services:"
     document.add_paragraph(text)
+    deliverables = ["d10", "d9", "d12", "d11", "d14", "d13", "d16", "d15", "d18", "d17", "d19", "d2", "d1", "d4", "d3", "d6", "d5", "d8", "d7"]
+    deliverables_added = 1
+    for d in deliverables:
+        if cc[d] == "true":
+            document.add_paragraph("    " + str(deliverables_added) + ".  " + DELIVERABLES[d])
+            deliverables_added += 1
 
-    # document.add_paragraph("@TODO")
-
-    document.add_heading("Users")
+    document.add_heading("Users", level=SUB_HEADING)
     user_types = ["external_people", "external_it", "internal_people", "internal_it"]
     users = get_users(cc, user_types)
     print users
@@ -244,16 +272,18 @@ def objectives(document, rfq):
     return document
 
 def personnel(document, rfq):
-    document.add_heading("Key Personnel", level=SUB_HEADING)
+    document.add_heading("4. Key Personnel", level=BIG_HEADING)
     intro_text = "The vendor shall provide talented people who have experience creating modern digital services. This includes bringing in seasoned product managers, engineers, UX researchers and designers."
     document.add_paragraph(intro_text)
 
     return document
 
 def invoicing(document, rfq):
+    document.add_heading("5. Invoicing & Funding", level=BIG_HEADING)
+
     content_components = session.query(ContentComponent).filter_by(document_id=rfq.id).filter_by(section=5).all()
     cc = make_dict(content_components)
-    document.add_heading("Invoicing & Funding", level=SUB_HEADING)
+    
     document.add_paragraph(cc["invoicing"])
 
     document.add_paragraph("The Contractor shall submit an original invoice for payment to the following office:")
@@ -263,9 +293,10 @@ def invoicing(document, rfq):
     return document
 
 def inspection_and_delivery(document, rfq):
+    document.add_heading("6. Inspection and Delivery", level=BIG_HEADING)
+
     content_components = session.query(ContentComponent).filter_by(document_id=rfq.id).filter_by(section=6).all()
     cc = make_dict(content_components)
-    document.add_heading("Inspection and Delivery", level=BIG_HEADING)
 
     document.add_heading("Overview", level=SUB_HEADING)
     document.add_paragraph(cc["guidingPrinciples"])
@@ -290,6 +321,7 @@ def inspection_and_delivery(document, rfq):
     return document
 
 def government_roles(document, rfq):
+    document.add_heading("7. Government Roles", level=BIG_HEADING)
     content_components = session.query(ContentComponent).filter_by(document_id=rfq.id).filter_by(section=8).all()
     cc = make_dict(content_components)
     
@@ -305,9 +337,10 @@ def government_roles(document, rfq):
     return document
 
 def special_requirements(document, rfq):
+    document.add_heading("8. Special Requirements", level=BIG_HEADING)
+
     content_components = session.query(ContentComponent).filter_by(document_id=rfq.id).filter_by(section=9).all()
-    cc = make_dict(content_components)
-    document.add_heading("Special Requirements", level=BIG_HEADING)
+    cc = make_dict(content_components)    
 
     document.add_heading("Controlled Facilities and Information Systems Security", level=SUB_HEADING)
     document.add_paragraph(cc["security"])
@@ -333,8 +366,8 @@ def special_requirements(document, rfq):
     document.add_heading("Limited Use of Data", level=SUB_HEADING)
     document.add_paragraph(cc["useOfData"])
 
-    document.add_heading("Notice of Size Re-representation at the Task Order Level (will be conditional)")
-    document.add_paragraph(cc["smallBusinessStatus"])
+    # document.add_heading("Notice of Size Re-representation at the Task Order Level (will be conditional)")
+    # document.add_paragraph(cc["smallBusinessStatus"])
 
     document.add_heading("Order of Precedence", level=SUB_HEADING)
     document.add_paragraph(cc["orderOfPrecedence"])
@@ -342,9 +375,9 @@ def special_requirements(document, rfq):
     return document
 
 def contract_clauses(document, rfq):
+    document.add_heading("9. Additional Contract Clauses", level=SUB_HEADING)
     contract_clauses = session.query(ContentComponent).filter_by(document_id=rfq.id).filter_by(section=10).first()
-
-    document.add_heading("Additional Contract Clauses", level=SUB_HEADING)
+    
     document.add_paragraph(contract_clauses.text)
 
     return document

@@ -156,15 +156,6 @@ var SpecialRequirements = React.createClass({
 						onTextChange={this.handleChange.bind(this, 'useOfData')}>
 				</EditBox>
 
-				<div className="sub-heading">Notice of Size Re-representation at the Task Order Level (will be conditional)</div>
-				<EditBox
-						text={this.state.smallBusinessStatus}
-						editing={this.state.edit == 'smallBusinessStatus'}
-						onStatusChange={this.toggleEdit.bind(this, 'smallBusinessStatus')}
-						onTextChange={this.handleChange.bind(this, 'smallBusinessStatus')}>
-				</EditBox>
-			
-
 				<div className="sub-heading">Order of Precedence</div>
 				<EditBox
 						text={this.state.orderOfPrecedence}
@@ -190,6 +181,14 @@ var SpecialRequirements = React.createClass({
 		);
 	},
 });
+
+//				<div className="sub-heading">Notice of Size Re-representation at the Task Order Level (will be conditional)</div>
+//				<EditBox
+//						text={this.state.smallBusinessStatus}
+//						editing={this.state.edit == 'smallBusinessStatus'}
+//						onStatusChange={this.toggleEdit.bind(this, 'smallBusinessStatus')}
+//						onTextChange={this.handleChange.bind(this, 'smallBusinessStatus')}>
+//				</EditBox>
 
 
 module.exports = SpecialRequirements;
