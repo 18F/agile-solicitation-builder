@@ -107,15 +107,15 @@ def services(document, rfq):
     table.rows[2].cells[1].text = cc["basePeriodDurationNumber"] + cc["basePeriodDurationUnit"]
     table.rows[3].cells[0].text = "Firm Fixed Price (Completion):"
     table.rows[3].cells[1].text = "$XXXXX (Vendor Completes)"
+    # @TODO if base fee, add base fee clin row
 
     document.add_paragraph("\n")
 
-
     # option periods
-    for i in (1, int(optionPeriods)+1):
+    for i in range(1, int(optionPeriods)+1):
         table = document.add_table(rows=2, cols=1)
         table.style = 'TableGrid'
-        table.rows[0].cells[0].text = "Option Period " + str(i) + ":"  + str(cc["optionPeriodDurationNumber"]) + ' ' + cc["optionPeriodDurationUnit"]
+        table.rows[0].cells[0].text = "Option Period " + str(i) + ": "  + str(cc["optionPeriodDurationNumber"]) + ' ' + cc["optionPeriodDurationUnit"]
         table.rows[1].cells[0].text = "CLIN 000" + str(i) + ", FFP- Completion - The Contractor shall provide services for the Government in accordance with the Performance Work Statement (PWS)"
 
         table = document.add_table(rows=4, cols=2)
@@ -128,6 +128,7 @@ def services(document, rfq):
         table.rows[2].cells[1].text = cc["optionPeriodDurationNumber"] + cc["optionPeriodDurationUnit"]
         table.rows[3].cells[0].text = "Firm Fixed Price (Completion):"
         table.rows[3].cells[1].text = "$XXXXX (Vendor Completes)"
+        # @TODO if option fee, add option fee clin row
         
         document.add_paragraph("\n")
 
@@ -139,7 +140,7 @@ def services(document, rfq):
 def objectives(document, rfq):
     content_components = session.query(ContentComponent).filter_by(document_id=rfq.id).filter_by(section=3).all()
     cc = make_dict(content_components)
-    #  u'deliverables', u'kickOffMeetingInPerson', u'userResearchStrategy', u'userAccess', u'programHistory', u'definitionOfDone', u'kickOffMeetingRemote', u'locationRequirement'
+    #  u'kickOffMeetingInPerson', u'userResearchStrategy', u'userAccess',
     document.add_heading("General Background")
     if len(cc["generalBackground"]) > 0:
         document.add_paragraph(cc["generalBackground"])
@@ -152,9 +153,10 @@ def objectives(document, rfq):
     else:
         document.add_paragraph("If you have any information about the current vendors and specific technology being used please provide it here.")
 
-    # document.add_heading("Specific Tasks and Deliverables")
-    # text = "This " + rfq.doc_type + " will require the following services:"
-    # document.add_paragraph(text)
+    document.add_heading("Specific Tasks and Deliverables")
+    text = "This " + rfq.doc_type + " will require the following services:"
+    document.add_paragraph(text)
+
     # document.add_paragraph("@TODO")
 
     document.add_heading("Users")
@@ -249,15 +251,42 @@ def personnel(document, rfq):
     return document
 
 def invoicing(document, rfq):
-    content_component = session.query(ContentComponent).filter_by(document_id=rfq.id).filter_by(section=5).first()
+    content_components = session.query(ContentComponent).filter_by(document_id=rfq.id).filter_by(section=5).all()
+    cc = make_dict(content_components)
     document.add_heading("Invoicing & Funding", level=SUB_HEADING)
-    document.add_paragraph(content_component.text)
+    document.add_paragraph(cc["invoicing"])
+
+    document.add_paragraph("The Contractor shall submit an original invoice for payment to the following office:")
+    document.add_paragraph(cc["billingAddress"])
+    document.add_paragraph(cc["duplicateInvoice"])
 
     return document
 
 def inspection_and_delivery(document, rfq):
     content_components = session.query(ContentComponent).filter_by(document_id=rfq.id).filter_by(section=6).all()
     cc = make_dict(content_components)
+    document.add_heading("Inspection and Delivery", level=BIG_HEADING)
+
+    document.add_heading("Overview", level=SUB_HEADING)
+    document.add_paragraph(cc["guidingPrinciples"])
+
+    document.add_heading("Delivery and Timing", level=SUB_HEADING)
+    document.add_paragraph(cc["inspectionOverview"])
+
+    document.add_heading("Late Delivery", level=SUB_HEADING)
+    document.add_paragraph(cc["lateDelivery"])
+
+    document.add_heading("Collaboration Environment", level=SUB_HEADING)
+
+    if cc["workspaceExists"] == "yes":
+        if cc["workspaceName"].length > 0:
+            document.add_paragraph(rfq.agency + " is currently using " + cc["workspaceName"]) + " as their primary collaborative workspace tool. The contractor is required to establish a collaborative workspace using either this tool or another that both the contractor and the CO can agree upon."
+
+    document.add_paragraph(cc["deliveringDeliverables"])
+
+    document.add_heading("Transition Activities", level=SUB_HEADING)
+    document.add_paragraph(cc["transitionActivities"])
+
     return document
 
 def government_roles(document, rfq):

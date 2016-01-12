@@ -67,7 +67,6 @@ function get_data(section, doc_id, callback){
 }
 
 function put_data(section, doc_id, data, callback){
-	console.log(data);
 	$.ajax({
 		type: "PUT",		
 		url: "/api/get_content/" + doc_id + "/sections/" + section,
@@ -109,7 +108,6 @@ function getAgencies(callback){
 }
 
 function createRFQ(dataDict, callback){
-	console.log(dataDict);
 	$.ajax({
 		type: "POST",
 		url: "/api/rfqs",
@@ -152,7 +150,6 @@ function getCustomComponents(rfqId, sectionId, callback){
 }
 
 function createCLIN(clinData, rfqId, callback){
-	console.log("clinData", clinData);
 	window.cd = clinData;
 	$.ajax({
 		type: "POST",

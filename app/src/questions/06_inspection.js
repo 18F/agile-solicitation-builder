@@ -43,10 +43,6 @@ var Inspection = React.createClass({
 				<div className="main-heading">Inspection, Acceptance, Delivery, Transition</div>
 				<div className="sub-heading">Overview</div>
 
-				<p>Under the agile methodology, the traditional transition process should not be necessary. Rather, the government should have access to all code and other relevant documents from day one in a clearly documented and organized electronically shared workspace.</p>
-
-				<p>Guiding Principles</p>
-
 				<EditBox
 						text={this.state.guidingPrinciples}
 						editing={this.state.edit === 'guidingPrinciples'}

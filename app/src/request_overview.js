@@ -114,8 +114,8 @@ var RequestOverview = React.createClass({
 		return (
 			<div className="main col-md-8">
 				<div>
+					<div className="sub-text">These questions are typically answered by the CO.</div>
 					<div className="sub-heading">Preliminary Questions</div>
-					<p>You're on your way to writing an awesome RFQ or RFP!</p>
 					<p>We'll ask you some questions to understand what you want to build,
 					and then let you download the generated documents.</p>
 					
