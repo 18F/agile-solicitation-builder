@@ -53,6 +53,19 @@ function putDeliverables(doc_id, data, callback){
 	});
 }
 
+function deleteRFQ(doc_id, callback){
+	$.ajax({
+		type: "DELETE",
+		url: "/api/delete/rfqs/" + doc_id,
+		dataType: 'json',
+	success: function(data){
+		if (callback){
+			callback(data);
+			}
+		}
+	});
+}
+
 function get_data(section, doc_id, callback){
 	$.ajax({
 		type: "GET",

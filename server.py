@@ -173,6 +173,35 @@ class Create(Resource):
 
         return jsonify({'id': rfq.id})
 
+class DeleteRFQ(Resource):
+
+    def delete(self, rfq_id):
+        session = Session()
+        
+        deliverables = session.query(Deliverable).filter_by(document_id=rfq_id).all()
+        for d in deliverables:
+            session.delete(d)
+
+        content_components = session.query(ContentComponent).filter_by(document_id=rfq_id).all()
+        for c in content_components:
+            session.delete(c)
+
+        custom_components = session.query(CustomComponent).filter_by(document_id=rfq_id).all()
+        for c in custom_components:
+            session.delete(c)
+
+        additional_clins = session.query(AdditionalClin).filter_by(document_id=rfq_id).all()
+        for a in additional_clins:
+            session.delete(a)
+
+        rfq = session.query(RFQ).filter_by(id=int(rfq_id)).first()
+
+        session.delete(rfq)
+        session.commit()
+        message = "RFQ #" + str(rfq_id) + " deleted."
+
+        return jsonify({'message': message})
+
 
 api.add_resource(Agencies, '/agencies')
 api.add_resource(Data, '/get_content/<int:rfq_id>/sections/<int:section_id>')
@@ -180,6 +209,7 @@ api.add_resource(Deliverables, '/get_deliverables/<int:rfq_id>')
 api.add_resource(Create, '/rfqs')
 api.add_resource(Clin, '/clins/<int:rfq_id>')
 api.add_resource(AddComponent, '/custom_component/<int:rfq_id>/section/<int:section_id>')
+api.add_resource(DeleteRFQ, '/delete/rfqs/<int:rfq_id>')
 
 # map index.html to app/index.html, map /build/bundle.js to app/build.bundle.js
 @app.route('/initiate')

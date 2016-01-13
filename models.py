@@ -11,7 +11,6 @@ import os
 import seed
 
 engine = create_engine(os.environ["DATABASE_URL"])
-# 'postgres:///playbook.db', echo=True)
 Session = sessionmaker(bind=engine)
 
 Base = declarative_base()
@@ -140,6 +139,7 @@ class SpecialRequirement(Base):
     __tablename__ = "special_requirements"
 
     id = Column(Integer, primary_key=True)
+    document_id = Column(Integer)
     title = Column(String)
     text = Column(Text)
 
