@@ -190,11 +190,9 @@ def objectives(document, rfq):
     document.add_heading("Users", level=SUB_HEADING)
     user_types = ["external_people", "external_it", "internal_people", "internal_it"]
     users = get_users(cc, user_types)
-    print users
     if len(users) == 0:
         document.add_paragraph("The primary users MAY include the following:")
         for i, user in enumerate(user_dict):
-            print user, users
             document.add_paragraph(str(i+1) + ".  " + user_dict[user])
 
     else:

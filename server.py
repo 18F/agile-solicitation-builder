@@ -57,7 +57,6 @@ class Data(Resource):
         parser.add_argument('data')
         data = request.get_json()['data']
         for key in data:
-            print key
             session = Session()
             component = session.query(ContentComponent).filter_by(document_id=rfq_id).filter_by(name=key).first()            
             component.text = data[key]
@@ -81,8 +80,6 @@ class Deliverables(Resource):
     def put(self, rfq_id):
         data = request.get_json()['data']
         for key in data:
-            print key
-            print data[key]
             session = Session()
             deliverable = session.query(Deliverable).filter_by(document_id=rfq_id).filter_by(name=name).first()
             # check that this works
@@ -227,7 +224,6 @@ def send_js(path):
 @app.route('/download/<int:rfq_id>')
 def download(rfq_id):
     doc_name = create_document.create_document(rfq_id)
-    print doc_name
     return send_from_directory(directory="downloads", filename=doc_name)
 
 
