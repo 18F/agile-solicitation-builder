@@ -176,6 +176,7 @@ var Services = React.createClass({
   		if (inputFilled){
   			var rfqId = getId(window.location.hash);
   			clinData = {};
+  			// capture clin data
   			for (i=0; i < ADD_CLIN.length; i++){
   				var row = ADD_CLIN[i];
   				clinData[row] = $("#" + row)[0].value;

@@ -104,7 +104,7 @@ def services(document, rfq):
 
     # travel
     if cc["travelRequirement"] == "yes":
-        travel_text = "The Government anticipates significant travel under this effort. Contractor travel expenses will reimbursed up to " + cc["travelBudget"]+ " NTE."
+        travel_text = "The Government anticipates significant travel under this effort. Contractor travel expenses will reimbursed up to $" + cc["travelBudget"]+ " NTE."
         document.add_paragraph(travel_text)
         document.add_paragraph(cc["travelLanguage"])
     else:

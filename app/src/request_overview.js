@@ -130,7 +130,6 @@ var RequestOverview = React.createClass({
 					<input type="text" className="form-control medium-response" value={this.state.programName} onChange={this.handleChange.bind(this, "programName")} />
 
 					<br />
-					<br />
 
 					<h5>This will be ...</h5>
 					<radiogroup onChange={this.updateDocType}>

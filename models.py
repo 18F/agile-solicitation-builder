@@ -135,6 +135,7 @@ class AdditionalClin(Base):
     def __repr__(self):
         return "<Clin(id='%d', row1='%s', row2='%s', row3a='%s')>" % (self.document_id, self.row1, self.row2, self.row3a)
 
+
 class SpecialRequirement(Base):
     __tablename__ = "special_requirements"
 
@@ -147,8 +148,8 @@ class SpecialRequirement(Base):
 class CustomComponent(Base):
     __tablename__ = 'custom_components'
 
-    id = Column(Integer, ForeignKey('rfqs.id'), primary_key=True)
-    document_id = Column(Integer)
+    id = Column(Integer, primary_key=True)
+    document_id = Column(Integer, ForeignKey('rfqs.id'))
     title = Column(String)
     description = Column(Text)
     section = Column(Integer)
