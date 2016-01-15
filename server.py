@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import Flask, send_from_directory, request, jsonify, make_response
+from flask import Flask, send_from_directory, request, jsonify, make_response, render_template
 from flask_restful import Resource, Api, reqparse
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.engine import reflection
@@ -11,13 +11,15 @@ from sqlalchemy.schema import (
     DropConstraint,
     )
 
-
 from pprint import pprint
 
 import os, shutil
 import sys
 import config
 import datetime
+import sys
+import logging
+
 
 import create_document
 
@@ -29,6 +31,8 @@ from seed import agencies
 # set the project root directory as the static folder, you can set others.
 app = Flask(__name__, static_folder='app')
 app.config['APP_SETTINGS'] = config.DevelopmentConfig
+app.logger.addHandler(logging.StreamHandler(sys.stdout))
+app.logger.setLevel(logging.ERROR)
 db = SQLAlchemy(app)
 api = Api(app, prefix="/api")
 
