@@ -307,9 +307,10 @@ def inspection_and_delivery(document, rfq):
 
     document.add_heading("Collaboration Environment", level=SUB_HEADING)
 
-    if cc["workspaceExists"] == "yes":
-        if len(cc["workspaceName"]) > 0:
-            document.add_paragraph(rfq.agency + " is currently using " + cc["workspaceName"]) + " as their primary collaborative workspace tool. The contractor is required to establish a collaborative workspace using either this tool or another that both the contractor and the CO can agree upon."
+    # if cc["workspaceExists"] == "yes":
+    #     if len(cc["workspaceName"]) > 0:
+    #         print type(rfq.agency)
+    #         document.add_paragraph(rfq.agency + " is currently using " + cc["workspaceName"]) + " as their primary collaborative workspace tool. The contractor is required to establish a collaborative workspace using either this tool or another that both the contractor and the CO can agree upon."
 
     document.add_paragraph(cc["deliveringDeliverables"])
 
