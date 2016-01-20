@@ -34,7 +34,7 @@ var Inspection = React.createClass({
 		}
 
 		var rfqId = getId(window.location.hash);
-    put_data(6, rfqId, data, cb);
+    put_data(6, "get_content", rfqId, data, cb);
 		
 	},
 	render: function() {
@@ -93,6 +93,7 @@ var Inspection = React.createClass({
 				<p>What workspace are you currently using?</p>
 				<input type="text" className="form-control short-response" onChange={this.handleChange.bind(this, "workspaceName")} value={this.state.workspaceName} />
 
+				<p>Currently the team is using {this.state.workspaceName}</p>
 				<p>This information should also include any systems documentation and training materials developed over the course of the engagement.</p>
 				<p>The US Digital Service Playbook strongly recommends the use of a version control system such as Github, or something similar for storing code and system documentation.</p>
 		

@@ -6,6 +6,7 @@ import os, shutil
 import sys
 import config
 import datetime
+import StringIO
 
 from pprint import pprint
 
@@ -154,6 +155,8 @@ def services(document, rfq):
         # @TODO if option fee, add option fee clin row
         
         document.add_paragraph("\n")
+
+    # add custom CLIN
 
     document.add_heading("Payment Schedule", level=SUB_HEADING)
     document.add_paragraph(cc["paymentSchedule"])
@@ -323,6 +326,8 @@ def government_roles(document, rfq):
     document.add_heading("7. Government Roles", level=BIG_HEADING)
     content_components = session.query(ContentComponent).filter_by(document_id=rfq.id).filter_by(section=8).all()
     cc = make_dict(content_components)
+
+    document.add_paragraph(cc["stakeholderIntro"])
     
     document.add_heading("Contracting Officer", level=SUB_HEADING)
     document.add_paragraph(cc["contractingOfficer"])
@@ -332,6 +337,11 @@ def government_roles(document, rfq):
 
     document.add_heading("Product Owner", level=SUB_HEADING)
     document.add_paragraph(cc["productOwner"])
+
+    document.add_heading("End Users", level=SUB_HEADING)
+    document.add_paragraph(cc["endUsers"])
+
+    # add custom roles 
 
     return document
 
@@ -370,6 +380,8 @@ def special_requirements(document, rfq):
 
     document.add_heading("Order of Precedence", level=SUB_HEADING)
     document.add_paragraph(cc["orderOfPrecedence"])
+
+    # add custom special requirements
 
     return document
 

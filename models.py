@@ -17,6 +17,7 @@ Base = declarative_base()
 
 content_components = seed.content_components
 deliverables = seed.deliverables
+custom_components = seed.custom_components
 
 
 class Agency(Base):
@@ -44,6 +45,7 @@ class RFQ(Base):
     base_number = Column(String)
     content_components = relationship("ContentComponent")
     deliverables = relationship("Deliverable")
+    custom_components = relationship("CustomComponent")
 
     def to_dict(self):
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}
@@ -81,6 +83,13 @@ class RFQ(Base):
             deliverable['value'] = True if (deliverable['value'] == "yes") else False
             # name = str(deliverable['name']).decode("utf8")
             self.deliverables.append(Deliverable(**deliverable))
+
+        for component in custom_components:
+            text = component['text'].decode("utf8")
+            title = component['title'].decode("utf8")
+            component['text'] = text.replace("{AGENCY}", agency).replace("{DOC_TYPE}", doc_type).replace("{AGENCY_FULL_NAME}", agency_full_name).replace("{PROGRAM_NAME}", program_name).replace("{VEHICLE}", vehicle)
+            component['title'] = title.replace("{AGENCY}", agency).replace("{DOC_TYPE}", doc_type).replace("{AGENCY_FULL_NAME}", agency_full_name).replace("{PROGRAM_NAME}", program_name).replace("{VEHICLE}", vehicle)
+            self.custom_components.append(CustomComponent(**component))
 
 
 class ContentComponent(Base):
@@ -151,7 +160,8 @@ class CustomComponent(Base):
     id = Column(Integer, primary_key=True)
     document_id = Column(Integer, ForeignKey('rfqs.id'))
     title = Column(String)
-    description = Column(Text)
+    name = Column(String)
+    text = Column(Text)
     section = Column(Integer)
     
     def to_dict(self):

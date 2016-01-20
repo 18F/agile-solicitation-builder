@@ -122,21 +122,37 @@ class Clin(Resource):
         clins = session.query(AdditionalClin).filter_by(document_id=rfq_id).all()
         return jsonify(data=[c.to_dict() for c in clins])
         
-class AddComponent(Resource):
+class CustomComponents(Resource):
 
     def get(self, rfq_id, section_id):
         session = Session()
-        components = session.query(CustomComponent).filter_by(document_id=rfq_id).filter_by(section=section_id).all()
+        components = session.query(CustomComponent).filter_by(document_id=rfq_id).filter_by(section=section_id).order_by(CustomComponent.id).all()
         return jsonify(data=[c.to_dict() for c in components])
 
+    def put(self, rfq_id, section_id):
+        parser = reqparse.RequestParser()
+        parser.add_argument('data')
+        data = request.get_json()['data']
+        for key in data:
+            session = Session()
+            component = session.query(CustomComponent).filter_by(document_id=rfq_id).filter_by(name=key).first()
+            component.text = data[key]
+            session.merge(component)
+            session.commit()  
+
     def post(self, rfq_id, section_id):
+        session = Session()
         parser = reqparse.RequestParser()
         data = request.get_json()["data"]
         title = data['title']
-        description = data['description']
+        text = data['text']
 
-        custom_component = CustomComponent(document_id=int(rfq_id), section=int(section_id), title=title, description=description)
-        session = Session()
+        # give component a name
+        current_components = session.query(CustomComponent).filter_by(document_id=rfq_id).filter_by(section=section_id).all()
+        name = "component" + str(len(current_components) + 1)
+
+        custom_component = CustomComponent(document_id=int(rfq_id), section=int(section_id), name=name, title=title, text=text)
+        
         session.add(custom_component)
         session.commit()
 
@@ -205,11 +221,11 @@ class DeleteRFQ(Resource):
 
 
 api.add_resource(Agencies, '/agencies')
-api.add_resource(Data, '/get_content/<int:rfq_id>/sections/<int:section_id>')
+api.add_resource(Data, '/get_content/<int:rfq_id>/section/<int:section_id>')
 api.add_resource(Deliverables, '/get_deliverables/<int:rfq_id>')
 api.add_resource(Create, '/rfqs')
 api.add_resource(Clin, '/clins/<int:rfq_id>')
-api.add_resource(AddComponent, '/custom_component/<int:rfq_id>/section/<int:section_id>')
+api.add_resource(CustomComponents, '/custom_component/<int:rfq_id>/section/<int:section_id>')
 api.add_resource(DeleteRFQ, '/delete/rfqs/<int:rfq_id>')
 
 # map index.html to app/index.html, map /build/bundle.js to app/build.bundle.js

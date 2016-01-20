@@ -23,7 +23,7 @@ var Requirement = React.createClass({
 			data[stateName] = this.state[stateName];
 		}
 		var rfqId = getId(window.location.hash);
-    put_data(4, rfqId, data, cb);
+    put_data(4, "get_content", rfqId, data, cb);
 	},
 	getInitialState: function() {
 		var initialStates = getStates(STATES);
@@ -81,6 +81,16 @@ var Requirement = React.createClass({
 					  </label>
 					</div>
 				</radiogroup>
+
+				{(this.state.clearanceRequired == "None")? 
+				<div>Contractor personnel will <b>not</b> be required to have a security clearance.</div> :
+				<div>Some contractor personnel will be required to have a clearance at the level of <b>{this.state.clearanceRequired}</b>.</div>
+				}
+				{(this.state.onSiteRequired == "yes")?
+				<div>An onsite presence by the contractor will be required.</div> :
+				<div>An onsite presence by the contractor will not be required.</div>
+				}
+				
 	
 				<div className="sub-heading">Evaluation Process</div>
 

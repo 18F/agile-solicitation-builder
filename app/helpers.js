@@ -69,7 +69,7 @@ function deleteRFQ(doc_id, callback){
 function get_data(section, doc_id, callback){
 	$.ajax({
 		type: "GET",
-		url: "/api/get_content/" + doc_id + "/sections/" + section,
+		url: "/api/get_content/" + doc_id + "/section/" + section,
 		dataType: 'json',
 		success: function(data){
 			if (callback){
@@ -79,10 +79,10 @@ function get_data(section, doc_id, callback){
 	});
 }
 
-function put_data(section, doc_id, data, callback){
+function put_data(section, url, doc_id, data, callback){
 	$.ajax({
 		type: "PUT",		
-		url: "/api/get_content/" + doc_id + "/sections/" + section,
+		url: "/api/" + url + "/" + doc_id + "/section/" + section,
 		data: JSON.stringify({data: data}),
 		contentType: 'application/json',
 		dataType: 'json',

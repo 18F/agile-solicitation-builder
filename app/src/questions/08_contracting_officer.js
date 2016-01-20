@@ -8,7 +8,6 @@ var STATES = [
 	"contractingOfficerRepresentative",
 	"productOwner",
 	"endUsers",
-	"stakeholderIntro",
 ];
 
 var ContractingOfficer = React.createClass({
@@ -16,21 +15,24 @@ var ContractingOfficer = React.createClass({
 
 	save: function(cb) {
 		var data = {};
+		var rfqId = getId(window.location.hash);
 		
-		for (i=0; i < STATES.length; i++){
+		// this skips stakeholderIntro
+		for (i=1; i < STATES.length; i++){
 			var stateName = STATES[i];
+			console.log(stateName);
 			data[stateName] = this.state[stateName];
 		}
-
-		var rfqId = getId(window.location.hash);
-    put_data(8, rfqId, data, cb);
+		// save stakeholderIntro
+    put_data(8, "custom_component", rfqId, data, cb);
+    put_data(8, 'get_content', rfqId, {'stakeholderIntro': this.state.stakeholderIntro}, cb);
 		
 	},
 	getInitialState: function() {		
 		var initialStates = getStates(STATES);
 		initialStates["addRole"] = false;
 		initialStates["title"] = "";
-		initialStates["description"] = "";
+		initialStates["text"] = "";
 		initialStates["rolesData"] = [];
 		return initialStates;
 	},
@@ -38,30 +40,36 @@ var ContractingOfficer = React.createClass({
   	var rfqId = getId(window.location.hash);
     get_data(8, rfqId, function(content){
     	var componentStates = getComponents(content["data"]);
-      this.setState( componentStates );      
+      this.setState( componentStates );
     }.bind(this));
-		getCustomComponents(rfqId, 8, function(data){ 
+		getCustomComponents(rfqId, 8, function(data){
+			var newStates = {};
+    	for (i=0; i < data['data'].length; i++){
+				var role = data['data'][i];
+				newStates[role['name']] = role['text'];
+			}
+			this.setState( newStates );
 			this.setState({rolesData: data["data"]});
 		}.bind(this));
   },
   addRole: function() {
   	if (this.state.addRole){  		
   		// check to see if info has been filled in
-  		if (this.state.title.length > 0 && this.state.description.length > 0){
+  		if (this.state.title.length > 0 && this.state.text.length > 0){
   			var rfqId = getId(window.location.hash);
   			var roleData = {};
   			roleData["title"] = this.state.title;
-  			roleData["description"] = this.state.description;
+  			roleData["text"] = this.state.text;
 
   			// save the data and update
   			createComponent(roleData, rfqId, 8, function(data){
   				this.setState({
   					addRole: false,
-  					rolesData: data["data"],
   					title: "",
-  					description: "",
+  					text: "",
   				});
   			}.bind(this));
+  			location.reload();
   		}
   		else {
   			alert("Please fill out the title and text components of the form before saving the new role.");
@@ -72,16 +80,22 @@ var ContractingOfficer = React.createClass({
   	}
   },
 	render: function() {
-		var additionalRoles = [];
+		var roles = [];
 		for (i=0; i < this.state.rolesData.length; i++){
 			var role = this.state.rolesData[i];
-			additionalRoles.push(
-				<div>
+			roles.push(
+				<div key={i}>
 					<div className="sub-heading">{role['title']}</div>
-					<p>{role['description']}</p>
+					<EditBox
+							text={this.state[role['name']]}
+							editing={this.state.edit == role['name']}
+							onStatusChange={this.toggleEdit.bind(this, role['name'])}
+							onTextChange={this.handleChange.bind(this, role['name'])}>
+					</EditBox>
 				</div>
 			);
 		}
+
 		return (
 			<div>
 				<div className="main-heading">Roles and Responsibilities</div>
@@ -93,40 +107,7 @@ var ContractingOfficer = React.createClass({
 						onTextChange={this.handleChange.bind(this, 'stakeholderIntro')}>
 				</EditBox>
 
-				<div className="sub-heading">Contracting Officer (CO)</div>
-				<EditBox
-						text={this.state.contractingOfficer}
-						editing={this.state.edit == 'contractingOfficer'}
-						onStatusChange={this.toggleEdit.bind(this, 'contractingOfficer')}
-						onTextChange={this.handleChange.bind(this, 'contractingOfficer')}>
-				</EditBox>
-
-				<div className="sub-heading">Contracting Officer’s Representative (COR)</div>
-				<EditBox
-						text={this.state.contractingOfficerRepresentative}
-						editing={this.state.edit === 'contractingOfficerRepresentative'}
-						onStatusChange={this.toggleEdit.bind(this, 'contractingOfficerRepresentative')}
-						onTextChange={this.handleChange.bind(this, 'contractingOfficerRepresentative')}>
-				</EditBox>
-
-				<div className="sub-heading editable">Product Owner</div>
-				<EditBox
-						text={this.state.productOwner}
-						editing={this.state.edit === 'productOwner'}
-						onStatusChange={this.toggleEdit.bind(this, 'productOwner')}
-						onTextChange={this.handleChange.bind(this, 'productOwner')}>
-				</EditBox>
-
-				<div className="sub-heading editable">End Users</div>
-				<EditBox
-						text={this.state.endUsers}
-						editing={this.state.edit === 'endUsers'}
-						onStatusChange={this.toggleEdit.bind(this, 'endUsers')}
-						onTextChange={this.handleChange.bind(this, 'endUsers')}>
-				</EditBox>
-
-
-				{additionalRoles}
+				{roles}
 
 				<br />
 
@@ -135,7 +116,7 @@ var ContractingOfficer = React.createClass({
 						<div className="sub-heading">
 							<input type="text" className="medium-response form-control" placeholder="Title" value={this.state.title} onChange={this.handleChange.bind(this, "title")} />
 						</div>
-						<textarea className="form-control" rows="5" placeholder="Description" value={this.state.description} onChange={this.handleChange.bind(this, "description")}></textarea>
+						<textarea className="form-control" rows="5" placeholder="Description" value={this.state.text} onChange={this.handleChange.bind(this, "text")}></textarea>
 						<button className="btn btn-default" placeholder="Description of Role" onClick={this.addRole}>Save Role</button>
 					</div>
 					: <button className="add btn btn-default" onClick={this.addRole}>Add Role</button>

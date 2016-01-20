@@ -30,7 +30,7 @@ var PostAward = React.createClass({
 		}
 
 		var rfqId = getId(window.location.hash);
-    put_data(5, rfqId, data, cb);
+    put_data(5, "get_content", rfqId, data, cb);
   },
 	render: function() {
 		return (

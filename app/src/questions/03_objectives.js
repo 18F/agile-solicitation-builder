@@ -58,6 +58,7 @@ var STATES = [
 	"kickOffMeetingRemote",
 	"locationRequirement",
 	"locationText",
+	"objectivesSummary",
 	"offSiteDevelopmentCompliance",
 	"programHistory",
 	"userAccess",
@@ -121,7 +122,7 @@ var Objective = React.createClass({
 		}
 
 		var rfqId = getId(window.location.hash);
-    put_data(3, rfqId, data, cb);
+    put_data(3, "get_content", rfqId, data, cb);
 	},
 	render: function() {
 
@@ -193,6 +194,9 @@ var Objective = React.createClass({
 			<div>
 				<div className="main-heading">Statement of Objectives</div>
 
+				<p>Note: The Statement of Objectives will be removed at time of award and replaced with the Offeror’s Performance Work Statement. All listed objectives and requirements shall be included as part of the Offeror’s Performance Work Statement.</p>
+
+
 				<div className="sub-heading">General Background</div>
 				<p>Please provide several paragraphs about your project's history, mission, and current state.</p>
 
@@ -219,6 +223,11 @@ var Objective = React.createClass({
 
 				{(usersString.length > 0)? 
 				<p>The users of the product will include {usersString}.</p> : null}
+
+				<p>What user needs will this service address?</p>
+				<p>@TODO list each </p>
+				<p>What languages is your service offered in? what languages do you require?</p>
+				<p>The vendor shall provide technology solutions which enable development teams to work efficiently and enable services to scale easily and cost-effectively. Recommendations for choices for hosting infrastructure, databases, software frameworks, programming languages and the rest of the technology stack shall seek to avoid vendor lock-in and match what successful modern consumer and enterprise software companies would choose today. In particular, the vendor shall consider using open source, cloud-based, and commodity solutions across the technology stack.  </p>
 
 				<div className="sub-heading">User Research</div>
 				<p>What is your User Research Strategy?</p>
@@ -350,6 +359,8 @@ var Objective = React.createClass({
 				{(this.state.kickOffMeeting === "none")?
 				<p>A formal kick-off meeting will not be required.</p> : null
 				}
+
+				<textarea>{this.state.objectivesSummary}</textarea>
 			</div>
 		);
 	},

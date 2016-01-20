@@ -8,7 +8,7 @@ var Definition = React.createClass({
     save: function(cb) {
       var rfqId = getId(window.location.hash);
       data = {"definitions": this.state.definitions};
-      put_data(1, rfqId, data, cb);
+      put_data(1, "get_content", rfqId, data, cb);
     },
     // React functions
     getInitialState: function(){

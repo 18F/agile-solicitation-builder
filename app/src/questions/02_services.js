@@ -209,7 +209,7 @@ var Services = React.createClass({
 
 		// get data from FAR code section
 		var rfqId = getId(window.location.hash);
-    put_data(2, rfqId, data, cb);
+    put_data(2, "get_content", rfqId, data, cb);
 		
 	},
 	render: function() {
@@ -364,8 +364,8 @@ var Services = React.createClass({
 				  </label>
 				</div>
 
-				<h5>NAICS and FAR Justification Codes</h5>
-				<div className="sub-text">We have provided a NAICS code that commonly applies to the acquisition of software development services. If you believe your requirement is not covered under this NAICS code you may search under <a href="http://www.census.gov/eos/www/naics/" target="_blank">this link</a> to select a different one; please edit the text below accordingly.</div>
+				<h5>NAICS Codes</h5>
+				<div className="sub-text">We have provided NAICS code 541512 that commonly applies to the acquisition of software development services. If you believe your requirement is not covered under this NAICS code you may search under <a href="http://www.census.gov/eos/www/naics/" target="_blank">this link</a> to select a different one; please edit the text below accordingly.</div>
 
 				<h5>Under which section of the FAR do you intend to compete this?</h5>
 				<radiogroup onChange={this.updateNaicsText}>
@@ -380,8 +380,7 @@ var Services = React.createClass({
 				</EditBox>
 
 				<div className="sub-heading">Budget</div>
-				<p>Note: The Statement of Objectives will be removed at time of award and replaced with the Offeror’s Performance Work Statement. All listed objectives and requirements shall be included as part of the Offeror’s Performance Work Statement.</p>
-
+	
 				<p>What is the maximum budget for your project?</p>
 				<form className="form-inline">
 					<div className="form-group">
@@ -394,7 +393,7 @@ var Services = React.createClass({
 
 				<p>The government is willing to invest a maximum budget of ${this.state.maxBudget} in this endeavor.</p>
 
-				<p>Will you reimburse contractor travel expenses?</p>
+				<p>Will travel be required under this contract?</p>
 
 				<radiogroup>
 					<div className="radio">
@@ -410,6 +409,8 @@ var Services = React.createClass({
 					  </label>
 					</div>
 				</radiogroup>
+
+				<p>If travel is being priced separately use the add clin tool.</p>
 
 				{(this.state.travelRequirement == "no")? null : 
 				<div>
