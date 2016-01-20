@@ -323,10 +323,10 @@ def inspection_and_delivery(document, rfq):
 
 def government_roles(document, rfq):
     document.add_heading("7. Government Roles", level=BIG_HEADING)
-    content_components = session.query(ContentComponent).filter_by(document_id=rfq.id).filter_by(section=8).all()
+    content_components = session.query(CustomComponent).filter_by(document_id=rfq.id).filter_by(section=8).all()
     cc = make_dict(content_components)
 
-    document.add_paragraph(cc["stakeholderIntro"])
+    # document.add_paragraph(cc["stakeholderIntro"])
     
     document.add_heading("Contracting Officer", level=SUB_HEADING)
     document.add_paragraph(cc["contractingOfficer"])
@@ -347,7 +347,7 @@ def government_roles(document, rfq):
 def special_requirements(document, rfq):
     document.add_heading("8. Special Requirements", level=BIG_HEADING)
 
-    content_components = session.query(ContentComponent).filter_by(document_id=rfq.id).filter_by(section=9).all()
+    content_components = session.query(CustomComponent).filter_by(document_id=rfq.id).filter_by(section=9).all()
     cc = make_dict(content_components)    
 
     document.add_heading("Controlled Facilities and Information Systems Security", level=SUB_HEADING)
