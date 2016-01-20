@@ -410,7 +410,7 @@ var Services = React.createClass({
 					</div>
 				</radiogroup>
 
-				<p>If travel is being priced separately use the add clin tool.</p>
+				<p>If travel is being priced separately you can create a custom CLIN below.</p>
 
 				{(this.state.travelRequirement == "no")? null : 
 				<div>

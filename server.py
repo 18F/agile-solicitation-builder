@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import Flask, send_from_directory, request, jsonify, make_response, render_template
+from flask import Flask, send_from_directory, send_file, request, jsonify, make_response, render_template
 from flask_restful import Resource, Api, reqparse
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.engine import reflection
@@ -19,6 +19,7 @@ import config
 import datetime
 import sys
 import logging
+import StringIO
 
 
 import create_document
@@ -243,8 +244,12 @@ def send_js(path):
 
 @app.route('/download/<int:rfq_id>')
 def download(rfq_id):
-    doc_name = create_document.create_document(rfq_id)
-    return send_from_directory(directory="downloads", filename=doc_name)
+    document = create_document.create_document(rfq_id)
+    strIO = StringIO.StringIO()
+    document.save(strIO)
+    strIO.seek(0)
+    return send_file(strIO, attachment_filename="RFQ.docx", as_attachment=True)
+    # return send_from_directory(directory="downloads", filename=doc_name)
 
 
 def drop_everything():

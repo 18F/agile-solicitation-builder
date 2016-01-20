@@ -20,7 +20,6 @@ var ContractingOfficer = React.createClass({
 		// this skips stakeholderIntro
 		for (i=1; i < STATES.length; i++){
 			var stateName = STATES[i];
-			console.log(stateName);
 			data[stateName] = this.state[stateName];
 		}
 		// save stakeholderIntro

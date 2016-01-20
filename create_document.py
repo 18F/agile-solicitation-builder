@@ -6,7 +6,6 @@ import os, shutil
 import sys
 import config
 import datetime
-import StringIO
 
 from pprint import pprint
 
@@ -413,7 +412,9 @@ def create_document(rfq_id):
 
     doc_name = "RFQ_" + str(rfq_id) + ".docx"
     file_path = os.path.join("downloads", doc_name)
-    document.save(file_path)
+    # document.save(file_path)
+
+
 
     # @TODO find a way to check if document was successfully saved
-    return doc_name
+    return document

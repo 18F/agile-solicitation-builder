@@ -5,25 +5,25 @@ var EditBox = require("../edit_box");
 //d "1": "Research, Insights, and Synthesis",
 
 var DELIVERABLES = {
-	"d1": "Training of end users on the systems",
-	"d2": "Design Solutions Prototyping",
-	"d3": "Process Improvement Recommendations",
-	"d4": "Program Management and Stewardship",
-	"d5": "UX requirements gathering",
-	"d6": "Initial application design and implementation",
-	"d7": "System configuration to support business processes",
-	"d8": "Integration for input and output methods",
-	"d9": "Workflow design and implementation",
-	"d10": "Overall collaboration of applications",
-	"d11": "Enhancements, patches, and updates to applications, data, or cloud systems",
-	"d12": "Data import of records collected from legacy systems",
-	"d13": "Automated testing",
-	"d14": "Supporting Legacy applications/systems",
-	"d15": "Native mobile application(s)",
-	"d16": "Mobile responsive web application(s)",
-	"d17": "Application capable of supporting high user traffic",
-	"d18": "Devops, continuous integration and continuous deployment",
-	"d19": "Workstations, data centers, server systems, and connectivity",
+	"d1": "Design Solutions Prototyping",
+	"d2": "Process Improvement Recommendations",
+	"d3": "Program Management and Stewardship",
+	"d4": "UX requirements gathering",
+	"d5": "Initial application design and implementation",
+	"d6": "System configuration to support business processes",
+	"d7": "Integration for input and output methods",
+	"d8": "Workflow design and implementation",
+	"d9": "Overall collaboration of applications",
+	"d10": "Enhancements, patches, and updates to applications, data, or cloud systems",
+	"d11": "Data import of records collected from legacy systems",
+	"d12": "Automated testing",
+	"d13": "Training of end users on the systems",
+	"d14": "Native mobile application(s)",
+	"d15": "Mobile responsive web application(s)",
+	"d16": "Application capable of supporting high user traffic",
+	"d17": "Devops, continuous integration and continuous deployment",
+	"d18": "Workstations, data centers, server systems, and connectivity",
+	"d19": "Supporting Legacy applications/systems",
 };
 
 var USER_RESEARCH = {			
@@ -225,9 +225,12 @@ var Objective = React.createClass({
 				<p>The users of the product will include {usersString}.</p> : null}
 
 				<p>What user needs will this service address?</p>
-				<p>@TODO list each </p>
-				<p>What languages is your service offered in? what languages do you require?</p>
-				<p>The vendor shall provide technology solutions which enable development teams to work efficiently and enable services to scale easily and cost-effectively. Recommendations for choices for hosting infrastructure, databases, software frameworks, programming languages and the rest of the technology stack shall seek to avoid vendor lock-in and match what successful modern consumer and enterprise software companies would choose today. In particular, the vendor shall consider using open source, cloud-based, and commodity solutions across the technology stack.  </p>
+				<textarea className="form-control" rows="4"></textarea>
+
+				<p>What languages is your service offered in?</p>
+				<textarea className="form-control" rows="4"></textarea>
+
+				<p>The vendor shall provide technology solutions which enable development teams to work efficiently and enable services to scale easily and cost-effectively. Recommendations for choices for hosting infrastructure, databases, software frameworks, programming languages and the rest of the technology stack shall seek to avoid vendor lock-in and match what successful modern consumer and enterprise software companies would choose today. In particular, the vendor shall consider using open source, cloud-based, and commodity solutions across the technology stack.</p>
 
 				<div className="sub-heading">User Research</div>
 				<p>What is your User Research Strategy?</p>
@@ -360,7 +363,8 @@ var Objective = React.createClass({
 				<p>A formal kick-off meeting will not be required.</p> : null
 				}
 
-				<textarea>{this.state.objectivesSummary}</textarea>
+				<div className="sub-heading">Summary of Objectives</div>
+				<textarea className="form-control" rows="4">{this.state.objectivesSummary}</textarea>
 			</div>
 		);
 	},
