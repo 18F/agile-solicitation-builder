@@ -180,7 +180,7 @@ content_components = [
     },
     {
         "name": "userAccess",
-        "text": "The team within {AGENCY} managing this contract commit to support the vendor in the user research process, and will provide the vendor with access to the government employees who will be the users of the product.",
+        "text": "The team within {AGENCY} managing this contract commit to support the vendor in the user research process, and will provide the vendor with access to the Government employees who will be the users of the product. (See section entitled 'Government Roles').",
         "section": 3,
     },
     {
@@ -240,12 +240,12 @@ content_components = [
     },
     {
         "name": "dataDrivenDecisions",
-        "text": "At every stage of a project, the contractor shall measure how well our service is working for our users. This includes measuring how well a system performs and how people are interacting with it in real-time. These metrics shall be reported to the Program Managers to find issues and identify which bug fixes and improvements should be prioritized. Along with monitoring tools, a feedback mechanism should be in place for people to report issues directly.\n\nIn delivery of this effort the contractor shall:\n\n  - Monitor system-level resource utilization in real time (Suggest tools)\n  - Monitor system performance in real-time (e.g. response time, latency, throughput, and error rates)\n  - Ensure monitoring can measure median, 95th percentile, and 98th percentile performance\n  - Create automated alerts based on this monitoring\n  - Track concurrent users in real-time, and monitor user behaviors in the aggregate to determine how well the service meets user needs\n  - Provide metrics which may be published internally\n  - Provide metrics which may be published externally\n  - Use an experimentation tool that supports multivariate testing in production\n  - Provide goverment employees access to these monitoring systems",
+        "text": "At every stage of a project, the contractor shall measure how well our service is working for our users. This includes measuring how well a system performs and how people are interacting with it in real-time. These metrics shall be reported to the Program Managers to find issues and identify which bug fixes and improvements should be prioritized. Along with monitoring tools, a feedback mechanism should be in place for people to report issues directly.\n\nIn delivery of this effort the contractor shall:\n\n  - Monitor system-level resource utilization in real time (Suggest tools)\n  - Monitor system performance in real-time (e.g. response time, latency, throughput, and error rates)\n  - Ensure monitoring can measure median, 95th percentile, and 98th percentile performance\n  - Create automated alerts based on this monitoring\n  - Track concurrent users in real-time, and monitor user behaviors in the aggregate to determine how well the service meets user needs\n  - Provide metrics which may be published internally\n  - Provide metrics which may be published externally\n  - Use an experimentation tool that supports multivariate testing in production\n  - Provide Goverment employees access to these monitoring systems",
         "section": 3,
     },
     {
         "name": "documentationAndTraining",
-        "text": "Objective: The contractor shall provide complete documentation for all systems and applications and provide training that will enable end users to utilize the system.\n\n  - The contractor shall provide comprehensive training materials for end users and system administrators for utilization and administration of the system.\n\n 1. Videos or self-guided training materials may be used\n 2. Training features built into the system are used to the greatest extent possible\n\n  - The contractor shall provide initial end-user training on a per-department basis during the initial on-boarding of users to the new system.\n  - The contractor shall provide “train-the-trainer“ classes for selected trainers and administrators.",
+        "text": "A well designed interface will not require additional training for users. (see USDS playbook #2) and the need for training should be minimized with regular user testing and training that is built into the product through clear instructions and tutorials.\n\nThe contractor shall provide complete documentation for all systems and applications and provide training that will enable end users to utilize the system. The contractor will also consult with the COR to determine what is appropriate, effective, and essential for training and provide the services the COR deems necessary. This may include:\n\n  - Videos or self-guided training materials may be used\n\n  - Training features built into the system are used to the greatest extent possible\n\n  - Initial end-user training on a per-department basis during the initial on-boarding of users to the new system.\n\n  - “Train-the-trainer“ classes for selected trainers and administrators.",
         "section": 3,
     },
     {
@@ -345,7 +345,7 @@ content_components = [
     },
     {
         "name": "keyPersonnelIntro",
-        "text": "The vendor shall provide talented people who have experience creating modern digital services. This includes bringing in seasoned product managers, engineers, UX researchers and designers.",
+        "text": "The vendor shall provide talented people who have experience creating modern digital services. This includes bringing in seasoned product managers, engineers, UX researchers and designers (where applicable).",
         "section": 4,
     },
     {
@@ -355,7 +355,7 @@ content_components = [
     },
     {
         "name": "performanceWorkStatement",
-        "text": "The performance work statement will include:\n\n  - Contact information for all senior leaders and an organizational chart showing the Offeror’s organizational hierarchy and reporting structure, with specific designation of individuals as Key Personnel;\n  - Management resources;\n  - Technical resources and skill sets required to develop, implement, and maintain the proposed solution; and\n  - Details on the management of the Offeror’s team that will be on-site.\n\nThe listing of Key Personnel shall become part of the {DOC_TYPE} upon award.",
+        "text": "The performance work statement will include:\n\n  - Contact information for all senior leaders and an organizational chart showing the Offeror’s organizational hierarchy and reporting structure, with specific designation of individuals as Key Personnel;\n  - Management resources;\n  - Technical resources and skill sets required to develop, implement, and maintain the proposed solution; and\n  - Details on the management of the Offeror’s team that will be on-site (if applicable).\n\nThe listing of Key Personnel shall become part of the {DOC_TYPE} upon award.",
         "section": 4,
     },
     {
@@ -390,7 +390,7 @@ content_components = [
     },
     {
         "name": "guidingPrinciples",
-        "text": "Under the agile methodology, the traditional transition process should not be necessary. Rather, the government should have access to all code and other relevant documents from day one in a clearly documented and organized electronically shared workspace.\n\n  1. The progress of the product will be inspected by the CO or another government employee at the completion of each iteration.\n  2. All documents should be stored electronically such that the CO, PM, and any other relevant government employees who have been granted permissions can access them at any time.\n  3. The transition of materials will occur on an ongoing basis . All new materials produced during an iteration will be made available to the government at the end of that iteration.\n  4. In addition to the code, documentation should be updated with each iteration. This includes technical documentation including but not limited to setup instructions in the README.md, user reseach findings etc.\n  5. A well designed interface will not require additional training for users. (see USDS playbook #2) and the need for training should be minimized with regular user testing and training that is built into the product through clear instructions and tutorials.",
+        "text": "Under the agile methodology, the traditional transition process should not be necessary. Rather, the Government should have access to all code and other relevant documents from day one in a clearly documented and organized electronically shared workspace.\n\n  1. The progress of the product will be inspected by the CO or another Government employee at the completion of each iteration.\n  2. All documents should be stored electronically such that the CO, PM, and any other relevant Government employees who have been granted permissions can access them at any time.\n  3. The transition of materials will occur on an ongoing basis . All new materials produced during an iteration will be made available to the Government at the end of that iteration.\n  4. In addition to the code, documentation should be updated with each iteration. This includes technical documentation including but not limited to setup instructions in the README.md, user research findings etc.",
         "section": 6,
     },
     {
@@ -400,17 +400,22 @@ content_components = [
     },
     {
         "name": "lateDelivery",
-        "text": "The Contractor shall notify the COR, or other authorized representative designated in each {DOC_TYPE}, as soon as it becomes apparent to the Contractor that a scheduled delivery will be late. The Contractor shall include in the notification the rationale for late delivery, the expected date for the delivery, and the project impact of the late delivery. Such notification in no way limits any Government contractual rights or remedies, including, but not limited to, termination.",
+        "text": "The Contractor shall notify the COR, or other authorized representative, as soon as it becomes apparent to the Contractor that a scheduled delivery will be late. The Contractor shall include in the notification the rationale for late delivery, the expected date for the delivery, and the project impact of the late delivery. Such notification in no way limits any Government contractual rights or remedies, including, but not limited to, termination.",
         "section": 6,
     },
     {
         "name": "deliveringDeliverables",
-        "text": "  1. Ensure that all deliverables, products, licenses, designs, data, documentation, tests, user research notes, source code, configuration settings and files, and materials developed throughout this {DOC_TYPE} will be the property of the U.S. Government.\n  2. Work with the CO from launch to ensure all reference materials and other documents are accessible to the appropriate government personnel at all times. If anything is unclear the CO should bring this to the attention of the contractor immediately.\n  3. This documentation may also include but is not limited to user research materials and findings.\n  4. Ensure any software written should be stored using version control with the COR and any other relevant government employees will have read access to at a minimum.\n  5. Any and all monitoring and analytics dashboards and tools will be accessible to the appropriate government personnel at all times.\n  6. Provide any necessary assistance to the COR and potentially another vendor to stand-up and ensure the applications, systems, databases, platform, and environments are tested and fully operational.\n  7. Consult with the COR to determine what is appropriate, effective, and essential for training and provide the services the COR deems necessary.",
+        "text": "  1. Ensure that all deliverables, products, licenses, designs, data, documentation, tests, user research notes, source code, configuration settings and files, and materials developed throughout this {DOC_TYPE} will be the property of the U.S. Government.\n  2. Work with the CO from launch to ensure all reference materials and other documents are accessible to the appropriate Government personnel at all times.\n  3. This documentation may also include but is not limited to user research materials and findings.\n  4. Ensure any software written should be stored using a version control to which the COR and any other relevant government employees will have a minimum read access.\n  5. Any and all monitoring and analytics dashboards and tools will be accessible to the appropriate Government personnel at all times.\n  6. Provide any necessary assistance to the COR and potentially another vendor to stand-up and ensure the applications, systems, databases, platform, and environments are tested and fully operational.",
         "section": 6,
     },
     {
         "name": "transitionActivities",
-        "text": "During the transition to the Government and/or a new contractor, the Contractor shall perform all necessary transition activities, including, but not limited to: \n\n  - continued full services to {AGENCY}\n  - participation, at discretion of COR in five or more meetings with the Government or new contractor to effect a smooth transition and provide detailed information on the operation of all deliverables\n  - training of new personnel (contractor or government) during the transition period in all system operation and maintenance functions\n  - appropriate close-out of outstanding technical and related work\n  - being available to answer any questions that arise.\n\nInformation such as the list of accomplishments, documentation, and customized code developed for {AGENCY} should be available to the Government in the collaborative workspace established from contract's initiation. Should the Contractor be terminated prior to the end of the scheduled base period, the Contractor shall work with the Government to ensure they retain access to this information within two weeks from the termination date.",
+        "text": "During the transition to the Government and/or a new contractor, the Contractor shall perform all necessary transition activities, including, but not limited to: \n\n  - continued full services to {AGENCY}\n  - participation, at discretion of COR in five or more meetings with the Government or new contractor to effect a smooth transition and provide detailed information on the operation of all deliverables\n  - training of new personnel (contractor or government) during the transition period in all system operation and maintenance functions\n  - appropriate close-out of outstanding technical and related work\n  - being available to answer any questions that arise.\n\nInformation such as the list of accomplishments, documentation, and customized code developed for {AGENCY} should be available to the Government in the collaborative workspace established from contract's initiation. Should the contract be terminated prior to the end of the scheduled base period, the Contractor shall work with the Government to ensure they retain access to this information within two weeks from the termination date.",
+        "section": 6,
+    },
+    {
+        "name": "workspaceIntro",
+        "text": "To support the agile development process the COR and vendor will establish a collaborative workspace consisting of a secure file sharing system where information and deliverables can be stored and updated. The information shared should include any systems documentation and training materials developed over the course of the engagement as well as any user research studies and reports.",
         "section": 6,
     },
     {
@@ -439,7 +444,7 @@ custom_components = [
     {
         "name": "contractingOfficer",
         "title": "Contracting Officer (CO)",
-        "text": "The Contracting Officer is the only individual who can legally commit or obligate the Government for the expenditure of public funds. The technical administration of this {DOC_TYPE} shall not be construed to authorize the revision of the terms and conditions of this {DOC_TYPE}. Only the Contracting Officer can authorize any such revision in writing. The Contracting Officer shall promptly countermand any action that exceeds the authority of the COR.",
+        "text": "The Contracting Officer is the only individual who can legally commit or obligate the Government for the expenditure of public funds. The technical administration of this {DOC_TYPE} shall not be construed to authorize the revision of the terms and conditions of this {DOC_TYPE}. Only the Contracting Officer can authorize any such revision in writing.",
         "section": 8,
     },
     {
@@ -457,7 +462,7 @@ custom_components = [
     {
         "name": "endUsers",
         "title": "End Users",
-        "text": "End Users may be used in this effort in usability testing and/or customer satisfaction surveying. The team within {AGENCY} managing this contract commit to support the vendor in the user research process, and will provide the vendor with access to the government employees who will be the users of the product.",
+        "text": "End Users may be used in this effort in usability testing and/or customer satisfaction surveying. The team within {AGENCY} managing this contract commit to support the vendor in the user research process, and will provide the vendor with access to the Government employees who will be the users of the product.",
         "section": 8,
     },
     {

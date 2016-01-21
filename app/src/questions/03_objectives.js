@@ -56,6 +56,7 @@ var STATES = [
 	"kickOffMeeting",
 	"kickOffMeetingInPerson",
 	"kickOffMeetingRemote",
+	"languagesRequired",
 	"locationRequirement",
 	"locationText",
 	"objectivesSummary",
@@ -228,7 +229,7 @@ var Objective = React.createClass({
 				<textarea className="form-control" rows="4"></textarea>
 
 				<p>What languages is your service offered in?</p>
-				<textarea className="form-control" rows="4"></textarea>
+				<textarea className="form-control medium-response" rows="4" value={this.state.languagesRequired} onChange={this.handleChange.bind(this, 'languagesRequired')}></textarea>
 
 				<p>The vendor shall provide technology solutions which enable development teams to work efficiently and enable services to scale easily and cost-effectively. Recommendations for choices for hosting infrastructure, databases, software frameworks, programming languages and the rest of the technology stack shall seek to avoid vendor lock-in and match what successful modern consumer and enterprise software companies would choose today. In particular, the vendor shall consider using open source, cloud-based, and commodity solutions across the technology stack.</p>
 

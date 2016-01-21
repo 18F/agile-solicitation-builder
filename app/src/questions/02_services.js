@@ -430,7 +430,7 @@ var Services = React.createClass({
 
 				{(this.state.travelRequirement == "no")? null :
 				<div>
-					<p>Contractor travel expenses will reimbursed up to ${this.state.travelBudget} NTE.</p>
+					<p>Contractor travel expenses shall not exceed ${this.state.travelBudget} NTE.</p>
 					<EditBox
 							text={this.state.travelLanguage}
 							editing={this.state.edit === 'travelLanguage'}

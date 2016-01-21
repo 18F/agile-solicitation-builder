@@ -115,13 +115,5 @@ var SpecialRequirements = React.createClass({
 	},
 });
 
-//				<div className="sub-heading">Notice of Size Re-representation at the Task Order Level (will be conditional)</div>
-//				<EditBox
-//						text={this.state.smallBusinessStatus}
-//						editing={this.state.edit == 'smallBusinessStatus'}
-//						onStatusChange={this.toggleEdit.bind(this, 'smallBusinessStatus')}
-//						onTextChange={this.handleChange.bind(this, 'smallBusinessStatus')}>
-//				</EditBox>
-
 
 module.exports = SpecialRequirements;

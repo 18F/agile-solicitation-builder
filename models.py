@@ -145,15 +145,6 @@ class AdditionalClin(Base):
         return "<Clin(id='%d', row1='%s', row2='%s', row3a='%s')>" % (self.document_id, self.row1, self.row2, self.row3a)
 
 
-class SpecialRequirement(Base):
-    __tablename__ = "special_requirements"
-
-    id = Column(Integer, primary_key=True)
-    document_id = Column(Integer)
-    title = Column(String)
-    text = Column(Text)
-
-
 class CustomComponent(Base):
     __tablename__ = 'custom_components'
 
@@ -168,5 +159,5 @@ class CustomComponent(Base):
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}    
 
     def __repr__(self):
-        return "<AdditionalComponent(id='%d', title='%s', text='%s')>" % (self.document_id, self.title, self.category, self.text)
+        return "<AdditionalComponent(id='%d', title='%s', text='%s')>" % (self.document_id, self.title, self.text)
 

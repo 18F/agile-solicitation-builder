@@ -49,6 +49,17 @@ def make_dict(components):
         component_dict[component.name] = component.text
     return component_dict
 
+def make_custom_component_list(components):
+    custom_component_list = []
+    for component in components:
+        this_component = {}
+        this_component['name'] = component.name
+        this_component['text'] = component.text
+        this_component['title'] = component.title
+        custom_component_list.append(this_component)
+
+    return custom_component_list
+
 def get_users(cc, user_types):
     users = []
     for user in user_types:
@@ -67,7 +78,7 @@ def overview(document, rfq):
 
     # table of contents
     document.add_heading("Table of Contents", level=2)
-    sections = ["Definitions", "Services", "Statement of Obectives", "Personnel Requirements", "Inspection and Delivery", "Government Roles", "Special Requirements", "Additional Contract Clauses"]
+    sections = ["Definitions", "Services", "Statement of Objectives", "Personnel Requirements", "Inspection and Delivery", "Government Roles", "Special Requirements", "Additional Contract Clauses", "Appendix"]
     for section in sections:
         document.add_paragraph(section, style='ListNumber')
 
@@ -104,7 +115,7 @@ def services(document, rfq):
 
     # travel
     if cc["travelRequirement"] == "yes":
-        travel_text = "The Government anticipates significant travel under this effort. Contractor travel expenses will reimbursed up to $" + cc["travelBudget"]+ " NTE."
+        travel_text = "The Government anticipates travel will be required under this effort. Contractor travel expenses will not exceed $" + cc["travelBudget"]+ "."
         document.add_paragraph(travel_text)
         document.add_paragraph(cc["travelLanguage"])
     else:
@@ -127,7 +138,7 @@ def services(document, rfq):
     table.rows[1].cells[0].text = "Price Per Iteration"
     table.rows[1].cells[1].text = "$XXXXX (Vendor Completes)"
     table.rows[2].cells[0].text = "Period of Performance"
-    table.rows[2].cells[1].text = cc["basePeriodDurationNumber"] + cc["basePeriodDurationUnit"]
+    table.rows[2].cells[1].text = cc["basePeriodDurationNumber"] + ' ' + cc["basePeriodDurationUnit"]
     table.rows[3].cells[0].text = "Firm Fixed Price (Completion):"
     table.rows[3].cells[1].text = "$XXXXX (Vendor Completes)"
     # @TODO if base fee, add base fee clin row
@@ -139,7 +150,7 @@ def services(document, rfq):
         table = document.add_table(rows=2, cols=1)
         table.style = 'TableGrid'
         table.rows[0].cells[0].text = "Option Period " + str(i) + ": "  + str(cc["optionPeriodDurationNumber"]) + ' ' + cc["optionPeriodDurationUnit"]
-        table.rows[1].cells[0].text = "CLIN 000" + str(i) + ", FFP- Completion - The Contractor shall provide services for the Government in accordance with the Performance Work Statement (PWS)"
+        table.rows[1].cells[0].text = "CLIN " + str(i) + "0001, FFP- Completion - The Contractor shall provide services for the Government in accordance with the Performance Work Statement (PWS)"
 
         table = document.add_table(rows=4, cols=2)
         table.style = 'TableGrid'
@@ -148,14 +159,14 @@ def services(document, rfq):
         table.rows[1].cells[0].text = "Price Per Iteration"
         table.rows[1].cells[1].text = "$XXXXX (Vendor Completes)"
         table.rows[2].cells[0].text = "Period of Performance"
-        table.rows[2].cells[1].text = cc["optionPeriodDurationNumber"] + cc["optionPeriodDurationUnit"]
+        table.rows[2].cells[1].text = cc["optionPeriodDurationNumber"] + ' ' + cc["optionPeriodDurationUnit"]
         table.rows[3].cells[0].text = "Firm Fixed Price (Completion):"
         table.rows[3].cells[1].text = "$XXXXX (Vendor Completes)"
         # @TODO if option fee, add option fee clin row
         
         document.add_paragraph("\n")
 
-    # add custom CLIN
+    # @TODO add custom CLIN
 
     document.add_heading("Payment Schedule", level=SUB_HEADING)
     document.add_paragraph(cc["paymentSchedule"])
@@ -209,16 +220,14 @@ def objectives(document, rfq):
         "done": "Research has already been conducted, either internally or by another vendor.",
         "internal": "We intend to conduct user research internally prior to the start date of this engagement.",
         "vendor": "The vendor will be responsible for the user research.",
-    }
-
-    document.add_paragraph(cc['userAccess'])
+    }    
 
     if cc["userResearchStrategy"] == "vendor":
         document.add_paragraph(user_research_options["vendor"])
         document.add_heading("Understand What People Need")
         document.add_paragraph(cc["whatPeopleNeed"])
 
-        document.add_heading("Address the whole experience, from start to finish")
+        document.add_heading("Address the whole experience, from start to finish", level=SUB_HEADING)
         document.add_paragraph(cc["startToFinish"])
 
     if cc["userResearchStrategy"] == "done":
@@ -231,13 +240,15 @@ def objectives(document, rfq):
     if cc["userResearchStrategy"] == "none":
         pass
 
+    document.add_paragraph(cc['userAccess'])
+
     document.add_heading("Make it simple and intuitive", level=SUB_HEADING)
     document.add_paragraph(cc["simpleAndIntuitive"])
 
     document.add_heading("Use data to drive decisions", level=SUB_HEADING)
     document.add_paragraph(cc["dataDrivenDecisions"])
 
-    document.add_heading("Deliverables")
+    document.add_heading("Deliverables", level=SUB_HEADING)
     document.add_paragraph(cc["definitionOfDone"])
 
     
@@ -323,64 +334,32 @@ def inspection_and_delivery(document, rfq):
 
 def government_roles(document, rfq):
     document.add_heading("7. Government Roles", level=BIG_HEADING)
-    content_components = session.query(CustomComponent).filter_by(document_id=rfq.id).filter_by(section=8).all()
+    
+    content_components = session.query(ContentComponent).filter_by(document_id=rfq.id).filter_by(section=8).all()
     cc = make_dict(content_components)
 
-    # document.add_paragraph(cc["stakeholderIntro"])
-    
-    document.add_heading("Contracting Officer", level=SUB_HEADING)
-    document.add_paragraph(cc["contractingOfficer"])
+    custom_components = session.query(CustomComponent).filter_by(document_id=rfq.id).filter_by(section=8).order_by(CustomComponent.id).all()
 
-    document.add_heading("Contracting Officer's Representative", level=SUB_HEADING)
-    document.add_paragraph(cc["contractingOfficerRepresentative"])
+    document.add_paragraph(cc["stakeholderIntro"])
 
-    document.add_heading("Product Owner", level=SUB_HEADING)
-    document.add_paragraph(cc["productOwner"])
+    component_list = make_custom_component_list(custom_components)
 
-    document.add_heading("End Users", level=SUB_HEADING)
-    document.add_paragraph(cc["endUsers"])
-
-    # add custom roles 
+    for component in component_list:
+        document.add_heading(component['title'], level=SUB_HEADING)
+        document.add_paragraph(component['text'])
 
     return document
 
 def special_requirements(document, rfq):
     document.add_heading("8. Special Requirements", level=BIG_HEADING)
 
-    content_components = session.query(CustomComponent).filter_by(document_id=rfq.id).filter_by(section=9).all()
-    cc = make_dict(content_components)    
+    custom_components = session.query(CustomComponent).filter_by(document_id=rfq.id).filter_by(section=9).order_by(CustomComponent.id).all()
 
-    document.add_heading("Controlled Facilities and Information Systems Security", level=SUB_HEADING)
-    document.add_paragraph(cc["security"])
+    component_list = make_custom_component_list(custom_components)
 
-    document.add_heading("Federal Holidays", level=SUB_HEADING)
-    document.add_paragraph(cc["federalHolidays"])
-
-    document.add_heading("Section 508 Accessibility Standards Notice (September 2009)", level=SUB_HEADING)
-    document.add_paragraph(cc["accessibility"])
-
-    document.add_heading("Non-Disclosure Policies", level=SUB_HEADING)
-    document.add_paragraph(cc["nonDisclosure"])
-
-    document.add_heading("Potential Organizational Conflicts of Interest", level=SUB_HEADING)
-    document.add_paragraph(cc["conflictOfInterest"])
-
-    document.add_heading("Contractor Use of Commercial Computer Software, Including Open Source Software", level=SUB_HEADING)
-    document.add_paragraph(cc["commercialSoftware"])
-
-    document.add_heading("Title to Materials Shall Vest in the Government", level=SUB_HEADING)
-    document.add_paragraph(cc["titleToMaterials"])
-
-    document.add_heading("Limited Use of Data", level=SUB_HEADING)
-    document.add_paragraph(cc["useOfData"])
-
-    # document.add_heading("Notice of Size Re-representation at the Task Order Level (will be conditional)")
-    # document.add_paragraph(cc["smallBusinessStatus"])
-
-    document.add_heading("Order of Precedence", level=SUB_HEADING)
-    document.add_paragraph(cc["orderOfPrecedence"])
-
-    # add custom special requirements
+    for component in component_list:
+        document.add_heading(component['title'], level=SUB_HEADING)
+        document.add_paragraph(component['text'])
 
     return document
 
@@ -389,6 +368,12 @@ def contract_clauses(document, rfq):
     contract_clauses = session.query(ContentComponent).filter_by(document_id=rfq.id).filter_by(section=10).first()
     
     document.add_paragraph(contract_clauses.text)
+
+    return document
+
+def appendix(document, rfq):
+
+    document.add_heading("10. Appendix", level=SUB_HEADING)
 
     return document
 
@@ -409,12 +394,9 @@ def create_document(rfq_id):
     document = government_roles(document, rfq)
     document = special_requirements(document, rfq)
     document = contract_clauses(document, rfq)
+    document = appendix(document, rfq)
 
     doc_name = "RFQ_" + str(rfq_id) + ".docx"
     file_path = os.path.join("downloads", doc_name)
-    # document.save(file_path)
 
-
-
-    # @TODO find a way to check if document was successfully saved
     return document
