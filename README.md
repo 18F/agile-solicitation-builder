@@ -16,6 +16,8 @@ This project uses the following node modules:
   - vinyl-source-stream
   - watchify
 
+To install them, `cd` to the `app` directory and run `npm install`.
+
 This project uses the following bower components:
 
   - jQuery
