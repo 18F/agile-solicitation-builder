@@ -23,6 +23,4 @@ This project uses the following bower components:
   - jQuery
   - Bootstrap
 
-The backend is a Flask app built with Python 2.
-
-To launch the app first run `python server.py init` and then run `python server.py`. The site will be available at `http://localhost:5000`.
+The backend is a Flask app built with Python 2. To install its Python package dependencies, run `pip install -r requirements.txt`.
