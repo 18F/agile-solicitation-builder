@@ -426,7 +426,7 @@ var Services = React.createClass({
 				</div>
 			}
 
-				<p>The Government {(this.state.travelRequirement == "yes")? "anticipates" : "does not anticipate"} significant travel under this effort.</p>
+				<p>The Government {(this.state.travelRequirement == "yes")? "anticipates" : "does not anticipate"} travel will be required under this effort.</p>
 
 				{(this.state.travelRequirement == "no")? null :
 				<div>

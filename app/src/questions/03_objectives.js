@@ -63,6 +63,7 @@ var STATES = [
 	"offSiteDevelopmentCompliance",
 	"programHistory",
 	"userAccess",
+	"userNeeds",
 	"userResearchStrategy",
 	"whatPeopleNeed",
 	"startToFinish",
@@ -226,7 +227,8 @@ var Objective = React.createClass({
 				<p>The users of the product will include {usersString}.</p> : null}
 
 				<p>What user needs will this service address?</p>
-				<textarea className="form-control" rows="4"></textarea>
+				<div className="sub-text">Please list the user needs for each type of user seleected above.</div>
+				<textarea className="form-control" rows="4" value={this.state.userNeeds} onChange={this.handleChange.bind(this, 'userNeeds')}></textarea>
 
 				<p>What languages is your service offered in?</p>
 				<textarea className="form-control medium-response" rows="4" value={this.state.languagesRequired} onChange={this.handleChange.bind(this, 'languagesRequired')}></textarea>
@@ -363,14 +365,12 @@ var Objective = React.createClass({
 				{(this.state.kickOffMeeting === "none")?
 				<p>A formal kick-off meeting will not be required.</p> : null
 				}
-
-				<div className="sub-heading">Summary of Objectives</div>
-				<textarea className="form-control" rows="4">{this.state.objectivesSummary}</textarea>
 			</div>
 		);
 	},
 });
 
-
+				// <div className="sub-heading">Summary of Objectives</div>
+				// <textarea className="form-control" rows="4"></textarea>
 // to ensure the system supports interoperability,  must be followed. (see section). To ensure the user interface is X, Y (playbook language)
 module.exports = Objective;

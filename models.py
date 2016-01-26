@@ -110,10 +110,12 @@ class ContentComponent(Base):
 class Deliverable(Base):
     __tablename__ = 'deliverables'
 
-    document_id = Column(Integer, ForeignKey('rfqs.id'), primary_key=True)
+    id = Column(Integer, primary_key=True)
+    document_id = Column(Integer, ForeignKey('rfqs.id'))
     name = Column(String, primary_key=True)
-    text = Column(String)
+    display = Column(String)
     value = Column(String)
+    text = Column(Text)
 
     def to_dict(self):
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}
@@ -126,7 +128,7 @@ class AdditionalClin(Base):
     __tablename__ = 'additional_clins'
 
     id = Column(Integer, primary_key=True)
-    document_id = Column(Integer)
+    document_id = Column(Integer, ForeignKey('rfqs.id'))
     row1 = Column(Text)
     row2 = Column(Text)
     row3a = Column(Text)

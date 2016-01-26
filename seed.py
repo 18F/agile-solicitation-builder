@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-playbook = "1.  Choose software frameworks that are commonly used by private-sector companies creating similar services2.  Whenever possible, ensure that software can be deployed on a variety of commodity hardware types3.  Ensure that each project has clear, understandable instructions for setting up a local development environment, and that team members can be quickly added or removed from projects4.  Consider open source software solutions at every layer of the stack"
+playbook = "1.  Choose software frameworks that are commonly used by private-sector companies creating similar services  2. Whenever possible, ensure that software can be deployed on a variety of commodity hardware types  3. Ensure that each project has clear, understandable instructions for setting up a local development environment, and that team members can be quickly added or removed from projects  4. Consider open source software solutions at every layer of the stack"
 
 content_components = [
     {
@@ -186,6 +186,16 @@ content_components = [
     {
         "name": "userResearchStrategy",
         "text": "",
+        "section": 3,
+    },
+    {
+        "name": "userNeeds",
+        "text": "",
+        "section": 3,
+    },
+    {
+        "name": "languagesRequired",
+        "text": "The products or services must be provided in ... ",
         "section": 3,
     },
     {

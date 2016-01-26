@@ -204,7 +204,7 @@ def objectives(document, rfq):
     user_types = ["external_people", "external_it", "internal_people", "internal_it"]
     users = get_users(cc, user_types)
     if len(users) == 0:
-        document.add_paragraph("The primary users MAY include the following:")
+        document.add_paragraph("The primary users may include any of the following:")
         for i, user in enumerate(user_dict):
             document.add_paragraph(str(i+1) + ".  " + user_dict[user])
 
@@ -374,7 +374,7 @@ def contract_clauses(document, rfq):
 def appendix(document, rfq):
 
     document.add_heading("10. Appendix", level=SUB_HEADING)
-
+    
     return document
 
 def create_document(rfq_id):
