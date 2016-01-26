@@ -2,6 +2,10 @@
   "name": "playbook",
   "version": "0.0.1",
   "description": "Playbook in Action",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/18F/playbook-in-action.git"
+  },
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
