@@ -263,7 +263,7 @@ def objectives(document, rfq):
         else:
             location = "[LOCATION HERE]"
 
-        location_text = "The contractor shall have a full-time working staff presence at " + location + ". Contractor shall have additional facilities to perform contract functions as necessary."
+        location_text = "The contractor shall have a full-time working staff presence at " + location + ". The contractor shall have additional facilities to perform contract functions as necessary."
         document.add_paragraph(location_text)
         document.add_paragraph(cc["offSiteDevelopmentCompliance"])
 
@@ -285,8 +285,31 @@ def objectives(document, rfq):
 
 def personnel(document, rfq):
     document.add_heading("4. Key Personnel", level=BIG_HEADING)
-    intro_text = "The vendor shall provide talented people who have experience creating modern digital services. This includes bringing in seasoned product managers, engineers, UX researchers and designers."
-    document.add_paragraph(intro_text)
+    content_components = session.query(ContentComponent).filter_by(document_id=rfq.id).filter_by(section=4).all()
+    cc = make_dict(content_components)
+
+    document.add_paragraph(cc["keyPersonnelIntro"])
+
+    document.add_heading("Security Clearance and Onsite Presence", level=SUB_HEADING)
+    if cc["clearanceRequired"] == "None":
+        document.add_paragraph("Contractor personnel will not be required to have a security clearance.")
+    else:
+        document.add_paragraph("Some contractor personnel will be required to have a clearance at the level of " + cc["clearanceRequired"] + ".")
+
+    if cc["onSiteRequired"] == "yes":
+        document.add_paragraph("An onsite presence by the contractor will be required.")
+    else:
+        document.add_paragraph("An onsite presence by the contractor will not be required.")
+
+    document.add_heading("Key Personnel Evaluation", level=SUB_HEADING)
+
+    if cc["evaluateKeyPersonnel"] == "yes":
+        document.add_paragraph(cc["keyPersonnelRequirements"])
+    else:
+        document.add_paragraph(cc["notEvaluateKeyPersonnel"])
+
+    document.add_heading("Performance Work Statement", level=SUB_HEADING)
+    document.add_paragraph(cc["performanceWorkStatement"])
 
     return document
 
@@ -321,10 +344,9 @@ def inspection_and_delivery(document, rfq):
 
     document.add_heading("Collaboration Environment", level=SUB_HEADING)
 
-    # if cc["workspaceExists"] == "yes":
-    #     if len(cc["workspaceName"]) > 0:
-    #         print type(rfq.agency)
-    #         document.add_paragraph(rfq.agency + " is currently using " + cc["workspaceName"]) + " as their primary collaborative workspace tool. The contractor is required to establish a collaborative workspace using either this tool or another that both the contractor and the CO can agree upon."
+    if cc["workspaceExists"] == "yes":
+        if len(cc["workspaceName"]) > 0:
+            document.add_paragraph(rfq.agency + " is currently using " + cc["workspaceName"] + " as their primary collaborative workspace tool. The contractor is required to establish a collaborative workspace using either this tool or another that both the contractor and the CO can agree upon.")
 
     document.add_paragraph(cc["deliveringDeliverables"])
 
@@ -366,8 +388,7 @@ def special_requirements(document, rfq):
 
 def contract_clauses(document, rfq):
     document.add_heading("9. Additional Contract Clauses", level=BIG_HEADING)
-    contract_clauses = session.query(ContentComponent).filter_by(document_id=rfq.id).filter_by(section=10).first()
-    
+    contract_clauses = session.query(ContentComponent).filter_by(document_id=rfq.id).filter_by(section=9).first()
     document.add_paragraph(contract_clauses.text)
 
     return document

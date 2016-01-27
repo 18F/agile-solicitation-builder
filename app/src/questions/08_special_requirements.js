@@ -55,7 +55,7 @@ var SpecialRequirements = React.createClass({
   					text: "",
   				});
   			}.bind(this));
-  		location.reload();	
+  		location.reload();
   		}
   		else {
   			alert("Please fill out the title and text components of the form before saving the new role.");

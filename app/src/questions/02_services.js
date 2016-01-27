@@ -188,6 +188,7 @@ var Services = React.createClass({
   				});
 
   			}.bind(this));
+  			location.reload();
   		}
   		// if not, alert and return
   		else {
@@ -281,13 +282,13 @@ var Services = React.createClass({
 					<div className="row clin additional">
 						<div className="col-md-6 table-content">{this_clin["row5a"]}
 						</div>
-						<div className="col-md-6 table-content">{this_clin["row5b"]}
+						<div className="col-md-6 table-content ">{this_clin["row5b"]}
 						</div>
 					</div>
 					<div className="row clin additional">
 						<div className="col-md-6 table-content">{this_clin["row6a"]}
 						</div>
-						<div className="col-md-6 table-content">{this_clin["row"]}
+						<div className="col-md-6 table-content">{this_clin["row6b"]}
 						</div>
 					</div>
 				</div>

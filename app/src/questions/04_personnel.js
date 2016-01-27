@@ -7,6 +7,7 @@ var STATES = [
 	"performanceWorkStatement",
 	"keyPersonnelRequirements",
 	"evaluateKeyPersonnel",
+	"notEvaluateKeyPersonnel",
 	"clearanceRequired",
 	"onSiteRequired",
 ];
@@ -92,7 +93,7 @@ var Requirement = React.createClass({
 				}
 				
 	
-				<div className="sub-heading">Evaluation Process</div>
+				<div className="sub-heading">Key Personnel Evaluation Process</div>
 
 				<p>Do you want to require and evaluate key personnel?</p>
 				<radiogroup onChange={this.handleChange.bind(this, "evaluateKeyPersonnel")}>
@@ -117,7 +118,16 @@ var Requirement = React.createClass({
 							onStatusChange={this.toggleEdit.bind(this, 'keyPersonnelRequirements')}
 							onTextChange={this.handleChange.bind(this, 'keyPersonnelRequirements')}>
 					</EditBox>
-				</div> : null}
+				</div> : 
+				<div>
+					<EditBox
+							text={this.state.notEvaluateKeyPersonnel}
+							editing={this.state.edit === 'notEvaluateKeyPersonnel'}
+							onStatusChange={this.toggleEdit.bind(this, 'notEvaluateKeyPersonnel')}
+							onTextChange={this.handleChange.bind(this, 'notEvaluateKeyPersonnel')}>
+					</EditBox>
+				</div>
+				}
 
 				<div className="sub-heading">Performance Work Statement</div>
 				<EditBox
@@ -132,8 +142,6 @@ var Requirement = React.createClass({
 		);
 	},
 });
-
-// <p>Some key points to include: if government not happy then these will be the consequences. There needs to be a POC on contractor side who is responsible. If there will be delays because of things on the government side the contractor needs to communicate this ASAP and come up with new schedule with CO/PM.</p>	
 
 
 module.exports = Requirement;

@@ -101,13 +101,13 @@ var Inspection = React.createClass({
 					<p>What workspace are you currently using?</p>
 					<input type="text" className="form-control short-response" onChange={this.handleChange.bind(this, "workspaceName")} value={this.state.workspaceName} />					
 					{(this.state.workspaceName.length > 0)? 
-						<p>Currently the team is using {this.state.workspaceName}.</p> : null
+						<p>Currently the government team is using {this.state.workspaceName}.</p> : null
 					}
 				</div>
 				: null
 				}
 				
-				<p>The US Digital Service Playbook strongly recommends the use of a version control system such as Github, or something similar for storing code and system documentation.</p>
+				<p>The US Digital Service Playbook strongly recommends the use of a version control system such as Github, or similar for storing code and system documentation.</p>
 	
 				<p>The Contractor shall:</p>
 

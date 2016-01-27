@@ -227,7 +227,7 @@ var Objective = React.createClass({
 				<p>The users of the product will include {usersString}.</p> : null}
 
 				<p>What user needs will this service address?</p>
-				<div className="sub-text">Please list the user needs for each type of user seleected above.</div>
+				<div className="sub-text">Please list the user needs for each type of user selected above.</div>
 				<textarea className="form-control" rows="4" value={this.state.userNeeds} onChange={this.handleChange.bind(this, 'userNeeds')}></textarea>
 
 				<p>What languages is your service offered in?</p>

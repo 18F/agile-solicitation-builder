@@ -364,23 +364,28 @@ content_components = [
         "section": 4,
     },
     {
-        "name": "performanceWorkStatement",
-        "text": "The performance work statement will include:\n\n  - Contact information for all senior leaders and an organizational chart showing the Offeror’s organizational hierarchy and reporting structure, with specific designation of individuals as Key Personnel;\n  - Management resources;\n  - Technical resources and skill sets required to develop, implement, and maintain the proposed solution; and\n  - Details on the management of the Offeror’s team that will be on-site (if applicable).\n\nThe listing of Key Personnel shall become part of the {DOC_TYPE} upon award.",
-        "section": 4,
-    },
-    {
         "name": "keyPersonnelRequirements",
         "text": "The following requirements related to personnel must be met:\n\n  - If awarded this {DOC_TYPE}, the Contractor shall assign to perform this {DOC_TYPE} those persons whose résumés are submitted with its proposal and who are identified in the Contractor’s proposal as Key Personnel. Not all contractor employees assigned to perform this {DOC_TYPE} will be Key Personnel.\n  - If an individual proposed as Key Personnel becomes unavailable during the course of the source selection process, the Offeror will notify the Contracting Officer immediately and provide a substitute and their résumé. The proposal of any Key Personnel not currently employed by the Offeror shall be accompanied by letters of intent signed by the proposed Key Personnel indicating their intent to be employed by the Offeror if the Offeror is awarded a {DOC_TYPE} under this RFQ.\n  - The Contractor agrees that during the first six (6) months of {DOC_TYPE} performance, no Key Personnel substitutions will be made unless necessitated by an individual’s sudden illness, death, or termination of employment. In any of these events, the Contractor shall promptly notify the Contracting Officer and provide the information required by paragraph (e) below on the proposed replacement for Government approval. No substitutions of Key Personnel shall be made except in accordance with this provision.\n  - After the initial six-month period of performance, the Contractor must obtain Government approval of any substitution of Key Personnel prior to removing the approved Key Personnel from performance. All proposed substitutions/additions must be submitted, in writing, to the Contracting Officer at least 30 days (60 days if security clearances are involved) in advance of the proposed substitution and provide the information required by paragraph (e) below.\n  - All requests for substitutions/additions of Key Personnel must include a detailed explanation of the circumstances necessitating the proposed substitution or addition, a complete résumé for the proposed substitute or addition including skills, experience, education, training, and security level. As determined by the Contracting Officer, all proposed substitutes/additions must have qualifications that meet or exceed the qualifications of the person to be replaced.\n  - The Contracting Officer or his/her authorized representatives will evaluate the request(s) for substitutions/additions of Key Personnel and the Contracting Officer will notify the Contractor, in writing, of approval or disapproval. Disapproval of the proposed individual(s) shall not provide grounds for nonperformance by the Contractor or form the basis of any claim for monies, delivery schedule extension, or any other equitable adjustment.\n  - The personnel set forth below as proposed by the Contractor for this {DOC_TYPE}, or identified in the Contractor’s proposals as Key Personnel, shall comprise the list of Key Personnel required to perform under this {DOC_TYPE}. The list may be  modified in accordance with the above, to substitute or add personnel.",
         "section": 4,
     },
     {
         "name": "onSiteRequired",
-        "text": "none",
+        "text": "no",
         "section": 4,
     },
     {
         "name": "evaluateKeyPersonnel",
-        "text": "none",
+        "text": "no",
+        "section": 4,
+    },
+    {
+        "name": "notEvaluateKeyPersonnel",
+        "text": "The CO will not be evaluating specific key personnel, but reserves the right to require the contractor to bring in new personnel if the quality of the work produced does not meet expectations.",
+        "section": 4,
+    },
+    {
+        "name": "performanceWorkStatement",
+        "text": "The performance work statement will include:\n\n  - Contact information for all senior leaders and an organizational chart showing the Offeror’s organizational hierarchy and reporting structure, with specific designation of individuals as Key Personnel;\n  - Management resources;\n  - Technical resources and skill sets required to develop, implement, and maintain the proposed solution; and\n  - Details on the management of the Offeror’s team that will be on-site (if applicable).\n\nThe listing of Key Personnel shall become part of the {DOC_TYPE} upon award.",
         "section": 4,
     },
     {
@@ -420,7 +425,7 @@ content_components = [
     },
     {
         "name": "transitionActivities",
-        "text": "During the transition to the Government and/or a new contractor, the Contractor shall perform all necessary transition activities, including, but not limited to: \n\n  - continued full services to {AGENCY}\n  - participation, at discretion of COR in five or more meetings with the Government or new contractor to effect a smooth transition and provide detailed information on the operation of all deliverables\n  - training of new personnel (contractor or government) during the transition period in all system operation and maintenance functions\n  - appropriate close-out of outstanding technical and related work\n  - being available to answer any questions that arise.\n\nInformation such as the list of accomplishments, documentation, and customized code developed for {AGENCY} should be available to the Government in the collaborative workspace established from contract's initiation. Should the contract be terminated prior to the end of the scheduled base period, the Contractor shall work with the Government to ensure they retain access to this information within two weeks from the termination date.",
+        "text": "During the transition to the Government and/or a new contractor, the Contractor shall perform all necessary transition activities, including, but not limited to: \n\n  - continued full services to the {AGENCY_FULL_NAME}\n  - participation, at discretion of COR in five or more meetings with the Government or new contractor to effect a smooth transition and provide detailed information on the operation of all deliverables\n  - training of new personnel (contractor or government) during the transition period in all system operation and maintenance functions\n  - appropriate close-out of outstanding technical and related work\n  - being available to answer any questions that arise.\n\nInformation such as the list of accomplishments, documentation, and customized code developed for {AGENCY} should be available to the Government in the collaborative workspace established from contract's initiation. Should the contract be terminated prior to the end of the scheduled base period, the Contractor shall work with the Government to ensure they retain access to this information within two weeks from the termination date.",
         "section": 6,
     },
     {
@@ -479,7 +484,7 @@ custom_components = [
         "name": "security",
         "title": "Controlled Facilities and Information Systems Security",
         "text": "The contractor must adhere to the IT security requirements described in the Appendix, including all security requirements related to deliverables under this {DOC_TYPE}.",
-        "section": 7,
+        "section": 8,
     },
     {
         "name": "accessibility",

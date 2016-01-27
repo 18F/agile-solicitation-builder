@@ -22,8 +22,8 @@ var Welcome = React.createClass({
    },
 	render: function() {
 		var rfqs = [];
-		for (rfq in this.state.rfqs) {
-			var this_rfq = this.state.rfqs[rfq];
+		for (var i=0; i < this.state.rfqs.length; i++) {
+			var this_rfq = this.state.rfqs[i];
 			var agency = this_rfq['agency'];
 			var doctype = this_rfq['doc_type'];
 			var url = '#/rfp/' + this_rfq['id'] + '/question/1';
