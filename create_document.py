@@ -13,6 +13,7 @@ session = Session()
 
 BIG_HEADING = 1
 SUB_HEADING = 2
+SUB_SUB_HEADING = 3
 
 user_dict = {
     "external_people": "External People/The Public",
@@ -77,7 +78,7 @@ def overview(document, rfq):
     document.add_heading(doc_date, level=3)
 
     # table of contents
-    document.add_heading("Table of Contents", level=2)
+    document.add_heading("Table of Contents", level=SUB_HEADING)
     sections = ["Definitions", "Services", "Statement of Objectives", "Personnel Requirements", "Inspection and Delivery", "Government Roles", "Special Requirements", "Additional Contract Clauses", "Appendix"]
     for section in sections:
         document.add_paragraph(section, style='ListNumber')
@@ -178,19 +179,19 @@ def objectives(document, rfq):
     content_components = session.query(ContentComponent).filter_by(document_id=rfq.id).filter_by(section=3).all()
     cc = make_dict(content_components)
     #  u'kickOffMeetingInPerson', u'userResearchStrategy', u'userAccess',
-    document.add_heading("General Background")
+    document.add_heading("General Background", level=SUB_HEADING)
     if len(cc["generalBackground"]) > 0:
         document.add_paragraph(cc["generalBackground"])
     else:
         document.add_paragraph("Please provide several paragraphs about your project's history, mission, and current state.")
 
-    document.add_heading("Program History")
+    document.add_heading("Program History", level=SUB_HEADING)
     if len(cc["programHistory"]) > 0:
         document.add_paragraph(cc["programHistory"])
     else:
         document.add_paragraph("If you have any information about the current vendors and specific technology being used please provide it here.")
 
-    document.add_heading("Specific Tasks and Deliverables")
+    document.add_heading("Specific Tasks and Deliverables", level=SUB_HEADING)
     text = "This " + rfq.doc_type + " will require the following services:"
     document.add_paragraph(text)
     deliverables = ["d10", "d9", "d12", "d11", "d14", "d13", "d16", "d15", "d18", "d17", "d19", "d2", "d1", "d4", "d3", "d6", "d5", "d8", "d7"]
@@ -215,7 +216,7 @@ def objectives(document, rfq):
 
     document.add_paragraph("The requirements described below will be customized to the types of users specified.")
 
-    document.add_heading("User Research")
+    document.add_heading("User Research", level=SUB_HEADING)
     user_research_options = {
         "done": "Research has already been conducted, either internally or by another vendor.",
         "internal": "We intend to conduct user research internally prior to the start date of this engagement.",
@@ -224,7 +225,7 @@ def objectives(document, rfq):
 
     if cc["userResearchStrategy"] == "vendor":
         document.add_paragraph(user_research_options["vendor"])
-        document.add_heading("Understand What People Need")
+        document.add_heading("Understand What People Need", level=SUB_HEADING)
         document.add_paragraph(cc["whatPeopleNeed"])
 
         document.add_heading("Address the whole experience, from start to finish", level=SUB_HEADING)
@@ -277,7 +278,7 @@ def objectives(document, rfq):
 
     document.add_paragraph(kickoff_text)
 
-    document.add_heading("Documentation and Training")
+    document.add_heading("Documentation and Training", level=SUB_HEADING)
     document.add_paragraph(cc["documentationAndTraining"])
 
     return document
@@ -335,10 +336,10 @@ def inspection_and_delivery(document, rfq):
 def government_roles(document, rfq):
     document.add_heading("7. Government Roles", level=BIG_HEADING)
     
-    content_components = session.query(ContentComponent).filter_by(document_id=rfq.id).filter_by(section=8).all()
+    content_components = session.query(ContentComponent).filter_by(document_id=rfq.id).filter_by(section=7).all()
     cc = make_dict(content_components)
 
-    custom_components = session.query(CustomComponent).filter_by(document_id=rfq.id).filter_by(section=8).order_by(CustomComponent.id).all()
+    custom_components = session.query(CustomComponent).filter_by(document_id=rfq.id).filter_by(section=7).order_by(CustomComponent.id).all()
 
     document.add_paragraph(cc["stakeholderIntro"])
 
@@ -353,7 +354,7 @@ def government_roles(document, rfq):
 def special_requirements(document, rfq):
     document.add_heading("8. Special Requirements", level=BIG_HEADING)
 
-    custom_components = session.query(CustomComponent).filter_by(document_id=rfq.id).filter_by(section=9).order_by(CustomComponent.id).all()
+    custom_components = session.query(CustomComponent).filter_by(document_id=rfq.id).filter_by(section=8).order_by(CustomComponent.id).all()
 
     component_list = make_custom_component_list(custom_components)
 
@@ -364,7 +365,7 @@ def special_requirements(document, rfq):
     return document
 
 def contract_clauses(document, rfq):
-    document.add_heading("9. Additional Contract Clauses", level=SUB_HEADING)
+    document.add_heading("9. Additional Contract Clauses", level=BIG_HEADING)
     contract_clauses = session.query(ContentComponent).filter_by(document_id=rfq.id).filter_by(section=10).first()
     
     document.add_paragraph(contract_clauses.text)
@@ -373,7 +374,7 @@ def contract_clauses(document, rfq):
 
 def appendix(document, rfq):
 
-    document.add_heading("10. Appendix", level=SUB_HEADING)
+    document.add_heading("10. Appendix", level=BIG_HEADING)
     
     return document
 
@@ -395,8 +396,5 @@ def create_document(rfq_id):
     document = special_requirements(document, rfq)
     document = contract_clauses(document, rfq)
     document = appendix(document, rfq)
-
-    doc_name = "RFQ_" + str(rfq_id) + ".docx"
-    file_path = os.path.join("downloads", doc_name)
 
     return document

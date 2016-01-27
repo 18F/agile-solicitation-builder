@@ -20,12 +20,12 @@ var ContractClauses = React.createClass({
 		}
 
 		var rfqId = getId(window.location.hash);
-    put_data(8, "get_content", rfqId, data, cb);
+    put_data(9, "get_content", rfqId, data, cb);
 		
 	},
   componentDidMount: function() {
   	var rfqId = getId(window.location.hash);
-	  get_data(10, rfqId, function(content){ 
+	  get_data(9, rfqId, function(content){ 
 	  	var data = content["data"];
 	    this.setState({
 	      contractClauses: data["contract_clauses"],

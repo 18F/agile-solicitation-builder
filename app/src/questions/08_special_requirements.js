@@ -27,7 +27,7 @@ var SpecialRequirements = React.createClass({
 	},
 	componentDidMount: function() {
 		var rfqId = getId(window.location.hash);
-    getCustomComponents(rfqId, 9, function(data){    	
+    getCustomComponents(rfqId, 8, function(data){    	
     	var newStates = {};
     	for (i=0; i < data['data'].length; i++){
 				var requirement = data['data'][i];
@@ -47,7 +47,7 @@ var SpecialRequirements = React.createClass({
   			requirementData["text"] = this.state.text;
 
   			// save the data and update state to include new component
-  			createComponent(requirementData, rfqId, 9, function(data){
+  			createComponent(requirementData, rfqId, 8, function(data){
   				console.log(data);
   				this.setState({
   					addRequirement: false,  					
@@ -74,7 +74,7 @@ var SpecialRequirements = React.createClass({
 		}
 
 		var rfqId = getId(window.location.hash);
-    put_data(9, "custom_component", rfqId, data, cb);
+    put_data(8, "custom_component", rfqId, data, cb);
 	},
 	render: function() {
 		var requirements = [];

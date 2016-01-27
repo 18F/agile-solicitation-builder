@@ -23,8 +23,8 @@ var ContractingOfficer = React.createClass({
 			data[stateName] = this.state[stateName];
 		}
 		// save stakeholderIntro
-    put_data(8, "custom_component", rfqId, data, cb);
-    put_data(8, 'get_content', rfqId, {'stakeholderIntro': this.state.stakeholderIntro}, cb);
+    put_data(7, "custom_component", rfqId, data, cb);
+    put_data(7, 'get_content', rfqId, {'stakeholderIntro': this.state.stakeholderIntro}, cb);
 		
 	},
 	getInitialState: function() {		
@@ -37,11 +37,11 @@ var ContractingOfficer = React.createClass({
 	},
   componentDidMount: function() {
   	var rfqId = getId(window.location.hash);
-    get_data(8, rfqId, function(content){
+    get_data(7, rfqId, function(content){
     	var componentStates = getComponents(content["data"]);
       this.setState( componentStates );
     }.bind(this));
-		getCustomComponents(rfqId, 8, function(data){
+		getCustomComponents(rfqId, 7, function(data){
 			var newStates = {};
     	for (i=0; i < data['data'].length; i++){
 				var role = data['data'][i];
@@ -61,7 +61,7 @@ var ContractingOfficer = React.createClass({
   			roleData["text"] = this.state.text;
 
   			// save the data and update
-  			createComponent(roleData, rfqId, 8, function(data){
+  			createComponent(roleData, rfqId, 7, function(data){
   				this.setState({
   					addRole: false,
   					title: "",
