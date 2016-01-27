@@ -29,6 +29,7 @@ var Definition = React.createClass({
         return (
             <div>
                 <div className="main-heading">Definitions</div>
+                <div className="sub-text">Definitions can be decided on by either the PM or the CO.</div>
                 <p>These are the standard definitions for agile development terms in alignment with the USDS Playbook. You can also modify the definitions and add additional terms. When you are done click the "Next" button at the bottom of the page.</p>
                 <EditBox
                     text={this.state.definitions}

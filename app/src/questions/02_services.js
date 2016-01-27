@@ -344,6 +344,7 @@ var Services = React.createClass({
 		return (
 			<div>
 				<div className="main-heading">Services and Prices</div>
+				<div className="sub-text">These questions are typically answered by the CO.</div>
 
 				<div className="sub-heading">Brief Description of Services</div>
 				<div className="sub-text">Feel free to edit the sample we have provided below.</div>
