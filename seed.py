@@ -195,7 +195,7 @@ content_components = [
     },
     {
         "name": "languagesRequired",
-        "text": "The products or services must be provided in ... ",
+        "text": "The products or services must be provided in ... and English",
         "section": 3,
     },
     {

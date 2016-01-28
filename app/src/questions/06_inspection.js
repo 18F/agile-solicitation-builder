@@ -42,6 +42,8 @@ var Inspection = React.createClass({
 		return (
 			<div>
 				<div className="main-heading">Inspection, Acceptance, Delivery, Transition</div>
+				<div className="sub-text">The content in this section should be decided on by both the CO and the PM.</div>
+
 				<div className="sub-heading">Overview</div>
 
 				<EditBox

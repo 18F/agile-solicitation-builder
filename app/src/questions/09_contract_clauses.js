@@ -36,6 +36,8 @@ var ContractClauses = React.createClass({
 		return (
 			<div>
 				<div className="main-heading">Contract Clauses</div>
+
+				<div className="sub-text">The PM and the CO may both contribute content to this section.</div>
 	
 				<div className="sub-heading">Additional Clauses.</div>
 				<p>Please feel free to add anything else specific to your contract. You will also be able to edit the Microsoft Word document that is produced.</p>

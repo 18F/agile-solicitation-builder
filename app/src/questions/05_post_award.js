@@ -35,8 +35,10 @@ var PostAward = React.createClass({
 	render: function() {
 		return (
 			<div>
-				<div className="sub-heading">Invoicing & Funding</div>
-					<div className="sub-text">If you wish to add additional text you may do so in the resulting word document.</div>
+				<div className="main-heading">Invoicing & Funding</div>
+					<div className="sub-text">The content in this section is typically decided on by the CO.</div>
+					<p>If you wish to add additional text you may do so in the resulting word document.</p>
+					<div className="sub-heading">Contractor Instructions</div>
 
 					<EditBox
 							text={this.state.invoicing}

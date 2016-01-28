@@ -53,7 +53,8 @@ var Requirement = React.createClass({
 		return (
 			<div>
 				<div className="main-heading">Contractor Personnel</div>
-				
+				<div className="sub-text">These questions are typically answered by the PM.</div>
+									
 				<EditBox
 						text={this.state.keyPersonnelIntro}
 						editing={this.state.edit === 'keyPersonnelIntro'}

@@ -96,7 +96,8 @@ var SpecialRequirements = React.createClass({
 		return (
 			<div>
 				<div className="main-heading">Special Contract Requirements</div>
-
+				<div className="sub-text">The content in this section is typically decided upon by the CO.</div>
+				
 				{requirements}
 
 				{this.state.addRequirement? 

@@ -99,6 +99,8 @@ var ContractingOfficer = React.createClass({
 			<div>
 				<div className="main-heading">Roles and Responsibilities</div>
 
+				<div className="sub-text">The content in this section should be decided upon by both the PM and the CO.</div>
+
 				<EditBox
 						text={this.state.stakeholderIntro}
 						editing={this.state.edit == 'stakeholderIntro'}
