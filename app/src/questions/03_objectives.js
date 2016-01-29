@@ -4,28 +4,6 @@ var EditBox = require("../edit_box");
 
 //d "1": "Research, Insights, and Synthesis",
 
-var DELIVERABLES = {
-	"d1": "Design Solutions Prototyping",
-	"d2": "Process Improvement Recommendations",
-	"d3": "Program Management and Stewardship",
-	"d4": "UX requirements gathering",
-	"d5": "Initial application design and implementation",
-	"d6": "System configuration to support business processes",
-	"d7": "Integration for input and output methods",
-	"d8": "Workflow design and implementation",
-	"d9": "Overall collaboration of applications",
-	"d10": "Enhancements, patches, and updates to applications, data, or cloud systems",
-	"d11": "Data import of records collected from legacy systems",
-	"d12": "Automated testing",
-	"d13": "Training of end users on the systems",
-	"d14": "Native mobile application(s)",
-	"d15": "Mobile responsive web application(s)",
-	"d16": "Application capable of supporting high user traffic",
-	"d17": "Devops, continuous integration and continuous deployment",
-	"d18": "Workstations, data centers, server systems, and connectivity",
-	"d19": "Supporting Legacy applications/systems",
-};
-
 var USER_RESEARCH = {			
 	"done": "Research has already been conducted, either internally or by another vendor. (proceed to product/program vision questionnaire)",
 	"internal": "We intend to conduct user research internally prior to the start date of this engagement.",
@@ -45,9 +23,10 @@ var USER_TYPES = {
 	"external_it": "External IT",
 };
 
+var DELIVERABLE_STATES = ["d10", "d9", "d12", "d11", "d14", "d13", "d16", "d15", "d18", "d17", "d19", "d2", "d1", "d4", "d3", "d6", "d5", "d8", "d7"]
+
 var STATES = [
 	"definitionOfDone",
-	"deliverables",
 	"external_it",
 	"external_people",
 	"generalBackground",
@@ -70,31 +49,13 @@ var STATES = [
 	"simpleAndIntuitive",
 	"dataDrivenDecisions",
 	"documentationAndTraining",	
-	"d10",
-	"d9",
-	"d12",
-	"d11",
-	"d14",
-	"d13",
-	"d16",
-	"d15",
-	"d18",
-	"d17",
-	"d19",
-	"d2",
-	"d1",
-	"d4",
-	"d3",
-	"d6",
-	"d5",
-	"d8",
-	"d7",
 ];
 
 var Objective = React.createClass({
 	mixins: [StateMixin],
 	getInitialState: function() {
-		var initialStates = getStates(STATES);
+		var allStates = STATES.concat(DELIVERABLE_STATES).concat(["deliverables"]);
+		var initialStates = getStates(allStates);
 		return initialStates;
 	},
 	componentDidMount: function() {
@@ -103,39 +64,55 @@ var Objective = React.createClass({
     	var components = getComponents(content["data"]);
       this.setState( components );
     }.bind(this));
+    getDeliverables(rfqId, function(content){
+    	var states = { deliverables: content["data"]};
+    	for (i=0; i < content["data"].length; i++){
+    		var deliverable = content["data"][i];
+    		states[deliverable["name"]] = deliverable["value"];
+    	}
+    	this.setState( states );
+    }.bind(this));
   },
   handleCheck: function(key, event) {
-  	var newState = {};
-  	var currentState = this.state[key];
-  	if (currentState == "false"){
-  		newState[key] = "true";
-  	}
-  	else{
-  		newState[key] = "false";
-  	}
-  	this.setState(newState);
+		var newState = {};
+		var currentState = this.state[key];
+		if (currentState == "false"){
+			newState[key] = "true";
+		}
+		else{
+			newState[key] = "false";
+		}
+		this.setState(newState);
   },
 	save: function(cb) {
 		var data = {};
+		var deliverables_data = {};
 		
 		for (i=0; i < STATES.length; i++){
 			var stateName = STATES[i];
 			data[stateName] = this.state[stateName];
 		}
 
+		for (i=0; i < DELIVERABLE_STATES.length; i++){
+			var stateName = DELIVERABLE_STATES[i];
+			deliverables_data[stateName] = this.state[stateName];
+		}
+
 		var rfqId = getId(window.location.hash);
+		putDeliverables(rfqId, deliverables_data);
     put_data(3, "get_content", rfqId, data, cb);
 	},
 	render: function() {
 
 		var deliverables = [];
-		for (var key in DELIVERABLES) {
-			var deliverable = this.state[key];
+		for (i=0; i < this.state.deliverables.length; i++) {
+			var deliverable = this.state.deliverables[i];
+			var key = deliverable["name"];
 			deliverables.push(
 				<div className="checkbox">
 					<label>
 					<input type="checkbox" value={this.state[key]} onClick={this.handleCheck.bind(this, key)} checked={this.state[key] == "true"}></input>
-					{DELIVERABLES[key]}
+					{deliverable["display"]}				
 				  </label>
 				</div>
 			);
@@ -232,8 +209,6 @@ var Objective = React.createClass({
 
 				<p>What languages is your service offered in?</p>
 				<textarea className="form-control medium-response" rows="4" value={this.state.languagesRequired} onChange={this.handleChange.bind(this, 'languagesRequired')}></textarea>
-
-				<p>The vendor shall provide technology solutions which enable development teams to work efficiently and enable services to scale easily and cost-effectively. Recommendations for choices for hosting infrastructure, databases, software frameworks, programming languages and the rest of the technology stack shall seek to avoid vendor lock-in and match what successful modern consumer and enterprise software companies would choose today. In particular, the vendor shall consider using open source, cloud-based, and commodity solutions across the technology stack.</p>
 
 				<div className="sub-heading">User Research</div>
 				<p>What is your User Research Strategy?</p>

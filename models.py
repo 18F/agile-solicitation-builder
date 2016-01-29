@@ -71,17 +71,18 @@ class RFQ(Base):
 
         session = Session()
         agency_full_name = session.query(Agency).filter_by(abbreviation=agency).first().full_name
+        
         if doc_type != "Purchase Order":
             vehicle = "(vehicle number " + base_number_value + ") "
+       
         for section in content_components:
             text = str(section['text']).decode("utf8")
             section['text'] = text.replace("{AGENCY}", agency).replace("{DOC_TYPE}", doc_type).replace("{AGENCY_FULL_NAME}", agency_full_name).replace("{PROGRAM_NAME}", program_name).replace("{VEHICLE}", vehicle)
             self.content_components.append(ContentComponent(**section))
 
         for deliverable in deliverables:
-            # text = str(deliverable['text']).decode("utf8")
-            deliverable['value'] = True if (deliverable['value'] == "yes") else False
-            # name = str(deliverable['name']).decode("utf8")
+            deliverable["text"] = str(deliverable['text']).decode("utf8")
+            deliverable["display"] = str(deliverable['display']).decode("utf8")
             self.deliverables.append(Deliverable(**deliverable))
 
         for component in custom_components:
@@ -121,7 +122,7 @@ class Deliverable(Base):
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}
 
     def __repr__(self):
-        return "<Deliverable(name='%s', doc_id='%d', text='%s', value='%s')>" % (self.name, self.document_id, self.text, self.value)
+        return "<Deliverable(name='%s', doc_id='%d', text='%s', value='%s', display='%s')>" % (self.name, self.document_id, self.text, self.value, self.display)
 
 
 class AdditionalClin(Base):

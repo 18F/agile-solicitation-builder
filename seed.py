@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-
-playbook = "1.  Choose software frameworks that are commonly used by private-sector companies creating similar services  2. Whenever possible, ensure that software can be deployed on a variety of commodity hardware types  3. Ensure that each project has clear, understandable instructions for setting up a local development environment, and that team members can be quickly added or removed from projects  4. Consider open source software solutions at every layer of the stack"
+modern_tech_stack_intro = "The vendor shall provide technology solutions which enable development teams to work efficiently and enable services to scale easily and cost-effectively. Recommendations for choices for hosting infrastructure, databases, software frameworks, programming languages and the rest of the technology stack shall seek to avoid vendor lock-in and match what successful modern consumer and enterprise software companies would choose today. In particular, the vendor shall consider using open source, cloud-based, and commodity solutions across the technology stack."
+modern_techn_stack = "1.  Choose software frameworks that are commonly used by private-sector companies creating similar services  2. Whenever possible, ensure that software can be deployed on a variety of commodity hardware types  3. Ensure that each project has clear, understandable instructions for setting up a local development environment, and that team members can be quickly added or removed from projects  4. Consider open source software solutions at every layer of the stack"
 
 content_components = [
     {
@@ -174,11 +174,6 @@ content_components = [
         "section": 3,
     },
     {
-        "name": "deliverables",
-        "text": '["Automated Testing"]',
-        "section": 3,
-    },
-    {
         "name": "userAccess",
         "text": "The team within {AGENCY} managing this contract commit to support the vendor in the user research process, and will provide the vendor with access to the Government employees who will be the users of the product. (See section entitled 'Government Roles').",
         "section": 3,
@@ -195,7 +190,7 @@ content_components = [
     },
     {
         "name": "languagesRequired",
-        "text": "The products or services must be provided in ... and English",
+        "text": "The products or services must be provided in English.",
         "section": 3,
     },
     {
@@ -255,7 +250,7 @@ content_components = [
     },
     {
         "name": "documentationAndTraining",
-        "text": "A well designed interface will not require additional training for users. (see USDS playbook #2) and the need for training should be minimized with regular user testing and training that is built into the product through clear instructions and tutorials.\n\nThe contractor shall provide complete documentation for all systems and applications and provide training that will enable end users to utilize the system. The contractor will also consult with the COR to determine what is appropriate, effective, and essential for training and provide the services the COR deems necessary. This may include:\n\n  - Videos or self-guided training materials may be used\n\n  - Training features built into the system are used to the greatest extent possible\n\n  - Initial end-user training on a per-department basis during the initial on-boarding of users to the new system.\n\n  - “Train-the-trainer“ classes for selected trainers and administrators.",
+        "text": "A well designed interface will not require additional training for users. (see USDS playbook #2) and the need for training should be minimized with regular user testing and training that is built into the product through clear instructions and tutorials.\n\nThe contractor shall provide complete documentation for all systems and applications and provide training that will enable end users to utilize the system. The contractor will also consult with the COR to determine what is appropriate, effective, and essential for training and provide the services the COR deems necessary. This may include:\n\n  - Videos or self-guided training materials may be used\n  - Training features built into the system are used to the greatest extent possible\n  - Initial end-user training on a per-department basis during the initial on-boarding of users to the new system.\n  - “Train-the-trainer“ classes for selected trainers and administrators.",
         "section": 3,
     },
     {
@@ -545,97 +540,116 @@ custom_components = [
 deliverables = [
     {
         "name": "d10",
-        "text": "Enhancements, patches, and updates to applications, data, or cloud systems",
+        "text": "",
+        "display": "Enhancements, patches, and updates to applications, data, or cloud systems",
         "value": "false",
     },
     {
         "name": "d9",
-        "text": "Overall collaboration of applications",
+        "text": "",
+        "display": "Overall collaboration of applications",
         "value": "false",
     },
     {
         "name": "d12",
-        "text": "Automated testing",
+        "text": "",
+        "display": "Automated testing",
         "value": "true",
     },
     {
         "name": "d11",
-        "text": "Data import of records collected from legacy systems",
+        "text": "",
+        "display": "Data import of records collected from legacy systems",
         "value": "false",
     },
     {
         "name": "d14",
-        "text": "Native mobile application(s)",
+        "text": "",
+        "display": "Native mobile application(s)",
         "value": "false",
     },
     {
         "name": "d13",
-        "text": "Training of end users on the systems",
+        "text": "",
+        "display": "Training of end users on the systems",
         "value": "true",
     },
     {
         "name": "d16",
-        "text": "Application capable of supporting high user traffic",        
+        "text": "",
+        "display": "Application capable of supporting high user traffic",        
         "value": "false",
     },
     {
         "name": "d15",
-        "text": "Mobile responsive web application(s)",
+        "text": "",
+        "display": "Mobile responsive web application(s)",
         "value": "false",
     },
     {
         "name": "d18",
-        "text": "Workstations, data centers, server systems, and connectivity",
+        "text": "",
+        "display": "Workstations, data centers, server systems, and connectivity",
         "value": "false",
     },
     {
         "name": "d17",
-        "text": "Devops, continuous integration and continuous deployment",
+        "text": "",
+        "display": "Devops, continuous integration and continuous deployment",
         "value": "false",
     },
     {
         "name": "d19",
-        "text": "Supporting Legacy applications/systems",
+        "text": "",
+        "display": "Supporting Legacy applications/systems",
         "value": "false",
     },
     {
         "name": "d2",
-        "text": "Process Improvement Recommendations",
+        "text": "",
+        "display": "Process Improvement Recommendations",
         "value": "false",
     },
     {
         "name": "d1",
-        "text": "Design Solutions Prototyping",
+        "text": "",
+        "display": "Design Solutions Prototyping",
         "value": "false",
     },
     {
         "name": "d4",
-        "text": "UX requirements gathering",
+        "text": "",
+        "display": "UX requirements gathering",
         "value": "false",
     },
     {
         "name": "d3",
-        "text": "Program Management and Stewardship",
+        "text": "",
+        "display": "Program Management and Stewardship",
         "value": "false",
     },
     {
         "name": "d6",
-        "text": "System configuration to support business processes",
+        "text": "",
+        "display": "System configuration to support business processes",
         "value": "false",
     },
     {
         "name": "d5",
-        "text": "Initial application design and implementation",
+        "text": "",
+        "display": "Initial application design and implementation",
         "value": "false",
     },
     {
         "name": "d8",
-        "text": "Workflow design and implementation",
+        "text": "",
+        "display": "Workflow design and implementation",
         "value": "false",
     },
     {
         "name": "d7",
-        "text": "Integration for input and output methods",
+        "text": "",
+        "display": "Integration for input and output methods",
         "value": "false",
     },
 ]

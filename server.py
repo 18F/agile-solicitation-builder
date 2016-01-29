@@ -11,8 +11,6 @@ from sqlalchemy.schema import (
     DropConstraint,
     )
 
-from pprint import pprint
-
 import os, shutil
 import sys
 import config
@@ -64,7 +62,7 @@ class Data(Resource):
         for key in data:
             session = Session()
             component = session.query(ContentComponent).filter_by(document_id=rfq_id).filter_by(name=key).first()            
-            component.text = data[key]
+            component.text = data[key].encode('ascii', 'ignore')
             session.merge(component)
             session.commit()
 
@@ -86,8 +84,7 @@ class Deliverables(Resource):
         data = request.get_json()['data']
         for key in data:
             session = Session()
-            deliverable = session.query(Deliverable).filter_by(document_id=rfq_id).filter_by(name=name).first()
-            # check that this works
+            deliverable = session.query(Deliverable).filter_by(document_id=rfq_id).filter_by(name=key).first()
             deliverable.value = data[key]
             session.merge(deliverable)
             session.commit()
@@ -100,7 +97,6 @@ class Clin(Resource):
         return jsonify(data=[c.to_dict() for c in clins])
 
     def post(self, rfq_id):
-        parser = reqparse.RequestParser()
         clin_values = ["row1", "row2", "row3a", "row3b", "row4a", "row4b", "row5a", "row5b", "row6a", "row6b",]
         data = request.get_json()["data"]
 
@@ -131,19 +127,16 @@ class CustomComponents(Resource):
         return jsonify(data=[c.to_dict() for c in components])
 
     def put(self, rfq_id, section_id):
-        parser = reqparse.RequestParser()
-        parser.add_argument('data')
         data = request.get_json()['data']
         for key in data:
             session = Session()
             component = session.query(CustomComponent).filter_by(document_id=rfq_id).filter_by(name=key).first()
             component.text = data[key]
             session.merge(component)
-            session.commit()  
+            session.commit()
 
     def post(self, rfq_id, section_id):
         session = Session()
-        parser = reqparse.RequestParser()
         data = request.get_json()["data"]
         title = data['title']
         text = data['text']
@@ -191,6 +184,7 @@ class Create(Resource):
 
         return jsonify({'id': rfq.id})
 
+
 class DeleteRFQ(Resource):
 
     def delete(self, rfq_id):
@@ -223,7 +217,7 @@ class DeleteRFQ(Resource):
 
 api.add_resource(Agencies, '/agencies')
 api.add_resource(Data, '/get_content/<int:rfq_id>/section/<int:section_id>')
-api.add_resource(Deliverables, '/get_deliverables/<int:rfq_id>')
+api.add_resource(Deliverables, '/deliverables/<int:rfq_id>')
 api.add_resource(Create, '/rfqs')
 api.add_resource(Clin, '/clins/<int:rfq_id>')
 api.add_resource(CustomComponents, '/custom_component/<int:rfq_id>/section/<int:section_id>')

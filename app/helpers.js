@@ -28,7 +28,7 @@ function getComponents(data){
 function getDeliverables(doc_id, callback){
 	$.ajax({
 		type: "GET",
-		url: "/api/get_deliverables/" + doc_id,
+		url: "/api/deliverables/" + doc_id,
 		dataType: 'json',
 		success: function(data){
 			if (callback){
@@ -41,7 +41,7 @@ function getDeliverables(doc_id, callback){
 function putDeliverables(doc_id, data, callback){
 	$.ajax({
 		type: "PUT",
-		url: "/api/get_deliverables/" + doc_id,
+		url: "/api/deliverables/" + doc_id,
 		data: JSON.stringify({data: data}),
 		contentType: 'application/json',
 		dataType: 'json',
