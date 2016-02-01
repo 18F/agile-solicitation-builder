@@ -245,6 +245,9 @@ def download(rfq_id):
     return send_file(strIO, attachment_filename="RFQ.docx", as_attachment=True)
     # return send_from_directory(directory="downloads", filename=doc_name)
 
+@app.route('/agile_estimator')
+def agile_estimator():
+    return send_file("AgileEstimator.xlsx")
 
 def drop_everything():
     # https://bitbucket.org/zzzeek/sqlalchemy/wiki/UsageRecipes/DropEverything
