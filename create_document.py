@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from docx import Document
-from models import Agency, RFQ, ContentComponent, AdditionalClin, CustomComponent, Base, Session, engine
+from models import Agency, RFQ, ContentComponent, AdditionalClin, Deliverable, CustomComponent, Base, Session, engine
 
 import os, shutil
 import sys
@@ -194,12 +194,10 @@ def objectives(document, rfq):
     document.add_heading("Specific Tasks and Deliverables", level=SUB_HEADING)
     text = "This " + rfq.doc_type + " will require the following services:"
     document.add_paragraph(text)
-    deliverables = ["d10", "d9", "d12", "d11", "d14", "d13", "d16", "d15", "d18", "d17", "d19", "d2", "d1", "d4", "d3", "d6", "d5", "d8", "d7"]
-    deliverables_added = 1
-    for d in deliverables:
-        if cc[d] == "true":
-            document.add_paragraph("    " + str(deliverables_added) + ".  " + DELIVERABLES[d])
-            deliverables_added += 1
+
+    deliverables = session.query(Deliverable).filter_by(document_id=rfq.id).filter_by(value="true").all()
+    for deliverable in deliverables:
+        document.add_paragraph("    " + deliverable.display)
 
     document.add_heading("Users", level=SUB_HEADING)
     user_types = ["external_people", "external_it", "internal_people", "internal_it"]
