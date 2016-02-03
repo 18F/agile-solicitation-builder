@@ -34,6 +34,7 @@ app.logger.setLevel(logging.ERROR)
 db = SQLAlchemy(app)
 api = Api(app, prefix="/api")
 
+
 def dicts_to_dict(dicts, key):
     new_dict = {}
     for i, d in enumerate(dicts):
@@ -41,11 +42,13 @@ def dicts_to_dict(dicts, key):
         new_dict[new_key] = dicts[i]['text']
     return new_dict
 
+
 class Agencies(Resource):
     def get(self):
         session = Session()
         agencies = session.query(Agency).order_by(Agency.full_name).all()
         return jsonify(data=[a.to_dict() for a in agencies])
+
 
 class Data(Resource):
 
@@ -88,6 +91,7 @@ class Deliverables(Resource):
             session.merge(deliverable)
             session.commit()
 
+
 class Clin(Resource):
 
     def get(self, rfq_id):
@@ -117,7 +121,8 @@ class Clin(Resource):
 
         clins = session.query(AdditionalClin).filter_by(document_id=rfq_id).all()
         return jsonify(data=[c.to_dict() for c in clins])
-        
+
+
 class CustomComponents(Resource):
 
     def get(self, rfq_id, section_id):
@@ -145,13 +150,13 @@ class CustomComponents(Resource):
         name = "component" + str(len(current_components) + 1)
 
         custom_component = CustomComponent(document_id=int(rfq_id), section=int(section_id), name=name, title=title, text=text)
-        
+
         session.add(custom_component)
         session.commit()
 
         components = session.query(CustomComponent).filter_by(document_id=rfq_id).filter_by(section=int(section_id)).all()
         return jsonify(data=[c.to_dict() for c in components])
-        
+
 
 class Create(Resource):
 
@@ -188,7 +193,7 @@ class DeleteRFQ(Resource):
 
     def delete(self, rfq_id):
         session = Session()
-        
+
         deliverables = session.query(Deliverable).filter_by(document_id=rfq_id).all()
         for d in deliverables:
             session.delete(d)
@@ -222,18 +227,22 @@ api.add_resource(Clin, '/clins/<int:rfq_id>')
 api.add_resource(CustomComponents, '/custom_component/<int:rfq_id>/section/<int:section_id>')
 api.add_resource(DeleteRFQ, '/delete/rfqs/<int:rfq_id>')
 
+
 # map index.html to app/index.html, map /build/bundle.js to app/build.bundle.js
 @app.route('/initiate')
 def initiate():
     RFQ.create(agency="", agency_full_name="", doc_type="")
 
+
 @app.route('/')
 def index():
     return send_from_directory("app", "index.html")
 
+
 @app.route('/<path:path>')
 def send_js(path):
     return send_from_directory("app", path)
+
 
 @app.route('/download/<int:rfq_id>')
 def download(rfq_id):
@@ -244,9 +253,11 @@ def download(rfq_id):
     return send_file(strIO, attachment_filename="RFQ.docx", as_attachment=True)
     # return send_from_directory(directory="downloads", filename=doc_name)
 
+
 @app.route('/agile_estimator')
 def agile_estimator():
     return send_file("AgileEstimator.xlsx")
+
 
 def drop_everything():
     # https://bitbucket.org/zzzeek/sqlalchemy/wiki/UsageRecipes/DropEverything
@@ -273,9 +284,9 @@ def drop_everything():
             if not fk['name']:
                 continue
             fks.append(
-                ForeignKeyConstraint((),(),name=fk['name'])
+                ForeignKeyConstraint((), (), name=fk['name'])
                 )
-        t = Table(table_name,metadata,*fks)
+        t = Table(table_name, metadata, *fks)
         tbs.append(t)
         all_fks.extend(fks)
 
@@ -286,6 +297,7 @@ def drop_everything():
         conn.execute(DropTable(table))
 
     trans.commit()
+
 
 def create_tables():
 
@@ -311,5 +323,3 @@ if __name__ == "__main__":
         create_tables()
     else:
         app.run(debug=True)
-
-
