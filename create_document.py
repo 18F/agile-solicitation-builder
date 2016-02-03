@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
-from docx import Document
-from models import Agency, RFQ, ContentComponent, AdditionalClin, Deliverable, CustomComponent, Base, Session, engine
-
-import os, shutil
+import os
+import shutil
 import sys
 import config
 import datetime
 
+from docx import Document
+from models import Agency, RFQ, ContentComponent, AdditionalClin, Deliverable, CustomComponent, Base, Session, engine
 from pprint import pprint
 
 session = Session()
