@@ -1,6 +1,3 @@
-import os
-
-
 class Config(object):
     DEBUG = False
     TESTING = False
@@ -28,4 +25,3 @@ class DevelopmentConfig(Config):
 
 class TestingConfig(Config):
     TESTING = True
-
