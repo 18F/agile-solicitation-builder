@@ -99,7 +99,6 @@ class Clin(Resource):
         return jsonify(data=[c.to_dict() for c in clins])
 
     def post(self, rfq_id):
-        clin_values = ["row1", "row2", "row3a", "row3b", "row4a", "row4b", "row5a", "row5b", "row6a", "row6b"]
         data = request.get_json()["data"]
 
         row1 = data['row1']
