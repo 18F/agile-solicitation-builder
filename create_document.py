@@ -316,6 +316,7 @@ def personnel(document, rfq):
 
     return document
 
+
 def invoicing(document, rfq):
     document.add_heading("5. Invoicing & Funding", level=BIG_HEADING)
 
@@ -358,6 +359,7 @@ def inspection_and_delivery(document, rfq):
     document.add_paragraph(cc["transitionActivities"])
 
     return document
+
 
 def government_roles(document, rfq):
     document.add_heading("7. Government Roles", level=BIG_HEADING)
