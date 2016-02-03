@@ -44,11 +44,13 @@ DELIVERABLES = {
     "d19": "Workstations, data centers, server systems, and connectivity",
 }
 
+
 def make_dict(components):
     component_dict = {}
     for component in components:
         component_dict[component.name] = component.text
     return component_dict
+
 
 def make_custom_component_list(components):
     custom_component_list = []
@@ -61,12 +63,14 @@ def make_custom_component_list(components):
 
     return custom_component_list
 
+
 def get_users(cc, user_types):
     users = []
     for user in user_types:
         if cc[user] == "true":
             users.append(user)            
     return users
+
 
 def overview(document, rfq):
     # table of contents & basic info
@@ -83,12 +87,12 @@ def overview(document, rfq):
     for section in sections:
         document.add_paragraph(section, style='ListNumber')
 
-
     text = "Note: All sections of this RFQ will be incorporated into the contract except the Statement of Objectives, Instructions, and Evaluation Factors."
     p = document.add_paragraph(text)
     document.add_page_break()
 
     return document
+
 
 def definitions(document, rfq):
 
@@ -98,6 +102,7 @@ def definitions(document, rfq):
         document.add_paragraph(definition)    
 
     return document
+
 
 def services(document, rfq):
     document.add_heading("2. Services", level=BIG_HEADING)
@@ -116,7 +121,7 @@ def services(document, rfq):
 
     # travel
     if cc["travelRequirement"] == "yes":
-        travel_text = "The Government anticipates travel will be required under this effort. Contractor travel expenses will not exceed $" + cc["travelBudget"]+ "."
+        travel_text = "The Government anticipates travel will be required under this effort. Contractor travel expenses will not exceed $" + cc["travelBudget"] + "."
         document.add_paragraph(travel_text)
         document.add_paragraph(cc["travelLanguage"])
     else:
@@ -150,7 +155,7 @@ def services(document, rfq):
     for i in range(1, int(optionPeriods)+1):
         table = document.add_table(rows=2, cols=1)
         table.style = 'TableGrid'
-        table.rows[0].cells[0].text = "Option Period " + str(i) + ": "  + str(cc["optionPeriodDurationNumber"]) + ' ' + cc["optionPeriodDurationUnit"]
+        table.rows[0].cells[0].text = "Option Period " + str(i) + ": " + str(cc["optionPeriodDurationNumber"]) + ' ' + cc["optionPeriodDurationUnit"]
         table.rows[1].cells[0].text = "CLIN " + str(i) + "0001, FFP- Completion - The Contractor shall provide services for the Government in accordance with the Performance Work Statement (PWS)"
 
         table = document.add_table(rows=4, cols=2)
@@ -164,7 +169,7 @@ def services(document, rfq):
         table.rows[3].cells[0].text = "Firm Fixed Price (Completion):"
         table.rows[3].cells[1].text = "$XXXXX (Vendor Completes)"
         # @TODO if option fee, add option fee clin row
-        
+
         document.add_paragraph("\n")
 
     # @TODO add custom CLIN
@@ -173,6 +178,7 @@ def services(document, rfq):
     document.add_paragraph(cc["paymentSchedule"])
 
     return document
+
 
 def objectives(document, rfq):
     document.add_heading("3. Objectives", level=BIG_HEADING)
@@ -232,7 +238,6 @@ def objectives(document, rfq):
     if cc["userResearchStrategy"] == "done":
         document.add_paragraph(user_research_options["done"])
 
-
     if cc["userResearchStrategy"] == "internal":
         document.add_paragraph(user_research_options["internal"])
 
@@ -250,7 +255,6 @@ def objectives(document, rfq):
     document.add_heading("Deliverables", level=SUB_HEADING)
     document.add_paragraph(cc["definitionOfDone"])
 
-    
     document.add_heading("Place of Performance", level=SUB_HEADING)
     if cc['locationRequirement'] == "no":
         document.add_paragraph("The contractor is not required to have a full-time working staff presence on-site.")
@@ -280,6 +284,7 @@ def objectives(document, rfq):
     document.add_paragraph(cc["documentationAndTraining"])
 
     return document
+
 
 def personnel(document, rfq):
     document.add_heading("4. Key Personnel", level=BIG_HEADING)
@@ -324,6 +329,7 @@ def invoicing(document, rfq):
     document.add_paragraph(cc["duplicateInvoice"])
 
     return document
+
 
 def inspection_and_delivery(document, rfq):
     document.add_heading("6. Inspection and Delivery", level=BIG_HEADING)
@@ -371,6 +377,7 @@ def government_roles(document, rfq):
 
     return document
 
+
 def special_requirements(document, rfq):
     document.add_heading("8. Special Requirements", level=BIG_HEADING)
 
@@ -384,6 +391,7 @@ def special_requirements(document, rfq):
 
     return document
 
+
 def contract_clauses(document, rfq):
     document.add_heading("9. Additional Contract Clauses", level=BIG_HEADING)
     contract_clauses = session.query(ContentComponent).filter_by(document_id=rfq.id).filter_by(section=9).first()
@@ -391,11 +399,13 @@ def contract_clauses(document, rfq):
 
     return document
 
+
 def appendix(document, rfq):
 
     document.add_heading("10. Appendix", level=BIG_HEADING)
     
     return document
+
 
 def create_document(rfq_id):
 
