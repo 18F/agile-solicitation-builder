@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
+import os
+
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, Text, Boolean, String, ForeignKey
 from flask_sqlalchemy import SQLAlchemy
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, relationship
-
-import os
 
 import seed
 
