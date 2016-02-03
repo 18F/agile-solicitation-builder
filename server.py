@@ -70,10 +70,11 @@ class Data(Resource):
 
         # this needs to be done client side to allow for jumping between sections
         if section_id < 10:
-            url =  '#/rfp/' + str(rfq_id) + '/question/' + str(int(section_id) + 1)
+            url = '#/rfp/' + str(rfq_id) + '/question/' + str(int(section_id) + 1)
         else:
             url = "#/rfp/" + str(rfq_id) + "/results"
         return jsonify({"url": url})
+
 
 class Deliverables(Resource):
 
