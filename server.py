@@ -162,7 +162,7 @@ class Create(Resource):
 
     def get(self):
         session = Session()
-        rfqs = session.query(RFQ).all();
+        rfqs = session.query(RFQ).all()
         return jsonify(data=[r.to_dict() for r in rfqs])
 
     def post(self, **kwargs):
