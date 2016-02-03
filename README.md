@@ -23,7 +23,9 @@ This project uses the following bower components:
   - jQuery
   - Bootstrap
 
-The backend is a Flask app built with Python 2. To install its Python package dependencies, run `pip install -r requirements.txt`.
+The backend is a Flask app built with Python 2. It requires Postgres, which must be installed before the Python package dependencies.  To install the Python package dependencies, run `pip install -r requirements.txt`.
+
+The server expects a `DATABASE_URL` environment variable of the form expected by [SQLAlchemy engine configuration](http://docs.sqlalchemy.org/en/latest/core/engines.html).  This project uses the `postgresql+psycopg2` dialect and driver, so an example URL might be `postgresql+psycopg2://localhost/myDBname`.
 
 To launch the app first run `python server.py init` and then run `python server.py`. The site will be available at `http://localhost:5000`.
 
