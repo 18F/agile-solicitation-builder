@@ -1,4 +1,12 @@
 # -*- coding: utf-8 -*-
+import os
+import shutil
+import sys
+import config
+import datetime
+import logging
+import StringIO
+
 from flask import Flask, send_from_directory, send_file, request, jsonify, make_response, render_template
 from flask_restful import Resource, Api, reqparse
 from flask_sqlalchemy import SQLAlchemy
@@ -10,15 +18,6 @@ from sqlalchemy.schema import (
     ForeignKeyConstraint,
     DropConstraint,
     )
-
-import os, shutil
-import sys
-import config
-import datetime
-import sys
-import logging
-import StringIO
-
 
 import create_document
 
