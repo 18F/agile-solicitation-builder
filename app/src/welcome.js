@@ -50,7 +50,7 @@ var Welcome = React.createClass({
 						<li>V1 is for firm fixed price contracts only. The firm fixed price will be per iteration. </li>
 						<li>This tool is not built to support waterfall development requirements documents.</li>
 
-						<li>All documents should be approved by a warranted contracting officer and in consultation with your legal council as required.</li>
+						<li>All documents should be approved by a warranted contracting officer and in consultation with your legal counsel as required.</li>
 					</ul>
 					<h4>Also please note that this product is only in alpha, therefore any of the following may occur:</h4>
 						<ul>
