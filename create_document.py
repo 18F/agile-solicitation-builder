@@ -81,7 +81,9 @@ def overview(document, rfq):
     sections = ["Definitions", "Services", "Statement of Objectives", "Personnel Requirements", "Inspection and Delivery", "Government Roles", "Special Requirements", "Additional Contract Clauses", "Appendix"]
     for section in sections:
         document.add_paragraph(section, style='ListNumber')
-
+    
+    text = "Note: All sections of this RFQ will be incorporated into the contract except the Statement of Objectives, Instructions, and Evaluation Factors."
+    document.add_paragraph(text)
     document.add_page_break()
 
     return document
