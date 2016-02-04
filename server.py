@@ -3,11 +3,10 @@ import os
 import shutil
 import sys
 import config
-import datetime
 import logging
 import StringIO
 
-from flask import Flask, send_from_directory, send_file, request, jsonify, make_response, render_template
+from flask import Flask, send_from_directory, send_file, request, jsonify
 from flask_restful import Resource, Api, reqparse
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.engine import reflection
@@ -21,7 +20,6 @@ from sqlalchemy.schema import (
 
 import create_document
 
-from docx import Document
 from models import Agency, RFQ, ContentComponent, AdditionalClin, CustomComponent, Base, Session, Deliverable, engine
 from seed import agencies
 
@@ -101,7 +99,6 @@ class Clin(Resource):
         return jsonify(data=[c.to_dict() for c in clins])
 
     def post(self, rfq_id):
-        clin_values = ["row1", "row2", "row3a", "row3b", "row4a", "row4b", "row5a", "row5b", "row6a", "row6b"]
         data = request.get_json()["data"]
 
         row1 = data['row1']

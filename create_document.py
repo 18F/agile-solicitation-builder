@@ -1,13 +1,8 @@
 # -*- coding: utf-8 -*-
-import os
-import shutil
-import sys
-import config
 import datetime
 
 from docx import Document
-from models import Agency, RFQ, ContentComponent, AdditionalClin, Deliverable, CustomComponent, Base, Session, engine
-from pprint import pprint
+from models import Agency, RFQ, ContentComponent, Deliverable, CustomComponent, Session
 
 session = Session()
 
@@ -86,9 +81,9 @@ def overview(document, rfq):
     sections = ["Definitions", "Services", "Statement of Objectives", "Personnel Requirements", "Inspection and Delivery", "Government Roles", "Special Requirements", "Additional Contract Clauses", "Appendix"]
     for section in sections:
         document.add_paragraph(section, style='ListNumber')
-
+    
     text = "Note: All sections of this RFQ will be incorporated into the contract except the Statement of Objectives, Instructions, and Evaluation Factors."
-    p = document.add_paragraph(text)
+    document.add_paragraph(text)
     document.add_page_break()
 
     return document
