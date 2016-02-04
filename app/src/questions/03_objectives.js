@@ -172,6 +172,12 @@ var Objective = React.createClass({
 		return (
 			<div>
 				<div className="main-heading">Statement of Objectives</div>
+				<EditBox
+						text={this.state.userAccess}
+						editing={this.state.edit === 'userAccess'}
+						onStatusChange={this.toggleEdit.bind(this, 'userAccess')}
+						onTextChange={this.handleChange.bind(this, 'userAccess')}>
+				</EditBox>
 				<div className="sub-text">These questions are typically answered by the PM.</div>
 				<p>Note: The Statement of Objectives will be removed at time of award and replaced with the Offeror’s Performance Work Statement. All listed objectives and requirements shall be included as part of the Offeror’s Performance Work Statement.</p>
 
