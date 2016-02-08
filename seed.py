@@ -139,6 +139,21 @@ content_components = [
         "section": 2,
     },
     {
+        "name": "govFurnishedInfo",
+        "text": "",
+        "section": 2,
+    },
+    {
+        "name": "govFurnishedEquipment",
+        "text": "",
+        "section": 2,
+    },
+    {
+        "name": "govFurnishedFacilities",
+        "text": "",
+        "section": 2,
+    },
+    {
         "name": "generalBackground",
         "text": "",
         "section": 3,
@@ -174,6 +189,26 @@ content_components = [
         "section": 3,
     },
     {
+        "name": "internal_people_needs",
+        "text": "",
+        "section": 3,
+    },
+    {
+        "name": "internal_it_needs",
+        "text": "",
+        "section": 3,
+    },
+    {
+        "name": "external_people_needs",
+        "text": "",
+        "section": 3,
+    },
+    {
+        "name": "external_it_needs",
+        "text": "",
+        "section": 3,
+    },
+    {
         "name": "userAccess",
         "text": "The team within {AGENCY} managing this contract commit to support the vendor in the user research process, and will provide the vendor with access to the Government employees who will be the users of the product. (See section entitled 'Government Roles').",
         "section": 3,
@@ -196,6 +231,16 @@ content_components = [
     {
         "name": "definitionOfDone",
         "text": "A deliverable will be considered complete and acceptable when it meets the contractor's 'Definition of Done' which are based on the contractor’s Agile Software Development methodology.\n\nEach deliverable shall incorporate agency IT requirements as detailed in the Appendix of this document and the United States Digital Service Playbook (https://playbook.cio.gov) standards and be compliant with Section 508.",
+        "section": 3,
+    },
+    {
+        "name": "API_internal",
+        "text": "",
+        "section": 3,
+    },
+    {
+        "name": "API_external",
+        "text": "",
         "section": 3,
     },
     {
@@ -235,7 +280,7 @@ content_components = [
     },
     {
         "name": "startToFinish",
-        "text": "The contractor shall ensure we understand the different ways people will interact with the services, including the actions they take online, through a mobile application, on a phone, or in person. Every encounter — whether it's online or offline — should move the user closer towards their goal.\n\nIn delivery of this effort the contractor shall:\n\n  - Understand the different points at which people will interact with the service – both online and in person\n  - Identify pain points in the current way users interact with the service, and prioritize these according to user needs\n  - Design the digital parts of the service so that they are integrated with the offline touch points people use to interact with the service\n  - Develop metrics that will measure how well the service is meeting user needs at each step of the service",
+        "text": "The contractor shall ensure we understand the different ways people will interact with the services, including the actions they take online, through a mobile application, on a phone, or in person. Every encounter,  whether it's online or offline, should move the user closer towards their goal.\n\nIn delivery of this effort the contractor shall:\n\n  - Understand the different points at which people will interact with the service, both online and in person\n  - Identify pain points in the current way users interact with the service, and prioritize these according to user needs\n  - Design the digital parts of the service so that they are integrated with the offline touch points people use to interact with the service\n  - Develop metrics that will measure how well the service is meeting user needs at each step of the service",
         "section": 3,
     },
     {
@@ -245,7 +290,17 @@ content_components = [
     },
     {
         "name": "dataDrivenDecisions",
-        "text": "At every stage of a project, the contractor shall measure how well our service is working for our users. This includes measuring how well a system performs and how people are interacting with it in real-time. These metrics shall be reported to the Program Managers to find issues and identify which bug fixes and improvements should be prioritized. Along with monitoring tools, a feedback mechanism should be in place for people to report issues directly.\n\nIn delivery of this effort the contractor shall:\n\n  - Monitor system-level resource utilization in real time (Suggest tools)\n  - Monitor system performance in real-time (e.g. response time, latency, throughput, and error rates)\n  - Ensure monitoring can measure median, 95th percentile, and 98th percentile performance\n  - Create automated alerts based on this monitoring\n  - Track concurrent users in real-time, and monitor user behaviors in the aggregate to determine how well the service meets user needs\n  - Provide metrics which may be published internally\n  - Provide metrics which may be published externally\n  - Use an experimentation tool that supports multivariate testing in production\n  - Provide Goverment employees access to these monitoring systems",
+        "text": "At every stage of a project, the contractor shall measure how well our service is working for our users. This includes measuring how well a system performs and how people are interacting with it in real-time. These metrics shall be reported to the Program Managers to find issues and identify which bug fixes and improvements should be prioritized. Along with monitoring tools, a feedback mechanism should be in place for people to report issues directly.\n\nIn delivery of this effort the contractor shall:\n\n  - Monitor system-level resource utilization in real time (Suggest tools)\n  - Monitor system performance in real-time (e.g. response time, latency, throughput, and error rates)\n  - Ensure monitoring can measure median, 95th percentile, and 98th percentile performance\n  - Create automated alerts based on this monitoring\n  - Track concurrent users in real-time, and monitor user behaviors in the aggregate to determine how well the service meets user needs\n  - Provide metrics which may be published internally\n  - Provide metrics which may be published externally\n  - Use an experimentation tool that supports multivariate testing in production\n  - Provide Government employees access to these monitoring systems",
+        "section": 3,
+    },
+    {
+        "name": "agileIterativePractices",
+        "text": "This requirement shall be delivered in an incremental, fast-paced style of software development to reduce the risk of failure. The vendor shall deliver working software into users’ hands as early as possible to give the design and development team opportunities to adjust based on user feedback about the service. A critical capability is being able to automatically test and deploy the service so that new features can be added often and be put into production easily.\n\nRequirements Checklist\n\n  1. Ship a functioning “minimum viable product” (MVP) that solves a core user need as soon as possible, no longer than three months from the beginning of the project, using a “beta” or “test” period if needed\n  2. Run usability tests frequently to see how well the service works and identify improvements that should be made\n  3. Ensure the individuals building the service communicate closely using techniques such as launch meetings, war rooms, daily standups, and team chat tools\n  4. Keep delivery teams small and focused; limit organizational layers that separate these teams from the business owners\n  5. Release features and improvements multiple times each month\n  6. Create a prioritized list of features and bugs, also known as the “feature backlog” and “bug backlog”\n  7. Use a source code version control system \n  8. Give the entire project team access to the issue tracker and version control system\n  9. Use code reviews to ensure quality",
+        "section": 3,
+    },
+    {
+        "name": "defaultToOpen",
+        "text": "To the greatest extent practical, the vendor shall collaborate in the open and publish our data publicly. By building services more openly and publishing open data, we simplify the public’s access to government services and information, allow the public to contribute easily, and enable reuse by entrepreneurs, nonprofits, other agencies, and the public. To accomplish this we recommend the vendor:\n\n  1. Offer users a mechanism to report bugs and issues, and be responsive to these reports\n  2. Provide datasets to the public, in their entirety, through bulk downloads and APIs (application programming interfaces)\n  3. When appropriate, create an API for third parties and internal users to interact with the service directly",
         "section": 3,
     },
     {
@@ -265,7 +320,7 @@ content_components = [
     },
     {
         "name": "keyPersonnelRequirements",
-        "text": "The following requirements related to personnel must be met:\n\n  - If awarded this {DOC_TYPE}, the Contractor shall assign to perform this {DOC_TYPE} those persons whose résumés are submitted with its proposal and who are identified in the Contractor’s proposal as Key Personnel. Not all contractor employees assigned to perform this {DOC_TYPE} will be Key Personnel.\n  - If an individual proposed as Key Personnel becomes unavailable during the course of the source selection process, the Offeror will notify the Contracting Officer immediately and provide a substitute and their résumé. The proposal of any Key Personnel not currently employed by the Offeror shall be accompanied by letters of intent signed by the proposed Key Personnel indicating their intent to be employed by the Offeror if the Offeror is awarded a {DOC_TYPE} under this RFQ.\n  - The Contractor agrees that during the first six (6) months of {DOC_TYPE} performance, no Key Personnel substitutions will be made unless necessitated by an individual’s sudden illness, death, or termination of employment. In any of these events, the Contractor shall promptly notify the Contracting Officer and provide the information required by paragraph (e) below on the proposed replacement for Government approval. No substitutions of Key Personnel shall be made except in accordance with this provision.\n  - After the initial six-month period of performance, the Contractor must obtain Government approval of any substitution of Key Personnel prior to removing the approved Key Personnel from performance. All proposed substitutions/additions must be submitted, in writing, to the Contracting Officer at least 30 days (60 days if security clearances are involved) in advance of the proposed substitution and provide the information required by paragraph (e) below.\n  - All requests for substitutions/additions of Key Personnel must include a detailed explanation of the circumstances necessitating the proposed substitution or addition, a complete résumé for the proposed substitute or addition including skills, experience, education, training, and security level. As determined by the Contracting Officer, all proposed substitutes/additions must have qualifications that meet or exceed the qualifications of the person to be replaced.\n  - The Contracting Officer or his/her authorized representatives will evaluate the request(s) for substitutions/additions of Key Personnel and the Contracting Officer will notify the Contractor, in writing, of approval or disapproval. Disapproval of the proposed individual(s) shall not provide grounds for nonperformance by the Contractor or form the basis of any claim for monies, delivery schedule extension, or any other equitable adjustment.\n  - The personnel set forth below as proposed by the Contractor for this {DOC_TYPE}, or identified in the Contractor’s proposals as Key Personnel, shall comprise the list of Key Personnel required to perform under this {DOC_TYPE}. The list may be  modified in accordance with the above, to substitute or add personnel.",
+        "text": "The following requirements related to personnel must be met:\n\n  - If awarded this {DOC_TYPE}, the Contractor shall assign to perform this {DOC_TYPE} those persons whose resumes are submitted with its proposal and who are identified in the Contractor’s proposal as Key Personnel. Not all contractor employees assigned to perform this {DOC_TYPE} will be Key Personnel.\n  - If an individual proposed as Key Personnel becomes unavailable during the course of the source selection process, the Offeror will notify the Contracting Officer immediately and provide a substitute and their resume. The proposal of any Key Personnel not currently employed by the Offeror shall be accompanied by letters of intent signed by the proposed Key Personnel indicating their intent to be employed by the Offeror if the Offeror is awarded a {DOC_TYPE} under this RFQ.\n  - The Contractor agrees that during the first six (6) months of {DOC_TYPE} performance, no Key Personnel substitutions will be made unless necessitated by an individual’s sudden illness, death, or termination of employment. In any of these events, the Contractor shall promptly notify the Contracting Officer and provide the information required by paragraph (e) below on the proposed replacement for Government approval. No substitutions of Key Personnel shall be made except in accordance with this provision.\n  - After the initial six-month period of performance, the Contractor must obtain Government approval of any substitution of Key Personnel prior to removing the approved Key Personnel from performance. All proposed substitutions/additions must be submitted, in writing, to the Contracting Officer at least 30 days (60 days if security clearances are involved) in advance of the proposed substitution and provide the information required by paragraph (e) below.\n  - All requests for substitutions/additions of Key Personnel must include a detailed explanation of the circumstances necessitating the proposed substitution or addition, a complete resume for the proposed substitute or addition including skills, experience, education, training, and security level. As determined by the Contracting Officer, all proposed substitutes/additions must have qualifications that meet or exceed the qualifications of the person to be replaced.\n  - The Contracting Officer or his/her authorized representatives will evaluate the request(s) for substitutions/additions of Key Personnel and the Contracting Officer will notify the Contractor, in writing, of approval or disapproval. Disapproval of the proposed individual(s) shall not provide grounds for nonperformance by the Contractor or form the basis of any claim for monies, delivery schedule extension, or any other equitable adjustment.\n  - The personnel set forth below as proposed by the Contractor for this {DOC_TYPE}, or identified in the Contractor’s proposals as Key Personnel, shall comprise the list of Key Personnel required to perform under this {DOC_TYPE}. The list may be  modified in accordance with the above, to substitute or add personnel.",
         "section": 4,
     },
     {
@@ -549,6 +604,24 @@ deliverables = [
         "name": "ioIntegration",
         "text": "",
         "display": "Integration for input and output methods",
+        "value": "false",
+    },
+    {
+        "name": "helpDesk",
+        "text": "",
+        "display": "Support / Help Desk",
+        "value": "false",
+    },
+    {
+        "name": "releaseManagement",
+        "text": "",
+        "display": "Release Management and Post-Implementation Maintenance Support",
+        "value": "false",
+    },
+    {
+        "name": "helpDesk",
+        "text": "",
+        "display": "Data Management and Securitization",
         "value": "false",
     },
 ]

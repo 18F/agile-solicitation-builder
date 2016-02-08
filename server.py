@@ -26,7 +26,8 @@ from seed import agencies
 
 # set the project root directory as the static folder, you can set others.
 app = Flask(__name__, static_folder='app')
-app.config['APP_SETTINGS'] = config.DevelopmentConfig
+# app.config['APP_SETTINGS'] = config.DevelopmentConfig
+app.config.from_object(os.environ['APP_SETTINGS'])
 app.logger.addHandler(logging.StreamHandler(sys.stdout))
 app.logger.setLevel(logging.ERROR)
 db = SQLAlchemy(app)
@@ -296,17 +297,12 @@ def drop_everything():
 
     trans.commit()
 
-
 def create_tables():
 
     # delete old records
     drop_everything()
 
     session = Session()
-
-    if os.path.isdir("downloads"):
-        shutil.rmtree("downloads")
-    os.makedirs("downloads")
 
     Base.metadata.create_all(engine)    
 
@@ -317,7 +313,10 @@ def create_tables():
 
 
 if __name__ == "__main__":
-    if len(sys.argv) > 1 and sys.argv[1] == "init":
-        create_tables()
-    else:
-        app.run(debug=True)
+    create_tables()
+    app.run(debug=True)
+    # if len(sys.argv) > 1 and sys.argv[1] == "init":
+    #     create_tables()
+    # else:
+    #     port = int(os.getenv('PORT', 5000))
+    #     app.run(port=port, debug=True)
