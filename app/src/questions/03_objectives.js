@@ -26,29 +26,38 @@ var USER_TYPES = {
 var DELIVERABLE_STATES = ["d10", "d9", "d12", "d11", "d14", "d13", "d16", "d15", "d18", "d17", "d19", "d2", "d1", "d4", "d3", "d6", "d5", "d8", "d7"]
 
 var STATES = [
+	"API_external",
+	"API_internal",
+	"agileIterativePractices",
+	"dataDrivenDecisions",
+	"defaultToOpen",
 	"definitionOfDone",
+	"documentationAndTraining",
 	"external_it",
+	"external_it_needs",
 	"external_people",
+	"external_people_needs",
 	"generalBackground",
 	"internal_it",
+	"internal_it_needs",
 	"internal_people",
+	"internal_people_needs",
 	"kickOffMeeting",
 	"kickOffMeetingInPerson",
 	"kickOffMeetingRemote",
 	"languagesRequired",
 	"locationRequirement",
 	"locationText",
+	"objectivesIntro",
 	"objectivesSummary",
 	"offSiteDevelopmentCompliance",
 	"programHistory",
+	"simpleAndIntuitive",
+	"startToFinish",
 	"userAccess",
 	"userNeeds",
 	"userResearchStrategy",
 	"whatPeopleNeed",
-	"startToFinish",
-	"simpleAndIntuitive",
-	"dataDrivenDecisions",
-	"documentationAndTraining",	
 ];
 
 var Objective = React.createClass({
@@ -174,7 +183,13 @@ var Objective = React.createClass({
 				<div className="main-heading">Statement of Objectives</div>
 
 				<div className="sub-text">These questions are typically answered by the PM.</div>
-				<p>Note: The Statement of Objectives will be removed at time of award and replaced with the Offeror’s Performance Work Statement. All listed objectives and requirements shall be included as part of the Offeror’s Performance Work Statement.</p>
+
+				<EditBox
+						text={this.state.objectivesIntro}
+						editing={this.state.edit === 'objectivesIntro'}
+						onStatusChange={this.toggleEdit.bind(this, 'objectivesIntro')}
+						onTextChange={this.handleChange.bind(this, 'objectivesIntro')}>
+				</EditBox>
 
 
 				<div className="sub-heading">General Background</div>
@@ -205,8 +220,31 @@ var Objective = React.createClass({
 				<p>The users of the product will include {usersString}.</p> : null}
 
 				<p>What user needs will this service address?</p>
-				<div className="sub-text">Please list the user needs for each type of user selected above.</div>
-				<textarea className="form-control" rows="4" value={this.state.userNeeds} onChange={this.handleChange.bind(this, 'userNeeds')}></textarea>
+				<div className="sub-text">Please list the user needs for each type of user selected above and how this service will address them.</div>
+
+				{(this.state.internal_people == "true")?
+				<div>
+					<p>Government Employee's Needs</p>
+					<textarea className="form-control" rows="2" value={this.state.internal_people_needs} onChange={this.handleChange.bind(this, 'internal_people_needs')}></textarea>
+				</div> : null}
+				
+				{(this.state.external_people == "true")?
+				<div>
+					<p>The Public's Needs</p>
+					<textarea className="form-control" rows="2" value={this.state.external_people_needs} onChange={this.handleChange.bind(this, 'external_people_needs')}></textarea>
+				</div> : null}
+
+				{(this.state.internal_it == "true")?
+				<div>
+					<p>Internal IT Needs</p>
+					<textarea className="form-control" rows="2" value={this.state.internal_it_needs} onChange={this.handleChange.bind(this, 'internal_it_needs')}></textarea>
+				</div> : null}
+
+				{(this.state.external_it == "true")?
+				<div>
+					<p>External IT Needs</p>
+					<textarea className="form-control" rows="2" value={this.state.external_it_needs} onChange={this.handleChange.bind(this, 'external_it_needs')}></textarea>
+				</div> : null}
 
 				<p>What languages is your service offered in?</p>
 				<textarea className="form-control medium-response" rows="4" value={this.state.languagesRequired} onChange={this.handleChange.bind(this, 'languagesRequired')}></textarea>

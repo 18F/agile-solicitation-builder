@@ -26,8 +26,8 @@ from seed import agencies
 
 # set the project root directory as the static folder, you can set others.
 app = Flask(__name__, static_folder='app')
-# app.config['APP_SETTINGS'] = config.DevelopmentConfig
-app.config.from_object(os.environ['APP_SETTINGS'])
+app.config['APP_SETTINGS'] = config.DevelopmentConfig
+# app.config.from_object(os.environ['APP_SETTINGS'])
 app.logger.addHandler(logging.StreamHandler(sys.stdout))
 app.logger.setLevel(logging.ERROR)
 db = SQLAlchemy(app)

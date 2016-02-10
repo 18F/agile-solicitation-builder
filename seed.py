@@ -124,11 +124,6 @@ content_components = [
         "section": 2,
     },
     {
-        "name": "fee",
-        "text": "",
-        "section": 2,
-    },
-    {
         "name": "addClin",
         "text": "false",
         "section": 2,
@@ -152,6 +147,11 @@ content_components = [
         "name": "govFurnishedFacilities",
         "text": "",
         "section": 2,
+    },
+    {
+        "name": "objectivesIntro",
+        "text": "Note: The Statement of Objectives will be removed at time of award and replaced with the Offeror’s Performance Work Statement. All listed objectives and requirements shall be included as part of the Offeror’s Performance Work Statement.",
+        "section": 3,
     },
     {
         "name": "generalBackground",
@@ -190,22 +190,22 @@ content_components = [
     },
     {
         "name": "internal_people_needs",
-        "text": "",
+        "text": "Government employees need to ... \nThis service addresses this/these need(s) by ...",
         "section": 3,
     },
     {
         "name": "internal_it_needs",
-        "text": "",
+        "text": "Internal IT need to ... \nThis service addresses this/these need(s) by ...",
         "section": 3,
     },
     {
         "name": "external_people_needs",
-        "text": "",
+        "text": "The American public needs to ... \nThis service addresses this/these need(s) by ...",
         "section": 3,
     },
     {
         "name": "external_it_needs",
-        "text": "",
+        "text": "External IT organizations need to ... \nThis service addresses this/these need(s) by ...",
         "section": 3,
     },
     {
@@ -305,7 +305,7 @@ content_components = [
     },
     {
         "name": "documentationAndTraining",
-        "text": "A well designed interface will not require additional training for users. (see USDS playbook #2) and the need for training should be minimized with regular user testing and training that is built into the product through clear instructions and tutorials.\n\nThe contractor shall provide complete documentation for all systems and applications and provide training that will enable end users to utilize the system. The contractor will also consult with the COR to determine what is appropriate, effective, and essential for training and provide the services the COR deems necessary. This may include:\n\n  - Videos or self-guided training materials may be used\n  - Training features built into the system are used to the greatest extent possible\n  - Initial end-user training on a per-department basis during the initial on-boarding of users to the new system.\n  - “Train-the-trainer“ classes for selected trainers and administrators.",
+        "text": "A well designed interface will not require additional training for users. (see USDS playbook #2) and the need for training should be minimized with regular user testing and training that is built into the product through clear instructions and tutorials.\n\nAdditionally, the contractor shall provide complete documentation for all systems and applications and provide training that will enable end users to utilize the system. The contractor will also consult with the COR to determine what is appropriate, effective, and essential for training and provide the services the COR deems necessary. This may include:\n\n  - Videos or self-guided training materials may be used\n  - Training features built into the system are used to the greatest extent possible\n  - Initial end-user training on a per-department basis during the initial on-boarding of users to the new system.\n  - “Train-the-trainer“ classes for selected trainers and administrators.",
         "section": 3,
     },
     {
@@ -619,7 +619,7 @@ deliverables = [
         "value": "false",
     },
     {
-        "name": "helpDesk",
+        "name": "dataManagement",
         "text": "",
         "display": "Data Management and Securitization",
         "value": "false",
