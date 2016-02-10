@@ -226,38 +226,6 @@ api.add_resource(Clin, '/clins/<int:rfq_id>')
 api.add_resource(CustomComponents, '/custom_component/<int:rfq_id>/section/<int:section_id>')
 api.add_resource(DeleteRFQ, '/delete/rfqs/<int:rfq_id>')
 
-
-# map index.html to app/index.html, map /build/bundle.js to app/build.bundle.js
-@app.route('/initiate')
-def initiate():
-    RFQ.create(agency="", agency_full_name="", doc_type="")
-
-
-@app.route('/')
-def index():
-    return send_from_directory("app", "index.html")
-
-
-@app.route('/<path:path>')
-def send_js(path):
-    return send_from_directory("app", path)
-
-
-@app.route('/download/<int:rfq_id>')
-def download(rfq_id):
-    document = create_document.create_document(rfq_id)
-    strIO = StringIO.StringIO()
-    document.save(strIO)
-    strIO.seek(0)
-    return send_file(strIO, attachment_filename="RFQ.docx", as_attachment=True)
-    # return send_from_directory(directory="downloads", filename=doc_name)
-
-
-@app.route('/agile_estimator')
-def agile_estimator():
-    return send_file("AgileEstimator.xlsx")
-
-
 def drop_everything():
     # https://bitbucket.org/zzzeek/sqlalchemy/wiki/UsageRecipes/DropEverything
     conn = engine.connect()
@@ -312,9 +280,43 @@ def create_tables():
         session.commit()
 
 
-if __name__ == "__main__":
+# map index.html to app/index.html, map /build/bundle.js to app/build.bundle.js
+@app.route('/seed_database')
+def initiate():
     create_tables()
+    return "Database Seeded"
+
+@app.route('/')
+def index():
+    return send_from_directory("app", "index.html")
+
+
+@app.route('/<path:path>')
+def send_js(path):
+    return send_from_directory("app", path)
+
+
+@app.route('/download/<int:rfq_id>')
+def download(rfq_id):
+    document = create_document.create_document(rfq_id)
+    strIO = StringIO.StringIO()
+    document.save(strIO)
+    strIO.seek(0)
+    return send_file(strIO, attachment_filename="RFQ.docx", as_attachment=True)
+    # return send_from_directory(directory="downloads", filename=doc_name)
+
+
+@app.route('/agile_estimator')
+def agile_estimator():
+    return send_file("AgileEstimator.xlsx")
+
+
+
+
+if __name__ == "__main__":
     app.run(debug=True)
+
+    # create_tables()
     # if len(sys.argv) > 1 and sys.argv[1] == "init":
     #     create_tables()
     # else:
