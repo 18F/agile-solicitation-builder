@@ -27,7 +27,9 @@ The backend is a Flask app built with Python 2. It requires Postgres, which must
 
 The server expects a `DATABASE_URL` environment variable of the form expected by [SQLAlchemy engine configuration](http://docs.sqlalchemy.org/en/latest/core/engines.html).  This project uses the `postgresql+psycopg2` dialect and driver, so an example URL might be `postgresql+psycopg2://localhost/myDBname`.
 
-To launch the app first run `python server.py init` and then run `python server.py`. The site will be available at `http://localhost:5000`.
+To launch the app run `python server.py`. The site will be available at `http://localhost:5000`. To seed the database and delete any old tables run create_tables() (from server.py).
+
+To ensure bundle.js is updated with the changes to any react code you will need to use something like the node package gulp. You can either let it run in a separate terminal tab (just enter `gulp`), or when you start the app run `gulp python server.py`.
 
 ### Public domain
 
