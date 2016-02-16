@@ -29,10 +29,8 @@ var Header = React.createClass({
 
 		return (
 			<div>
-				<div className="container">
-					<p id="site-status">Help us improve by reporting issues and feedback <a href="https://github.com/18F/playbook-in-action/issues">here.</a></p>
-				</div>
 				<div className="col-md-12 header">
+					<p id="site-status">Help us improve by reporting issues and feedback <a href="https://github.com/18F/playbook-in-action/issues">here.</a></p>
 					<h1>
 						<IndexLink to="/" style={inheritStyle}>Playbook in Action</IndexLink>					
 					</h1>

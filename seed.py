@@ -626,8 +626,9 @@ deliverables = [
     },
 ]
 
-agencies = {
+agencies = {    
     'CFPB': 'Consumer Financial Protection Bureau',
+    'DOA': 'Department of Agriculture',
     'DHS': 'Department of Homeland Security',
     'DOC': 'Department of Commerce',
     'DOD': 'Department of Defense',
@@ -637,15 +638,20 @@ agencies = {
     'DOL': 'Department of Labor',
     'DOT': 'Department of Transportation',
     'ED': 'Department of Education',
+    'EPA': 'Environmental Protection Agency',
     'EOP': 'Executive Office of the President',
     'GSA': 'General Services Administration',
     'HHS': 'Department of Health and Human Services',
     'HUD': 'Department of Housing and Urban Development',
     'NARA': 'National Archives and Records Administration',
     'NASA': 'National Aeronautics and Space Administration',
+    'ODNI': 'Office of the Director of National Intelligence',
+    'OPM': 'Office of Personnel Management',
+    'NSF': 'National Science Foundation',
     'SBA': 'Small Business Administration',
-    'State': 'Department of State',
+    'DOS': 'Department of State',
     'Treasury': 'Department of the Treasury',
+    'USAID': 'Agency for International Development',
     'USDA': 'Department of Agriculture',
     'VA': 'Department of Veterans Affairs'
 }

@@ -1,7 +1,6 @@
 .header {
 	border-bottom: solid 1px #aeb0b5;
 	margin-bottom: 15px;
-	margin-top: -35px;
 }
 
 .term {
@@ -20,6 +19,7 @@ button.add {
 
 #site-status {
 	float: right;
+	margin-bottom: 0px;
 }
 
 .row.clin {

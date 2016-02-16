@@ -17,28 +17,6 @@ user_dict = {
     "internal_it": "Internal IT/Developers",
 }
 
-DELIVERABLES = {
-    "d1": "Training of end users on the systems",
-    "d2": "Design Solutions Prototyping",
-    "d3": "Process Improvement Recommendations",
-    "d4": "Program Management and Stewardship",
-    "d5": "UX requirements gathering",
-    "d6": "Initial application design and implementation",
-    "d7": "System configuration to support business processes",
-    "d8": "Integration for input and output methods",
-    "d9": "Workflow design and implementation",
-    "d10": "Overall collaboration of applications",
-    "d11": "Enhancements, patches, and updates to applications, data, or cloud systems",
-    "d12": "Data import of records collected from legacy systems",
-    "d13": "Automated testing",
-    "d14": "Supporting Legacy applications/systems",
-    "d15": "Native mobile application(s)",
-    "d16": "Mobile responsive web application(s)",
-    "d17": "Application capable of supporting high user traffic",
-    "d18": "Devops, continuous integration and continuous deployment",
-    "d19": "Workstations, data centers, server systems, and connectivity",
-}
-
 
 def make_dict(components):
     component_dict = {}
@@ -179,7 +157,6 @@ def objectives(document, rfq):
     document.add_heading("3. Objectives", level=BIG_HEADING)
     content_components = session.query(ContentComponent).filter_by(document_id=rfq.id).filter_by(section=3).all()
     cc = make_dict(content_components)
-    #  u'kickOffMeetingInPerson', u'userResearchStrategy', u'userAccess',
     document.add_heading("General Background", level=SUB_HEADING)
     if len(cc["generalBackground"]) > 0:
         document.add_paragraph(cc["generalBackground"])
@@ -212,6 +189,10 @@ def objectives(document, rfq):
         document.add_paragraph("The primary users will include the following:")
         for i, user in enumerate(users):
             document.add_paragraph(str(i+1) + ".  " + user_dict[user])
+
+    # for user in users, add text of each user's needs
+    needs = ['external_people_needs', 'external_it_needs', 'internal_it_needs', 'internal_people_needs']
+
 
     document.add_paragraph("The requirements described below will be customized to the types of users specified.")
 
