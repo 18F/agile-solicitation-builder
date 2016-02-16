@@ -18,6 +18,9 @@ var Request = require('./request');
 var RequestOverview = require('./request_overview');
 var Question = require('./question');
 var Results = require('./results');
+var RepoLink = React.createElement('a', {
+    href: 'https://github.com/18F/playbook-in-action/issues',
+}, 'reporting issues and feedback');
 
 
 var Header = React.createClass({
@@ -30,7 +33,7 @@ var Header = React.createClass({
 		return (
 			<div>
 				<div className="col-md-12 header">
-					<p id="site-status">Help us improve by reporting issues and feedback <a href="https://github.com/18F/playbook-in-action/issues">here.</a></p>
+					<p id="site-status">Help us improve by {RepoLink}.</p>
 					<h1>
 						<IndexLink to="/" style={inheritStyle}>Playbook in Action</IndexLink>					
 					</h1>
