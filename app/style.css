@@ -7,7 +7,7 @@
 	font-weight: 500;
 }
 
-div.edit {
+.edit {
 	color: #337ab7;
 	cursor: pointer; 
 	cursor: hand;
@@ -27,7 +27,7 @@ button.add {
 	margin-bottom: 0px;
 }
 
-.row.clin {
+.row .clin {
 	border: 1px solid;
 }
 
@@ -44,7 +44,7 @@ button.add {
 	border-top:0;
 }
 
-div.btn-toolbar{
+.btn-toolbar{
 	margin-top: 20px;
 }
 
@@ -60,9 +60,6 @@ div.btn-toolbar{
 
 .table-wrapper {
 	border: solid 1px;
-}
-
-.sidebar-nav{
 }
 
 .main-heading{
@@ -112,7 +109,7 @@ div.btn-toolbar{
 
 .new-content {
 	font-weight: 600;
-	font-color: red;
+	color: red;
 }
 
 .input-guidelines{
@@ -124,9 +121,9 @@ p {
 }
 
 textarea {
-	margin: 10px 0px;
+	margin: 10px 0;
 }
 
 #sidenav.affix {
-	top: 0px;
+	top: 0;
 }
