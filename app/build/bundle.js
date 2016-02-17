@@ -40200,6 +40200,9 @@ var Request = require('./request');
 var RequestOverview = require('./request_overview');
 var Question = require('./question');
 var Results = require('./results');
+var RepoLink = React.createElement('a', {
+    href: 'https://github.com/18F/playbook-in-action/issues',
+}, 'reporting issues and feedback');
 
 
 var Header = React.createClass({displayName: "Header",
@@ -40211,10 +40214,8 @@ var Header = React.createClass({displayName: "Header",
 
 		return (
 			React.createElement("div", null, 
-				React.createElement("div", {className: "container"}, 
-					React.createElement("p", {id: "site-status"}, "Help us improve by reporting issues and feedback ", React.createElement("a", {href: "https://github.com/18F/playbook-in-action/issues"}, "here."))
-				), 
 				React.createElement("div", {className: "col-md-12 header"}, 
+					React.createElement("p", {id: "site-status"}, "Help us improve by ", RepoLink, "."), 
 					React.createElement("h1", null, 
 						React.createElement(IndexLink, {to: "/", style: inheritStyle}, "Playbook in Action")					
 					)
