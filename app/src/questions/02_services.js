@@ -142,7 +142,7 @@ var Services = React.createClass({
 	},
 	updateNaicsText: function(event) {
 		var farCode = event.target.value;
-		var naicsText = "This requirement will be solicited under the following North American Industrial Classification System (NAICS) Code: 541512, Computer Systems Design Services, $27.5 million. This Task Order will be awarded under " + farCode + " which governs orders placed under " + FAR_CODES[farCode] + " contracts.";
+		var naicsText = "This requirement will be solicited under the following North American Industrial Classification System (NAICS) Code: 541512, Computer Systems Design Services. This Task Order will be awarded under " + farCode + " which governs orders placed under " + FAR_CODES[farCode] + " contracts.";
 		this.setState({
 			naicsText: naicsText,
 			farCode: farCode,
@@ -188,6 +188,7 @@ var Services = React.createClass({
   				});
 
   			}.bind(this));
+  			save();
   			location.reload();
   		}
   		// if not, alert and return
