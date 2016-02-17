@@ -23,8 +23,6 @@ var USER_TYPES = {
 	"external_it": "External IT",
 };
 
-// var DELIVERABLE_STATES = ["d10", "d9", "d12", "d11", "d14", "d13", "d16", "d15", "d18", "d17", "d19", "d2", "d1", "d4", "d3", "d6", "d5", "d8", "d7"]
-
 var DELIVERABLE_STATES = ["updates", "automatedTesting", "dataImport", "nativeMobile", "userTraining", "highTraffic", "mobileWeb", "connectivity", "devops", "legacySystems", "processImprovement", "prototyping", "UXrequirements", "programManagement", "systemConfiguration", "applicationDesign", "workflowDesign", "ioIntegration", "helpDesk", "releaseManagement", "dataManagement"]
 
 var STATES = [
