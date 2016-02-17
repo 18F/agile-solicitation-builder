@@ -33,9 +33,11 @@ var Header = React.createClass({
 		return (
 			<div>
 				<div className="col-md-12 header">
-					<p id="site-status">Help us improve by {RepoLink}.</p>
+				    <div className="container">
+						<p id="site-status">Help us improve by {RepoLink}.</p>
+					</div>
 					<h1>
-						<IndexLink to="/" style={inheritStyle}>Playbook in Action</IndexLink>					
+						<IndexLink to="/" style={inheritStyle}>Playbook in Action</IndexLink>
 					</h1>
 				</div>
 			</div>
