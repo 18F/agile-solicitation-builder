@@ -83,9 +83,10 @@ class Deliverables(Resource):
         return jsonify(data=[d.to_dict() for d in deliverables])
 
     def put(self, rfq_id):
+        session = Session()
         data = request.get_json()['data']
-        for key in data:
-            session = Session()
+        print data
+        for key in data:            
             deliverable = session.query(Deliverable).filter_by(document_id=rfq_id).filter_by(name=key).first()
             deliverable.value = data[key]
             session.merge(deliverable)
