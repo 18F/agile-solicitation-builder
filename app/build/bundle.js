@@ -40215,9 +40215,11 @@ var Header = React.createClass({displayName: "Header",
 		return (
 			React.createElement("div", null, 
 				React.createElement("div", {className: "col-md-12 header"}, 
-					React.createElement("p", {id: "site-status"}, "Help us improve by ", RepoLink, "."), 
+				    React.createElement("div", {className: "container"}, 
+						React.createElement("p", {id: "site-status"}, "Help us improve by ", RepoLink, ".")
+					), 
 					React.createElement("h1", null, 
-						React.createElement(IndexLink, {to: "/", style: inheritStyle}, "Playbook in Action")					
+						React.createElement(IndexLink, {to: "/", style: inheritStyle}, "Playbook in Action")
 					)
 				)
 			)
