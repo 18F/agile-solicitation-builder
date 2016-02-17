@@ -17,6 +17,11 @@ button.add {
 	margin-bottom: 10px;
 }
 
+.section-heading {
+	font-size: 20px;
+	font-weight: 500;
+}
+
 #site-status {
 	float: right;
 	margin-bottom: 0px;
@@ -67,7 +72,7 @@ div.btn-toolbar{
 
 .sub-heading{
 	font-size: 20px;
-	font-weight: 500;	
+	font-weight: 400;	
 }
 
 .sub-text{

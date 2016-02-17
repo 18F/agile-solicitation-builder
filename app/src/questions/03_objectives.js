@@ -23,7 +23,7 @@ var USER_TYPES = {
 	"external_it": "External IT",
 };
 
-var DELIVERABLE_STATES = ["updates", "automatedTesting", "dataImport", "nativeMobile", "userTraining", "highTraffic", "mobileWeb", "connectivity", "devops", "legacySystems", "processImprovement", "prototyping", "UXrequirements", "programManagement", "systemConfiguration", "applicationDesign", "workflowDesign", "ioIntegration", "helpDesk", "releaseManagement", "dataManagement"]
+var DELIVERABLE_STATES = ["updates", "automatedTesting", "dataImport", "nativeMobile", "userTraining", "highTraffic", "mobileWeb", "connectivity", "devops", "legacySystems", "processImprovement", "prototyping", "UXrequirements", "programManagement", "systemConfiguration", "applicationDesign", "workflowDesign", "ioIntegration", "helpDesk", "releaseManagement", "dataManagement"];
 
 var STATES = [
 	"API_external",
@@ -192,7 +192,6 @@ var Objective = React.createClass({
 						onTextChange={this.handleChange.bind(this, 'objectivesIntro')}>
 				</EditBox>
 
-
 				<div className="sub-heading">General Background</div>
 				<p>Please provide several paragraphs about your project's history, mission, and current state.</p>
 
@@ -218,7 +217,7 @@ var Objective = React.createClass({
 				{userTypesOptions}
 
 				{(usersString.length > 0)? 
-				<p>The users of the product will include {usersString}.</p> : null}
+				<div><p>The users of the product will include {usersString}.</p>
 
 				<p>What user needs will this service address?</p>
 				<div className="sub-text">Please list the user needs for each type of user selected above and how this service will address them.</div>
@@ -246,6 +245,10 @@ var Objective = React.createClass({
 					<p>External IT Needs</p>
 					<textarea className="form-control" rows="2" value={this.state.external_it_needs} onChange={this.handleChange.bind(this, 'external_it_needs')}></textarea>
 				</div> : null}
+				</div>
+				 : null}
+
+
 
 				<p>What languages is your service offered in?</p>
 				<textarea className="form-control medium-response" rows="4" value={this.state.languagesRequired} onChange={this.handleChange.bind(this, 'languagesRequired')}></textarea>
@@ -286,6 +289,18 @@ var Objective = React.createClass({
 					</div> : null
 			}
 
+			<div className="section-heading">Universal Requirements</div>
+			<p>All agile projects should follow these guidelines.</p>
+
+			<div className="sub-heading">Build the service using agile and iterative practices</div>
+			<EditBox
+					text={this.state.agileIterativePractices}
+					editing={this.state.edit === 'agileIterativePractices'}
+					onStatusChange={this.toggleEdit.bind(this, 'agileIterativePractices')}
+					onTextChange={this.handleChange.bind(this, 'agileIterativePractices')}>
+			</EditBox>
+			
+
 			<div className="sub-heading">Make it simple and intuitive</div>
 
 			<EditBox
@@ -314,22 +329,22 @@ var Objective = React.createClass({
 					onTextChange={this.handleChange.bind(this, 'definitionOfDone')}>
 			</EditBox>
 
-				<div className="sub-heading">Place of Performance</div>
-				<p>Will you require the contractor to have a full-time working staff presence onsite at a specific location?</p>
-				<div className="sub-text">Ex: SBA headquarters in Washington, DC</div>
-					<div className="radio">
-					  <label>
-					    <input type="radio" value="yes" onChange={this.handleChange.bind(this, "locationRequirement")} checked={this.state.locationRequirement === "yes"}></input>
-					    Yes
-					  </label>
-					</div>
-					<div className="radio">
-					  <label>
-					    <input type="radio" value="no" onChange={this.handleChange.bind(this, "locationRequirement")} checked={this.state.locationRequirement === "no"}></input>
-					    No
-					  </label>
-					</div>
-					{(this.state.locationRequirement === "yes")? <div><input type="text" className="form-control short-response" placeholder="ex: Washington, DC" value={this.state.locationText} onChange={this.handleChange.bind(this, "locationText")}></input><br /></div> : null}
+			<div className="sub-heading">Place of Performance</div>
+			<p>Will you require the contractor to have a full-time working staff presence onsite at a specific location?</p>
+			<div className="sub-text">Ex: SBA headquarters in Washington, DC</div>
+				<div className="radio">
+				  <label>
+				    <input type="radio" value="yes" onChange={this.handleChange.bind(this, "locationRequirement")} checked={this.state.locationRequirement === "yes"}></input>
+				    Yes
+				  </label>
+				</div>
+				<div className="radio">
+				  <label>
+				    <input type="radio" value="no" onChange={this.handleChange.bind(this, "locationRequirement")} checked={this.state.locationRequirement === "no"}></input>
+				    No
+				  </label>
+				</div>
+				{(this.state.locationRequirement === "yes")? <div><input type="text" className="form-control short-response" placeholder="ex: Washington, DC" value={this.state.locationText} onChange={this.handleChange.bind(this, "locationText")}></input><br /></div> : null}
 
 
 				<div className="resulting-text">Resulting Text</div>

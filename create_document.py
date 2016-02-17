@@ -222,6 +222,11 @@ def objectives(document, rfq):
 
     document.add_paragraph(cc['userAccess'])
 
+    document.add_heading("Universal Requirements", level=BIG_HEADING)
+
+    document.add_heading("Build the service using agile and iterative practices", level=SUB_HEADING)
+    document.add_paragraph(cc["agileIterativePractices"])
+
     document.add_heading("Make it simple and intuitive", level=SUB_HEADING)
     document.add_paragraph(cc["simpleAndIntuitive"])
 
