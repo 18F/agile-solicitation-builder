@@ -19,3 +19,7 @@ class NewVisitorTest(unittest.TestCase):
 
         # She notices that the page title and header mention the name of the app.
         self.assertIn('Playbook in Action', self.browser.title)
+
+
+if __name__ == '__main__':
+    unittest.main()
