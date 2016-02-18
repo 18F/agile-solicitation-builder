@@ -1,4 +1,8 @@
+<<<<<<< 49f3bae6a04ba034a5f00009c443f7f4e37e3e3a
 [![Stories in Ready](https://badge.waffle.io/18F/playbook-in-action.png?label=ready&title=Ready)](https://waffle.io/18F/playbook-in-action)
+=======
+### Installation
+
 This project uses the following node modules:
 
   - babel-preset-react
@@ -31,6 +35,10 @@ The server expects a `DATABASE_URL` environment variable of the form expected by
 To launch the app run `python server.py`. The site will be available at `http://localhost:5000`. To seed the database and delete any old tables run create_tables() (from server.py).
 
 To ensure bundle.js is updated with the changes to any React code, you will need to use something like the node package Gulp. Once you have it [installed](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md), leave it running in a separate Terminal tab: just change to the `app` directory (`cd app`) and run `gulp`.
+
+### Testing
+
+To test using a local browser, run `python tests/functional_tests.py`.
 
 ### Public domain
 
