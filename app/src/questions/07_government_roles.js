@@ -97,9 +97,9 @@ var ContractingOfficer = React.createClass({
 
 		return (
 			<div>
-				<div className="main-heading">Roles and Responsibilities</div>
+				<div className="page-heading">Roles and Responsibilities</div>
 
-				<div className="sub-text">The content in this section should be decided upon by both the PM and the CO.</div>
+				<div className="responder-instructions">The content in this section should be decided upon by both the PM and the CO.</div>
 
 				<EditBox
 						text={this.state.stakeholderIntro}
@@ -112,7 +112,7 @@ var ContractingOfficer = React.createClass({
 
 				<br />
 
-				{this.state.addRole? 
+				{this.state.addRole?
 					<div>
 						<div className="sub-heading">
 							<input type="text" className="medium-response form-control" placeholder="Title" value={this.state.title} onChange={this.handleChange.bind(this, "title")} />
@@ -124,7 +124,7 @@ var ContractingOfficer = React.createClass({
 				}
 				
 				<br />
-				<p>You may also add elaborate on these roles, or add additional roles in the generated RFQ.</p>
+				<div className="guidance-text">You may also add elaborate on these roles, or add additional roles in the generated RFQ.</div>
 				<br />
 
 			</div>

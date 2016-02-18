@@ -41,8 +41,8 @@ var Inspection = React.createClass({
 	render: function() {
 		return (
 			<div>
-				<div className="main-heading">Inspection, Acceptance, Delivery, Transition</div>
-				<div className="sub-text">The content in this section should be decided on by both the CO and the PM.</div>
+				<div className="page-heading">Inspection, Acceptance, Delivery, Transition</div>
+				<div className="responder-instructions">The content in this section should be decided on by both the CO and the PM.</div>
 
 				<div className="sub-heading">Overview</div>
 
@@ -81,8 +81,8 @@ var Inspection = React.createClass({
 						onTextChange={this.handleChange.bind(this, 'workspaceIntro')}>
 				</EditBox>
 
-				<p>Is your team currently using a collaborative workspace?</p>
-				<div className="sub-text">Ex: Sharepoint, JIRA, Rally, Google Drive, Box, etc.</div>
+				<div className="question-text">Is your team currently using a collaborative workspace?</div>
+				<div className="question-description">Ex: Sharepoint, JIRA, Rally, Google Drive, Box, etc.</div>
 
 				<radiogroup onChange={this.handleChange.bind(this, "workspaceExists")}>
 					<div className="radio">
@@ -97,21 +97,21 @@ var Inspection = React.createClass({
 					</div>
 				</radiogroup>
 
-				<p>The contractor will work with the PM and CO to establish a collaborative workspace that is acceptable for both parties.</p>
+				<div className="resulting-text">The contractor will work with the PM and CO to establish a collaborative workspace that is acceptable for both parties.</div>
 				{(this.state.workspaceExists == "yes")? 
 				<div>
 					<p>What workspace are you currently using?</p>
 					<input type="text" className="form-control short-response" onChange={this.handleChange.bind(this, "workspaceName")} value={this.state.workspaceName} />					
 					{(this.state.workspaceName.length > 0)? 
-						<p>Currently the government team is using {this.state.workspaceName}.</p> : null
+						<div className="resulting-text">Currently the government team is using {this.state.workspaceName}.</div> : null
 					}
 				</div>
 				: null
 				}
 				
-				<p>The US Digital Service Playbook strongly recommends the use of a version control system such as Github, or similar for storing code and system documentation.</p>
+				<div className="guidance-text">The US Digital Service Playbook strongly recommends the use of a version control system such as Github, or similar for storing code and system documentation.</div>
 	
-				<p>The Contractor shall:</p>
+				<div className="resulting-text">The Contractor shall:</div>
 
 				<EditBox
 						text={this.state.deliveringDeliverables}

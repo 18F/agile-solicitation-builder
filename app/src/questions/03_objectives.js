@@ -181,9 +181,9 @@ var Objective = React.createClass({
 
 		return (
 			<div>
-				<div className="main-heading">Statement of Objectives</div>
+				<div className="page-heading">Statement of Objectives</div>
 
-				<div className="sub-text">These questions are typically answered by the PM.</div>
+				<div className="responder-instructions">These questions are typically answered by the PM.</div>
 
 				<EditBox
 						text={this.state.objectivesIntro}
@@ -203,24 +203,24 @@ var Objective = React.createClass({
 				<textarea className="form-control" rows="10" value={this.state.programHistory} onChange={this.handleChange.bind(this, 'programHistory')}></textarea>
 
 				<div className="sub-heading">Specific Tasks and Deliverables</div>
-				<p>Which of the following do you anticipate your project will need?</p>
+				<div className="question-text">Which of the following do you anticipate your project will need?</div>
 
-				<div className="sub-text">We have already checked certain components that the USDS Playbook suggests be required for all projects.</div>
+				<div className="question-description">We have already checked certain components that the USDS Playbook suggests be required for all projects.</div>
 				
 				{deliverables}
 
 				<p>These functional Requirements will be translated into Epics and User Stories that will be used to populate the Product Backlog.</p>
 
 				<div className="sub-heading">Users</div>
-				<p>The primary users will be:</p>
+				<div className="question-text">Who will the primary users will be?</div>
 
 				{userTypesOptions}
 
 				{(usersString.length > 0)? 
-				<div><p>The users of the product will include {usersString}.</p>
+				<div><div className="resulting-text">The users of the product will include {usersString}.</div>
 
-				<p>What user needs will this service address?</p>
-				<div className="sub-text">Please list the user needs for each type of user selected above and how this service will address them.</div>
+				<div className="question-text">What user needs will this service address?</div>
+				<div className="question-description">Please list the user needs for each type of user selected above and how this service will address them.</div>
 
 				{(this.state.internal_people == "true")?
 				<div>
@@ -250,11 +250,11 @@ var Objective = React.createClass({
 
 
 
-				<p>What languages is your service offered in?</p>
+				<div className="question-text">What languages is your service offered in?</div>
 				<textarea className="form-control medium-response" rows="4" value={this.state.languagesRequired} onChange={this.handleChange.bind(this, 'languagesRequired')}></textarea>
 
 				<div className="sub-heading">User Research</div>
-				<p>What is your User Research Strategy?</p>
+				<div className="question-text">What is your User Research Strategy?</div>
 
 				<radiogroup onChange={this.handleChange.bind(this, 'userResearchStrategy')}>
 					{userResearchOptions}
@@ -330,8 +330,8 @@ var Objective = React.createClass({
 			</EditBox>
 
 			<div className="sub-heading">Place of Performance</div>
-			<p>Will you require the contractor to have a full-time working staff presence onsite at a specific location?</p>
-			<div className="sub-text">Ex: SBA headquarters in Washington, DC</div>
+			<div className="question-text">Will you require the contractor to have a full-time working staff presence onsite at a specific location?</div>
+			<div className="question-description">Ex: SBA headquarters in Washington, DC</div>
 				<div className="radio">
 				  <label>
 				    <input type="radio" value="yes" onChange={this.handleChange.bind(this, "locationRequirement")} checked={this.state.locationRequirement === "yes"}></input>
@@ -367,7 +367,7 @@ var Objective = React.createClass({
 				
 				<div className="sub-heading">Kick-Off Meeting/Post-Award Conference</div>
 
-				<p>Will you require the contractor to attend a kick-off meeting?</p>
+				<div className="question-text">Will you require the contractor to attend a kick-off meeting?</div>
 				<radiogroup onChange={this.handleChange.bind(this, "kickOffMeeting")}>
 				{kickOffMeetingOptions}
 				</radiogroup>
@@ -393,7 +393,7 @@ var Objective = React.createClass({
 					</div>: null}
 
 				{(this.state.kickOffMeeting === "none")?
-				<p>A formal kick-off meeting will not be required.</p> : null
+				<div className="resulting-text">A formal kick-off meeting will not be required.</div> : null
 				}
 			</div>
 		);

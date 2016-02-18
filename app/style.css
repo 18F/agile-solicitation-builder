@@ -62,7 +62,7 @@ button.add {
 	border: solid 1px;
 }
 
-.main-heading{
+.page-heading{
 	font-size: 28px;
 	margin-bottom: 10px;
 }
@@ -72,11 +72,20 @@ button.add {
 	font-weight: 400;	
 }
 
-.sub-text{
+.question-description{
 	font-style: italic;
-	/*margin-top: 5px;*/
 	margin-bottom: 10px;
 	font-size: 95%;
+}
+
+.responder-instructions{
+	font-style: italic;
+	margin-bottom: 10px;
+	font-size: 95%;
+}
+
+.question-text {
+	
 }
 
 .resulting-text{

@@ -52,8 +52,8 @@ var Requirement = React.createClass({
 
 		return (
 			<div>
-				<div className="main-heading">Contractor Personnel</div>
-				<div className="sub-text">These questions are typically answered by the PM.</div>
+				<div className="page-heading">Contractor Personnel</div>
+				<div className="responder-instructions">These questions are typically answered by the PM.</div>
 									
 				<EditBox
 						text={this.state.keyPersonnelIntro}
@@ -64,13 +64,13 @@ var Requirement = React.createClass({
 
 				<div className="sub-heading">Security Clearances</div>
 
-				<p>What is the highest level of clearance that will be required?</p>
+				<div className="question-text">What is the highest level of clearance that will be required?</div>
 
 				<radiogroup onChange={this.handleChange.bind(this, "clearanceRequired")}>
 					{clearance_options}
 				</radiogroup>
 
-				<p>Will any of the work be done onsite?</p>
+				<div className="question-text">Will any of the work be done onsite?</div>
 				<radiogroup onChange={this.handleChange.bind(this, "onSiteRequired")}>
 					<div className="radio">
 						<label>
@@ -85,18 +85,18 @@ var Requirement = React.createClass({
 				</radiogroup>
 
 				{(this.state.clearanceRequired == "None")? 
-				<div>Contractor personnel will <b>not</b> be required to have a security clearance.</div> :
-				<div>Some contractor personnel will be required to have a clearance at the level of <b>{this.state.clearanceRequired}</b>.</div>
+				<div className="resulting-text">Contractor personnel will <b>not</b> be required to have a security clearance.</div> :
+				<div className="resulting-text">Some contractor personnel will be required to have a clearance at the level of <b>{this.state.clearanceRequired}</b>.</div>
 				}
 				{(this.state.onSiteRequired == "yes")?
-				<div>An onsite presence by the contractor will be required.</div> :
-				<div>An onsite presence by the contractor will not be required.</div>
+				<div className="resulting-text">An onsite presence by the contractor will be required.</div> :
+				<div className="resulting-text">An onsite presence by the contractor will not be required.</div>
 				}
 				
 	
 				<div className="sub-heading">Key Personnel Evaluation Process</div>
 
-				<p>Do you want to require and evaluate key personnel?</p>
+				<div className="question-text">Do you want to require and evaluate key personnel?</div>
 				<radiogroup onChange={this.handleChange.bind(this, "evaluateKeyPersonnel")}>
 					<div className="radio">
 						<label>

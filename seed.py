@@ -541,12 +541,6 @@ deliverables = [
         "value": "false",
     },
     {
-        "name": "connectivity",
-        "text": "",
-        "display": "Workstations, data centers, server systems, and connectivity",
-        "value": "false",
-    },
-    {
         "name": "devops",
         "text": "",
         "display": "Devops, continuous integration and continuous deployment",
@@ -625,6 +619,13 @@ deliverables = [
         "value": "false",
     },
 ]
+
+    # {
+    #     "name": "connectivity",
+    #     "text": "",
+    #     "display": "Workstations, data centers, server systems, and connectivity",
+    #     "value": "false",
+    # },
 
 agencies = {    
     'CFPB': 'Consumer Financial Protection Bureau',

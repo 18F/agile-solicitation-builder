@@ -35,12 +35,12 @@ var ContractClauses = React.createClass({
 	render: function() {
 		return (
 			<div>
-				<div className="main-heading">Contract Clauses</div>
+				<div className="page-heading">Contract Clauses</div>
 
-				<div className="sub-text">The PM and the CO may both contribute content to this section.</div>
+				<div className="responder-instructions">The PM and the CO may both contribute content to this section.</div>
 	
 				<div className="sub-heading">Additional Clauses.</div>
-				<p>Please feel free to add anything else specific to your contract. You will also be able to edit the Microsoft Word document that is produced.</p>
+				<div className="guidance-text">Please feel free to add anything else specific to your contract. You will also be able to edit the Microsoft Word document that is produced.</div>
 				<textarea className="form-control" rows="15" value={this.state.contractClauses} onChange={this.handleChange.bind(this, 'contractClauses')}></textarea>
 			</div>
 		);
@@ -49,5 +49,3 @@ var ContractClauses = React.createClass({
 
 
 module.exports = ContractClauses;
-
-// data clauses, other agile specific clauses, NDA?

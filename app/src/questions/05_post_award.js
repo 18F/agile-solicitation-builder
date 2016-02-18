@@ -35,8 +35,8 @@ var PostAward = React.createClass({
 	render: function() {
 		return (
 			<div>
-				<div className="main-heading">Invoicing & Funding</div>
-					<div className="sub-text">The content in this section is typically decided on by the CO.</div>
+				<div className="page-heading">Invoicing & Funding</div>
+					<div className="responder-instructions">The content in this section is typically decided on by the CO.</div>
 					<p>If you wish to add additional text you may do so in the resulting word document.</p>
 					<div className="sub-heading">Contractor Instructions</div>
 
@@ -47,8 +47,8 @@ var PostAward = React.createClass({
 							onTextChange={this.handleChange.bind(this, 'invoicing')}>
 					</EditBox>
 
-					<p>The Contractor shall submit an original invoice for payment to the following office:</p>
-					<div className="sub-text">Please include your agency's payment office mailing address, telephone number and fax number.</div>
+					<div className="resulting-text">The Contractor shall submit an original invoice for payment to the following office:</div>
+					<div className="question-description">Please include your agency's payment office mailing address, telephone number and fax number.</div>
 
 	    		<textarea rows="5" className="form-control medium-response" placeholder="Office Name & Mailing Address" value={this.state.billingAddress} onChange={this.handleChange.bind(this, "billingAddress")}></textarea>
 

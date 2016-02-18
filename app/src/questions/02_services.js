@@ -344,16 +344,17 @@ var Services = React.createClass({
 
 		return (
 			<div>
-				<div className="main-heading">Services and Prices</div>
-				<div className="sub-text">These questions are typically answered by the CO.</div>
+				<div className="page-heading">Services and Prices</div>
+				<div className="responder-instructions">These questions are typically answered by the CO.</div>
 
 				<div className="sub-heading">Brief Description of Services</div>
-				<div className="sub-text">Feel free to edit the sample we have provided below.</div>
+				<div className="question-description">Feel free to edit the sample we have provided below.</div>
 				<textarea className="form-control" rows="4" value={this.state.descriptionOfServices} onChange={this.handleChange.bind(this, 'descriptionOfServices')}></textarea>				
 
 				<div className="sub-heading">Type of Contract</div>
-				<p>What type of contract will this be?</p>
-				<div className="sub-text">At the moment this tool only supports Firm Fixed Price as it better supports agile development.</div>
+				<div className="question-text">What type of contract will this be?</div>
+
+				<div className="question-description">At the moment this tool only supports Firm Fixed Price as it better supports agile development.</div>
 				<div className="radio">
 				  <label>
 				    <input type="radio" defaultChecked></input>
@@ -368,9 +369,9 @@ var Services = React.createClass({
 				</div>
 
 				<h5>NAICS Codes</h5>
-				<div className="sub-text">We have provided NAICS code 541512 that commonly applies to the acquisition of software development services. If you believe your requirement is not covered under this NAICS code you may search under <a href="http://www.census.gov/eos/www/naics/" target="_blank">this link</a> to select a different one; please edit the text below accordingly.</div>
+				<div className="question-description">We have provided NAICS code 541512 that commonly applies to the acquisition of software development services. If you believe your requirement is not covered under this NAICS code you may search under <a href="http://www.census.gov/eos/www/naics/" target="_blank">this link</a> to select a different one; please edit the text below accordingly.</div>
 
-				<h5>Under which section of the FAR do you intend to compete this?</h5>
+				<div className="question-text">Under which section of the FAR do you intend to compete this?</div>
 				<radiogroup onChange={this.updateNaicsText}>
 					{FARS}
 				</radiogroup>
@@ -384,7 +385,7 @@ var Services = React.createClass({
 
 				<div className="sub-heading">Budget</div>
 	
-				<p>What is the maximum budget for your project?</p>
+				<div className="question-text">What is the maximum budget for your project?</div>
 				<form className="form-inline">
 					<div className="form-group">
 						<div className="input-group">
@@ -394,9 +395,9 @@ var Services = React.createClass({
 	    		</div>
 				</form>
 
-				<p>The government is willing to invest a maximum budget of ${this.state.maxBudget} in this endeavor.</p>
+				<div className="resulting-text">The government is willing to invest a maximum budget of ${this.state.maxBudget} in this endeavor.</div>
 
-				<p>Will travel be required under this contract?</p>
+				<div className="question-text">Will travel be required under this contract?</div>
 
 				<radiogroup>
 					<div className="radio">
@@ -413,11 +414,11 @@ var Services = React.createClass({
 					</div>
 				</radiogroup>
 
-				<p>If travel is being priced separately you can create a custom CLIN below.</p>
+				<div className="guidance-text">If travel is being priced separately you can create a custom CLIN below.</div>
 
 				{(this.state.travelRequirement == "no")? null : 
 				<div>
-					<p>What is the maximum amount you are willing to reimbuse for travel?</p>
+					<div className="question-text">What is the maximum amount you are willing to reimbuse for travel?</div>
 					<form className="form-inline">
 						<div className="form-group">
 							<div className="input-group">
@@ -429,11 +430,11 @@ var Services = React.createClass({
 				</div>
 			}
 
-				<p>The Government {(this.state.travelRequirement == "yes")? "anticipates" : "does not anticipate"} travel will be required under this effort.</p>
+				<div className="resulting-text">The Government {(this.state.travelRequirement == "yes")? "anticipates" : "does not anticipate"} travel will be required under this effort.</div>
 
 				{(this.state.travelRequirement == "no")? null :
 				<div>
-					<p>Contractor travel expenses shall not exceed ${this.state.travelBudget}.</p>
+					<div className="resulting-text">Contractor travel expenses shall not exceed ${this.state.travelBudget}.</div>
 					<EditBox
 							text={this.state.travelLanguage}
 							editing={this.state.edit === 'travelLanguage'}
@@ -445,8 +446,8 @@ var Services = React.createClass({
 
 				<div className="sub-heading">Base Periods</div>
 
-				<p>How long would you like the period of performance for the <b>base period</b> to be?</p>
-				<div className="sub-text">We suggest 6 months or less.</div>
+				<div className="question-text">How long would you like the period of performance for the <b>base period</b> to be?</div>
+				<div className="question-description">We suggest 6 months or less.</div>
 				<form className="form-inline">
     			<input type="text" className="form-control" placeholder="enter a number" onChange={this.handleChange.bind(this, "basePeriodDurationNumber")} value={this.state.basePeriodDurationNumber}/>
 
@@ -456,7 +457,7 @@ var Services = React.createClass({
     			</select>
 				</form>
 
-				<p>Would you like to offer any of the following with the <b>base period</b>?</p>
+				<div className="question-text">Would you like to offer any of the following with the <b>base period</b>?</div>
 				<radiogroup onChange={this.updateFee.bind(this, "baseFee")}>
 					{BASE_FEES}
 				</radiogroup>
@@ -472,7 +473,7 @@ var Services = React.createClass({
 			    			</div>
 			    		</div>
 						</form>
-						<p>Use agency specific guidance regarding details.</p>
+						<div className="guidance-text">Use agency specific guidance regarding details.</div>
 
 						<div className="container fake-table col-md-12">
 							<div className="row clin">
@@ -491,12 +492,12 @@ var Services = React.createClass({
 				}
 
 				<div className="sub-heading">Option Periods</div>
-				<p>In addition to your base period, how many option periods would you like? We suggest no more than 3.</p>
+				<div className="question-text">In addition to your base period, how many option periods would you like? We suggest no more than 3.</div>
 				<form className="form-inline">
     			<input type="text" id="optionPeriods" className="form-control short-response" placeholder="enter a number" value={this.state.optionPeriods} onChange={this.handleChange.bind(this, "optionPeriods")}></input>
 				</form>
 
-				<p>Would you like to offer any of the following with each <b>option period</b>?</p>
+				<div className="question-text">Would you like to offer any of the following with each <b>option period</b>?</div>
 				<radiogroup onChange={this.updateFee.bind(this, 'optionFee')}>
 					{OPTION_FEES}
 				</radiogroup>
@@ -512,7 +513,7 @@ var Services = React.createClass({
 			    			</div>
 			    		</div>
 						</form>
-						<p>Use agency specific guidance for details.</p>
+						<div className="guidance-text">Use agency specific guidance for details.</div>
 	
 						<div className="container fake-table col-md-12">
 							<div className="row clin">
@@ -531,8 +532,8 @@ var Services = React.createClass({
 					
 				}
 
-				<p>How long would you like period of performance for each <b>option period</b> to be?</p>
-				<div className="sub-text">We suggest 6 months or less.</div>
+				<div className="question-text">How long would you like period of performance for each <b>option period</b> to be?</div>
+				<div className="question-description">We suggest 6 months or less.</div>
 				<form className="form-inline">
     			<input type="text" className="form-control" placeholder="enter a number" onChange={this.handleChange.bind(this, "optionPeriodDurationNumber")} value={this.state.optionPeriodDurationNumber}/>
     			<select className="form-control" onChange={this.handleChange.bind(this, "optionPeriodDurationUnit")} value={this.state.optionPeriodDurationUnit}>
@@ -541,8 +542,8 @@ var Services = React.createClass({
     			</select>
 				</form>
 
-				<p>How long will each iteration within a period of performance be? </p>
-				<div className="sub-text">We recommend 2-3 weeks per iteration.</div>
+				<div className="question-text">How long will each iteration within a period of performance be?</div>
+				<div className="question-description">We recommend 2-3 weeks per iteration.</div>
 				<form className="form-inline">
     			<input type="text" className="form-control" placeholder="enter a number" onChange={this.handleChange.bind(this, "iterationPoPNumber")} value={this.state.iterationPoPNumber}/>
 
@@ -552,12 +553,11 @@ var Services = React.createClass({
     			</select>
 				</form>
 
-				<div className="resulting-text">Resulting Text</div>
-				<p>The Period of Performance for this {this.state.docType} shall be a base period of <b>{bPoP}</b>. <b>{this.state.optionPeriods}</b> additional <b>{oPoP}</b> Option Periods will be included for a total potential period of performance of up to 2 years as described in section 2.
-				</p>
+				<div className="resulting-text">The Period of Performance for this {this.state.docType} shall be a base period of <b>{bPoP}</b>. <b>{this.state.optionPeriods}</b> additional <b>{oPoP}</b> Option Periods will be included for a total potential period of performance of up to 2 years as described in section 2.
+				</div>
 
 				<div className="sub-heading">Funding</div>
-				<p>Funding for performance will be allocated and obligated for each exercised Contract Line Item (CLIN).</p>
+				<div className="guidance-text">Funding for performance will be allocated and obligated for each exercised Contract Line Item (CLIN).</div>
 
 				<div className="sub-heading">Contract Line Item Number (CLIN) Format</div>							
 
@@ -611,8 +611,7 @@ var Services = React.createClass({
 
 				<div className="sub-heading">Payment Schedule</div>
 				
-				<p>We have pre-populated this section with the standard agile contracting text. However you are free to add to, modify or delete this text as you see fit.
-				</p>
+				<div className="guidance-text">We have pre-populated this section with the standard agile contracting text. However you are free to add to, modify or delete this text as you see fit.</div>
 
 				<EditBox
 						text={this.state.paymentSchedule}
