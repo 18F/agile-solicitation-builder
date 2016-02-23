@@ -85,8 +85,7 @@ class Deliverables(Resource):
     def put(self, rfq_id):
         session = Session()
         data = request.get_json()['data']
-        print data
-        for key in data:            
+        for key in data:
             deliverable = session.query(Deliverable).filter_by(document_id=rfq_id).filter_by(name=key).first()
             deliverable.value = data[key]
             session.merge(deliverable)

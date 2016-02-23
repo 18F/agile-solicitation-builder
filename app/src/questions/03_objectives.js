@@ -23,7 +23,7 @@ var USER_TYPES = {
 	"external_it": "External IT",
 };
 
-var DELIVERABLE_STATES = ["updates", "automatedTesting", "dataImport", "nativeMobile", "userTraining", "highTraffic", "mobileWeb", "connectivity", "devops", "legacySystems", "processImprovement", "prototyping", "UXrequirements", "programManagement", "systemConfiguration", "applicationDesign", "workflowDesign", "ioIntegration", "helpDesk", "releaseManagement", "dataManagement"];
+var DELIVERABLE_STATES = ["updates", "automatedTesting", "dataImport", "nativeMobile", "userTraining", "highTraffic", "mobileWeb", "devops", "legacySystems", "processImprovement", "prototyping", "UXrequirements", "programManagement", "systemConfiguration", "applicationDesign", "workflowDesign", "ioIntegration", "helpDesk", "releaseManagement", "dataManagement"];
 
 var STATES = [
 	"API_external",
