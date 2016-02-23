@@ -63,7 +63,7 @@ var Inspection = React.createClass({
 				</EditBox>
 
 
-				<div className="sub-heading">Notice Regarding Late Delivery</div>
+				<div className="content-title">Notice Regarding Late Delivery</div>
 
 				<EditBox
 						text={this.state.lateDelivery}

@@ -33,7 +33,7 @@ var PostAward = React.createClass({
     put_data(5, "get_content", rfqId, data, cb);
   },
 	render: function() {
-		var placeholderText = "Mailing Address                                          Phone Number                                          Fax Number";
+		var placeholderText = "Mailing Address                                          Phone Number                                                 Fax Number";
 		return (
 			<div>
 				<div className="page-heading">Invoicing & Funding</div>

@@ -103,14 +103,45 @@ button.add {
 	line-height: 1.3em/22px;
 }
 
+.question-text {
+	margin: 5px 0 10px 0;
+	font-size: 16px;
+	font-family: 'Merriweather', serif;
+	color: #323a45;
+}
+
 .question-description{
 	font-style: italic;
 	margin: 0 0 10px 0;
 	font-size: 95%;
 }
 
-.guidance-text{
+.responder-instructions{
+	font-style: italic;
+	margin-bottom: 10px;
+	font-size: 95%;
+}
 
+.resulting-text{
+	font-weight: 500;
+	font-size: 105%;
+	color: #205493;
+	background-color: #dce4ef;
+}
+
+.content-title{
+	margin: 5px 0 10px 0;
+	font-size: 16px;
+	font-family: 'Merriweather', serif;
+	color: #323a45;
+/*	font-family: ‘Source Sans Pro’, sans-serif;
+	font-weight: 400;
+	font-size: 13px;
+	line-height: 1.3em/17px;
+	text-transform: uppercase;*/
+}
+
+.guidance-text{
 }
 
 .edit-box {
@@ -129,26 +160,6 @@ div#mount textarea {
 	font-size: 16px;
 }
 
-.responder-instructions{
-	font-style: italic;
-	margin-bottom: 10px;
-	font-size: 95%;
-}
-
-.question-text {
-	margin: 5px 0 10px 0;
-	font-size: 16px;
-	font-family: 'Merriweather', serif;
-	color: #323a45;
-}
-
-.resulting-text{
-	font-weight: 500;
-	font-size: 105%;
-	color: #205493;
-	background-color: #dce4ef;
-}
-
 .help {
 	background-color: #aeb0b5;
 	font-weight: 600;
@@ -156,7 +167,6 @@ div#mount textarea {
 
 .short-response{
 	width: 150px;
-	/*margin-left: 5px;*/
 }
 
 .medium-response{

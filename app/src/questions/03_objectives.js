@@ -242,7 +242,6 @@ var Objective = React.createClass({
 				<div className="question-text">What languages is your service offered in?</div>
 				<textarea className="form-control medium-response" rows="4" value={this.state.languagesRequired} onChange={this.handleChange.bind(this, 'languagesRequired')}></textarea>
 
-				<div className="sub-heading">User Research</div>
 				<div className="question-text">What is your User Research Strategy?</div>
 
 				<radiogroup onChange={this.handleChange.bind(this, 'userResearchStrategy')}>
@@ -258,7 +257,7 @@ var Objective = React.createClass({
 	
 				{(this.state.userResearchStrategy === "vendor")?
 					<div>
-						<div className="sub-heading">Understand what people need</div>
+						<div className="content-title">Understand what people need</div>
 						<EditBox
 								text={this.state.whatPeopleNeed}
 								editing={this.state.edit === 'whatPeopleNeed'}
@@ -266,8 +265,7 @@ var Objective = React.createClass({
 								onTextChange={this.handleChange.bind(this, 'whatPeopleNeed')}>
 						</EditBox>
 
-
-						<div className="sub-heading">Address the whole experience, from start to finish</div>
+						<div className="content-title">Address the whole experience, from start to finish</div>
 						<EditBox
 								text={this.state.startToFinish}
 								editing={this.state.edit === 'startToFinish'}
@@ -278,10 +276,10 @@ var Objective = React.createClass({
 					</div> : null
 				}
 
-				<div className="section-heading">General Requirements</div>
+				<div className="sub-heading">General Requirements</div>
 				<p>All agile projects should follow these guidelines.</p>
 
-				<div className="sub-heading">Build the service using agile and iterative practices</div>
+				<div className="content-title">Build the service using agile and iterative practices</div>
 				<EditBox
 						text={this.state.agileIterativePractices}
 						editing={this.state.edit === 'agileIterativePractices'}
@@ -289,7 +287,7 @@ var Objective = React.createClass({
 						onTextChange={this.handleChange.bind(this, 'agileIterativePractices')}>
 				</EditBox>
 
-				<div className="sub-heading">Make it simple and intuitive</div>
+				<div className="content-title">Make it simple and intuitive</div>
 
 				<EditBox
 						text={this.state.simpleAndIntuitive}
@@ -299,7 +297,7 @@ var Objective = React.createClass({
 				</EditBox>
 
 
-				<div className="sub-heading">Use data to drive decisions</div>
+				<div className="content-title">Use data to drive decisions</div>
 
 				<EditBox
 						text={this.state.dataDrivenDecisions}
@@ -308,7 +306,7 @@ var Objective = React.createClass({
 						onTextChange={this.handleChange.bind(this, 'dataDrivenDecisions')}>
 				</EditBox>
 
-				<div className="sub-heading">Deliverables</div>
+				<div className="sub-heading">Specific Tasks and Deliverables</div>
 
 				<EditBox
 						text={this.state.definitionOfDone}
@@ -316,9 +314,7 @@ var Objective = React.createClass({
 						onStatusChange={this.toggleEdit.bind(this, 'definitionOfDone')}
 						onTextChange={this.handleChange.bind(this, 'definitionOfDone')}>
 				</EditBox>
-
-
-				<div className="sub-heading">Specific Tasks and Deliverables</div>
+				
 				<div className="question-text">Which of the following do you anticipate your project will need?</div>
 
 				<div className="question-description">We have already checked certain components that the USDS Playbook suggests be required for all projects.</div>
@@ -335,7 +331,8 @@ var Objective = React.createClass({
 						onTextChange={this.handleChange.bind(this, 'documentationAndTraining')}>
 				</EditBox>
 
-								<div className="sub-heading">Place of Performance</div>
+				
+				<div className="sub-heading">Location & Kick-Off Meeting</div>
 				<div className="question-text">Will you require the contractor to have a full-time working staff presence onsite at a specific location?</div>
 				<div className="question-description">Ex: SBA headquarters in Washington, DC</div>
 				<div className="radio">
@@ -366,8 +363,6 @@ var Objective = React.createClass({
 						onStatusChange={this.toggleEdit.bind(this, 'offSiteDevelopmentCompliance')}
 						onTextChange={this.handleChange.bind(this, 'offSiteDevelopmentCompliance')}>
 				</EditBox>
-
-				<div className="sub-heading">Kick-Off Meeting/Post-Award Conference</div>
 
 				<div className="question-text">Will you require the contractor to attend a kick-off meeting?</div>
 				<radiogroup onChange={this.handleChange.bind(this, "kickOffMeeting")}>
