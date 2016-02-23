@@ -192,12 +192,12 @@ var Objective = React.createClass({
 				</EditBox>
 
 				<div className="sub-heading">General Background</div>
-				<p>Please provide several paragraphs about your project's history, mission, and current state.</p>
+				<div className="question-description">Please provide several paragraphs about your project's history, mission, and current state.</div>
 
 				<textarea className="form-control" rows="9" value={this.state.generalBackground} onChange={this.handleChange.bind(this, 'generalBackground')}></textarea>
 
 				<div className="sub-heading">Program History</div>
-				<p>If you have any information about the current vendors and specific technology being used please provide it here.</p>
+				<div className="question-description">If you have any information about the current vendors and specific technology being used please provide it here.</div>
 
 				<textarea className="form-control" rows="10" value={this.state.programHistory} onChange={this.handleChange.bind(this, 'programHistory')}></textarea>
 

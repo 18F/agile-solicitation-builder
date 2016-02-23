@@ -108,6 +108,7 @@ button.add {
 	font-size: 16px;
 	font-family: 'Merriweather', serif;
 	color: #323a45;
+	font-weight: 700;
 }
 
 .question-description{
@@ -134,11 +135,7 @@ button.add {
 	font-size: 16px;
 	font-family: 'Merriweather', serif;
 	color: #323a45;
-/*	font-family: ‘Source Sans Pro’, sans-serif;
-	font-weight: 400;
-	font-size: 13px;
-	line-height: 1.3em/17px;
-	text-transform: uppercase;*/
+	font-weight: 700;
 }
 
 .guidance-text{
@@ -158,11 +155,6 @@ div#mount select {
 
 div#mount textarea {
 	font-size: 16px;
-}
-
-.help {
-	background-color: #aeb0b5;
-	font-weight: 600;
 }
 
 .short-response{
@@ -196,7 +188,6 @@ div#mount textarea {
 	float: right;
 	padding-right: 15px;
 }
-
 
 textarea {
 	margin: 10px 0;
