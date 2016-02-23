@@ -74,6 +74,8 @@ var Inspection = React.createClass({
 
 				<div className="sub-heading">Delivering Deliverables</div>
 
+				<div className="guidance-text">The US Digital Service Playbook strongly recommends the use of a version control system such as Github, or similar for storing code and system documentation.</div>
+
 				<EditBox
 						text={this.state.workspaceIntro}
 						editing={this.state.edit === 'workspaceIntro'}
@@ -100,7 +102,7 @@ var Inspection = React.createClass({
 				<div className="resulting-text">The contractor will work with the PM and CO to establish a collaborative workspace that is acceptable for both parties.</div>
 				{(this.state.workspaceExists == "yes")? 
 				<div>
-					<p>What workspace are you currently using?</p>
+					<div className="question-text">What workspace are you currently using?</div>
 					<input type="text" className="form-control short-response" onChange={this.handleChange.bind(this, "workspaceName")} value={this.state.workspaceName} />					
 					{(this.state.workspaceName.length > 0)? 
 						<div className="resulting-text">Currently the government team is using {this.state.workspaceName}.</div> : null
@@ -109,10 +111,6 @@ var Inspection = React.createClass({
 				: null
 				}
 				
-				<div className="guidance-text">The US Digital Service Playbook strongly recommends the use of a version control system such as Github, or similar for storing code and system documentation.</div>
-	
-				<div className="resulting-text">The Contractor shall:</div>
-
 				<EditBox
 						text={this.state.deliveringDeliverables}
 						editing={this.state.edit === 'deliveringDeliverables'}

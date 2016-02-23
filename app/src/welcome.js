@@ -28,7 +28,7 @@ var Welcome = React.createClass({
 			var doctype = this_rfq['doc_type'];
 			var url = '#/rfp/' + this_rfq['id'] + '/question/1';
 			rfqs.push(
-				<li>
+				<li key={this_rfq['id']}>
 					<a href={url} >
 						#{this_rfq['id']}, {this_rfq['doc_type']} for <b>{this_rfq['program_name']}</b> with {this_rfq['agency']}
 					</a>

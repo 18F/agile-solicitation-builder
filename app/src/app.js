@@ -20,7 +20,8 @@ var Question = require('./question');
 var Results = require('./results');
 var RepoLink = React.createElement('a', {
     href: 'https://github.com/18F/playbook-in-action/issues',
-}, 'reporting issues and feedback');
+    'target': '_blank',
+}, 'Help us improve');
 
 
 var Header = React.createClass({
@@ -31,15 +32,17 @@ var Header = React.createClass({
 		};
 
 		return (
-			<div>
-				<div className="col-md-12 header">
-				    <div className="container">
-						<p id="site-status">Help us improve by {RepoLink}.</p>
-					</div>
-					<h1>
-						<IndexLink to="/" style={inheritStyle}>Playbook in Action</IndexLink>
-					</h1>
-				</div>
+			<div className="col-md-12 header">
+				<div className="usa-disclaimer">
+    			<span className="usa-disclaimer-official">
+      			<img className="usa-flag_icon" alt="US flag signifying that this is a United States Federal Government website" src="/assets/img/us_flag_small.png" />
+			      An official website of the United States Government
+				  </span>
+				  <span className="usa-disclaimer-stage">This site is currently in alpha. {RepoLink}.</span>
+			  </div>
+				<h1>
+					<IndexLink to="/" style={inheritStyle}>Playbook in Action</IndexLink>
+				</h1>
 			</div>
 		);
 	},

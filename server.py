@@ -247,6 +247,7 @@ def drop_everything():
     all_fks = []
 
     for table_name in inspector.get_table_names():
+        print table_name
         fks = []
         for fk in inspector.get_foreign_keys(table_name):
             if not fk['name']:
@@ -270,6 +271,7 @@ def create_tables():
 
     # delete old records
     drop_everything()
+    print '273 here'
 
     session = Session()
 
@@ -304,13 +306,11 @@ def download(rfq_id):
     document.save(strIO)
     strIO.seek(0)
     return send_file(strIO, attachment_filename="RFQ.docx", as_attachment=True)
-    # return send_from_directory(directory="downloads", filename=doc_name)
 
 
 @app.route('/agile_estimator')
 def agile_estimator():
     return send_file("AgileEstimator.xlsx")
-
 
 
 

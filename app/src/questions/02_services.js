@@ -188,7 +188,7 @@ var Services = React.createClass({
   				});
 
   			}.bind(this));
-  			save();
+  			this.save();
   			location.reload();
   		}
   		// if not, alert and return
@@ -223,7 +223,7 @@ var Services = React.createClass({
 		var FARS = [];
 		for (var key in FAR_CODES) {
 			FARS.push(
-				<div className="radio">
+				<div className="radio" key={key}>
 					<label>
 						<input type="radio" value={key} checked={key == this.state.farCode} />{key} - { FAR_CODES[key] }
 				  </label>
@@ -264,34 +264,44 @@ var Services = React.createClass({
 						<div className="col-md-12 table-content">{this_clin["row1"]}
 						</div>
 					</div>
-					<div className="row clin additional">
-						<div className="col-md-12 table-content">{this_clin["row2"]}
+					{(this_clin['row2'].length > 0) ? 
+						<div className="row clin additional">
+							<div className="col-md-12 table-content">{this_clin["row2"]}
+							</div>
+						</div> 
+					: null }
+					{(this_clin['row3a'].length > 0) || (this_clin['row3b'].length > 0) ? 
+						<div className="row clin additional">
+							<div className="col-md-6 table-content">{this_clin["row3a"]}
+							</div>
+							<div className="col-md-6 table-content">{this_clin["row3b"]}
+							</div>
 						</div>
-					</div>
-					<div className="row clin additional">
-						<div className="col-md-6 table-content">{this_clin["row3a"]}
+					: null}
+					{(this_clin['row4a'].length > 0) || (this_clin['row4b'].length > 0) ? 
+						<div className="row clin additional">
+							<div className="col-md-6 table-content">{this_clin["row4a"]}
+							</div>
+							<div className="col-md-6 table-content">{this_clin["row4b"]}
+							</div>
 						</div>
-						<div className="col-md-6 table-content">{this_clin["row3b"]}
+					: null}
+					{(this_clin['row5a'].length > 0) || (this_clin['row5b'].length > 0) ?
+						<div className="row clin additional">
+							<div className="col-md-6 table-content">{this_clin["row5a"]}
+							</div>
+							<div className="col-md-6 table-content ">{this_clin["row5b"]}
+							</div>
 						</div>
-					</div>
-					<div className="row clin additional">
-						<div className="col-md-6 table-content">{this_clin["row4a"]}
+					: null}
+					{(this_clin['row6a'].length > 0) || (this_clin['row6b'].length > 0) ?
+						<div className="row clin additional">
+							<div className="col-md-6 table-content">{this_clin["row6a"]}
+							</div>
+							<div className="col-md-6 table-content">{this_clin["row6b"]}
+							</div>
 						</div>
-						<div className="col-md-6 table-content">{this_clin["row4b"]}
-						</div>
-					</div>
-					<div className="row clin additional">
-						<div className="col-md-6 table-content">{this_clin["row5a"]}
-						</div>
-						<div className="col-md-6 table-content ">{this_clin["row5b"]}
-						</div>
-					</div>
-					<div className="row clin additional">
-						<div className="col-md-6 table-content">{this_clin["row6a"]}
-						</div>
-						<div className="col-md-6 table-content">{this_clin["row6b"]}
-						</div>
-					</div>
+					: null}
 				</div>
 			);
 		}
@@ -527,7 +537,6 @@ var Services = React.createClass({
 								</div>
 							</div>
 						</div>
-	
 					</div>
 					
 				}

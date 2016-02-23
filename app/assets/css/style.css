@@ -1,0 +1,197 @@
+.header {
+	border-bottom: solid 1px #aeb0b5;
+	margin-bottom: 15px;
+}
+
+.term {
+	font-weight: 500;
+}
+
+div#mount{
+	font-family: 'Source Sans Pro', sans-serif;
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 1.5em/26px;
+}
+
+.nav>li>a{
+	padding: 7px 15px;
+	
+}
+
+a {
+	color: #0071bc;
+}
+
+h1 {
+	font-family: 'Merriweather', serif;
+	font-weight: 700;
+	font-size: 25px;
+	line-height: 1.3em/26px;
+	color: #5b616b;
+
+}
+
+.edit {
+	color: #337ab7;
+	cursor: pointer; 
+	cursor: hand;
+}
+
+button.add {
+	margin-bottom: 10px;
+}
+
+#site-status {
+	float: right;
+	margin-bottom: 0px;
+}
+
+.clin {
+	border: 1px solid;
+}
+
+.fake-table {
+	margin-top: 5px;
+	margin-bottom: 10px;
+}
+
+.row + .row {
+	border-top:0;
+}
+
+.btn-toolbar{
+	margin-top: 20px;
+}
+
+.table-content {
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.yes-no {
+	margin-right: 5px;
+	margin-left: 5px;
+}
+
+.table-wrapper {
+	border: solid 1px;
+}
+
+.page-heading{
+	font-family: 'Merriweather', serif;
+	font-weight: 700;
+	font-size: 30px;
+	margin-bottom: 5px;
+	line-height: 1.3em/26px;
+	color: #212121;
+}
+
+.section-heading {
+	font-weight: 700;
+	font-family: 'Merriweather', serif;
+	font-size: 20px;
+	line-height: 1.3em/22px;
+}
+
+.sub-heading{
+	color: #205493;
+	font-weight: 700;
+	margin: 10px 0;
+	font-family: 'Merriweather', serif;
+	font-size: 20px;
+	line-height: 1.3em/22px;
+}
+
+.question-description{
+	font-style: italic;
+	margin: 0 0 10px 0;
+	font-size: 95%;
+}
+
+.guidance-text{
+
+}
+
+.edit-box {
+	margin: 5px 0 10px 0;
+}
+
+div#mount input {
+	font-size: 15px;
+}
+
+div#mount select {
+	font-size: 15px;
+}
+
+div#mount textarea {
+	font-size: 16px;
+}
+
+.responder-instructions{
+	font-style: italic;
+	margin-bottom: 10px;
+	font-size: 95%;
+}
+
+.question-text {
+	margin: 5px 0 10px 0;
+	font-size: 16px;
+	font-family: 'Merriweather', serif;
+	color: #323a45;
+}
+
+.resulting-text{
+	font-weight: 500;
+	font-size: 105%;
+	color: #205493;
+	background-color: #dce4ef;
+}
+
+.help {
+	background-color: #aeb0b5;
+	font-weight: 600;
+}
+
+.short-response{
+	width: 150px;
+	/*margin-left: 5px;*/
+}
+
+.medium-response{
+	width: 300px;
+}
+
+.long-response{
+	width: 100%;
+}
+
+.usa-disclaimer{
+	background-color: #f1f1f1;
+	font-size: 15px;	
+	padding: 5px;
+	margin: -8px -23px 0px -23px;
+}
+
+.usa-disclaimer-official{
+	padding-left: 15px;
+}
+
+.usa-flag_icon{
+	margin: 0 5px 0 15px;
+}
+
+.usa-disclaimer-stage{
+	float: right;
+	padding-right: 15px;
+}
+
+
+textarea {
+	margin: 10px 0;
+}
+
+#sidenav.affix {
+	top: 0;
+}

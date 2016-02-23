@@ -109,7 +109,7 @@ class Deliverable(Base):
     __tablename__ = 'deliverables'
 
     id = Column(Integer, primary_key=True)
-    document_id = Column(Integer, ForeignKey('rfqs.id'))
+    document_id = Column(Integer, ForeignKey('rfqs.id'), primary_key=True)
     name = Column(String, primary_key=True)
     display = Column(String)
     value = Column(String)

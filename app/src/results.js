@@ -29,7 +29,7 @@ var Results = React.createClass({
 		var url = "/download/" + rfqId;
 		return (
 			<div>
-				<div className="main-heading">Resulting RFQ</div>
+				<div className="page-heading">Resulting RFQ</div>
 				<a href={url}><button className="btn btn-default">Download</button></a>
 				<br />
 				<br />

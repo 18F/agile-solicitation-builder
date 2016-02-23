@@ -193,15 +193,12 @@ def objectives(document, rfq):
     # for user in users, add text of each user's needs
     needs = ['external_people_needs', 'external_it_needs', 'internal_it_needs', 'internal_people_needs']
 
-
-    document.add_paragraph("The requirements described below will be customized to the types of users specified.")
-
     document.add_heading("User Research", level=SUB_HEADING)
     user_research_options = {
         "done": "Research has already been conducted, either internally or by another vendor.",
         "internal": "We intend to conduct user research internally prior to the start date of this engagement.",
         "vendor": "The vendor will be responsible for the user research.",
-    }    
+    }
 
     if cc["userResearchStrategy"] == "vendor":
         document.add_paragraph(user_research_options["vendor"])
@@ -236,6 +233,9 @@ def objectives(document, rfq):
     document.add_heading("Deliverables", level=SUB_HEADING)
     document.add_paragraph(cc["definitionOfDone"])
 
+    document.add_heading("Documentation and Training", level=SUB_HEADING)
+    document.add_paragraph(cc["documentationAndTraining"])
+
     document.add_heading("Place of Performance", level=SUB_HEADING)
     if cc['locationRequirement'] == "no":
         document.add_paragraph("The contractor is not required to have a full-time working staff presence on-site.")
@@ -260,9 +260,6 @@ def objectives(document, rfq):
         kickoff_text = cc["kickOffMeetingRemote"]
 
     document.add_paragraph(kickoff_text)
-
-    document.add_heading("Documentation and Training", level=SUB_HEADING)
-    document.add_paragraph(cc["documentationAndTraining"])
 
     return document
 

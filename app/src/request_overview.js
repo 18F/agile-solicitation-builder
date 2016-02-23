@@ -74,12 +74,12 @@ var RequestOverview = React.createClass({
 	render: function() {
 		// Create the agency names list
 		var agencyNameOptions = [(
-			<option value="none">-- Please select --</option>
+			<option key="none" value="none">-- Please select --</option>
 		)];
 		for (i=0; i < this.state.agencies.length; i++) {
 			var agency = this.state.agencies[i];
 			agencyNameOptions.push(
-				<option value={agency["abbreviation"]}>{agency["full_name"]} ({agency["abbreviation"]})</option>
+				<option key={agency["abbreviation"]} value={agency["abbreviation"]}>{agency["full_name"]} ({agency["abbreviation"]})</option>
 			);
 		}
 
@@ -87,7 +87,7 @@ var RequestOverview = React.createClass({
 		var docTypeOptions = [];
 		for(var key in DOC_TYPES) {
 			docTypeOptions.push(
-				<div className="radio">
+				<div className="radio" key={key}>
 					<label>
 						<input type="radio" value={key} checked={key == this.state.docType} />.. { DOC_TYPES[key] }
 				  </label>
@@ -99,7 +99,7 @@ var RequestOverview = React.createClass({
 		var setasideOptions = [];
 		for(var key in SETASIDES) {
 			setasideOptions.push(
-				<div className="radio">
+				<div className="radio" key={key}>
 					<label>
 						<input type="radio" value={key} checked={key == this.state.setaside} />{ SETASIDES[key] }
 				  </label>
@@ -114,24 +114,24 @@ var RequestOverview = React.createClass({
 		return (
 			<div className="main col-md-8">
 				<div>
-					<div className="sub-text">These questions are typically answered by the CO.</div>
+					<div className="responder-instructions">These questions are typically answered by the CO.</div>
 					<div className="sub-heading">Preliminary Questions</div>
 					<p>We'll ask you some questions to understand what you want to build,
 					and then let you download the generated documents.</p>
 					
-					<h5>Firstly, what agency is this for?</h5>
+					<div className="question-text">To begin, what agency is this for?</div>
 					<select className="form-control medium-response" onChange={this.handleChange.bind(this, "agency")} value={this.state.agency}>
 						{agencyNameOptions}
 					</select>
 
 					<br />
 
-					<h5>Program Name: </h5>
+					<div className="question-text">Program Name: </div>
 					<input type="text" className="form-control medium-response" value={this.state.programName} onChange={this.handleChange.bind(this, "programName")} />
 
 					<br />
 
-					<h5>This will be ...</h5>
+					<div className="question-text">This will be ...</div>
 					<radiogroup onChange={this.updateDocType}>
 						{docTypeOptions}
 					</radiogroup>
@@ -145,7 +145,7 @@ var RequestOverview = React.createClass({
 
 					<br />
 
-					<h5>Do you intend to set aside this acquisition for any of the following under FAR part 19?</h5>
+					<div className="question-text">Do you intend to set aside this acquisition for any of the following under FAR part 19?</div>
 					<radiogroup onChange={this.handleChange.bind(this, 'setaside')}>
 						{setasideOptions}
 					</radiogroup>
@@ -153,7 +153,6 @@ var RequestOverview = React.createClass({
 					 <br />
 
 				</div>
-
 					<Button bsStyle="primary" onClick={this.handleCreateRFQ} disabled={continueDisabled}>{"Let's go!"}</Button>				
 			</div>
 		);
