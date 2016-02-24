@@ -153,7 +153,7 @@ var RequestOverview = React.createClass({
 					 <br />
 
 				</div>
-					<Button bsStyle="primary" onClick={this.handleCreateRFQ} disabled={continueDisabled}>{"Let's go!"}</Button>				
+					<Button bsStyle="primary" onClick={this.handleCreateRFQ} disabled={continueDisabled}>{"Let's go!"}</Button>
 			</div>
 		);
 	},
