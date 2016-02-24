@@ -7,9 +7,9 @@ var Button = require('react-bootstrap').Button;
 // Router stuff
 var Link = require('react-router').Link;
 
-// "Contact": "a new purchase under Far 15 (Contract)",
+// "Contact": "a new purchase under FAR 15 (Contract)",
 var DOC_TYPES = {
-	"Purchase Order": "a new purchase under Far 13 (Purchase Order)",
+	"Purchase Order": "a new purchase under FAR 13 (Purchase Order)",
 	"Task Order": "being issued off an existing Indefinite Delivery Indefinite Quantity (ID/IQ) (Task Order)",
 	"Call": "being ordered off an existing Blanket Purchase Agreement (BPA) (Call)",
 };
