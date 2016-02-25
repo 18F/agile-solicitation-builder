@@ -79,15 +79,16 @@ class Deliverables(Resource):
 
     def get(self, rfq_id):
         session = Session()
-        deliverables = session.query(Deliverable).filter_by(document_id=rfq_id).all()
+        deliverables = session.query(Deliverable).filter_by(document_id=rfq_id).order_by(Deliverable.id).all()
         return jsonify(data=[d.to_dict() for d in deliverables])
 
     def put(self, rfq_id):
         session = Session()
         data = request.get_json()['data']
-        for key in data:
-            deliverable = session.query(Deliverable).filter_by(document_id=rfq_id).filter_by(name=key).first()
-            deliverable.value = data[key]
+        for item in data:            
+            deliverable = session.query(Deliverable).filter_by(document_id=rfq_id).filter_by(name=item["name"]).first()
+            deliverable.value = item["value"]
+            deliverable.text = item["text"]
             session.merge(deliverable)
             session.commit()
 

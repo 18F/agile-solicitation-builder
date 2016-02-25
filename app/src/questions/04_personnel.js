@@ -42,7 +42,7 @@ var Requirement = React.createClass({
 		for (i=0; i < CLEARANCE_LEVELS.length; i++){
 			var level = CLEARANCE_LEVELS[i];
 			clearance_options.push(
-				<div className="radio">
+				<div className="radio" key={level}>
 					<label>
 						<input type="radio" value={level} checked={level == this.state.clearanceRequired} />{level}
 				  </label>
@@ -130,7 +130,7 @@ var Requirement = React.createClass({
 				</div>
 				}
 
-				<div className="sub-heading">Performance Work Statement</div>
+				<div className="question-text">Performance Work Statement</div>
 				<EditBox
 						text={this.state.performanceWorkStatement}
 						editing={this.state.edit === 'performanceWorkStatement'}

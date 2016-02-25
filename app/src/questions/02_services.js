@@ -358,9 +358,15 @@ var Services = React.createClass({
 				<div className="page-heading">Services and Prices</div>
 				<div className="responder-instructions">These questions are typically answered by the CO.</div>
 
-				<div className="sub-heading">Brief Description of Services</div>
+				<div className="question-text">Brief Description of Services</div>
 				<div className="question-description">Feel free to edit the sample we have provided below.</div>
-				<textarea className="form-control" rows="4" value={this.state.descriptionOfServices} onChange={this.handleChange.bind(this, 'descriptionOfServices')}></textarea>				
+
+				<EditBox
+						text={this.state.descriptionOfServices}
+						editing={this.state.edit === 'descriptionOfServices'}
+						onStatusChange={this.toggleEdit.bind(this, 'descriptionOfServices')}
+						onTextChange={this.handleChange.bind(this, 'descriptionOfServices')}>
+				</EditBox>
 
 				<div className="sub-heading">Type of Contract</div>
 				<div className="question-text">What type of contract will this be?</div>

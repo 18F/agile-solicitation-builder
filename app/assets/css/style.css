@@ -128,9 +128,8 @@ button.add {
 	font-size: 105%;
 	color: #205493;
 	background-color: #dce4ef;
-}
-
-.guidance-text{
+	padding: 5px;
+	margin-bottom: 10px;
 }
 
 .edit-box {

@@ -2,8 +2,6 @@ var React = require('react');
 var StateMixin = require("../state_mixin");
 var EditBox = require("../edit_box");
 
-//d "1": "Research, Insights, and Synthesis",
-
 var USER_RESEARCH = {			
 	"done": "Research has already been conducted, either internally or by another vendor. (proceed to product/program vision questionnaire)",
 	"internal": "We intend to conduct user research internally prior to the start date of this engagement.",
@@ -22,8 +20,6 @@ var USER_TYPES = {
 	"internal_it": "Internal Government IT",
 	"external_it": "External IT",
 };
-
-var text = "Data management may include database architecture, data import/export tasks, data migration efforts, security with a Government provided third-party encryption tool, and creation of policy and/or procedures surrounding data implementation.\n\nThis may include:\n\n  - Provide database architecture subject matter expertise regarding implementation.\n  - Include database performance and impact in all system design or development efforts to ensure industry best practices are supported;\n  - Work with third-party cloud encryption gateway technologies, if present, provided by the government to secure designated data while in transit to/from the cloud as well as at rest;\n  - Work with security in the creation of policy and/or procedures surrounding data implementation including the correction of application security vulnerabilities within 24 hours;\n  - Verify in writing to the Government that data migrated from any legacy system to the new application is complete and accurate in accordance with the Federal Records Act and any other applicable federal law, according to the agreed upon framework coordinated with Agency and the Contractor and that all data is accessible;\n  - Be knowledgeable in data warehousing, data visualization and business intelligence best practices to provide guidance on data architecture and mapping;\n  - Provide systems and data integration and orchestration services between the application and other systems of record or data warehouses; (see interoperability guidelines)";
 
 var DELIVERABLE_STATES = ["updates", "automatedTesting", "nativeMobile", "mobileWeb", "userTraining", "highTraffic", "devops", "legacySystems", "processImprovement", "applicationDesign", "UXrequirements", "programManagement", "systemConfiguration", "helpDesk", "releaseManagement", "dataManagement"];
 
@@ -66,6 +62,10 @@ var Objective = React.createClass({
 	mixins: [StateMixin],
 	getInitialState: function() {
 		var allStates = STATES.concat(DELIVERABLE_STATES).concat(["deliverables"]);
+		for (var i=0; i < DELIVERABLE_STATES.length; i++){
+			var deliverable = DELIVERABLE_STATES[i];
+			allStates.push(deliverable + "text");
+		}
 		var initialStates = getStates(allStates);
 		return initialStates;
 	},
@@ -77,9 +77,10 @@ var Objective = React.createClass({
     }.bind(this));
     getDeliverables(rfqId, function(content){
     	var states = { deliverables: content["data"]};
-    	for (i=0; i < content["data"].length; i++){
+    	for (var i=0; i < content["data"].length; i++){
     		var deliverable = content["data"][i];
     		states[deliverable["name"]] = deliverable["value"];
+    		states[deliverable["name"] + "text"] = deliverable["text"];
     	}
     	this.setState( states );
     }.bind(this));
@@ -93,20 +94,33 @@ var Objective = React.createClass({
 		else{
 			newState[key] = "false";
 		}
+		if (DELIVERABLE_STATES.indexOf(key) >= 0){
+			for (var i=0; i < this.state.deliverables.length; i++){
+				var deliverable = this.state.deliverables[i];
+				if (deliverable['name'] == key){
+					this.state.deliverables[i]['value'] = newState[key];
+				}
+			}
+		}
 		this.setState(newState);
   },
 	save: function(cb) {
 		var data = {};
-		var deliverables_data = {};
+		var deliverables_data = [];
 		
 		for (i=0; i < STATES.length; i++){
 			var stateName = STATES[i];
 			data[stateName] = this.state[stateName];
 		}
 
-		for (i=0; i < DELIVERABLE_STATES.length; i++){
+		// get states of deliverable content in addition to true/false value
+		for (i=0; i < DELIVERABLE_STATES.length; i++){			
 			var stateName = DELIVERABLE_STATES[i];
-			deliverables_data[stateName] = this.state[stateName];
+			var deliverable = {}
+			deliverable["name"] = stateName;
+			deliverable["value"] = this.state[stateName];
+			deliverable["text"] = this.state[stateName+"text"];
+			deliverables_data.push(deliverable);
 		}
 
 		var rfqId = getId(window.location.hash);
@@ -118,18 +132,19 @@ var Objective = React.createClass({
 		var deliverables_options = [];
 		var selected_deliverables = [];
 		var selected_deliverables_strings = [];
-		for (i=0; i < this.state.deliverables.length; i++) {
+		for (var i=0; i < this.state.deliverables.length; i++) {
 			var deliverable = this.state.deliverables[i];
 			var key = deliverable["name"];
+			var contentStateName = key + "text";
 			if (deliverable["value"] == "true"){
 				selected_deliverables.push(
 					<div key={key}>
-						<div className="question-text">{deliverable["display"]}</div>
+						<div className="question-text">{deliverable['display']}</div>
 						<EditBox
-								text={deliverable["text"]}
-								editing={this.state.edit === 'userAccess'}
-								onStatusChange={this.toggleEdit.bind(this, 'userAccess')}
-								onTextChange={this.handleChange.bind(this, 'userAccess')}>
+								text={this.state[contentStateName]}
+								editing={this.state.edit === contentStateName}
+								onStatusChange={this.toggleEdit.bind(this, contentStateName)}
+								onTextChange={this.handleChange.bind(this, contentStateName)}>
 						</EditBox>
 					</div>
 				)
@@ -333,7 +348,7 @@ var Objective = React.createClass({
 
 				{deliverables_options}
 
-				<div>The contractors are required to provide the following services: {deliverablesString}.</div>
+				<div className="resulting-text">The contractors are required to provide the following services: {deliverablesString}. Each deliverable has been described in more detail below.</div>
 
 				<div className="guidance-text">These functional Requirements will be translated into Epics and User Stories that will be used to populate the Product Backlog.</div>
 

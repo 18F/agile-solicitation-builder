@@ -547,7 +547,7 @@ deliverables = [
     },
     {
         "name": "legacySystems",
-        "text": "Please replace this text with more detail about the legacy applications and/or systems the contractor will be expected to maintain. Any information about the technology currently being used, when the application was built, etc.",
+        "text": "Please replace this text with more detail about the legacy applications and/or systems the contractor will be expected to maintain. Ideally this will include information about the technology currently being used, when the application was built, etc.",
         "display": "Supporting legacy applications/systems",
         "value": "false",
     },
@@ -577,7 +577,7 @@ deliverables = [
     },
     {
         "name": "systemConfiguration",
-        "text": "",
+        "text": "Please replace this text with more detail about the specific business processes and their configuration requirements.",
         "display": "System configuration to support business processes",
         "value": "false",
     },
