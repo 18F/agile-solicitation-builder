@@ -191,3 +191,18 @@ function getCLINs(rfqId, callback){
 	});
 }
 
+function createString(userTypes){
+	var usersString = "";
+	if (userTypes.length == 1){
+		usersString = userTypes[0];
+	}
+	if (userTypes.length > 1){
+		for (i=0; i < userTypes.length - 1; i++){
+			usersString += userTypes[i] + ", ";
+		}
+		usersString += "and " + userTypes[userTypes.length-1];
+	}
+	return usersString;
+}
+
+

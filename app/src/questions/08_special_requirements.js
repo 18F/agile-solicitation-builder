@@ -83,7 +83,7 @@ var SpecialRequirements = React.createClass({
 			
 			requirements.push(
 				<div key={i}>
-					<div className="sub-heading">{role['title']}</div>
+					<div className="question-text">{role['title']}</div>
 					<EditBox
 							text={this.state[role['name']]}
 							editing={this.state.edit == role['name']}

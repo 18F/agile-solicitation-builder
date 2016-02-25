@@ -124,6 +124,11 @@ content_components = [
         "section": 2,
     },
     {
+        "name": "clinIntro",
+        "text": "Funding for performance will be allocated and obligated for each exercised Contract Line Item (CLIN).",
+        "section": 2,
+    },
+    {
         "name": "addClin",
         "text": "false",
         "section": 2,
@@ -132,7 +137,7 @@ content_components = [
         "name": "clin",
         "text": "null",
         "section": 2,
-    },
+    },    
     {
         "name": "govFurnishedInfo",
         "text": "",
@@ -511,15 +516,15 @@ deliverables = [
         "value": "true",
     },
     {
-        "name": "dataImport",
-        "text": "The vendor will be provided with the necessary credentials to access the data.",
-        "display": "Data import of records collected from legacy systems",
+        "name": "nativeMobile",
+        "text": "This may include development for the Android, iOS, Blackberry, and Windows phone mobile operating systems.",
+        "display": "Native mobile application(s)",
         "value": "false",
     },
     {
-        "name": "nativeMobile",
+        "name": "mobileWeb",
         "text": "",
-        "display": "Native mobile application(s)",
+        "display": "Mobile responsive web application(s)",
         "value": "false",
     },
     {
@@ -532,12 +537,6 @@ deliverables = [
         "name": "highTraffic",
         "text": "To support high user traffic applications, the vendor shall deploy services on flexible infrastructure, where resources can be provisioned in real-time to meet spikes traffic and user demand. To do so, the vendor will ensure:\n\n  1. Resources are provisioned on demand\n  2. Resources scale based on real-time user demand\n  3. Resources are provisioned through an API\n  4.   Resources are available in multiple regions\n  5. The government only pays for resources used\n  6. Static assets are served through a content delivery network\n  7. Applications are hosted on commodity hardware",
         "display": "Application capable of supporting high user traffic",        
-        "value": "false",
-    },
-    {
-        "name": "mobileWeb",
-        "text": "",
-        "display": "Mobile responsive web application(s)",
         "value": "false",
     },
     {
@@ -559,9 +558,9 @@ deliverables = [
         "value": "false",
     },
     {
-        "name": "prototyping",
+        "name": "applicationDesign",
         "text": "",
-        "display": "Design solutions prototyping",
+        "display": "Initial application design and prototyping",
         "value": "false",
     },
     {
@@ -583,49 +582,24 @@ deliverables = [
         "value": "false",
     },
     {
-        "name": "applicationDesign",
-        "text": "",
-        "display": "Initial application design and implementation",
-        "value": "false",
-    },
-    {
-        "name": "workflowDesign",
-        "text": "",
-        "display": "Workflow design and implementation",
-        "value": "false",
-    },
-    {
-        "name": "ioIntegration",
-        "text": "",
-        "display": "Integration for input and output methods",
-        "value": "false",
-    },
-    {
         "name": "helpDesk",
-        "text": "",
+        "text": "The contractor will provide support & help desk functions for software development support or application support to end users.\n\nThis may include:\n\n  - Utilize a centralized bug and issue tracking system designated and hosted by the government, unless otherwise proposed and provided by the contractor;\n  - Provide weekly reporting and metrics on issue tracking and resolution;\n  - Act as an escalation point for break/fix items as reported by the government.  This may require working with end users and the platform vendor as necessary to define, document, test, and address incidents.",
         "display": "Support / Help Desk",
         "value": "false",
     },
     {
         "name": "releaseManagement",
-        "text": "",
+        "text": "The contractor will provide enterprise-level management of releases from development to production and post-implementation operational and maintenance support of production applications on the platform.\n\nThis may include:\n\n  - Identify usability issues and craft solutions to resolve bug fixes or other performance problems;\n  - Advise and provide recommendations of how new manufacturer-driven updates of the platform shall be affected or upgraded according to manufacturer release schedules;\n  - Provide enterprise-wide release management support for large monthly releases, small configuration changes, and out-of-cycle emergency releases of code and configuration to higher environments, including production;\n  - Provide enterprise-wide release management support for incremental feature releases, configuration changes, and expedited code changes from development through production environments;\n  - Provide development environment management expertise, regression testing, and continuous integration management including the administration of the systems and tools that are used as part of that process.",
         "display": "Release Management and Post-Implementation Maintenance Support",
         "value": "false",
     },
     {
         "name": "dataManagement",
-        "text": "",
-        "display": "Data Management and Securitization",
+        "text": "Data management may include database architecture, data import/export tasks, data migration efforts from new or legacy systems, security with a Government provided third-party encryption tool, and creation of policy and/or procedures surrounding data implementation.\n\nThis may include:\n\n  - Provide database architecture subject matter expertise regarding implementation.\n  - Include database performance and impact in all system design or development efforts to ensure industry best practices are supported;\n  - Work with third-party cloud encryption gateway technologies, if present, provided by the government to secure designated data while in transit to/from the cloud as well as at rest;\n  - Work with security in the creation of policy and/or procedures surrounding data implementation including the correction of application security vulnerabilities within 24 hours;\n  - Verify in writing to the Government that data migrated from any legacy system to the new application is complete and accurate in accordance with the Federal Records Act and any other applicable federal law, according to the agreed upon framework coordinated with Agency and the Contractor and that all data is accessible;\n  - Be knowledgeable in data warehousing, data visualization and business intelligence best practices to provide guidance on data architecture and mapping;\n  - Provide systems and data integration and orchestration services between the application and other systems of record or data warehouses; (see interoperability guidelines)",
+        "display": "Data Import, Management and Securitization",
         "value": "false",
     },
 ]
-
-    # {
-    #     "name": "connectivity",
-    #     "text": "",
-    #     "display": "Workstations, data centers, server systems, and connectivity",
-    #     "value": "false",
-    # },
 
 agencies = {    
     'CFPB': 'Consumer Financial Protection Bureau',

@@ -55,6 +55,8 @@ var Inspection = React.createClass({
 
 				<div className="sub-heading">Delivery & Timing</div>
 
+				<div className="question-text">Government Acceptance</div>
+
 				<EditBox
 						text={this.state.inspectionOverview}
 						editing={this.state.edit === 'inspectionOverview'}
@@ -62,8 +64,7 @@ var Inspection = React.createClass({
 						onTextChange={this.handleChange.bind(this, 'inspectionOverview')}>
 				</EditBox>
 
-
-				<div className="content-title">Notice Regarding Late Delivery</div>
+				<div className="question-text">Notice Regarding Late Delivery</div>
 
 				<EditBox
 						text={this.state.lateDelivery}

@@ -104,7 +104,7 @@ button.add {
 }
 
 .question-text {
-	margin: 5px 0 10px 0;
+	margin: 5px 0 5px 0;
 	font-size: 16px;
 	font-family: 'Merriweather', serif;
 	color: #323a45;
@@ -128,14 +128,6 @@ button.add {
 	font-size: 105%;
 	color: #205493;
 	background-color: #dce4ef;
-}
-
-.content-title{
-	margin: 5px 0 10px 0;
-	font-size: 16px;
-	font-family: 'Merriweather', serif;
-	color: #323a45;
-	font-weight: 700;
 }
 
 .guidance-text{

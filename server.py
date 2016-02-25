@@ -270,7 +270,6 @@ def create_tables():
 
     # delete old records
     drop_everything()
-    print '273 here'
 
     session = Session()
 

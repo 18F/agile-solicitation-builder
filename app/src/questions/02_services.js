@@ -14,6 +14,7 @@ var STATES = [
   "basePeriodDurationUnit",
   "baseFee",
   "baseFeeAmount",
+  "clinIntro",
   "optionPeriodDurationNumber",
   "optionPeriodDurationUnit",
   "optionFee",
@@ -565,10 +566,10 @@ var Services = React.createClass({
 				<div className="resulting-text">The Period of Performance for this {this.state.docType} shall be a base period of <b>{bPoP}</b>. <b>{this.state.optionPeriods}</b> additional <b>{oPoP}</b> Option Periods will be included for a total potential period of performance of up to 2 years as described in section 2.
 				</div>
 
-				<div className="sub-heading">Funding</div>
+				<div className="sub-heading">Funding & Payment</div>
 				<div className="guidance-text">Funding for performance will be allocated and obligated for each exercised Contract Line Item (CLIN).</div>
 
-				<div className="sub-heading">Contract Line Item Number (CLIN) Format</div>							
+				<div className="question-text">Contract Line Item Number (CLIN) Format</div>							
 
 				<div className="container fake-table col-md-12">
 					<div className="row clin">
@@ -618,7 +619,7 @@ var Services = React.createClass({
 
 				<br />
 
-				<div className="sub-heading">Payment Schedule</div>
+				<div className="question-text">Payment Schedule</div>
 				
 				<div className="guidance-text">We have pre-populated this section with the standard agile contracting text. However you are free to add to, modify or delete this text as you see fit.</div>
 

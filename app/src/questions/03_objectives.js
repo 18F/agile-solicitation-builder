@@ -23,7 +23,9 @@ var USER_TYPES = {
 	"external_it": "External IT",
 };
 
-var DELIVERABLE_STATES = ["updates", "automatedTesting", "dataImport", "nativeMobile", "userTraining", "highTraffic", "mobileWeb", "devops", "legacySystems", "processImprovement", "prototyping", "UXrequirements", "programManagement", "systemConfiguration", "applicationDesign", "workflowDesign", "ioIntegration", "helpDesk", "releaseManagement", "dataManagement"];
+var text = "Data management may include database architecture, data import/export tasks, data migration efforts, security with a Government provided third-party encryption tool, and creation of policy and/or procedures surrounding data implementation.\n\nThis may include:\n\n  - Provide database architecture subject matter expertise regarding implementation.\n  - Include database performance and impact in all system design or development efforts to ensure industry best practices are supported;\n  - Work with third-party cloud encryption gateway technologies, if present, provided by the government to secure designated data while in transit to/from the cloud as well as at rest;\n  - Work with security in the creation of policy and/or procedures surrounding data implementation including the correction of application security vulnerabilities within 24 hours;\n  - Verify in writing to the Government that data migrated from any legacy system to the new application is complete and accurate in accordance with the Federal Records Act and any other applicable federal law, according to the agreed upon framework coordinated with Agency and the Contractor and that all data is accessible;\n  - Be knowledgeable in data warehousing, data visualization and business intelligence best practices to provide guidance on data architecture and mapping;\n  - Provide systems and data integration and orchestration services between the application and other systems of record or data warehouses; (see interoperability guidelines)";
+
+var DELIVERABLE_STATES = ["updates", "automatedTesting", "nativeMobile", "mobileWeb", "userTraining", "highTraffic", "devops", "legacySystems", "processImprovement", "applicationDesign", "UXrequirements", "programManagement", "systemConfiguration", "helpDesk", "releaseManagement", "dataManagement"];
 
 var STATES = [
 	"API_external",
@@ -113,11 +115,27 @@ var Objective = React.createClass({
 	},
 	render: function() {
 
-		var deliverables = [];
+		var deliverables_options = [];
+		var selected_deliverables = [];
+		var selected_deliverables_strings = [];
 		for (i=0; i < this.state.deliverables.length; i++) {
 			var deliverable = this.state.deliverables[i];
 			var key = deliverable["name"];
-			deliverables.push(
+			if (deliverable["value"] == "true"){
+				selected_deliverables.push(
+					<div key={key}>
+						<div className="question-text">{deliverable["display"]}</div>
+						<EditBox
+								text={deliverable["text"]}
+								editing={this.state.edit === 'userAccess'}
+								onStatusChange={this.toggleEdit.bind(this, 'userAccess')}
+								onTextChange={this.handleChange.bind(this, 'userAccess')}>
+						</EditBox>
+					</div>
+				)
+				selected_deliverables_strings.push(deliverable['display'].toLowerCase());
+			}
+			deliverables_options.push(
 				<div className="checkbox" key={key}>
 					<label>
 					<input type="checkbox" value={this.state[key]} onClick={this.handleCheck.bind(this, key)} checked={this.state[key] == "true"}></input>
@@ -126,6 +144,8 @@ var Objective = React.createClass({
 				</div>
 			);
 		}
+		deliverablesString = createString(selected_deliverables_strings);
+
 
 		var userTypesOptions = [];
 		for (var key in USER_TYPES){
@@ -168,15 +188,7 @@ var Objective = React.createClass({
   			userTypes.push(USER_TYPES[key]);  		
   		}
   	}
-  	if (userTypes.length == 1){
-  		usersString = userTypes[0];
-  	}
-  	if (userTypes.length > 1){
-  		for (i=0; i < userTypes.length - 1; i++){
-  			usersString += userTypes[i] + ", ";
-  		}
-  		usersString += "and " + userTypes[userTypes.length-1];
-  	}
+  	usersString = createString(userTypes);
 
 		return (
 			<div>
@@ -257,7 +269,7 @@ var Objective = React.createClass({
 	
 				{(this.state.userResearchStrategy === "vendor")?
 					<div>
-						<div className="content-title">Understand what people need</div>
+						<div className="question-text">Understand what people need</div>
 						<EditBox
 								text={this.state.whatPeopleNeed}
 								editing={this.state.edit === 'whatPeopleNeed'}
@@ -265,7 +277,7 @@ var Objective = React.createClass({
 								onTextChange={this.handleChange.bind(this, 'whatPeopleNeed')}>
 						</EditBox>
 
-						<div className="content-title">Address the whole experience, from start to finish</div>
+						<div className="question-text">Address the whole experience, from start to finish</div>
 						<EditBox
 								text={this.state.startToFinish}
 								editing={this.state.edit === 'startToFinish'}
@@ -279,7 +291,7 @@ var Objective = React.createClass({
 				<div className="sub-heading">General Requirements</div>
 				<p>All agile projects should follow these guidelines.</p>
 
-				<div className="content-title">Build the service using agile and iterative practices</div>
+				<div className="question-text">Build the service using agile and iterative practices</div>
 				<EditBox
 						text={this.state.agileIterativePractices}
 						editing={this.state.edit === 'agileIterativePractices'}
@@ -287,7 +299,7 @@ var Objective = React.createClass({
 						onTextChange={this.handleChange.bind(this, 'agileIterativePractices')}>
 				</EditBox>
 
-				<div className="content-title">Make it simple and intuitive</div>
+				<div className="question-text">Make it simple and intuitive</div>
 
 				<EditBox
 						text={this.state.simpleAndIntuitive}
@@ -297,7 +309,7 @@ var Objective = React.createClass({
 				</EditBox>
 
 
-				<div className="content-title">Use data to drive decisions</div>
+				<div className="question-text">Use data to drive decisions</div>
 
 				<EditBox
 						text={this.state.dataDrivenDecisions}
@@ -318,19 +330,14 @@ var Objective = React.createClass({
 				<div className="question-text">Which of the following do you anticipate your project will need?</div>
 
 				<div className="question-description">We have already checked certain components that the USDS Playbook suggests be required for all projects.</div>
-				
-				{deliverables}
+
+				{deliverables_options}
+
+				<div>The contractors are required to provide the following services: {deliverablesString}.</div>
 
 				<div className="guidance-text">These functional Requirements will be translated into Epics and User Stories that will be used to populate the Product Backlog.</div>
 
-				<div className="sub-heading">Documentation and Training</div>
-				<EditBox
-						text={this.state.documentationAndTraining}
-						editing={this.state.edit === 'documentationAndTraining'}
-						onStatusChange={this.toggleEdit.bind(this, 'documentationAndTraining')}
-						onTextChange={this.handleChange.bind(this, 'documentationAndTraining')}>
-				</EditBox>
-
+				{selected_deliverables}
 				
 				<div className="sub-heading">Location & Kick-Off Meeting</div>
 				<div className="question-text">Will you require the contractor to have a full-time working staff presence onsite at a specific location?</div>
