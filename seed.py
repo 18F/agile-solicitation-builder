@@ -597,7 +597,6 @@ deliverables = [
 
 agencies = {    
     'CFPB': 'Consumer Financial Protection Bureau',
-    'DOA': 'Department of Agriculture',
     'DHS': 'Department of Homeland Security',
     'DOC': 'Department of Commerce',
     'DOD': 'Department of Defense',

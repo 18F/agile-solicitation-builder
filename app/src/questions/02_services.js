@@ -314,7 +314,7 @@ var Services = React.createClass({
 		for (var key in CLIN_CONTENT) {
 			if (counter < parseInt(optionPeriods, 10)) {
 				CLINS.push(
-					<div className="container fake-table col-md-12">
+					<div className="container fake-table col-md-12" key={counter}>
 						<div className="row clin">
 							<div className="col-md-12 table-content">{CLIN_CONTENT[key]}: {oPoP}
 							</div>

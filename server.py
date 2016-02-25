@@ -85,8 +85,8 @@ class Deliverables(Resource):
     def put(self, rfq_id):
         session = Session()
         data = request.get_json()['data']
-        for item in data:            
-            deliverable = session.query(Deliverable).filter_by(document_id=rfq_id).filter_by(name=item["name"]).first()
+        for item in data:
+            deliverable = session.query(Deliverable).filter_by(document_id=rfq_id).filter_by(name=item["name"]).first()            
             deliverable.value = item["value"]
             deliverable.text = item["text"]
             session.merge(deliverable)
@@ -247,7 +247,6 @@ def drop_everything():
     all_fks = []
 
     for table_name in inspector.get_table_names():
-        print table_name
         fks = []
         for fk in inspector.get_foreign_keys(table_name):
             if not fk['name']:
