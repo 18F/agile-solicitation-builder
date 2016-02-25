@@ -29,7 +29,7 @@ The server expects a `DATABASE_URL` environment variable of the form expected by
 
 To launch the app run `python server.py`. The site will be available at `http://localhost:5000`. To seed the database and delete any old tables run create_tables() (from server.py).
 
-To ensure bundle.js is updated with the changes to any react code you will need to use something like the node package gulp. You can either let it run in a separate terminal tab (just enter `gulp`), or when you start the app run `gulp python server.py`.
+To ensure bundle.js is updated with the changes to any React code, you will need to use something like the node package Gulp. Once you have it [installed](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md), leave it running in a separate Terminal tab: just change to the `app` directory (`cd app`) and run `gulp`.
 
 ### Public domain
 
