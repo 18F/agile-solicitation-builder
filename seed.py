@@ -505,13 +505,13 @@ custom_components = [
 deliverables = [
     {
         "name": "updates",
-        "text": "",
+        "text": "Please describe in more detail.",
         "display": "Enhancements, patches, and updates to applications, data, or cloud systems",
         "value": "false",
     },
     {
         "name": "automatedTesting",
-        "text": "The vendor shall provide a solution that can write automated scripts that can verify thousands of scenarios in minutes and then deploy updated code into production environments multiple times a day. Moreover the solution shall use automated performance tests which simulate surges in traffic to identify performance bottlenecks. While manual tests and quality assurance are still necessary, automated tests must be implemented to provide consistent and reliable protection against unintentional regressions, and make it possible for developers to confidently release frequent updates to the service.\n\nRequirements of automated tests include:\n\n  1.    Create automated tests that verify all user-facing functionality\n  2. Create unit and integration tests to verify modules and components\n  3. Run tests automatically as part of the build process\n  4. Perform deployments automatically with deployment scripts, continuous delivery services, or similar techniques\n  5. Conduct load and performance tests at regular intervals, including before public launch",
+        "text": "The vendor shall provide a solution that can write automated scripts that can verify thousands of scenarios in minutes and then deploy updated code into production environments multiple times a day. Moreover the solution shall use automated performance tests which simulate surges in traffic to identify performance bottlenecks. While manual tests and quality assurance are still necessary, automated tests must be implemented to provide consistent and reliable protection against unintentional regressions, and make it possible for developers to confidently release frequent updates to the service.\n\nRequirements of automated tests include:\n\n  1. Create automated tests that verify all user-facing functionality\n  2. Create unit and integration tests to verify modules and components\n  3. Run tests automatically as part of the build process\n  5. Conduct load and performance tests at regular intervals, including before public launch",
         "display": "Automated testing",
         "value": "true",
     },
@@ -541,20 +541,14 @@ deliverables = [
     },
     {
         "name": "devops",
-        "text": "",
+        "text": "The vendor will perform deployments automatically with deployment scripts, continuous delivery services, or similar techniques. The vendor's automated scripts should be able to verify thousands of scenarios in minutes to support the deployment of updated code into production environments multiple times a day.",
         "display": "Devops, continuous integration and continuous deployment",
         "value": "false",
     },
     {
         "name": "legacySystems",
-        "text": "Please replace this text with more detail about the legacy applications and/or systems the contractor will be expected to maintain. Ideally this will include information about the technology currently being used, when the application was built, etc.",
+        "text": "Please provide more detail about the legacy applications and/or systems the contractor will be expected to maintain. Ideally this will include information about the technology currently being used, when the application was built, etc.",
         "display": "Supporting legacy applications/systems",
-        "value": "false",
-    },
-    {
-        "name": "processImprovement",
-        "text": "",
-        "display": "Process improvement recommendations",
         "value": "false",
     },
     {
@@ -571,7 +565,7 @@ deliverables = [
     },
     {
         "name": "programManagement",
-        "text": "",
+        "text": "Provide the government program management and center of excellence governance support for managing applications on an enterprise-wide platform. This may include:\n\n  - Give periodic project, program, and operational status updates as required by the government within an agreed-upon frequency and schedule.  These are typically weekly or monthly task order status reports and weekly Agile/Scrum development meetings.\n  - Provide on-site project management support and attend in-person meetings on an ad-hoc basis.\n  - As part of the COE support, the contractor provide enterprise-wide platform architectural design, centralized design review of configuration and code prior to release, and support of the most current Salesforce / Force.com implementation best practices, features and functions.  - Provide project and operational documentation as required by the government to support specific project deliverables or ongoing operational support such as security Authority to Operate.\n  - Manage and oversee daily, weekly, and monthly workloads and schedule for active tasks with regard to schedule, budget, priority, risk, and quality to ensure quality response to government task order requests.",
         "display": "Program management and stewardship",
         "value": "false",
     },

@@ -91,8 +91,7 @@ var Requirement = React.createClass({
 				{(this.state.onSiteRequired == "yes")?
 				<div className="resulting-text">An onsite presence by the contractor will be required.</div> :
 				<div className="resulting-text">An onsite presence by the contractor will not be required.</div>
-				}
-				
+				}			
 	
 				<div className="sub-heading">Key Personnel Evaluation Process</div>
 

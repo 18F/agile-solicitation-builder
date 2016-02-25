@@ -236,7 +236,7 @@ var Services = React.createClass({
 		for (var key in BASE_FEE_OPTIONS) {
 			var value = BASE_FEE_OPTIONS[key];
 			BASE_FEES.push(
-				<div className="radio">
+				<div className="radio" key={key}>
 					<label>
 						<input type="radio" value={key} checked={key == this.state.baseFee} />{ BASE_FEE_OPTIONS[key] }
 				  </label>
@@ -248,7 +248,7 @@ var Services = React.createClass({
 		for (var key in OPTION_FEE_OPTIONS) {
 			var value = OPTION_FEE_OPTIONS[key];
 			OPTION_FEES.push(
-				<div className="radio">
+				<div className="radio" key={key}>
 					<label>
 						<input type="radio" value={key} checked={key == this.state.optionFee} />{ OPTION_FEE_OPTIONS[key] }
 				  </label>

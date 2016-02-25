@@ -21,6 +21,8 @@ var USER_TYPES = {
 	"external_it": "External IT",
 };
 
+var text = "Provide the government program management and center of excellence governance support for managing applications on an enterprise-wide platform. This may include:\n\n  - Give periodic project, program, and operational status updates as required by the government within an agreed-upon frequency and schedule.  These are typically weekly or monthly task order status reports and weekly Agile/Scrum development meetings.\n  - Provide on-site project management support and attend in-person meetings on an ad-hoc basis.\n  - As part of the COE support, the contractor provide enterprise-wide platform architectural design, centralized design review of configuration and code prior to release, and support of the most current Salesforce / Force.com implementation best practices, features and functions.  - Provide project and operational documentation as required by the government to support specific project deliverables or ongoing operational support such as security Authority to Operate.\n  - Manage and oversee daily, weekly, and monthly workloads and schedule for active tasks with regard to schedule, budget, priority, risk, and quality to ensure quality response to government task order requests.";
+
 var DELIVERABLE_STATES = ["updates", "automatedTesting", "nativeMobile", "mobileWeb", "userTraining", "highTraffic", "devops", "legacySystems", "processImprovement", "applicationDesign", "UXrequirements", "programManagement", "systemConfiguration", "helpDesk", "releaseManagement", "dataManagement"];
 
 var STATES = [
