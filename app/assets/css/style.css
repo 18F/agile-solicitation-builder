@@ -97,7 +97,7 @@ button.add {
 .sub-heading{
 	color: #205493;
 	font-weight: 700;
-	margin: 10px 0;
+	margin: 25px 0 5px 0;
 	font-family: 'Merriweather', serif;
 	font-size: 20px;
 	line-height: 1.3em/22px;
@@ -124,16 +124,18 @@ button.add {
 }
 
 .resulting-text{
+	font-family: 'Times', serif;
+	border: solid 3px #aeb0b5;
 	font-weight: 500;
 	font-size: 105%;
-	color: #205493;
-	background-color: #dce4ef;
+	color: #212121;
+	background-color: #ffffff;
 	padding: 5px;
 	margin-bottom: 10px;
 }
 
 .edit-box {
-	margin: 5px 0 10px 0;
+	margin: 5px 0 10px 0;	
 }
 
 div#mount input {

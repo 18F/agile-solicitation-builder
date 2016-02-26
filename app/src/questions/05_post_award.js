@@ -48,7 +48,7 @@ var PostAward = React.createClass({
 							onTextChange={this.handleChange.bind(this, 'invoicing')}>
 					</EditBox>
 
-					<div className="resulting-text">The Contractor shall submit an original invoice for payment to the following office:</div>
+					<div>The Contractor shall submit an original invoice for payment to the following office:</div>
 
 	    		<textarea rows="5" className="form-control medium-response" placeholder={placeholderText} value={this.state.billingAddress} onChange={this.handleChange.bind(this, "billingAddress")}></textarea>
 

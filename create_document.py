@@ -8,7 +8,7 @@ session = Session()
 
 BIG_HEADING = 1
 SUB_HEADING = 2
-SUB_SUB_HEADING = 3
+SMALL_HEADING = 4
 
 user_dict = {
     "external_people": "External People/The Public",
@@ -80,7 +80,6 @@ def definitions(document, rfq):
 def services(document, rfq):
     document.add_heading("2. Services", level=BIG_HEADING)
     content_components = session.query(ContentComponent).filter_by(document_id=rfq.id).filter_by(section=2).all()
-    # baseFee baseFeeAmount basePeriodDurationNumber basePeriodDurationUnit clin farCode fee iterationPoPNumber iterationPoPUnit maxBudget naicsText optionFee optionFeeAmount optionPeriodDurationNumber optionPeriodDurationUnit optionPeriods paymentSchedule travelBudget travelLanguage travelRequirement 
     # include vendor number
     cc = make_dict(content_components)
     optionPeriods = cc["optionPeriods"]
@@ -145,7 +144,7 @@ def services(document, rfq):
 
         document.add_paragraph("\n")
 
-    # @TODO add custom CLIN
+    # @TODO add custom CLIN(s)
 
     document.add_heading("Payment Schedule", level=SUB_HEADING)
     document.add_paragraph(cc["paymentSchedule"])
@@ -168,14 +167,6 @@ def objectives(document, rfq):
         document.add_paragraph(cc["programHistory"])
     else:
         document.add_paragraph("If you have any information about the current vendors and specific technology being used please provide it here.")
-
-    document.add_heading("Specific Tasks and Deliverables", level=SUB_HEADING)
-    text = "This " + rfq.doc_type + " will require the following services:"
-    document.add_paragraph(text)
-
-    deliverables = session.query(Deliverable).filter_by(document_id=rfq.id).filter_by(value="true").all()
-    for deliverable in deliverables:
-        document.add_paragraph("    " + deliverable.display)
 
     document.add_heading("Users", level=SUB_HEADING)
     user_types = ["external_people", "external_it", "internal_people", "internal_it"]
@@ -230,11 +221,21 @@ def objectives(document, rfq):
     document.add_heading("Use data to drive decisions", level=SUB_HEADING)
     document.add_paragraph(cc["dataDrivenDecisions"])
 
+    document.add_heading("Specific Tasks and Deliverables", level=SUB_HEADING)
+    text = "This " + rfq.doc_type + " will require the following services:"
+    document.add_paragraph(text)
+
+    deliverables = session.query(Deliverable).filter_by(document_id=rfq.id).filter_by(value="true").all()
+    for deliverable in deliverables:
+        document.add_paragraph("    " + deliverable.display)
+
+
     document.add_heading("Deliverables", level=SUB_HEADING)
     document.add_paragraph(cc["definitionOfDone"])
 
-    document.add_heading("Documentation and Training", level=SUB_HEADING)
-    document.add_paragraph(cc["documentationAndTraining"])
+    for deliverable in deliverables:
+        document.add_heading(deliverable.display, level=SMALL_HEADING)
+        document.add_paragraph(deliverable.text)
 
     document.add_heading("Place of Performance", level=SUB_HEADING)
     if cc['locationRequirement'] == "no":
@@ -304,7 +305,10 @@ def invoicing(document, rfq):
     document.add_paragraph(cc["invoicing"])
 
     document.add_paragraph("The Contractor shall submit an original invoice for payment to the following office:")
-    document.add_paragraph(cc["billingAddress"])
+    if cc['billingAddress'].length < 1:
+        document.add_paragraph("ADD BILLING ADDRESS HERE")
+    else:
+        document.add_paragraph(cc["billingAddress"])
     document.add_paragraph(cc["duplicateInvoice"])
 
     return document
