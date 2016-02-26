@@ -199,8 +199,11 @@ var Services = React.createClass({
   		}
   	}
   	else {
-  		this.setState({addClin: true});
+  		this.setState({ addClin: true });
   	}  
+  },
+  cancelGenerateClin: function(){
+  	this.setState({ addClin: false });
   },
 	save: function(cb) {
 		var data = {};
@@ -619,6 +622,7 @@ var Services = React.createClass({
 				<div>
 					<Clin />
 					<button className="add btn btn-default" onClick={this.generateClin}>Save CLIN</button>
+					<button className="add btn btn-default" onClick={this.cancelGenerateClin}>Cancel</button>
 				</div> :
 				<button className="add btn btn-default" onClick={this.generateClin}>Add CLIN</button>
 				}

@@ -78,6 +78,9 @@ var ContractingOfficer = React.createClass({
   		this.setState({ addRole: true });
   	}
   },
+  cancelAddRole: function() {
+  	this.setState({ addRole: false});
+  },
 	render: function() {
 		var roles = [];
 		for (i=0; i < this.state.rolesData.length; i++){
@@ -118,7 +121,8 @@ var ContractingOfficer = React.createClass({
 							<input type="text" className="medium-response form-control" placeholder="Title" value={this.state.title} onChange={this.handleChange.bind(this, "title")} />
 						</div>
 						<textarea className="form-control" rows="5" placeholder="Description" value={this.state.text} onChange={this.handleChange.bind(this, "text")}></textarea>
-						<button className="btn btn-default" placeholder="Description of Role" onClick={this.addRole}>Save Role</button>
+						<button className="btn btn-default" onClick={this.addRole}>Save Role</button>
+						<button className="btn btn-default" onClick={this.cancelAddRole}>Cancel</button>
 					</div>
 					: <button className="add btn btn-default" onClick={this.addRole}>Add Role</button>
 				}

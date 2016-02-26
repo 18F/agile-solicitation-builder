@@ -65,6 +65,9 @@ var SpecialRequirements = React.createClass({
   		this.setState({ addRequirement: true });
   	}
   },
+  cancelAddRequirement: function() {
+  	this.setState( {addRequirement: false });
+  },
   save: function(cb) {
 		var data = {};
 		
@@ -107,6 +110,7 @@ var SpecialRequirements = React.createClass({
 						</div>
 						<textarea className="form-control" rows="5" placeholder="Requirement Text" value={this.state.text} onChange={this.handleChange.bind(this, "text")}></textarea>
 						<button className="btn btn-default" onClick={this.addRequirement}>Save Requirement</button>
+						<button className="btn btn-default" onClick={this.cancelAddRequirement}>Cancel</button>
 					</div>
 					: <button className="add btn btn-default" onClick={this.addRequirement}>Add Requirement</button>
 				}
