@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/18F/playbook-in-action.png?label=ready&title=Ready)](https://waffle.io/18F/playbook-in-action)
 This project uses the following node modules:
 
   - babel-preset-react
