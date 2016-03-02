@@ -1,4 +1,3 @@
-<<<<<<< 49f3bae6a04ba034a5f00009c443f7f4e37e3e3a
 [![Stories in Ready](https://badge.waffle.io/18F/playbook-in-action.png?label=ready&title=Ready)](https://waffle.io/18F/playbook-in-action)
 =======
 ### Installation
