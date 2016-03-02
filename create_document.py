@@ -305,7 +305,7 @@ def invoicing(document, rfq):
     document.add_paragraph(cc["invoicing"])
 
     document.add_paragraph("The Contractor shall submit an original invoice for payment to the following office:")
-    if cc['billingAddress'].length < 1:
+    if len(cc['billingAddress']) < 1:
         document.add_paragraph("ADD BILLING ADDRESS HERE")
     else:
         document.add_paragraph(cc["billingAddress"])
