@@ -1,0 +1,16 @@
+language: python
+sudo: false
+python:
+    - "2.7"
+env:
+    global:
+        # Set cloud.gov credentials
+        # @todo: Add these.
+        # - secure: ''
+        # - secure: ''
+    install:
+        - pip install -r requirements.txt
+        - npm install app/package.json
+        - psql -c 'create database travis_ci_test;' -U postgres
+    script:
+        - python server.py
