@@ -8,6 +8,7 @@ Flask-RESTful==0.3.4
 Flask-Script==2.0.5
 Flask-SQLAlchemy==2.1
 gunicorn==19.4.5
+honcho==0.6.6
 itsdangerous==0.24
 Jinja2==2.8
 lxml==3.4.1

@@ -3,4 +3,4 @@ app/build/
 app/bower_components/
 .DS_Store
 venv/
-*.pyc
+*.pyc*.env
