@@ -5,3 +5,5 @@ app/bower_components/
 venv/
 *.pyc
 *.env
+.coverage/
+htmlcov/
