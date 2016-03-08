@@ -3,6 +3,7 @@ aniso8601==1.1.0
 coverage==4.0.3
 cssselect==0.9.1
 Django==1.8.6
+flake8==2.5.4
 Flask==0.10.1
 Flask-Migrate==1.6.0
 Flask-RESTful==0.3.4
@@ -15,8 +16,13 @@ Jinja2==2.8
 lxml==3.4.1
 Mako==1.0.3
 MarkupSafe==0.23
+mccabe==0.4.0
 pbr==1.8.1
+pep8==1.7.0
 psycopg2==2.6.1
+py==1.4.31
+pyflakes==1.0.0
+pytest==2.9.0
 python-dateutil==2.4.2
 python-docx==0.8.5
 python-editor==0.4
