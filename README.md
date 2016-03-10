@@ -37,7 +37,9 @@ To ensure bundle.js is updated with the changes to any React code, you will need
 
 ### Testing
 
-To test using a local browser, run `python tests/functional_tests.py`.
+To run functional tests using a local browser, run `python tests/functional_tests.py`.
+
+To see current test coverage, run `coverage report`.
 
 ### Public domain
 
