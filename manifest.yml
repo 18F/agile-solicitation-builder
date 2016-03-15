@@ -3,4 +3,4 @@
 memory: 512m
 applications:
 - name: playbook-in-action
-- disk_quota: 512M
+  disk_quota: 512M
