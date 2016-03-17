@@ -73,44 +73,30 @@ var Clin = React.createClass({
 	render: function() {
 		return (
 			<form id="additional-clin">
-        <div className="usa-grid">
-          <div className="container fake-table usa-width-one-whole">
-            <div className="usa-grid clin">
-              <div className="usa-width-one-whole table-content">
-                <input type="text" className="long-response" id="row1"/>
-              </div>
-            </div>
-            <div className="usa-grid clin">
-              <div className="usa-width-one-whole table-content">
-                <input type="text" className="long-response" id="row2" />
-              </div>
-            </div>
-            <div className="usa-grid clin">
-              <div className="usa-width-one-half table-content"><input type="text" id="row3a" />
-              </div>
-              <div className="usa-width-one-half table-content"><input type="text" id="row3b" />
-              </div>
-            </div>
-            <div className="usa-grid clin">
-              <div className="usa-width-one-half table-content"><input type="text" id="row4a" />
-              </div>
-              <div className="usa-width-one-half table-content"><input type="text" id="row4b"/>
-              </div>
-            </div>
-            <div className="usa-grid clin">
-              <div className="usa-width-one-half table-content"><input type="text" id="row5a" />
-              </div>
-              <div className="usa-width-one-half table-content"><input type="text" id="row5b" />
-              </div>
-            </div>
-            <div className="usa-grid clin">
-              <div className="usa-width-one-half table-content"><input type="text" id="row6a" />
-              </div>
-              <div className="usa-width-one-half table-content"><input type="text" id="row6b" />
-              </div>
-            </div>
-          </div>
-        </div>
+        <table>
+          <tr>
+            <td colSpan="2"><input type="text" className="long-response" id="row1"/></td>
+          </tr>
+          <tr>
+            <td colSpan="2"><input type="text" className="long-response" id="row2" /></td>
+          </tr>
+          <tr>
+            <td><input type="text" id="row3a" /></td>
+            <td><input type="text" id="row3b" /></td>
+          </tr>
+          <tr>
+            <td><input type="text" id="row4a" /></td>
+            <td><input type="text" id="row4b" /></td>
+          </tr>
+          <tr>
+            <td><input type="text" id="row5a" /></td>
+            <td><input type="text" id="row5b" /></td>
+          </tr>
+          <tr>
+            <td><input type="text" id="row6a" /></td>
+            <td><input type="text" id="row6b" /></td>
+          </tr>
+        </table>
 			</form>
 		);
 	}
@@ -262,51 +248,40 @@ var Services = React.createClass({
 		for (var clin in this.state.clins){
 			var this_clin = this.state.clins[clin];
 			ADDITIONAL_CLINS.push(
-        <div className="usa-grid" key={clin}>
-				  <div className="container fake-table usa-width-one-whole">
-            <div className="usa-grid clin additional">
-              <div className="usa-width-one-whole table-content">{this_clin["row1"]}</div>
-            </div>
-            {(this_clin['row2'].length > 0) ?
-              <div className="usa-grid clin additional">
-                <div className="usa-width-one-whole table-content">{this_clin["row2"]}
-                </div>
-              </div>
+        <table key={clin}>
+          <tr>
+            <td colSpan="2">{this_clin["row1"]}</td>
+          </tr>
+          {(this_clin['row2'].length > 0) ?
+            <tr>
+              <td colSpan="2">{this_clin["row2"]}</td>
+            </tr>
             : null }
-            {(this_clin['row3a'].length > 0) || (this_clin['row3b'].length > 0) ?
-              <div className="usa-grid clin additional">
-                <div className="usa-width-one-half table-content">{this_clin["row3a"]}
-                </div>
-                <div className="usa-width-one-half table-content">{this_clin["row3b"]}
-                </div>
-              </div>
+          {(this_clin['row3a'].length > 0) || (this_clin['row3b'].length > 0) ?
+            <tr>
+              <td>{this_clin["row3a"]}</td>
+              <td>{this_clin["row3b"]}</td>
+            </tr>
             : null}
-            {(this_clin['row4a'].length > 0) || (this_clin['row4b'].length > 0) ?
-              <div className="usa-grid clin additional">
-                <div className="usa-width-one-half table-content">{this_clin["row4a"]}
-                </div>
-                <div className="usa-width-one-half table-content">{this_clin["row4b"]}
-                </div>
-              </div>
+          {(this_clin['row4a'].length > 0) || (this_clin['row4b'].length > 0) ?
+            <tr>
+              <td>{this_clin["row4a"]}</td>
+              <td>{this_clin["row4b"]}</td>
+            </tr>
             : null}
-            {(this_clin['row5a'].length > 0) || (this_clin['row5b'].length > 0) ?
-              <div className="usa-grid clin additional">
-                <div className="usa-width-one-half table-content">{this_clin["row5a"]}
-                </div>
-                <div className="usa-width-one-half table-content ">{this_clin["row5b"]}
-                </div>
-              </div>
+          {(this_clin['row5a'].length > 0) || (this_clin['row5b'].length > 0) ?
+            <tr>
+              <td>{this_clin["row5a"]}</td>
+              <td>{this_clin["row5b"]}</td>
+            </tr>
             : null}
-            {(this_clin['row6a'].length > 0) || (this_clin['row6b'].length > 0) ?
-              <div className="usa-grid clin additional">
-                <div className="usa-width-one-half table-content">{this_clin["row6a"]}
-                </div>
-                <div className="usa-width-one-half table-content">{this_clin["row6b"]}
-                </div>
-              </div>
+          {(this_clin['row6a'].length > 0) || (this_clin['row6b'].length > 0) ?
+            <tr>
+              <td>{this_clin["row6a"]}</td>
+              <td>{this_clin["row6b"]}</td>
+            </tr>
             : null}
-          </div>
-        </div>
+        </table>
       );
 		}
 
@@ -317,42 +292,30 @@ var Services = React.createClass({
 		for (var key in CLIN_CONTENT) {
 			if (counter < parseInt(optionPeriods, 10)) {
 				CLINS.push(
-          <div className="usa-grid" key={key}>
-            <div className="container fake-table usa-width-one-whole" key={counter}>
-              <div className="usa-grid clin">
-                <div className="usa-width-one-whole table-content">{CLIN_CONTENT[key]}: {oPoP}
-                </div>
-              </div>
-              <div className="usa-grid clin">
-                <div className="usa-width-one-whole table-content">{key}, FFP- Completion - The Contractor shall provide services for the Government in accordance with the Performance Work Statement (PWS)
-                </div>
-              </div>
-              <div className="usa-grid clin">
-                <div className="usa-width-one-half table-content">Iteration PoP
-                </div>
-                <div className="usa-width-one-half table-content">{iPoP}
-                </div>
-              </div>
-              <div className="usa-grid clin">
-                <div className="usa-width-one-half table-content">Price Per Iteration
-                </div>
-                <div className="usa-width-one-half table-content">$XXXXXXX (vendor completes)
-                </div>
-              </div>
-              <div className="usa-grid clin">
-                <div className="usa-width-one-half table-content">Period of Performance
-                </div>
-                <div className="usa-width-one-half table-content">{oPoP}
-                </div>
-              </div>
-              <div className="usa-grid clin">
-                <div className="usa-width-one-half table-content">Firm Fixed Price (Completion):
-                </div>
-                <div className="usa-width-one-half table-content">$XXXXXXX (vendor completes)
-                </div>
-              </div>
-            </div>
-          </div>
+          <table key={counter}>
+            <tr>
+              <td colSpan="2">{CLIN_CONTENT[key]}: {oPoP}</td>
+            </tr>
+            <tr>
+              <td colSpan="2">{key}, FFP- Completion - The Contractor shall provide services for the Government in accordance with the Performance Work Statement (PWS)</td>
+            </tr>
+            <tr>
+              <td>Iteration PoP</td>
+              <td>{iPoP}</td>
+            </tr>
+            <tr>
+              <td>Price Per Iteration</td>
+              <td>$XXXXXXX (vendor completes)</td>
+            </tr>
+            <tr>
+              <td>Period of Performance</td>
+              <td>{oPoP}</td>
+            </tr>
+            <tr>
+              <td>Firm Fixed Price (Completion):</td>
+              <td>$XXXXXXX (vendor completes)</td>
+            </tr>
+          </table>
 				)
 			counter += 1;
 			}
@@ -506,20 +469,15 @@ var Services = React.createClass({
               </form>
               <div className="guidance-text">Use agency-specific guidance regarding details.</div>
 
-              <div className="usa-grid">
-                <div className="container fake-table usa-width-one-whole">
-                  <div className="usa-grid clin">
-                    <div className="usa-width-one-whole table-content">{BASE_FEE_OPTIONS[this.state.baseFee]} Based CLIN
-                    </div>
-                  </div>
-                  <div className="usa-grid clin">
-                    <div className="usa-width-one-half table-content">{BASE_FEE_OPTIONS[this.state.baseFee]}
-                    </div>
-                    <div className="usa-width-one-half table-content">$XXXXX (vendor completes)
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <table>
+                <tr>
+                  <td colSpan="2">{BASE_FEE_OPTIONS[this.state.baseFee]} Based CLIN</td>
+                </tr>
+                <tr>
+                  <td>{BASE_FEE_OPTIONS[this.state.baseFee]}</td>
+                  <td>$XXXXX (vendor completes)</td>
+                </tr>
+              </table>
 
             </div>
           }
@@ -553,20 +511,15 @@ var Services = React.createClass({
               </form>
               <div className="guidance-text">Use agency-specific guidance for details.</div>
 
-              <div className="usa-grid">
-                <div className="container fake-table usa-width-one-whole">
-                  <div className="usa-grid clin">
-                    <div className="usa-width-one-whole table-content">{OPTION_FEE_OPTIONS[this.state.optionFee]} Based CLIN
-                    </div>
-                  </div>
-                  <div className="usa-grid clin">
-                    <div className="usa-width-one-half table-content">{OPTION_FEE_OPTIONS[this.state.optionFee]}
-                    </div>
-                    <div className="usa-width-one-half table-content">$XXXXX (vendor completes)
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <table>
+                <tr>
+                  <td colSpan="2">{OPTION_FEE_OPTIONS[this.state.optionFee]} Based CLIN</td>
+                </tr>
+                <tr>
+                  <td>{OPTION_FEE_OPTIONS[this.state.optionFee]}</td>
+                  <td>$XXXXX (vendor completes)</td>
+                </tr>
+              </table>
             </div>
           }
         </div>
@@ -606,42 +559,30 @@ var Services = React.createClass({
         <div className="question">
           <div className="question-text">Contract Line Item Number (CLIN) Format</div>
 
-          <div className="usa-grid">
-            <div className="container fake-table usa-width-one-whole">
-              <div className="usa-grid clin">
-                <div className="usa-width-one-whole table-content">Base Period: {bPoP}
-                </div>
-              </div>
-              <div className="usa-grid clin">
-                <div className="usa-width-one-whole table-content">CLIN 0001, FFP - Completion - The Contractor shall provide services for the Government in accordance with the Performance Work Statement (PWS)
-                </div>
-              </div>
-              <div className="usa-grid clin">
-                <div className="usa-width-one-half table-content">Iteration PoP
-                </div>
-                <div className="usa-width-one-half table-content">{iPoP}
-                </div>
-              </div>
-              <div className="usa-grid clin">
-                <div className="usa-width-one-half table-content">Price Per Iteration
-                </div>
-                <div className="usa-width-one-half table-content">$XXXXXXX (vendor completes)
-                </div>
-              </div>
-              <div className="usa-grid clin">
-                <div className="usa-width-one-half table-content">Period of Performance
-                </div>
-                <div className="usa-width-one-half table-content">{bPoP}
-                </div>
-              </div>
-              <div className="usa-grid clin">
-                <div className="usa-width-one-half table-content">Firm Fixed Price (Completion):
-                </div>
-                <div className="usa-width-one-half table-content">$XXXXXXX (vendor completes)
-                </div>
-              </div>
-            </div>
-          </div>
+          <table key={counter}>
+            <tr>
+              <td colSpan="2">Base Period: {bPoP}</td>
+            </tr>
+            <tr>
+              <td colSpan="2">CLIN 0001, FFP - Completion - The Contractor shall provide services for the Government in accordance with the Performance Work Statement (PWS)</td>
+            </tr>
+            <tr>
+              <td>Iteration PoP</td>
+              <td>{iPoP}</td>
+            </tr>
+            <tr>
+              <td>Price Per Iteration</td>
+              <td>$XXXXXXX (vendor completes)</td>
+            </tr>
+            <tr>
+              <td>Period of Performance</td>
+              <td>{bPoP}</td>
+            </tr>
+            <tr>
+              <td>Firm Fixed Price (Completion):</td>
+              <td>$XXXXXXX (vendor completes)</td>
+            </tr>
+          </table>
 
           {CLINS}
           {ADDITIONAL_CLINS}
@@ -649,10 +590,10 @@ var Services = React.createClass({
           { (this.state.addClin === true)?
             <div>
               <Clin />
-              <button onClick={this.generateClin}>Save CLIN</button>
-              <button onClick={this.cancelGenerateClin}>Cancel</button>
+              <button className="usa-button-outline" onClick={this.generateClin}>Save CLIN</button>
+              <button className="usa-button-outline" onClick={this.cancelGenerateClin}>Cancel</button>
             </div> :
-            <button onClick={this.generateClin}>Add CLIN</button>
+            <button className="usa-button-outline" onClick={this.generateClin}>Add CLIN</button>
           }
         </div>
 

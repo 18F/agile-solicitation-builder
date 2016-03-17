@@ -119,10 +119,10 @@ var ContractingOfficer = React.createClass({
 							<input type="text" className="medium-response" placeholder="Title" value={this.state.title} onChange={this.handleChange.bind(this, "title")} />
 						</div>
 						<textarea rows="5" placeholder="Description" value={this.state.text} onChange={this.handleChange.bind(this, "text")}></textarea>
-						<button onClick={this.addRole}>Save Role</button>
-						<button onClick={this.cancelAddRole}>Cancel</button>
+						<button className="usa-button-outline" onClick={this.addRole}>Save Role</button>
+						<button className="usa-button-outline" onClick={this.cancelAddRole}>Cancel</button>
 					</div>
-					: <button onClick={this.addRole}>Add Role</button>
+					: <button className="usa-button-outline" onClick={this.addRole}>Add Role</button>
 				}
 				
 				<div className="guidance-text">You may also add elaborate on these roles, or add additional roles in the generated RFQ.</div>

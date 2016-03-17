@@ -110,10 +110,10 @@ var SpecialRequirements = React.createClass({
 							<input type="text" className="medium-response" placeholder="Requirement Title" value={this.state.title} onChange={this.handleChange.bind(this, "title")} />
 						</div>
 						<textarea rows="5" placeholder="Requirement Text" value={this.state.text} onChange={this.handleChange.bind(this, "text")}></textarea>
-						<button onClick={this.addRequirement}>Save Requirement</button>
-						<button onClick={this.cancelAddRequirement}>Cancel</button>
+						<button className="usa-button-outline" onClick={this.addRequirement}>Save Requirement</button>
+						<button className="usa-button-outline" onClick={this.cancelAddRequirement}>Cancel</button>
 					</div>
-					: <button onClick={this.addRequirement}>Add Requirement</button>
+					: <button className="usa-button-outline" onClick={this.addRequirement}>Add Requirement</button>
 				}
 
 			</div>
