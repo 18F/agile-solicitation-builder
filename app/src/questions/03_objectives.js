@@ -210,7 +210,7 @@ var Objective = React.createClass({
 				<div className="page-heading">Statement of Objectives</div>
 
 				<div className="responder-instructions">These questions are typically answered by the PM.</div>
-
+				
 				<EditBox
 						text={this.state.objectivesIntro}
 						editing={this.state.edit === 'objectivesIntro'}
