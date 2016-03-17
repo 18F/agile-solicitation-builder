@@ -36,29 +36,29 @@ var PostAward = React.createClass({
 		var placeholderText = "Mailing Address                                          Phone Number                                                 Fax Number";
 		return (
 			<div>
-				<div className="page-heading">Invoicing & Funding</div>
-					<div className="responder-instructions">The content in this section is typically decided on by the CO.</div>
-					<p>If you wish to add additional text you may do so in the resulting word document.</p>
-					<div className="sub-heading">Contractor Instructions</div>
+				<div className="page-heading">Invoicing &amp; Funding</div>
+        <div className="responder-instructions">The content in this section is typically decided on by the CO.</div>
+        <p>If you wish to add additional text you may do so in the resulting word document.</p>
 
-					<EditBox
-							text={this.state.invoicing}
-							editing={this.state.edit === 'invoicing'}
-							onStatusChange={this.toggleEdit.bind(this, 'invoicing')}
-							onTextChange={this.handleChange.bind(this, 'invoicing')}>
-					</EditBox>
+        <div className="sub-heading">Contractor Instructions</div>
 
-					<div>The Contractor shall submit an original invoice for payment to the following office:</div>
+        <EditBox
+            text={this.state.invoicing}
+            editing={this.state.edit === 'invoicing'}
+            onStatusChange={this.toggleEdit.bind(this, 'invoicing')}
+            onTextChange={this.handleChange.bind(this, 'invoicing')}>
+        </EditBox>
 
-	    		<textarea rows="5" className="form-control medium-response" placeholder={placeholderText} value={this.state.billingAddress} onChange={this.handleChange.bind(this, "billingAddress")}></textarea>
+        <div>The Contractor shall submit an original invoice for payment to the following office:</div>
 
-	    		<EditBox
-							text={this.state.duplicateInvoice}
-							editing={this.state.edit === 'duplicateInvoice'}
-							onStatusChange={this.toggleEdit.bind(this, 'duplicateInvoice')}
-							onTextChange={this.handleChange.bind(this, 'duplicateInvoice')}>
-					</EditBox>
-				
+        <textarea rows="5" className="medium-response" placeholder={placeholderText} value={this.state.billingAddress} onChange={this.handleChange.bind(this, "billingAddress")}></textarea>
+
+        <EditBox
+            text={this.state.duplicateInvoice}
+            editing={this.state.edit === 'duplicateInvoice'}
+            onStatusChange={this.toggleEdit.bind(this, 'duplicateInvoice')}
+            onTextChange={this.handleChange.bind(this, 'duplicateInvoice')}>
+        </EditBox>
 			</div>
 		);
 	},

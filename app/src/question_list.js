@@ -5,7 +5,7 @@ module.exports = [
 	{code: "4", key: "4", title: "Key Personnel", component: require('./questions/04_personnel')},
 	{code: "5", key: "5", title: "Invoicing & Funding", component: require('./questions/05_post_award')},
 	{code: "6", key: "6", title: "Inspection & Acceptance", component: require('./questions/06_inspection')},
-	{code: "8", key: "8", title: "Government Roles", component: require('./questions/07_government_roles')},
-	{code: "9", key: "9", title: "Special Requirements", component: require('./questions/08_special_requirements')},
-	{code: "10", key: "10", title: "Contract Clauses", component: require('./questions/09_contract_clauses')},
+	{code: "7", key: "7", title: "Government Roles", component: require('./questions/07_government_roles')},
+	{code: "8", key: "8", title: "Special Requirements", component: require('./questions/08_special_requirements')},
+	{code: "9", key: "9", title: "Contract Clauses", component: require('./questions/09_contract_clauses')},
 ];

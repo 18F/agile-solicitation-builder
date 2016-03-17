@@ -30,15 +30,12 @@ var Results = React.createClass({
 		return (
 			<div>
 				<div className="page-heading">Resulting RFQ</div>
-				<a href={url}><button className="btn btn-default">Download</button></a>
-				<br />
-				<br />
-				<button onClick={this.handleDelete.bind(this, "yes")} className="btn btn-default">Delete this RFQ</button>
+				<a href={url}><button>Download</button></a>
+				<button onClick={this.handleDelete.bind(this, "yes")}>Delete this RFQ</button>
 				<div className="confirm-delete">
-					<br />
 					<h4>Are you sure you want to delete this RFQ?</h4>
-					<button onClick={this.handleDelete.bind(this, "no")} className="btn btn-default yes-no">No</button>
-					<button onClick={this.deleteRFQ} className="btn btn-default yes-no">Yes</button>
+					<button onClick={this.handleDelete.bind(this, "no")} className="yes-no">No</button>
+					<button onClick={this.deleteRFQ} className="yes-no">Yes</button>
 				</div>
 			</div>
 		);

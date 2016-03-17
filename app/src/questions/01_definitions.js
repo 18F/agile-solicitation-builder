@@ -37,7 +37,6 @@ var Definition = React.createClass({
                     onStatusChange={this.toggleEdit.bind(this, 'definitions')}
                     onTextChange={this.handleChange.bind(this, 'definitions')}>
                 </EditBox>
-
             </div>
         );
     },

@@ -86,8 +86,9 @@ var ContractingOfficer = React.createClass({
 		for (i=0; i < this.state.rolesData.length; i++){
 			var role = this.state.rolesData[i];
 			roles.push(
-				<div key={i}>
+				<div className="question" key={i}>
 					<div className="question-text">{role['title']}</div>
+
 					<EditBox
 							text={this.state[role['name']]}
 							editing={this.state.edit == role['name']}
@@ -101,7 +102,6 @@ var ContractingOfficer = React.createClass({
 		return (
 			<div>
 				<div className="page-heading">Roles and Responsibilities</div>
-
 				<div className="responder-instructions">The content in this section should be decided upon by both the PM and the CO.</div>
 
 				<EditBox
@@ -113,24 +113,19 @@ var ContractingOfficer = React.createClass({
 
 				{roles}
 
-				<br />
-
 				{this.state.addRole?
 					<div>
 						<div className="sub-heading">
-							<input type="text" className="medium-response form-control" placeholder="Title" value={this.state.title} onChange={this.handleChange.bind(this, "title")} />
+							<input type="text" className="medium-response" placeholder="Title" value={this.state.title} onChange={this.handleChange.bind(this, "title")} />
 						</div>
-						<textarea className="form-control" rows="5" placeholder="Description" value={this.state.text} onChange={this.handleChange.bind(this, "text")}></textarea>
-						<button className="btn btn-default" onClick={this.addRole}>Save Role</button>
-						<button className="btn btn-default" onClick={this.cancelAddRole}>Cancel</button>
+						<textarea rows="5" placeholder="Description" value={this.state.text} onChange={this.handleChange.bind(this, "text")}></textarea>
+						<button onClick={this.addRole}>Save Role</button>
+						<button onClick={this.cancelAddRole}>Cancel</button>
 					</div>
-					: <button className="add btn btn-default" onClick={this.addRole}>Add Role</button>
+					: <button onClick={this.addRole}>Add Role</button>
 				}
 				
-				<br />
 				<div className="guidance-text">You may also add elaborate on these roles, or add additional roles in the generated RFQ.</div>
-				<br />
-
 			</div>
 		);
 	},

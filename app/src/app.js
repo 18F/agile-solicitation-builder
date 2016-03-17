@@ -32,18 +32,22 @@ var Header = React.createClass({
 		};
 
 		return (
-			<div className="col-md-12 header">
-				<div className="usa-disclaimer">
-    			<span className="usa-disclaimer-official">
-      			<img className="usa-flag_icon" alt="US flag signifying that this is a United States Federal Government website" src="/assets/img/us_flag_small.png" />
-			      An official website of the United States Government
-				  </span>
-				  <span className="usa-disclaimer-stage">This site is currently in alpha. {RepoLink}.</span>
-			  </div>
-				<h1>
-					<IndexLink to="/" style={inheritStyle}>Playbook in Action</IndexLink>
-				</h1>
-			</div>
+      <div>
+        <div className="usa-disclaimer">
+          <span className="usa-disclaimer-official">
+            <img className="usa-flag_icon" alt="US flag signifying that this is a United States Federal Government website" src="/assets/img/us_flag_small.png" />
+            An official website of the United States Government
+          </span>
+          <span className="usa-disclaimer-stage">This site is currently in alpha. {RepoLink}.</span>
+        </div>
+        <div className="usa-grid">
+          <div className="usa-width-one-whole header">
+            <h1>
+              <IndexLink to="/" style={inheritStyle}>Playbook in Action</IndexLink>
+            </h1>
+          </div>
+        </div>
+      </div>
 		);
 	},
 });
@@ -55,12 +59,10 @@ var App = React.createClass({
 		};
 
 		return (
-			<View column style={appStyle}>
-				<View>
-					<Header />
-				</View>
+			<div style={appStyle}>
+        <Header />
 				{this.props.children}
-			</View>
+			</div>
 		);
 	},
 });

@@ -66,12 +66,11 @@ var Question = React.createClass({
 		if(Component) {
 			return (
 				<div>
-					<div>
-						<Component
-							params={this.props.params}
-							questionData={this.props.questionData}
-							updateQuestion={this.props.updateQuestion} ref="question" />
-					</div>
+          <Component
+            params={this.props.params}
+            questionData={this.props.questionData}
+            updateQuestion={this.props.updateQuestion} ref="question"
+          />
 					<ButtonToolbar>
 						<Button onClick={this.handlePrev} disabled={this.state.saving}>Previous</Button>
 						<Button bsStyle="primary" onClick={this.handleNext} disabled={this.state.saving}>Next</Button>

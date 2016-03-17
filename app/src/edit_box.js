@@ -41,6 +41,10 @@ var EditBox = React.createClass({
 	},
 	render: function() {
 		var renderedMarkdown = {__html: marked(this.props.text)};
+    var displayStyle = {
+      border: 'thin dashed black',
+      padding: '1rem'
+    };
 
 		if(this.props.editing) {
 			return (
@@ -53,7 +57,7 @@ var EditBox = React.createClass({
 			return (
 				<div className="edit-box">
 					<div className="edit" onClick={this.toggleEdit.bind(this, true)}>Edit</div>
-					<div className="edit-content" dangerouslySetInnerHTML={renderedMarkdown}></div>
+					<div className="edit-content" style={displayStyle} dangerouslySetInnerHTML={renderedMarkdown}></div>
 				</div>
 			);
 		}

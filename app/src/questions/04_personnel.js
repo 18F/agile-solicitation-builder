@@ -42,11 +42,10 @@ var Requirement = React.createClass({
 		for (i=0; i < CLEARANCE_LEVELS.length; i++){
 			var level = CLEARANCE_LEVELS[i];
 			clearance_options.push(
-				<div className="radio" key={level}>
-					<label>
-						<input type="radio" value={level} checked={level == this.state.clearanceRequired} />{level}
-				  </label>
-				</div>
+				<li className="radio" key={level}>
+          <input type="radio" id={"clearance_options:" + level} value={level} checked={level == this.state.clearanceRequired} />
+					<label htmlFor={"clearance_options:" + level}>{level}</label>
+				</li>
 			);
 		}
 
@@ -64,81 +63,95 @@ var Requirement = React.createClass({
 
 				<div className="sub-heading">Security Clearances</div>
 
-				<div className="question-text">What is the highest level of clearance that will be required?</div>
+        <div className="question">
+          <div className="question-text">What is the highest level of clearance that will be required?</div>
 
-				<radiogroup onChange={this.handleChange.bind(this, "clearanceRequired")}>
-					{clearance_options}
-				</radiogroup>
+          <fieldset className="usa-fieldset-inputs">
+            <legend className="usa-sr-only">What is the highest level of clearance that will be required?</legend>
+            <ul className="usa-unstyled-list" onChange={this.handleChange.bind(this, "clearanceRequired")}>
+              {clearance_options}
+            </ul>
+          </fieldset>
+        </div>
 
-				<div className="question-text">Will any of the work be done onsite?</div>
-				<radiogroup onChange={this.handleChange.bind(this, "onSiteRequired")}>
-					<div className="radio">
-						<label>
-							<input type="radio" value="yes" checked={"yes" == this.state.onSiteRequired} />Yes
-					  </label>
-					</div>
-					<div className="radio">
-						<label>
-							<input type="radio" value="no" checked={"no" == this.state.onSiteRequired} />No
-					  </label>
-					</div>
-				</radiogroup>
+        <div className="question">
+          <div className="question-text">Will any of the work be done onsite?</div>
 
-				{(this.state.clearanceRequired == "None")? 
-				<div className="resulting-text">Contractor personnel will <b>not</b> be required to have a security clearance.</div> :
-				<div className="resulting-text">Some contractor personnel will be required to have a clearance at the level of <b>{this.state.clearanceRequired}</b>.</div>
-				}
-				{(this.state.onSiteRequired == "yes")?
-				<div className="resulting-text">An onsite presence by the contractor will be required.</div> :
-				<div className="resulting-text">An onsite presence by the contractor will not be required.</div>
-				}			
+          <fieldset className="usa-fieldset-inputs">
+            <legend className="usa-sr-only">Will any of the work be done onsite?</legend>
+            <ul className="usa-unstyled-list" onChange={this.handleChange.bind(this, "onSiteRequired")}>
+              <li className="radio">
+                <input type="radio" id="onSiteRequired:yes" value="yes" checked={"yes" == this.state.onSiteRequired} />
+                <label htmlFor="onSiteRequired:yes">Yes</label>
+              </li>
+              <li className="radio">
+                <input type="radio" id="onSiteRequired:no" value="no" checked={"no" == this.state.onSiteRequired} />
+                <label htmlFor="onSiteRequired:no">No</label>
+              </li>
+            </ul>
+          </fieldset>
+
+          {(this.state.clearanceRequired == "None")?
+            <div className="resulting-text">Contractor personnel will <b>not</b> be required to have a security clearance.</div> :
+            <div className="resulting-text">Some contractor personnel will be required to have a clearance at the level of <b>{this.state.clearanceRequired}</b>.</div>
+          }
+          {(this.state.onSiteRequired == "yes")?
+            <div className="resulting-text">An onsite presence by the contractor will be required.</div> :
+            <div className="resulting-text">An onsite presence by the contractor will not be required.</div>
+          }
+        </div>
 	
 				<div className="sub-heading">Key Personnel Evaluation Process</div>
 
-				<div className="question-text">Do you want to require and evaluate key personnel?</div>
-				<radiogroup onChange={this.handleChange.bind(this, "evaluateKeyPersonnel")}>
-					<div className="radio">
-						<label>
-							<input type="radio" value="yes" checked={"yes" == this.state.evaluateKeyPersonnel} />Yes
-					  </label>
-					</div>
-					<div className="radio">
-						<label>
-							<input type="radio" value="no" checked={"no" == this.state.evaluateKeyPersonnel} />No
-					  </label>
-					</div>
-				</radiogroup>
+        <div className="question">
+          <div className="question-text">Do you want to require and evaluate key personnel?</div>
 
-				{(this.state.evaluateKeyPersonnel === "yes")? 
-				<div>
-					<div className="sub-heading">Key Personnel</div>
-					<EditBox
-							text={this.state.keyPersonnelRequirements}
-							editing={this.state.edit === 'keyPersonnelRequirements'}
-							onStatusChange={this.toggleEdit.bind(this, 'keyPersonnelRequirements')}
-							onTextChange={this.handleChange.bind(this, 'keyPersonnelRequirements')}>
-					</EditBox>
-				</div> : 
-				<div>
-					<EditBox
-							text={this.state.notEvaluateKeyPersonnel}
-							editing={this.state.edit === 'notEvaluateKeyPersonnel'}
-							onStatusChange={this.toggleEdit.bind(this, 'notEvaluateKeyPersonnel')}
-							onTextChange={this.handleChange.bind(this, 'notEvaluateKeyPersonnel')}>
-					</EditBox>
-				</div>
-				}
+          <fieldset className="usa-fieldset-inputs">
+            <legend className="usa-sr-only">Do you want to require and evaluate key personnel?</legend>
+            <ul className="usa-unstyled-list" onChange={this.handleChange.bind(this, "evaluateKeyPersonnel")}>
+              <li className="radio">
+                <input type="radio" id="evaluateKeyPersonnel:yes" value="yes" checked={"yes" == this.state.evaluateKeyPersonnel} />
+                <label htmlFor="evaluateKeyPersonnel:yes">Yes</label>
+              </li>
+              <li className="radio">
+                <input type="radio" id="evaluateKeyPersonnel:no" value="no" checked={"no" == this.state.evaluateKeyPersonnel} />
+                <label htmlFor="evaluateKeyPersonnel:no">No</label>
+              </li>
+            </ul>
+          </fieldset>
 
-				<div className="question-text">Performance Work Statement</div>
-				<EditBox
+          {(this.state.evaluateKeyPersonnel === "yes")?
+            <div>
+              <div className="sub-heading">Key Personnel</div>
+              <EditBox
+                  text={this.state.keyPersonnelRequirements}
+                  editing={this.state.edit === 'keyPersonnelRequirements'}
+                  onStatusChange={this.toggleEdit.bind(this, 'keyPersonnelRequirements')}
+                  onTextChange={this.handleChange.bind(this, 'keyPersonnelRequirements')}>
+              </EditBox>
+            </div> :
+            <div>
+              <EditBox
+                  text={this.state.notEvaluateKeyPersonnel}
+                  editing={this.state.edit === 'notEvaluateKeyPersonnel'}
+                  onStatusChange={this.toggleEdit.bind(this, 'notEvaluateKeyPersonnel')}
+                  onTextChange={this.handleChange.bind(this, 'notEvaluateKeyPersonnel')}>
+              </EditBox>
+            </div>
+          }
+        </div>
+
+        <div className="question">
+				  <div className="question-text">Performance Work Statement</div>
+
+          <EditBox
 						text={this.state.performanceWorkStatement}
 						editing={this.state.edit === 'performanceWorkStatement'}
 						onStatusChange={this.toggleEdit.bind(this, 'performanceWorkStatement')}
 						onTextChange={this.handleChange.bind(this, 'performanceWorkStatement')}>
-				</EditBox>
-
+				  </EditBox>
+        </div>
 			</div>
-
 		);
 	},
 });
