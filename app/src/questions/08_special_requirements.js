@@ -85,8 +85,9 @@ var SpecialRequirements = React.createClass({
 			var role = this.state.requirementsData[i];
 			
 			requirements.push(
-				<div key={i}>
+				<div className="question" key={i}>
 					<div className="question-text">{role['title']}</div>
+
 					<EditBox
 							text={this.state[role['name']]}
 							editing={this.state.edit == role['name']}
@@ -106,13 +107,13 @@ var SpecialRequirements = React.createClass({
 				{this.state.addRequirement? 
 					<div>
 						<div className="sub-heading">
-							<input type="text" className="medium-response form-control" placeholder="Requirement Title" value={this.state.title} onChange={this.handleChange.bind(this, "title")} />
+							<input type="text" className="medium-response" placeholder="Requirement Title" value={this.state.title} onChange={this.handleChange.bind(this, "title")} />
 						</div>
-						<textarea className="form-control" rows="5" placeholder="Requirement Text" value={this.state.text} onChange={this.handleChange.bind(this, "text")}></textarea>
-						<button className="btn btn-default" onClick={this.addRequirement}>Save Requirement</button>
-						<button className="btn btn-default" onClick={this.cancelAddRequirement}>Cancel</button>
+						<textarea rows="5" placeholder="Requirement Text" value={this.state.text} onChange={this.handleChange.bind(this, "text")}></textarea>
+						<button className="usa-button-outline" onClick={this.addRequirement}>Save Requirement</button>
+						<button className="usa-button-outline" onClick={this.cancelAddRequirement}>Cancel</button>
 					</div>
-					: <button className="add btn btn-default" onClick={this.addRequirement}>Add Requirement</button>
+					: <button className="usa-button-outline" onClick={this.addRequirement}>Add Requirement</button>
 				}
 
 			</div>

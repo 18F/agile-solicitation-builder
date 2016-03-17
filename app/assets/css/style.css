@@ -32,10 +32,22 @@ h1 {
 
 }
 
+.affix {
+  position: fixed;
+}
+
 .edit {
 	color: #337ab7;
 	cursor: pointer; 
 	cursor: hand;
+}
+
+.edit-box .edit-content > *:first-child {
+  margin-top: 0;
+}
+
+.edit-box .edit-content > *:last-child {
+  margin-bottom: 0;
 }
 
 button.add {
@@ -101,6 +113,10 @@ button.add {
 	font-family: 'Merriweather', serif;
 	font-size: 20px;
 	line-height: 1.3em/22px;
+}
+
+.question {
+  margin: 5vh auto;
 }
 
 .question-text {

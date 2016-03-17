@@ -87,11 +87,10 @@ var RequestOverview = React.createClass({
 		var docTypeOptions = [];
 		for(var key in DOC_TYPES) {
 			docTypeOptions.push(
-				<div className="radio" key={key}>
-					<label>
-						<input type="radio" value={key} checked={key == this.state.docType} />.. { DOC_TYPES[key] }
-				  </label>
-				</div>
+				<li className="radio" key={key}>
+          <input id={"docType:" + key} type="radio" value={key} checked={key == this.state.docType} />
+					<label htmlFor={"docType:" + key}>.. { DOC_TYPES[key] }</label>
+				</li>
 			);
 		}
 
@@ -99,11 +98,10 @@ var RequestOverview = React.createClass({
 		var setasideOptions = [];
 		for(var key in SETASIDES) {
 			setasideOptions.push(
-				<div className="radio" key={key}>
-					<label>
-						<input type="radio" value={key} checked={key == this.state.setaside} />{ SETASIDES[key] }
-				  </label>
-				</div>
+				<li className="radio" key={key}>
+          <input id={"setaside:" + key} type="radio" value={key} checked={key == this.state.setaside} />
+					<label htmlFor={"setaside:" + key}>{ SETASIDES[key] }</label>
+				</li>
 			);
 		}
 
@@ -111,50 +109,61 @@ var RequestOverview = React.createClass({
 		var validDocType = this.state.docType != "";
 		var continueDisabled = !(validAgency && validDocType);
 
+    var mainStyle = {
+      paddingLeft: 16
+    };
+
 		return (
-			<div className="main col-md-8">
-				<div>
-					<div className="responder-instructions">These questions are typically answered by the CO.</div>
-					<div className="sub-heading">Preliminary Questions</div>
-					<p>We'll ask you some questions to understand what you want to build,
-					and then let you download the generated documents.</p>
-					
-					<div className="question-text">To begin, what agency is this for?</div>
-					<select className="form-control medium-response" onChange={this.handleChange.bind(this, "agency")} value={this.state.agency}>
-						{agencyNameOptions}
-					</select>
+      <div className="usa-grid">
+        <div className="usa-width-two-thirds" style={mainStyle}>
+          <div className="page-heading">Preliminary Questions</div>
+          <div className="responder-instructions">These questions are typically answered by the CO.</div>
 
-					<br />
+          <p>We'll ask you some questions to understand what you want to build,
+          and then let you download the generated documents.</p>
 
-					<div className="question-text">Program Name: </div>
-					<input type="text" className="form-control medium-response" value={this.state.programName} onChange={this.handleChange.bind(this, "programName")} />
+          <div className="question">
+            <div className="question-text">To begin, what agency is this for?</div>
+            <select className="medium-response" onChange={this.handleChange.bind(this, "agency")} value={this.state.agency}>
+              {agencyNameOptions}
+            </select>
+          </div>
 
-					<br />
+          <div className="question">
+            <div className="question-text">Program Name: </div>
+            <input type="text" className="medium-response" value={this.state.programName} onChange={this.handleChange.bind(this, "programName")} />
+          </div>
 
-					<div className="question-text">This will be ...</div>
-					<radiogroup onChange={this.updateDocType}>
-						{docTypeOptions}
-					</radiogroup>
+          <div className="question">
+            <div className="question-text">This will be ...</div>
+            <fieldset className="usa-fieldset-inputs">
+              <legend className="usa-sr-only">This will be ...</legend>
+              <ul className="usa-unstyled-list" onChange={this.updateDocType}>
+                {docTypeOptions}
+              </ul>
+            </fieldset>
+          </div>
 
-					{this.state.baseNumberNeeded?
-						<div>
-						<h5>Vehicle Name:</h5>
-							<input type="text" className="form-control medium-response" value={this.state.baseNumber} onChange={this.handleChange.bind(this, "baseNumber")} />
-						</div>
-					 : null}
+          {this.state.baseNumberNeeded?
+            <div>
+              <h5>Vehicle Name:</h5>
+              <input type="text" className="medium-response" value={this.state.baseNumber} onChange={this.handleChange.bind(this, "baseNumber")} />
+            </div>
+           : null}
 
-					<br />
+          <div className="question">
+            <div className="question-text">Do you intend to set aside this acquisition for any of the following under FAR part 19?</div>
+            <fieldset className="usa-fieldset-inputs">
+              <legend className="usa-sr-only">Do you intend to set aside this acquisition for any of the following under FAR part 19?</legend>
+              <ul className="usa-unstyled-list" onChange={this.handleChange.bind(this, 'setaside')}>
+                {setasideOptions}
+              </ul>
+            </fieldset>
+          </div>
 
-					<div className="question-text">Do you intend to set aside this acquisition for any of the following under FAR part 19?</div>
-					<radiogroup onChange={this.handleChange.bind(this, 'setaside')}>
-						{setasideOptions}
-					</radiogroup>
-
-					 <br />
-
-				</div>
-					<Button bsStyle="primary" onClick={this.handleCreateRFQ} disabled={continueDisabled}>{"Let's go!"}</Button>
-			</div>
+          <Button bsStyle="primary" onClick={this.handleCreateRFQ} disabled={continueDisabled}>{"Let's go!"}</Button>
+        </div>
+      </div>
 		);
 	},
 });

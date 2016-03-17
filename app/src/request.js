@@ -57,8 +57,8 @@ var Sidebar = React.createClass({
 		var links = subpages.map(function(subpage, i) {
 			var active = (subpage.link == this.props.currentPage);
 			return (
-				<li className={active ? "active" : ""} key={i} ref={"link-"+i}>
-					<a href={subpage.link} onClick={this.handleFollowLink}>{subpage.title}</a>
+				<li key={i} ref={"link-"+i}>
+					<a className={active ? "usa-current" : ""} href={subpage.link} onClick={this.handleFollowLink}>{subpage.title}</a>
 				</li>
 			);
 		}.bind(this));
@@ -68,9 +68,9 @@ var Sidebar = React.createClass({
 		};
 
 		return (
-			<Nav id="sidenav" stacked style={style} bsStyle="pills">
+			<ul className="usa-sidenav-list" id="sidenav" style={style}>
 				{links}
-			</Nav>
+			</ul>
 		);
 	},
 });
@@ -136,20 +136,15 @@ var Request = React.createClass({
 			paddingLeft: 16,
 		};
 		return (
-			<div row>
-
-				<div className="main col-md-8" style={mainStyle}>
-					<div>
-						{this.renderChildren()}
-					</div>
+			<div className="usa-grid">
+				<div className="main usa-width-two-thirds" style={mainStyle}>
+          {this.renderChildren()}
 				</div>
-				<div className="col-md-1">					
-				</div>
-				<div className="col-md-2 sidebar-nav">
+				<div className="usa-width-one-twelfth"></div>
+				<aside className="usa-width-one-sixth sidebar-nav">
 					<Sidebar width={200} onChange={this.handleSidebarChange} currentPage={this.props.location.pathname} rfpId={this.props.params.id} />
-				</div>
-				<div className="col-md-1">					
-				</div>
+				</aside>
+				<div className="usa-width-one-twelfth"></div>
 			</div>
 		);
 	},

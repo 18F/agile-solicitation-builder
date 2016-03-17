@@ -36,12 +36,13 @@ var ContractClauses = React.createClass({
 		return (
 			<div>
 				<div className="page-heading">Contract Clauses</div>
-
 				<div className="responder-instructions">The PM and the CO may both contribute content to this section.</div>
 	
-				<div className="sub-heading">Additional Clauses.</div>
+				<div className="sub-heading">Additional Clauses</div>
+
 				<div className="guidance-text">Please feel free to add anything else specific to your contract. You will also be able to edit the Microsoft Word document that is produced.</div>
-				<textarea className="form-control" rows="15" value={this.state.contractClauses} onChange={this.handleChange.bind(this, 'contractClauses')}></textarea>
+
+        <textarea rows="15" value={this.state.contractClauses} onChange={this.handleChange.bind(this, 'contractClauses')}></textarea>
 			</div>
 		);
 	},
