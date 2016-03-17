@@ -348,9 +348,9 @@ var Objective = React.createClass({
 
 				{deliverables_options}
 
-				<div className="resulting-text">The contractors are required to provide the following services: {deliverablesString}. Each deliverable has been described in more detail below.</div>
+				<div className="resulting-text">The contractors are required to provide the following services: {deliverablesString}. Each deliverable has been described in more detail below.\nThese functional Requirements will be translated into Epics and User Stories that will be used to populate the Product Backlog.</div>
 
-				<div className="guidance-text">These functional Requirements will be translated into Epics and User Stories that will be used to populate the Product Backlog.</div>
+				<div className="guidance-text"></div>
 
 				{selected_deliverables}
 				

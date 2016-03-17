@@ -97,14 +97,14 @@ button.add {
 .sub-heading{
 	color: #205493;
 	font-weight: 700;
-	margin: 25px 0 5px 0;
+	margin: 25px 0 10px 0;
 	font-family: 'Merriweather', serif;
 	font-size: 20px;
 	line-height: 1.3em/22px;
 }
 
 .question-text {
-	margin: 5px 0 5px 0;
+	margin: 25px 0 5px 0;
 	font-size: 16px;
 	font-family: 'Merriweather', serif;
 	color: #323a45;
