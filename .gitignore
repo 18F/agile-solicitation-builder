@@ -4,3 +4,6 @@ app/bower_components/
 .DS_Store
 venv/
 *.pyc
+*.env
+.coverage/
+htmlcov/

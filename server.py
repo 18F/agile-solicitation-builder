@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-import os
-import shutil
 import sys
 import config
 import logging
@@ -227,6 +225,7 @@ api.add_resource(Clin, '/clins/<int:rfq_id>')
 api.add_resource(CustomComponents, '/custom_component/<int:rfq_id>/section/<int:section_id>')
 api.add_resource(DeleteRFQ, '/delete/rfqs/<int:rfq_id>')
 
+
 def drop_everything():
     # https://bitbucket.org/zzzeek/sqlalchemy/wiki/UsageRecipes/DropEverything
     conn = engine.connect()
@@ -266,6 +265,7 @@ def drop_everything():
 
     trans.commit()
 
+
 def create_tables():
 
     # delete old records
@@ -286,6 +286,7 @@ def create_tables():
 def initiate():
     create_tables()
     return "Database Seeded"
+
 
 @app.route('/')
 def index():
@@ -309,7 +310,6 @@ def download(rfq_id):
 @app.route('/agile_estimator')
 def agile_estimator():
     return send_file("AgileEstimator.xlsx")
-
 
 
 if __name__ == "__main__":
