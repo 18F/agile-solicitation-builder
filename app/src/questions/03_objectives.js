@@ -216,14 +216,14 @@ var Objective = React.createClass({
           <div className="question-text">General Background</div>
           <div className="question-description">Please provide several paragraphs about your project's history, mission, and current state.</div>
 
-          <textarea rows="9" value={this.state.generalBackground} onChange={this.handleChange.bind(this, 'generalBackground')}></textarea>
+          <textarea rows="9" className="form-control" value={this.state.generalBackground} onChange={this.handleChange.bind(this, 'generalBackground')}></textarea>
         </div>
 
         <div className="question">
           <div className="question-text">Program History</div>
           <div className="question-description">If you have any information about the current vendors and specific technology being used please provide it here.</div>
 
-          <textarea rows="10" value={this.state.programHistory} onChange={this.handleChange.bind(this, 'programHistory')}></textarea>
+          <textarea rows="10" className="form-control" value={this.state.programHistory} onChange={this.handleChange.bind(this, 'programHistory')}></textarea>
         </div>
 
 				<div className="sub-heading">Users</div>
@@ -379,7 +379,7 @@ var Objective = React.createClass({
             </ul>
           </fieldset>
 
-				<div className="resulting-text">The contractors are required to provide the following services: {deliverablesString}. Each deliverable has been described in more detail below.\nThese functional Requirements will be translated into Epics and User Stories that will be used to populate the Product Backlog.</div>
+				<div className="resulting-text">The contractors are required to provide the following services: {deliverablesString}. Each deliverable has been described in more detail below. These functional Requirements will be translated into Epics and User Stories that will be used to populate the Product Backlog.</div>
           {selected_deliverables}
         </div>
 				

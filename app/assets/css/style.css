@@ -36,6 +36,10 @@ h1 {
   position: fixed;
 }
 
+form.usa-grid {
+	margin-left: -30px;
+}
+
 .edit {
 	color: #337ab7;
 	cursor: pointer; 
@@ -170,6 +174,10 @@ div#mount textarea {
 	width: 150px;
 }
 
+.usa-width-one-sixth.sidebar-nav{
+	margin-left: 28px;
+}
+
 .medium-response{
 	width: 300px;
 }
@@ -178,11 +186,24 @@ div#mount textarea {
 	width: 100%;
 }
 
+#additional-clin{
+	max-width: none;
+}
+
+textarea{
+	max-width: none;
+	height: auto;
+}
+
 .usa-disclaimer{
 	background-color: #f1f1f1;
 	font-size: 15px;	
 	padding: 5px;
 	margin: -8px -23px 0px -23px;
+}
+
+.guidance-text{
+	margin: 0 0 10px 0;
 }
 
 .usa-disclaimer-official{

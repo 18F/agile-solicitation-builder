@@ -137,17 +137,19 @@ var Request = React.createClass({
 		};
 		return (
 			<div className="usa-grid">
-				<div className="main usa-width-two-thirds" style={mainStyle}>
+				<div className="main usa-width-three-fourths" style={mainStyle}>
           {this.renderChildren()}
 				</div>
 				<div className="usa-width-one-twelfth"></div>
 				<aside className="usa-width-one-sixth sidebar-nav">
 					<Sidebar width={200} onChange={this.handleSidebarChange} currentPage={this.props.location.pathname} rfpId={this.props.params.id} />
 				</aside>
-				<div className="usa-width-one-twelfth"></div>
+				
 			</div>
 		);
 	},
 });
+
+// <div className="usa-width-one-twelfth"></div>
 
 module.exports = Request;

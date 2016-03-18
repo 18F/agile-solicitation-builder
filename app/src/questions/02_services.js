@@ -385,7 +385,7 @@ var Services = React.createClass({
         <div className="question">
           <div className="question-text">What is the maximum budget for your project (in USD)?</div>
           <form className="usa-grid">
-              <input type="text" className="usa-width-one-whole" placeholder="ex: 10,000,000" value={this.state.maxBudget} onChange={this.handleChange.bind(this, "maxBudget")}></input>
+              <input type="text" className="usa-width-one-third" placeholder="ex: 10,000,000" value={this.state.maxBudget} onChange={this.handleChange.bind(this, "maxBudget")}></input>
           </form>
 
           <div className="resulting-text">The government is willing to invest a maximum budget of ${this.state.maxBudget} in this endeavor.</div>
@@ -443,8 +443,8 @@ var Services = React.createClass({
           <div className="question-description">We suggest 6 months or less.</div>
 
           <form className="usa-grid">
-            <input type="text" className="usa-width-two-thirds" placeholder="enter a number" onChange={this.handleChange.bind(this, "basePeriodDurationNumber")} value={this.state.basePeriodDurationNumber}/>
-            <select className="usa-width-one-third" onChange={this.handleChange.bind(this, "basePeriodDurationUnit")} value={this.state.basePeriodDurationUnit}>
+            <input type="text" className="usa-width-one-sixth" placeholder="enter a number" onChange={this.handleChange.bind(this, "basePeriodDurationNumber")} value={this.state.basePeriodDurationNumber}/>
+            <select className="usa-width-one-fourth" onChange={this.handleChange.bind(this, "basePeriodDurationUnit")} value={this.state.basePeriodDurationUnit}>
               <option>months</option>
               <option>weeks</option>
             </select>
@@ -529,8 +529,8 @@ var Services = React.createClass({
           <div className="question-description">We suggest 6 months or less.</div>
 
           <form className="usa-grid">
-            <input type="text" className="usa-width-two-thirds" placeholder="enter a number" onChange={this.handleChange.bind(this, "optionPeriodDurationNumber")} value={this.state.optionPeriodDurationNumber}/>
-            <select className="usa-width-one-third" onChange={this.handleChange.bind(this, "optionPeriodDurationUnit")} value={this.state.optionPeriodDurationUnit}>
+            <input type="text" className="usa-width-one-sixth" placeholder="enter a number" onChange={this.handleChange.bind(this, "optionPeriodDurationNumber")} value={this.state.optionPeriodDurationNumber}/>
+            <select className="usa-width-one-fourth" onChange={this.handleChange.bind(this, "optionPeriodDurationUnit")} value={this.state.optionPeriodDurationUnit}>
               <option>months</option>
               <option>weeks</option>
             </select>
@@ -542,8 +542,8 @@ var Services = React.createClass({
           <div className="question-description">We recommend 2-3 weeks per iteration.</div>
 
           <form className="usa-grid">
-            <input type="text" className="usa-width-two-thirds" placeholder="enter a number" onChange={this.handleChange.bind(this, "iterationPoPNumber")} value={this.state.iterationPoPNumber}/>
-            <select className="usa-width-one-third" onChange={this.handleChange.bind(this, "iterationPoPUnit")} value={this.state.iterationPoPUnit}>
+            <input type="text" className="usa-width-one-sixth" placeholder="enter a number" onChange={this.handleChange.bind(this, "iterationPoPNumber")} value={this.state.iterationPoPNumber}/>
+            <select className="usa-width-one-fourth" onChange={this.handleChange.bind(this, "iterationPoPUnit")} value={this.state.iterationPoPUnit}>
               <option>months</option>
               <option>weeks</option>
             </select>
