@@ -32,6 +32,34 @@ To launch the app run `python server.py`. The site will be available at `http://
 
 To ensure bundle.js is updated with the changes to any React code, you will need to use something like the node package Gulp. Once you have it [installed](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md), leave it running in a separate Terminal tab: just change to the `app` directory (`cd app`) and run `gulp`.
 
+### The Code
+
+#####Adding a new page
+
+To add a new "questions" page (all pages are listed in the right sidebar), create a new file in the [questions](https://github.com/18F/playbook-in-action/tree/master/app/src/questions) folder. See [`XX_sample.js`](https://github.com/18F/playbook-in-action/blob/master/app/src/questions/XX_sample.js) to get an idea of what needs to be included in a page.
+
+To make the page visible in and accessible from the side bar you must add it to [`question_list.js`](https://github.com/18F/playbook-in-action/blob/master/app/src/question_list.js).
+
+#####Removing an existing page
+
+Delete the corresponding page file from the [questions](https://github.com/18F/playbook-in-action/tree/master/app/src/questions) folder and remove the reference to the question from [`question_list.js`](https://github.com/18F/playbook-in-action/blob/master/app/src/question_list.js).
+
+#####Modifying the content
+
+Content that can be modified is created in seed.py. There are 3 types of content, ContentComponents, CustomComponents, and Deliverables. Content types are declared in [`models.py`](https://github.com/18F/playbook-in-action/blob/master/models.py).
+
+To remove content you need to both remove the content object from seed.py and if it is referenced by name on a page you need to remove that reference. CustomComponents are not referenced individually so this second step is not necessary.
+
+Please note that any documents created prior to the removal or addition of new content will be incompatabile and will break the site so they should be deleted as soon as the changes go live.
+
+#####The API
+
+The code for the API can be found in [`server.py`](https://github.com/18F/playbook-in-action/blob/master/server.py). Each "questions" page (found in the "questions" folder) calls a function in [`helpers.js`](https://github.com/18F/playbook-in-action/blob/master/app/helpers.js). which in turn sends an ajax request to `server.py` which sends the request to the database.
+
+#####Creating a Word Document
+
+This is managed in the file [`create_document.py`](https://github.com/18F/playbook-in-action/blob/master/create_document.py). Currently everything is added to the document manually.
+
 ### Public domain
 
 This project is in the worldwide [public domain](LICENSE.md). As stated in [CONTRIBUTING](CONTRIBUTING.md):
