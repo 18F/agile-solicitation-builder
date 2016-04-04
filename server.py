@@ -4,7 +4,8 @@ import shutil
 import sys
 import config
 import logging
-import StringIO
+# import StringIO
+import io
 
 from flask import Flask, send_from_directory, send_file, request, jsonify
 from flask_restful import Resource, Api, reqparse
@@ -62,7 +63,7 @@ class Data(Resource):
         data = request.get_json()['data']
         for key in data:
             session = Session()
-            component = session.query(ContentComponent).filter_by(document_id=rfq_id).filter_by(name=key).first()            
+            component = session.query(ContentComponent).filter_by(document_id=rfq_id).filter_by(name=key).first()
             component.text = data[key].encode('ascii', 'ignore')
             session.merge(component)
             session.commit()
@@ -86,7 +87,7 @@ class Deliverables(Resource):
         session = Session()
         data = request.get_json()['data']
         for item in data:
-            deliverable = session.query(Deliverable).filter_by(document_id=rfq_id).filter_by(name=item["name"]).first()            
+            deliverable = session.query(Deliverable).filter_by(document_id=rfq_id).filter_by(name=item["name"]).first()
             deliverable.value = item["value"]
             deliverable.text = item["text"]
             session.merge(deliverable)
@@ -238,7 +239,7 @@ def drop_everything():
     inspector = reflection.Inspector.from_engine(engine)
 
     # gather all data first before dropping anything.
-    # some DBs lock after things have been dropped in 
+    # some DBs lock after things have been dropped in
     # a transaction.
 
     metadata = MetaData()
@@ -273,7 +274,7 @@ def create_tables():
 
     session = Session()
 
-    Base.metadata.create_all(engine)    
+    Base.metadata.create_all(engine)
 
     for agency in agencies:
         a = Agency(abbreviation=agency, full_name=agencies[agency])
@@ -300,10 +301,28 @@ def send_js(path):
 @app.route('/download/<int:rfq_id>')
 def download(rfq_id):
     document = create_document.create_document(rfq_id)
-    strIO = StringIO.StringIO()
+    strIO = io.StringIO()
     document.save(strIO)
     strIO.seek(0)
     return send_file(strIO, attachment_filename="RFQ.docx", as_attachment=True)
+
+@app.route('/api/users', methods = ['POST'])
+def new_user():
+    username = request.json.get('username')
+    password = request.json.get('password')
+    if username is None or password is None:
+        abort(400) # missing arguments
+    if User.query.filter_by(username = username).first() is not None:
+        abort(400) # existing user
+    user = User(username = username)
+    user.hash_password(password)
+
+    session = Session()
+
+    session.add(user)
+    session.commit()
+
+    return jsonify({ 'username': user.username }), 201, {'Location': url_for('get_user', id = user.id, _external = True)}
 
 
 @app.route('/agile_estimator')
@@ -313,11 +332,11 @@ def agile_estimator():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    # app.run(debug=True)
 
-    # create_tables()
-    # if len(sys.argv) > 1 and sys.argv[1] == "init":
-    #     create_tables()
-    # else:
-    #     port = int(os.getenv('PORT', 5000))
-    #     app.run(port=port, debug=True)
+    create_tables()
+    if len(sys.argv) > 1 and sys.argv[1] == "init":
+        create_tables()
+    else:
+        port = int(os.getenv('PORT', 5000))
+        app.run(port=port, debug=True)

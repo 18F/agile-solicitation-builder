@@ -5,6 +5,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, Text, Boolean, String, ForeignKey, create_engine
 from sqlalchemy.orm import sessionmaker, relationship
 from flask_sqlalchemy import SQLAlchemy
+from passlib.apps import custom_app_context as pwd_context
 
 import seed
 
@@ -17,6 +18,18 @@ content_components = seed.content_components
 deliverables = seed.deliverables
 custom_components = seed.custom_components
 
+class User(Base):
+    __tablename__ = 'users'
+
+    id = Column(Integer, primary_key = True)
+    username = Column(String(32), index = True)
+    password_hash = Column(String(128))
+
+    def hash_password(self, password):
+        self.password_hash = pwd_context.encrypt(password)
+
+    def verify_password(self, password):
+        return pwd_context.verify(password, self.password_hash)
 
 class Agency(Base):
     __tablename__ = 'agencies'
@@ -30,7 +43,7 @@ class Agency(Base):
 
     def to_dict(self):
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}
-        
+
 
 class RFQ(Base):
     __tablename__ = 'rfqs'
@@ -68,10 +81,10 @@ class RFQ(Base):
 
         session = Session()
         agency_full_name = session.query(Agency).filter_by(abbreviation=agency).first().full_name
-        
+
         if doc_type != "Purchase Order":
             vehicle = "(vehicle number " + base_number_value + ") "
-       
+
         for section in content_components:
             text = str(section['text']).decode("utf8")
             section['text'] = text.replace("{AGENCY}", agency).replace("{DOC_TYPE}", doc_type).replace("{AGENCY_FULL_NAME}", agency_full_name).replace("{PROGRAM_NAME}", program_name).replace("{VEHICLE}", vehicle)
@@ -139,7 +152,7 @@ class AdditionalClin(Base):
     row6b = Column(Text)
 
     def to_dict(self):
-        return {c.name: getattr(self, c.name) for c in self.__table__.columns}        
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
 
     def __repr__(self):
         return "<Clin(id='%d', row1='%s', row2='%s', row3a='%s')>" % (self.document_id, self.row1, self.row2, self.row3a)
@@ -154,10 +167,9 @@ class CustomComponent(Base):
     name = Column(String)
     text = Column(Text)
     section = Column(Integer)
-    
+
     def to_dict(self):
-        return {c.name: getattr(self, c.name) for c in self.__table__.columns}    
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
 
     def __repr__(self):
         return "<AdditionalComponent(id='%d', title='%s', text='%s')>" % (self.document_id, self.title, self.text)
-
