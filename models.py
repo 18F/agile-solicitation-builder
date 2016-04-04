@@ -71,6 +71,7 @@ class RFQ(Base):
     __tablename__ = 'rfqs'
 
     id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey('users.id'), primary_key=True)
     agency = Column(String)
     doc_type = Column(String)
     program_name = Column(String)
@@ -93,6 +94,7 @@ class RFQ(Base):
             base_number_value = base_number
 
         # seed each section of the new document with the template content
+        self.user_id = user_id
         self.agency = agency
         self.doc_type = doc_type
         self.program_name = program_name

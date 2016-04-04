@@ -76,7 +76,7 @@ class Agencies(Resource):
 
 
 class Data(Resource):
-
+    decorators = [auth.login_required]
     def get(self, rfq_id, section_id):
         session = Session()
         content = session.query(ContentComponent).filter_by(document_id=rfq_id).filter_by(section=int(section_id))
@@ -102,7 +102,7 @@ class Data(Resource):
 
 
 class Deliverables(Resource):
-
+    decorators = [auth.login_required]
     def get(self, rfq_id):
         session = Session()
         deliverables = session.query(Deliverable).filter_by(document_id=rfq_id).order_by(Deliverable.id).all()
@@ -120,7 +120,7 @@ class Deliverables(Resource):
 
 
 class Clin(Resource):
-
+    decorators = [auth.login_required]
     def get(self, rfq_id):
         session = Session()
         clins = session.query(AdditionalClin).filter_by(document_id=rfq_id).all()
@@ -150,7 +150,7 @@ class Clin(Resource):
 
 
 class CustomComponents(Resource):
-
+    decorators = [auth.login_required]
     def get(self, rfq_id, section_id):
         session = Session()
         components = session.query(CustomComponent).filter_by(document_id=rfq_id).filter_by(section=section_id).order_by(CustomComponent.id).all()
@@ -185,7 +185,7 @@ class CustomComponents(Resource):
 
 
 class Create(Resource):
-
+    decorators = [auth.login_required]
     def get(self):
         session = Session()
         rfqs = session.query(RFQ).all()
@@ -216,7 +216,7 @@ class Create(Resource):
 
 
 class DeleteRFQ(Resource):
-
+    decorators = [auth.login_required]
     def delete(self, rfq_id):
         session = Session()
 
