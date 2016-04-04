@@ -7,9 +7,11 @@ import logging
 # import StringIO
 import io
 
-from flask import Flask, send_from_directory, send_file, request, jsonify
+from flask import Flask, send_from_directory, send_file, request, jsonify, g
 from flask_restful import Resource, Api, reqparse
 from flask_sqlalchemy import SQLAlchemy
+from flask.ext.httpauth import HTTPBasicAuth
+auth = HTTPBasicAuth()
 from sqlalchemy.engine import reflection
 from sqlalchemy.schema import (
     MetaData,
@@ -21,7 +23,7 @@ from sqlalchemy.schema import (
 
 import create_document
 
-from models import Agency, RFQ, ContentComponent, AdditionalClin, CustomComponent, Base, Session, Deliverable, engine
+from models import User, Agency, RFQ, ContentComponent, AdditionalClin, CustomComponent, Base, Session, Deliverable, engine
 from seed import agencies
 
 
@@ -42,6 +44,29 @@ def dicts_to_dict(dicts, key):
         new_dict[new_key] = dicts[i]['text']
     return new_dict
 
+class Users(Resource):
+    def get(self):
+        session = Session()
+        users = session.query(User).order_by(User.username).all()
+        return jsonify(data=[{'id': u.id, 'username': u.username} for u in users])
+
+    def post(self):
+        data = request.get_json()
+        username = data['username']
+        password = data['password']
+        if username is None or password is None:
+            abort(400) # missing arguments
+        session = Session()
+        if session.query(User).filter_by(username = username).first() is not None:
+            abort(400) # existing user
+        user = User(username = username)
+        user.hash_password(password)
+        session.add(user)
+        session.commit()
+        if session.query(User).filter_by(username = username).first() is not None:
+            return jsonify({ 'username': user.username, 'id': user.id })
+        else:
+            return jsonify({'error': "The user request was not completed."})
 
 class Agencies(Resource):
     def get(self):
@@ -219,7 +244,7 @@ class DeleteRFQ(Resource):
 
         return jsonify({'message': message})
 
-
+api.add_resource(Users, '/users')
 api.add_resource(Agencies, '/agencies')
 api.add_resource(Data, '/get_content/<int:rfq_id>/section/<int:section_id>')
 api.add_resource(Deliverables, '/deliverables/<int:rfq_id>')
@@ -281,6 +306,14 @@ def create_tables():
         session.add(a)
         session.commit()
 
+@auth.verify_password
+def verify_password(username, password):
+    session = Session()
+    user = session.query(User).filter_by(username = username).first()
+    if not user or not user.verify_password(password):
+        return False
+    g.user = user
+    return True
 
 # map index.html to app/index.html, map /build/bundle.js to app/build.bundle.js
 @app.route('/seed_database')
@@ -306,37 +339,28 @@ def download(rfq_id):
     strIO.seek(0)
     return send_file(strIO, attachment_filename="RFQ.docx", as_attachment=True)
 
-@app.route('/api/users', methods = ['POST'])
-def new_user():
-    username = request.json.get('username')
-    password = request.json.get('password')
-    if username is None or password is None:
-        abort(400) # missing arguments
-    if User.query.filter_by(username = username).first() is not None:
-        abort(400) # existing user
-    user = User(username = username)
-    user.hash_password(password)
-
-    session = Session()
-
-    session.add(user)
-    session.commit()
-
-    return jsonify({ 'username': user.username }), 201, {'Location': url_for('get_user', id = user.id, _external = True)}
+@app.route('/api/authtest')
+@auth.login_required
+def get_resource():
+    return jsonify({ 'data': 'Hello, %s!' % g.user.username })
 
 
 @app.route('/agile_estimator')
 def agile_estimator():
     return send_file("AgileEstimator.xlsx")
 
-
+@app.route('/api/token')
+@auth.login_required
+def get_auth_token():
+    token = g.user.generate_auth_token()
+    return jsonify({ 'token': token.decode('ascii') })
 
 if __name__ == "__main__":
-    # app.run(debug=True)
+    app.run(debug=True)
 
-    create_tables()
-    if len(sys.argv) > 1 and sys.argv[1] == "init":
-        create_tables()
-    else:
-        port = int(os.getenv('PORT', 5000))
-        app.run(port=port, debug=True)
+    # create_tables()
+    # if len(sys.argv) > 1 and sys.argv[1] == "init":
+    #     create_tables()
+    # else:
+    #     port = int(os.getenv('PORT', 5000))
+    #     app.run(port=port, debug=True)

@@ -1,11 +1,15 @@
 # -*- coding: utf-8 -*-
 import os
+import config
 
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, Text, Boolean, String, ForeignKey, create_engine
 from sqlalchemy.orm import sessionmaker, relationship
 from flask_sqlalchemy import SQLAlchemy
 from passlib.apps import custom_app_context as pwd_context
+
+from itsdangerous import (TimedJSONWebSignatureSerializer
+                          as Serializer, BadSignature, SignatureExpired)
 
 import seed
 
@@ -30,6 +34,24 @@ class User(Base):
 
     def verify_password(self, password):
         return pwd_context.verify(password, self.password_hash)
+
+    def generate_auth_token(self, expiration = 600):
+        s = Serializer(os.environ.get('SECRET_KEY', "None"), expires_in = expiration)
+        return s.dumps({ 'id': self.id })
+
+    @staticmethod
+    def verify_auth_token(token):
+        s = Serializer(os.environ.get('SECRET_KEY', "None"))
+        try:
+            data = s.loads(token)
+        except SignatureExpired:
+            return None # valid token, but expired
+        except BadSignature:
+            return None # invalid token
+        session = Session()
+        user = session.query(User).get(data['id'])
+        return user
+
 
 class Agency(Base):
     __tablename__ = 'agencies'
