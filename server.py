@@ -356,11 +356,11 @@ def get_auth_token():
     return jsonify({ 'token': token.decode('ascii') })
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    # app.run(debug=True)
 
     # create_tables()
-    # if len(sys.argv) > 1 and sys.argv[1] == "init":
-    #     create_tables()
-    # else:
-    #     port = int(os.getenv('PORT', 5000))
-    #     app.run(port=port, debug=True)
+    if len(sys.argv) > 1 and sys.argv[1] == "init":
+         create_tables()
+    else:
+         port = int(os.getenv('PORT', 5000))
+         app.run(port=port, debug=True)
