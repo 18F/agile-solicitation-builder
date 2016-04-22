@@ -308,10 +308,12 @@ def create_tables():
 
 @auth.verify_password
 def verify_password(username, password):
-    session = Session()
-    user = session.query(User).filter_by(username = username).first()
-    if not user or not user.verify_password(password):
-        return False
+    user = User.verify_auth_token(username);
+    if not user:
+        session = Session()
+        user = session.query(User).filter_by(username = username).first()
+        if not user or not user.verify_password(password):
+            return False
     g.user = user
     return True
 
@@ -343,7 +345,6 @@ def download(rfq_id):
 @auth.login_required
 def get_resource():
     return jsonify({ 'data': 'Hello, %s!' % g.user.username })
-
 
 @app.route('/agile_estimator')
 def agile_estimator():
