@@ -18,11 +18,11 @@ var Request = require('./request');
 var RequestOverview = require('./request_overview');
 var Question = require('./question');
 var Results = require('./results');
+var AuthButton = require('./auth');
 var RepoLink = React.createElement('a', {
     href: 'https://github.com/18F/playbook-in-action/issues',
     'target': '_blank',
 }, 'Help us improve');
-
 
 var Header = React.createClass({
 	render: function() {
@@ -38,6 +38,7 @@ var Header = React.createClass({
             <img className="usa-flag_icon" alt="US flag signifying that this is a United States Federal Government website" src="/assets/img/us_flag_small.png" />
             An official website of the United States Government
           </span>
+          <AuthButton />
           <span className="usa-disclaimer-stage">This site is currently in alpha. {RepoLink}.</span>
         </div>
         <div className="usa-grid">
