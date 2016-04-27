@@ -5,22 +5,33 @@ var Button = require('react-bootstrap').Button;
 
 // Router stuff
 var IndexLink = require('react-router').IndexLink;
+
+// Auth stuff
+var AuthMixin = require('./auth_mixin');
 var AuthButton = require('./auth').Button;
 var AuthWrapper = require('./auth').HideIfLoggedOut;
 
 var Welcome = React.createClass({
+	mixins: [AuthMixin],
+
 	getInitialState: function() {
 		return {
 			rfqs: "",
 		};
 	},
-	componentDidMount: function() {
-    //getRFQs(function(content){
-    //  this.setState({
-    //    rfqs: content['data'],
-    //  });
-    //}.bind(this));
-   },
+
+	loginStateChanged: function() {
+		if(this.state.loggedIn) {
+			getRFQs(function(content){
+	      this.setState({
+	        rfqs: content['data'],
+	      });
+	    }.bind(this));
+		} else {
+			this.setState({ rfqs: "" });
+		}
+	},
+
 	render: function() {
 		var rfqs = [];
 		for (var i=0; i < this.state.rfqs.length; i++) {

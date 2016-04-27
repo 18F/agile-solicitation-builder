@@ -1,4 +1,5 @@
 var React = require('react');
+var AuthMixin = require('./auth_mixin');
 
 function login(callback) {
   if(typeof callback !== 'function') {
@@ -37,53 +38,36 @@ function logout(callback) {
 	});
 }
 
-var _all = [ ];
-function registerSelf(self) {
-  _all.push(self);
-}
-
-var _state = { loggedIn: false, text: 'Log In' };
-function getGlobalState() {
-  return _state;
-}
-
-function updateAllAuthComponents(state) {
-  _state = state;
-  _all.forEach(function(component) {
-    component.updateState(state);
-  });
-}
-
 var AuthButton = React.createClass({
+  mixins: [AuthMixin],
+
   getInitialState: function() {
-    registerSelf(this);
     return {
-      loggedIn: false,
       text: 'Log In'
     }
   },
 
   componentDidMount: function() {
-    this.setState(getGlobalState());
+    this.loginStateChanged();
   },
 
-  updateState: function(state) {
-    this.setState(state);
+  loginStateChanged: function() {
+    this.setState({ text: this.state.loggedIn ? 'Log Out' : 'Log In' });
   },
 
   click: function() {
     if(this.state.loggedIn) {
       logout(function() {
-        updateAllAuthComponents({ loggedIn: false, text: 'Log In' });
-      });
+        this.setAuthenticationState(false);
+      }.bind(this));
     } else {
       login(function(token) {
         if(token) {
-          updateAllAuthComponents({ loggedIn: true, text: 'Log Out' });
+          this.setAuthenticationState(true);
         } else {
-          updateAllAuthComponents({ loggedIn: false, text: 'Log In' })
+          this.setAuthenticationState(false);
         }
-      });
+      }.bind(this));
     }
   },
 
@@ -108,18 +92,7 @@ function makeWrapper(className, hideIfLoggedIn) {
   var not = hideIfLoggedIn ? "" : "none";
 
   return React.createClass({
-    getInitialState: function() {
-      registerSelf(this);
-      return { loggedIn: false };
-    },
-
-    componentDidMount: function() {
-      this.setState(getGlobalState());
-    },
-
-    updateState: function(state) {
-      this.setState(state);
-    },
+    mixins: [AuthMixin],
 
     render: function() {
       return(
