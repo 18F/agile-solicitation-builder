@@ -5,7 +5,8 @@ var Button = require('react-bootstrap').Button;
 
 // Router stuff
 var IndexLink = require('react-router').IndexLink;
-var AuthButton = require('./auth');
+var AuthButton = require('./auth').Button;
+var AuthWrapper = require('./auth').HideIfLoggedOut;
 
 var Welcome = React.createClass({
 	getInitialState: function() {
@@ -68,9 +69,11 @@ var Welcome = React.createClass({
           <br />
 					<AuthButton hideIfLoggedIn={true} />
           <IndexLink to="/rfp">
-            <Button bsStyle="primary">
-              Start	New RFQ
-            </Button>
+            <AuthWrapper>
+							<Button bsStyle="primary">
+              	Start	New RFQ
+            	</Button>
+						</AuthWrapper>
           </IndexLink>
         </div>
       </div>

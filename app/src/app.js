@@ -18,7 +18,7 @@ var Request = require('./request');
 var RequestOverview = require('./request_overview');
 var Question = require('./question');
 var Results = require('./results');
-var AuthButton = require('./auth');
+var AuthButton = require('./auth').Button;
 var RepoLink = React.createElement('a', {
     href: 'https://github.com/18F/playbook-in-action/issues',
     'target': '_blank',

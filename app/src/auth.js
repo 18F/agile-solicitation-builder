@@ -103,4 +103,36 @@ var AuthButton = React.createClass({
   }
 });
 
-module.exports = AuthButton;
+function makeWrapper(className, hideIfLoggedIn) {
+  var is = hideIfLoggedIn ? "none" : "";
+  var not = hideIfLoggedIn ? "" : "none";
+
+  return React.createClass({
+    getInitialState: function() {
+      registerSelf(this);
+      return { loggedIn: false };
+    },
+
+    componentDidMount: function() {
+      this.setState(getGlobalState());
+    },
+
+    updateState: function(state) {
+      this.setState(state);
+    },
+
+    render: function() {
+      return(
+        <span className={className + " " + (this.state.loggedIn ? "is-logged-in" : "is-not-logged-in")} style={{ display: this.state.loggedIn ? is : not }}>
+          {this.props.children}
+        </span>
+      );
+    }
+  })
+}
+
+module.exports = {
+  Button: AuthButton,
+  HideIfLoggedIn: makeWrapper('hide-if-logged-in', true),
+  HideIfLoggedOut: makeWrapper('hide-if-logged-out', false)
+};
