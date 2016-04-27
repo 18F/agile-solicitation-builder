@@ -219,6 +219,10 @@ textarea{
 	padding-right: 15px;
 }
 
+.top-right-auth-button{
+	float: right;
+}
+
 textarea {
 	margin: 10px 0;
 }

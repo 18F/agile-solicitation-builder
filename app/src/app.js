@@ -38,9 +38,9 @@ var Header = React.createClass({
             <img className="usa-flag_icon" alt="US flag signifying that this is a United States Federal Government website" src="/assets/img/us_flag_small.png" />
             An official website of the United States Government
           </span>
-          <AuthButton />
           <span className="usa-disclaimer-stage">This site is currently in alpha. {RepoLink}.</span>
         </div>
+        <AuthButton className="top-right-auth-button" hideIfLoggedOut={true} />
         <div className="usa-grid">
           <div className="usa-width-one-whole header">
             <h1>
