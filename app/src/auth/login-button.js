@@ -1,5 +1,5 @@
 var React = require('react');
-var AuthMixin = require('./auth_mixin');
+var AuthMixin = require('./mixin');
 
 function login(callback) {
   if(typeof callback !== 'function') {
@@ -42,7 +42,7 @@ function logout(callback) {
 	});
 }
 
-var AuthButton = React.createClass({
+var LoginButton = React.createClass({
   mixins: [AuthMixin],
 
   getInitialState: function() {
@@ -91,4 +91,4 @@ var AuthButton = React.createClass({
   }
 });
 
-module.exports = AuthButton;
+module.exports = LoginButton;

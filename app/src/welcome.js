@@ -7,8 +7,8 @@ var Button = require('react-bootstrap').Button;
 var IndexLink = require('react-router').IndexLink;
 
 // Auth stuff
-var AuthMixin = require('./auth_mixin');
-var AuthButton = require('./auth_button');
+var AuthMixin = require('./auth/mixin');
+var AuthButton = require('./auth/login-button');
 
 var Welcome = React.createClass({
 	mixins: [AuthMixin],
