@@ -1,6 +1,27 @@
 var _components = [ ];
 var _currentState = false;
 
+function updateComponents() {
+  _components.forEach(function(c) {
+    c.setState({ loggedIn: _currentState });
+    if(typeof c.loginStateChanged === 'function') {
+      c.loginStateChanged();
+    }
+  });
+}
+
+$.ajax({
+  type: 'GET',
+  url: '/api/isLoggedIn',
+  dataType: 'json',
+  success: function(data) {
+    if(typeof data === 'object') {
+      _currentState = !!data.loggedIn;
+      updateComponents();
+    }
+  }
+});
+
 module.exports = {
   componentWillMount: function() {
     _components.push(this);
@@ -16,11 +37,6 @@ module.exports = {
 
   setAuthenticationState: function(loggedIn) {
     _currentState = loggedIn;
-    _components.forEach(function(c) {
-      c.setState({ loggedIn: loggedIn });
-      if(typeof c.loginStateChanged === 'function') {
-        c.loginStateChanged();
-      }
-    });
+    updateComponents();
   }
 }

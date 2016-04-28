@@ -6,12 +6,14 @@ function login(callback) {
     callback = function() { };
   }
 
+  var failed = true;
   $.ajax({
     type: 'GET',
     url: '/api/token',
     dataType: 'json',
     success: function(data) {
       var token = data.token;
+      failed = false;
       $.ajax({
   			type: "GET",
   			url: "/api/token",
@@ -22,8 +24,10 @@ function login(callback) {
         }
   		});
     },
-    error: function() {
-      callback(false);
+    complete: function() {
+      if(failed) {
+        callback(false);
+      }
     }
   });
 }
