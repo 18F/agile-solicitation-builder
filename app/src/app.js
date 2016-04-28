@@ -18,7 +18,7 @@ var Request = require('./request');
 var RequestOverview = require('./request_overview');
 var Question = require('./question');
 var Results = require('./results');
-var AuthButton = require('./auth/login-button');
+var LogoutButton = require('./auth/login-button');
 var RepoLink = React.createElement('a', {
     href: 'https://github.com/18F/playbook-in-action/issues',
     'target': '_blank',
@@ -40,7 +40,7 @@ var Header = React.createClass({
           </span>
           <span className="usa-disclaimer-stage">This site is currently in alpha. {RepoLink}.</span>
         </div>
-        <AuthButton className="top-right-auth-button" hideIfLoggedOut={true} />
+        <LogoutButton className="top-right-auth-button" hideIfLoggedOut={true} />
         <div className="usa-grid">
           <div className="usa-width-one-whole header">
             <h1>

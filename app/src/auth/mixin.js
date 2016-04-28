@@ -10,6 +10,60 @@ function updateComponents() {
   });
 }
 
+
+function login(username, password, callback) {
+  if(typeof username === 'function') {
+    callback = username;
+    username = undefined;
+    password = undefined;
+  }
+  if(typeof callback !== 'function') {
+    callback = function() { };
+  }
+
+  var failed = true;
+  var opts = {
+    type: 'GET',
+    url: '/api/token',
+    dataType: 'json',
+    success: function(data) {
+      var token = data.token;
+      failed = false;
+      $.ajax({
+  			type: "GET",
+  			url: "/api/token",
+  			username: token,
+  			password: 'none',
+  			success: function() {
+          callback(token);
+        }
+  		});
+    },
+    complete: function() {
+      if(failed) {
+        callback(false);
+      }
+    }
+  };
+
+  if(username && password) {
+    opts.username = username;
+    opts.password = password;
+  }
+
+  $.ajax(opts);
+}
+
+function logout(callback) {
+	$.ajax({
+		type: "GET",
+		url: "/api/token",
+		username: "--invalid--",
+		password: "--invalid--",
+    complete: callback
+	});
+}
+
 $.ajax({
   type: 'GET',
   url: '/api/isLoggedIn',
@@ -38,5 +92,8 @@ module.exports = {
   setAuthenticationState: function(loggedIn) {
     _currentState = loggedIn;
     updateComponents();
-  }
+  },
+
+  doAuthLogin: login,
+  doAuthLogout: logout
 }

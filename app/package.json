@@ -22,6 +22,7 @@
     "react-bootstrap": "^0.27.3",
     "react-dom": "^0.14.2",
     "react-flexbox": "^3.0.0",
+    "react-popover": "^0.4.4",
     "react-router": "^1.0.0-rc4"
   },
   "devDependencies": {

@@ -16,7 +16,7 @@ div#mount{
 
 .nav>li>a{
 	padding: 7px 15px;
-	
+
 }
 
 a {
@@ -42,7 +42,7 @@ form.usa-grid {
 
 .edit {
 	color: #337ab7;
-	cursor: pointer; 
+	cursor: pointer;
 	cursor: hand;
 }
 
@@ -155,7 +155,7 @@ button.add {
 }
 
 .edit-box {
-	margin: 5px 0 10px 0;	
+	margin: 5px 0 10px 0;
 }
 
 div#mount input {
@@ -197,7 +197,7 @@ textarea{
 
 .usa-disclaimer{
 	background-color: #f1f1f1;
-	font-size: 15px;	
+	font-size: 15px;
 	padding: 5px;
 	margin: -8px -23px 0px -23px;
 }
@@ -229,4 +229,20 @@ textarea {
 
 #sidenav.affix {
 	top: 0;
+}
+
+.Popover-body {
+  display: inline-flex;
+  flex-direction: column;
+  padding: 2rem 4rem;
+  background: white;
+  color: black;
+  border-radius: 0.3rem;
+	border: 1px solid #888;
+	box-shadow: 10px 10px 25px #555;
+	width: 400px;
+}
+
+.Popover-tipShape {
+  fill: black;
 }

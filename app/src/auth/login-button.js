@@ -1,47 +1,6 @@
 var React = require('react');
 var AuthMixin = require('./mixin');
 
-function login(callback) {
-  if(typeof callback !== 'function') {
-    callback = function() { };
-  }
-
-  var failed = true;
-  $.ajax({
-    type: 'GET',
-    url: '/api/token',
-    dataType: 'json',
-    success: function(data) {
-      var token = data.token;
-      failed = false;
-      $.ajax({
-  			type: "GET",
-  			url: "/api/token",
-  			username: token,
-  			password: 'none',
-  			success: function() {
-          callback(token);
-        }
-  		});
-    },
-    complete: function() {
-      if(failed) {
-        callback(false);
-      }
-    }
-  });
-}
-
-function logout(callback) {
-	$.ajax({
-		type: "GET",
-		url: "/api/token",
-		username: "--invalid--",
-		password: "--invalid--",
-    complete: callback
-	});
-}
-
 var LoginButton = React.createClass({
   mixins: [AuthMixin],
 
@@ -61,11 +20,11 @@ var LoginButton = React.createClass({
 
   click: function() {
     if(this.state.loggedIn) {
-      logout(function() {
+      this.doAuthLogout(function() {
         this.setAuthenticationState(false);
       }.bind(this));
     } else {
-      login(function(token) {
+      this.doAuthLogin(function(token) {
         if(token) {
           this.setAuthenticationState(true);
         } else {
