@@ -8,8 +8,7 @@ var IndexLink = require('react-router').IndexLink;
 
 // Auth stuff
 var AuthMixin = require('./auth_mixin');
-var AuthButton = require('./auth').Button;
-var AuthWrapper = require('./auth').HideIfLoggedOut;
+var AuthButton = require('./auth_button');
 
 var Welcome = React.createClass({
 	mixins: [AuthMixin],
@@ -79,13 +78,12 @@ var Welcome = React.createClass({
 
           <br />
 					<AuthButton hideIfLoggedIn={true} />
+					{(this.state.loggedIn) ?
           <IndexLink to="/rfp">
-            <AuthWrapper>
-							<Button bsStyle="primary">
-              	Start	New RFQ
-            	</Button>
-						</AuthWrapper>
-          </IndexLink>
+						<Button bsStyle="primary">
+            	Start	New RFQ
+          	</Button>
+          </IndexLink> : null}
         </div>
       </div>
 		);
