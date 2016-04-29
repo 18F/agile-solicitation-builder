@@ -69,7 +69,6 @@ var Welcome = React.createClass({
                 <li>Content may unexpectedly change</li>
                 <li>Documents you have created may be deleted without warning</li>
                 <li>Certain pages may not always be functioning. We recommend you refresh the page if this happens</li>
-                <li>Your RFQs will be visible to other visitors on the site</li>
               </ul>
           </div>
           {(rfqs.length > 0)? <div><div className="sub-heading">Resume RFQ</div>
