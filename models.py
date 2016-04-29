@@ -87,13 +87,14 @@ class RFQ(Base):
     def __repr__(self):
         return "<RFQ(id='%d', agency='%s', doc_type='%s', program_name='%s')>" % (self.id, self.agency, self.doc_type, self.program_name)
 
-    def __init__(self, agency, doc_type, program_name, setaside, base_number=None):
+    def __init__(self, user_id, agency, doc_type, program_name, setaside, base_number=None):
         # working-with-related-objects
         base_number_value = None
         if len(base_number) > 0:
             base_number_value = base_number
 
         # seed each section of the new document with the template content
+        self.user_id = user_id
         self.agency = agency
         self.doc_type = doc_type
         self.program_name = program_name

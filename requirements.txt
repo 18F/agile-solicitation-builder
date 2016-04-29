@@ -3,6 +3,7 @@ aniso8601==1.1.0
 cssselect==0.9.1
 Django==1.8.6
 Flask==0.10.1
+Flask-HTTPAuth==3.1.2
 Flask-Migrate==1.6.0
 Flask-RESTful==0.3.4
 Flask-Script==2.0.5
@@ -29,4 +30,3 @@ w3lib==1.10.0
 Werkzeug==0.11.2
 wheel==0.24.0
 passlib==1.6.1
-itsdangerous=0.24
