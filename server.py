@@ -189,7 +189,7 @@ class Create(Resource):
     decorators = [auth.login_required]
     def get(self):
         session = Session()
-        rfqs = session.query(RFQ).all()
+        rfqs = session.query(RFQ).filter_by(user_id=g.user.id).all()
         return jsonify(data=[r.to_dict() for r in rfqs])
 
     def post(self, **kwargs):
@@ -207,8 +207,9 @@ class Create(Resource):
         program_name = args['program_name'].decode('latin-1').encode('utf8')
         setaside = args['setaside'].decode('latin-1').encode('utf8')
         base_number = args['base_number'].decode('latin-1').encode('utf8')
+        user_id = g.user.id
 
-        rfq = RFQ(agency=agency, doc_type=doc_type, program_name=program_name, setaside=setaside, base_number=base_number)
+        rfq = RFQ(user_id=user_id, agency=agency, doc_type=doc_type, program_name=program_name, setaside=setaside, base_number=base_number)
         session = Session()
         session.add(rfq)
         session.commit()
