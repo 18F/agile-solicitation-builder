@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import os
+import json
 
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, Text, Boolean, String, ForeignKey, create_engine
@@ -8,7 +9,14 @@ from flask_sqlalchemy import SQLAlchemy
 
 import seed
 
-engine = create_engine(os.environ["DATABASE_URL"])
+# @todo: Refactor: handle this in config.py instead.
+vcap_services = json.loads(os.environ.get('VCAP_SERVICES', '{}'))
+aws_config = vcap_services.get('aws-rds', '[]')
+if aws_config:
+    DATABASE_URL = aws_config[0]['credentials']['uri']
+
+# @todo: Add error handling in case DATABASE_URL isn't set.
+engine = create_engine(DATABASE_URL)
 Session = sessionmaker(bind=engine)
 
 Base = declarative_base()
