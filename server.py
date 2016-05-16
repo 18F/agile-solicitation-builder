@@ -310,7 +310,9 @@ def download(rfq_id):
 def agile_estimator():
     return send_file("AgileEstimator.xlsx")
 
-
+@app.cli.command()
+def seed_db():
+    create_tables()
 
 if __name__ == "__main__":
     app.run(debug=True)
