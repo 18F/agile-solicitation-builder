@@ -7,6 +7,8 @@ import logging
 import StringIO
 
 from flask import Flask, send_from_directory, send_file, request, jsonify
+from waitress import serve
+port = port = int(os.getenv("VCAP_APP_PORT"))
 from flask_restful import Resource, Api, reqparse
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.engine import reflection
@@ -22,6 +24,7 @@ import create_document
 
 from models import Agency, RFQ, ContentComponent, AdditionalClin, CustomComponent, Base, Session, Deliverable, engine
 from seed import agencies
+
 
 
 # set the project root directory as the static folder, you can set others.
@@ -62,7 +65,7 @@ class Data(Resource):
         data = request.get_json()['data']
         for key in data:
             session = Session()
-            component = session.query(ContentComponent).filter_by(document_id=rfq_id).filter_by(name=key).first()            
+            component = session.query(ContentComponent).filter_by(document_id=rfq_id).filter_by(name=key).first()
             component.text = data[key].encode('ascii', 'ignore')
             session.merge(component)
             session.commit()
@@ -86,7 +89,7 @@ class Deliverables(Resource):
         session = Session()
         data = request.get_json()['data']
         for item in data:
-            deliverable = session.query(Deliverable).filter_by(document_id=rfq_id).filter_by(name=item["name"]).first()            
+            deliverable = session.query(Deliverable).filter_by(document_id=rfq_id).filter_by(name=item["name"]).first()
             deliverable.value = item["value"]
             deliverable.text = item["text"]
             session.merge(deliverable)
@@ -238,7 +241,7 @@ def drop_everything():
     inspector = reflection.Inspector.from_engine(engine)
 
     # gather all data first before dropping anything.
-    # some DBs lock after things have been dropped in 
+    # some DBs lock after things have been dropped in
     # a transaction.
 
     metadata = MetaData()
@@ -273,7 +276,7 @@ def create_tables():
 
     session = Session()
 
-    Base.metadata.create_all(engine)    
+    Base.metadata.create_all(engine)
 
     for agency in agencies:
         a = Agency(abbreviation=agency, full_name=agencies[agency])
@@ -315,7 +318,7 @@ def seed_db():
     create_tables()
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    serve(app, port=port)
 
     # create_tables()
     # if len(sys.argv) > 1 and sys.argv[1] == "init":
