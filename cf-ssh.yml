@@ -1,0 +1,10 @@
+applications:
+- command: curl https://18f-tmate-bootstrap.s3.amazonaws.com/tmate-debug-init.sh |
+    sh
+  host: playbook-in-action-staging-acq
+  instances: 1
+  memory: 512M
+  name: playbook-in-action-ssh
+  no-route: true
+  services:
+  - playbook-staging
