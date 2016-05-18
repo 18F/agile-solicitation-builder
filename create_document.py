@@ -391,8 +391,6 @@ def appendix(document, rfq):
 
 
 def create_document(rfq_id):
-
-    session = Session()
     rfq = session.query(RFQ).filter_by(id=rfq_id).first()
 
     document = Document()

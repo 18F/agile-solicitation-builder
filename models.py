@@ -5,10 +5,11 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, Text, Boolean, String, ForeignKey, create_engine
 from sqlalchemy.orm import sessionmaker, relationship, scoped_session
 from flask_sqlalchemy import SQLAlchemy
+from config import ProductionConfig
 
 import seed
 
-engine = create_engine(os.environ["DATABASE_URL"])
+engine = create_engine(ProductionConfig.SQLALCHEMY_DATABASE_URI)
 session_factory = sessionmaker(bind=engine)
 session = scoped_session(session_factory)
 
