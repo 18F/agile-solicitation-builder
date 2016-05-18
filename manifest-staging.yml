@@ -3,7 +3,7 @@ applications:
 - name: playbook-in-action
   memory: 512M
   instances: 1
-  host: playbook-in-action
+  host: playbook-in-action-staging
   domain: apps.cloud.gov
   services:
-  - playbook
+  - playbook-staging
