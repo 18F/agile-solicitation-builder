@@ -10,7 +10,7 @@ env:
         # - secure: ''
 install:
     - pip install -r requirements.txt
-    - npm install app/package.json
+    - npm --prefix ./app install ./app
     - psql -c 'create database travis_ci_test;' -U postgres
 script:
     - python server.py
