@@ -15,6 +15,7 @@ port = port = int(os.getenv("VCAP_APP_PORT"))
 from flask_restful import Resource, Api, reqparse
 from flask_sqlalchemy import SQLAlchemy
 from flask_cli import FlaskCLI
+from sqlalchemy import create_engine
 from sqlalchemy.engine import reflection
 from sqlalchemy.schema import (
     MetaData,
@@ -26,7 +27,7 @@ from sqlalchemy.schema import (
 
 import create_document
 
-from models import Agency, RFQ, ContentComponent, AdditionalClin, CustomComponent, Base, Session, Deliverable, engine
+from models import Agency, RFQ, ContentComponent, AdditionalClin, CustomComponent, Base, session, Deliverable, engine
 from seed import agencies
 
 logger = logging.getLogger('waitress')
@@ -51,7 +52,7 @@ def dicts_to_dict(dicts, key):
 
 class Agencies(Resource):
     def get(self):
-        session = Session()
+        # session = Session()
         agencies = session.query(Agency).order_by(Agency.full_name).all()
         return jsonify(data=[a.to_dict() for a in agencies])
 
@@ -59,7 +60,7 @@ class Agencies(Resource):
 class Data(Resource):
 
     def get(self, rfq_id, section_id):
-        session = Session()
+        # session = Session()
         content = session.query(ContentComponent).filter_by(document_id=rfq_id).filter_by(section=int(section_id))
         return jsonify(data=dicts_to_dict([c.to_dict() for c in content], "name"))
 
@@ -68,7 +69,7 @@ class Data(Resource):
         parser.add_argument('data')
         data = request.get_json()['data']
         for key in data:
-            session = Session()
+            # session = Session()
             component = session.query(ContentComponent).filter_by(document_id=rfq_id).filter_by(name=key).first()
             component.text = data[key].encode('ascii', 'ignore')
             session.merge(component)
@@ -85,12 +86,12 @@ class Data(Resource):
 class Deliverables(Resource):
 
     def get(self, rfq_id):
-        session = Session()
+        # session = Session()
         deliverables = session.query(Deliverable).filter_by(document_id=rfq_id).order_by(Deliverable.id).all()
         return jsonify(data=[d.to_dict() for d in deliverables])
 
     def put(self, rfq_id):
-        session = Session()
+        # session = Session()
         data = request.get_json()['data']
         for item in data:
             deliverable = session.query(Deliverable).filter_by(document_id=rfq_id).filter_by(name=item["name"]).first()
@@ -103,7 +104,7 @@ class Deliverables(Resource):
 class Clin(Resource):
 
     def get(self, rfq_id):
-        session = Session()
+        # session = Session()
         clins = session.query(AdditionalClin).filter_by(document_id=rfq_id).all()
         return jsonify(data=[c.to_dict() for c in clins])
 
@@ -133,21 +134,21 @@ class Clin(Resource):
 class CustomComponents(Resource):
 
     def get(self, rfq_id, section_id):
-        session = Session()
+        # session = Session()
         components = session.query(CustomComponent).filter_by(document_id=rfq_id).filter_by(section=section_id).order_by(CustomComponent.id).all()
         return jsonify(data=[c.to_dict() for c in components])
 
     def put(self, rfq_id, section_id):
         data = request.get_json()['data']
         for key in data:
-            session = Session()
+            # session = Session()
             component = session.query(CustomComponent).filter_by(document_id=rfq_id).filter_by(name=key).first()
             component.text = data[key]
             session.merge(component)
             session.commit()
 
     def post(self, rfq_id, section_id):
-        session = Session()
+        # session = Session()
         data = request.get_json()["data"]
         title = data['title']
         text = data['text']
@@ -168,7 +169,7 @@ class CustomComponents(Resource):
 class Create(Resource):
 
     def get(self):
-        session = Session()
+        # session = Session()
         rfqs = session.query(RFQ).all()
         return jsonify(data=[r.to_dict() for r in rfqs])
 
@@ -189,7 +190,7 @@ class Create(Resource):
         base_number = args['base_number'].decode('latin-1').encode('utf8')
 
         rfq = RFQ(agency=agency, doc_type=doc_type, program_name=program_name, setaside=setaside, base_number=base_number)
-        session = Session()
+        # session = Session()
         session.add(rfq)
         session.commit()
 
@@ -199,7 +200,7 @@ class Create(Resource):
 class DeleteRFQ(Resource):
 
     def delete(self, rfq_id):
-        session = Session()
+        # session = Session()
 
         deliverables = session.query(Deliverable).filter_by(document_id=rfq_id).all()
         for d in deliverables:
@@ -234,54 +235,18 @@ api.add_resource(Clin, '/clins/<int:rfq_id>')
 api.add_resource(CustomComponents, '/custom_component/<int:rfq_id>/section/<int:section_id>')
 api.add_resource(DeleteRFQ, '/delete/rfqs/<int:rfq_id>')
 
-def drop_everything():
-    # https://bitbucket.org/zzzeek/sqlalchemy/wiki/UsageRecipes/DropEverything
-    conn = engine.connect()
 
-    # the transaction only applies if the DB supports
-    # transactional DDL, i.e. Postgresql, MS SQL Server
-    trans = conn.begin()
-
-    inspector = reflection.Inspector.from_engine(engine)
-
-    # gather all data first before dropping anything.
-    # some DBs lock after things have been dropped in
-    # a transaction.
-
-    metadata = MetaData()
-
-    tbs = []
-    all_fks = []
-
-    for table_name in inspector.get_table_names():
-        fks = []
-        for fk in inspector.get_foreign_keys(table_name):
-            if not fk['name']:
-                continue
-            fks.append(
-                ForeignKeyConstraint((), (), name=fk['name'])
-                )
-        t = Table(table_name, metadata, *fks)
-        tbs.append(t)
-        all_fks.extend(fks)
-
-    for fkc in all_fks:
-        conn.execute(DropConstraint(fkc))
-
-    for table in tbs:
-        conn.execute(DropTable(table))
-
-    trans.commit()
 
 def create_tables():
-
+    uri = config.DevelopmentConfig.SQLALCHEMY_DATABASE_URI
+    engine = create_engine(uri)
     # delete old records
-    drop_everything()
-
-    session = Session()
-
+    Base.metadata.drop_all(engine)
+    #
+    # session = Session(engine)
+    #
     Base.metadata.create_all(engine)
-
+    #
     for agency in agencies:
         a = Agency(abbreviation=agency, full_name=agencies[agency])
         session.add(a)
@@ -323,10 +288,3 @@ def seed_db():
 
 if __name__ == "__main__":
     serve(app, port=port)
-
-    # create_tables()
-    # if len(sys.argv) > 1 and sys.argv[1] == "init":
-    #     create_tables()
-    # else:
-    #     port = int(os.getenv('PORT', 5000))
-    #     app.run(port=port, debug=True)
