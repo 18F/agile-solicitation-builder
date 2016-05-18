@@ -1,5 +1,11 @@
 ---
-# all applications use these settings and services
-memory: 512m
 applications:
 - name: playbook-in-action
+  memory: 512M
+  instances: 1
+  host: playbook-in-action
+  domain: apps.cloud.gov
+  services:
+  - playbook-db2
+  command: python server.py
+#  command: python seed_agencies.py && python server.py
