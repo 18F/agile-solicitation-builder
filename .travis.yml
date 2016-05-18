@@ -13,4 +13,4 @@ install:
     - npm --prefix ./app install ./app
     - psql -c 'create database travis_ci_test;' -U postgres
 script:
-    - python server.py
+    - python tests.py
