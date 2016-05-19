@@ -15,6 +15,9 @@ function handleErrors() {
   this.emit('end'); // Keep gulp from hanging on this task
 }
 
+gulp.task('copy_jquery', function(){
+  gulp.source('bower_components/jquery/dist/jquery.min.js').pipe(ulp.dest('./build'));
+});
 gulp.task('default', function() {
     var bundler = browserify({
         entries: ['./src/app.js'], // Only need initial file, browserify finds the deps
