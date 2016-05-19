@@ -36,22 +36,14 @@ flask -a server.py seed_db
 ```
 
 ### Install the Front end.
-Load the following javaScript modules via npm.
-
+Load the javaScript modules via npm:
 
 ```
-npm --prefix ./app install ./app
-```
-
-Make sure that you have Gulp globally installed.
-And then run to port and bundle the development javaScript into the build directory.
-```
+cd app
+npm install
 gulp build
+cd ..
 ```
-
-To update the bundle.js file while developing the front-end run the default gulp command `gulp`.
-
-Once you have it [installed](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md), leave it running in a separate Terminal tab: just change to the `app` directory (`cd app`) and run `gulp`.
 
 ### Start the app
 From the root directory of the project run
@@ -62,7 +54,7 @@ python server.py
 
 ## The Code
 
-#####Adding a new page
+##### Adding a new page
 
 To add a new "questions" page (all pages are listed in the right sidebar), create a new file in the [questions](https://github.com/18F/playbook-in-action/tree/master/app/src/questions) folder. See [`XX_sample.js`](https://github.com/18F/playbook-in-action/blob/master/app/src/questions/XX_sample.js) to get an idea of what needs to be included in a page.
 
