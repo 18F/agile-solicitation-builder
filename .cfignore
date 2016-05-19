@@ -4,7 +4,6 @@ app/bower_components/
 .DS_Store
 venv/
 *.pyc
-.python-version
 cf-ssh.yml
 app/package.json
 app/helpers.js

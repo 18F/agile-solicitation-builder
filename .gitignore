@@ -4,5 +4,4 @@ app/bower_components/
 .DS_Store
 venv/
 *.pyc
-.python-version
 cf-ssh.yml
