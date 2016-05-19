@@ -39,37 +39,19 @@ flask -a server.py seed_db
 
 ### Install the Front end.
 Load the following javaScript modules via npm.
+
+
 ```
 npm --prefix ./app install ./app
 ```
 
-This project uses the following node modules:
+Make sure that you have Gulp globally installed.
+And then run to port and bundle the development javaScript into the build directory.
+```
+gulp build
+```
 
-  - babel-preset-react
-  - babelify
-  - browserify
-  - gulp
-  - gulp-notify
-  - gulp-rename
-  - history
-  - react
-  - react-bootstrap
-  - react-dom
-  - react-flexbox
-  - react-router
-  - reactify
-  - vinyl-source-stream
-  - watchify
-
-To install them, `cd` to the `app` directory and run `npm install`.
-
-This project uses the following bower components:
-
-  - jQuery
-  - Bootstrap
-
-
-To ensure bundle.js is updated with the changes to any React code, you will need to use something like the node package Gulp.
+To update the bundle.js file while developing the front-end run the default gulp command `gulp`.
 
 Once you have it [installed](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md), leave it running in a separate Terminal tab: just change to the `app` directory (`cd app`) and run `gulp`.
 
@@ -107,6 +89,26 @@ The code for the API can be found in [`server.py`](https://github.com/18F/playbo
 ##### Creating a Word Document
 
 This is managed in the file [`create_document.py`](https://github.com/18F/playbook-in-action/blob/master/create_document.py). Currently everything is added to the document manually.
+
+##### Node Dependencies
+This project uses the following node modules:
+
+  - babel-preset-react
+  - babelify
+  - browserify
+  - gulp
+  - gulp-notify
+  - gulp-rename
+  - history
+  - react
+  - react-bootstrap
+  - react-dom
+  - react-flexbox
+  - react-router
+  - reactify
+  - vinyl-source-stream
+  - watchify
+
 
 ### Public domain
 
