@@ -11,7 +11,7 @@ except ImportError:
 
 from flask import Flask, send_from_directory, send_file
 from waitress import serve
-port = port = int(os.getenv("PORT"))
+port = os.getenv("PORT") or 5000
 from flask_restful import Api
 from flask_sqlalchemy import SQLAlchemy
 

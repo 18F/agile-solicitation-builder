@@ -24,10 +24,8 @@ initdb /usr/local/var/postgres
 
 To create a playbook database run:
 ```
-psql
-postgres=# CREATE DATABASE your_database_name;
-\q
-export DATABASE_URL=postgresql+psycopg2://localhost/your_database_name
+createdb your_database_name
+export DATABASE_URL=postgresql://localhost/your_database_name
 ```
 
 Replacing `your_database_name` with the db you'd like.
