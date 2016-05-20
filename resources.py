@@ -20,7 +20,7 @@ class Data(Resource):
         data = request.get_json()['data']
         for key in data:
             component = session.query(ContentComponent).filter_by(document_id=rfq_id).filter_by(name=key).first()
-            component.text = data[key].encode('ascii', 'ignore')
+            component.text = data[key]
             session.merge(component)
             session.commit()
 
@@ -124,11 +124,11 @@ class Create(Resource):
 
         args = parser.parse_args()
 
-        agency = args['agency'].decode('latin-1').encode('utf8')
-        doc_type = args['doc_type'].decode('latin-1').encode('utf8')
-        program_name = args['program_name'].decode('latin-1').encode('utf8')
-        setaside = args['setaside'].decode('latin-1').encode('utf8')
-        base_number = args['base_number'].decode('latin-1').encode('utf8')
+        agency = args['agency']
+        doc_type = args['doc_type']
+        program_name = args['program_name']
+        setaside = args['setaside']
+        base_number = args['base_number']
 
         rfq = RFQ(agency=agency, doc_type=doc_type, program_name=program_name, setaside=setaside, base_number=base_number)
         session.add(rfq)

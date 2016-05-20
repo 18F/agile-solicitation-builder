@@ -1,5 +1,6 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
-import os
+import sys, os
 
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, Text, Boolean, String, ForeignKey, create_engine
@@ -75,18 +76,18 @@ class RFQ(Base):
             vehicle = "(vehicle number " + base_number_value + ") "
 
         for section in content_components:
-            text = str(section['text']).decode("utf8")
+            text = section['text']
             section['text'] = text.replace("{AGENCY}", agency).replace("{DOC_TYPE}", doc_type).replace("{AGENCY_FULL_NAME}", agency_full_name).replace("{PROGRAM_NAME}", program_name).replace("{VEHICLE}", vehicle)
             self.content_components.append(ContentComponent(**section))
 
         for deliverable in deliverables:
-            deliverable["text"] = str(deliverable['text']).decode("utf8")
-            deliverable["display"] = str(deliverable['display']).decode("utf8")
+            deliverable["text"] = str(deliverable['text'])
+            deliverable["display"] = str(deliverable['display'])
             self.deliverables.append(Deliverable(**deliverable))
 
         for component in custom_components:
-            text = component['text'].decode("utf8")
-            title = component['title'].decode("utf8")
+            text = component['text']
+            title = component['title']
             component['text'] = text.replace("{AGENCY}", agency).replace("{DOC_TYPE}", doc_type).replace("{AGENCY_FULL_NAME}", agency_full_name).replace("{PROGRAM_NAME}", program_name).replace("{VEHICLE}", vehicle)
             component['title'] = title.replace("{AGENCY}", agency).replace("{DOC_TYPE}", doc_type).replace("{AGENCY_FULL_NAME}", agency_full_name).replace("{PROGRAM_NAME}", program_name).replace("{VEHICLE}", vehicle)
             self.custom_components.append(CustomComponent(**component))

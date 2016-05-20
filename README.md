@@ -6,11 +6,11 @@ git clone https://github.com/18F/playbook-in-action.git
 ```
 ### Flask app
 
-Create a [virtual environment](https://github.com/yyuu/pyenv-virtualenvwrapper) with `Python 2.7.11`
+Create a [virtual environment](https://github.com/yyuu/pyenv-virtualenvwrapper) with `Python 3.5.1`
 
 ```
-# pyenv install 2.7.11
-pyenv local 2.7.11
+# pyenv install 3.5.1
+pyenv local 3.5.1
 mkvirtualenv playbook
 pip install -r requirements.txt
 ```

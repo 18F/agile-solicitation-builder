@@ -1,13 +1,10 @@
+#!/usr/bin/python -tt
 # -*- coding: utf-8 -*-
-import os
+import os, sys
 import shutil
-import sys
 import config
 import logging
-try:
-    import StringIO
-except ImportError:
-    from io import StringIO
+from io import BytesIO
 
 from flask import Flask, send_from_directory, send_file
 from waitress import serve
@@ -71,7 +68,7 @@ def send_js(path):
 @app.route('/download/<int:rfq_id>')
 def download(rfq_id):
     document = create_document.create_document(rfq_id)
-    strIO = StringIO.StringIO()
+    strIO = BytesIO()
     document.save(strIO)
     strIO.seek(0)
     return send_file(strIO, attachment_filename="RFQ.docx", as_attachment=True)
