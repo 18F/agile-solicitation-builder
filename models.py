@@ -7,6 +7,8 @@ from sqlalchemy import Column, Integer, Text, Boolean, String, ForeignKey, creat
 from sqlalchemy.orm import sessionmaker, relationship, scoped_session
 from flask_sqlalchemy import SQLAlchemy
 from config import ProductionConfig
+from passlib.apps import custom_app_context as pwd_context
+from itsdangerous import (TimedJSONWebSignatureSerializer as Serializer, BadSignature, SignatureExpired)
 
 import seed
 
@@ -21,6 +23,35 @@ content_components = seed.content_components
 deliverables = seed.deliverables
 custom_components = seed.custom_components
 
+class User(Base):
+    __tablename__ = 'users'
+
+    id = Column(Integer, primary_key = True)
+    username = Column(String(32), index = True)
+    password_hash = Column(String(128))
+
+    def hash_password(self, password):
+        self.password_hash = pwd_context.encrypt(password)
+
+    def verify_password(self, password):
+        return pwd_context.verify(password, self.password_hash)
+
+    def generate_auth_token(self, expiration = 600):
+        s = Serializer(os.environ.get('SECRET_KEY', "None"), expires_in = expiration)
+        return s.dumps({ 'id': self.id })
+
+    @staticmethod
+    def verify_auth_token(token):
+        s = Serializer(os.environ.get('SECRET_KEY', "None"))
+        try:
+            data = s.loads(token)
+        except SignatureExpired:
+            return None # valid token, but expired
+        except BadSignature:
+            return None # invalid token
+        session = Session()
+        user = session.query(User).get(data['id'])
+        return user
 
 class Agency(Base):
     __tablename__ = 'agencies'
@@ -40,6 +71,7 @@ class RFQ(Base):
     __tablename__ = 'rfqs'
 
     id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey('users.id'))
     agency = Column(String)
     doc_type = Column(String)
     program_name = Column(String)
@@ -55,13 +87,14 @@ class RFQ(Base):
     def __repr__(self):
         return "<RFQ(id='%d', agency='%s', doc_type='%s', program_name='%s')>" % (self.id, self.agency, self.doc_type, self.program_name)
 
-    def __init__(self, agency, doc_type, program_name, setaside, base_number=None):
+    def __init__(self, user_id, agency, doc_type, program_name, setaside, base_number=None):
         # working-with-related-objects
         base_number_value = None
         if len(base_number) > 0:
             base_number_value = base_number
 
         # seed each section of the new document with the template content
+        self.user_id = user_id
         self.agency = agency
         self.doc_type = doc_type
         self.program_name = program_name
