@@ -7,7 +7,7 @@ import logging
 from io import BytesIO
 import base64
 
-from flask import Flask, send_from_directory, send_file, g
+from flask import Flask, send_from_directory, send_file, g, request, jsonify
 from waitress import serve
 port = os.getenv("PORT") or 5000
 from flask_restful import Api
