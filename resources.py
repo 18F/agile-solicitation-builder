@@ -154,7 +154,7 @@ class Create(Resource):
         setaside = args['setaside']
         base_number = args['base_number']
 
-        rfq = RFQ(user_id=user_id, agency=agency, doc_type=doc_type, program_name=program_name, setaside=setaside, base_number=base_number)
+        rfq = RFQ(user_id=g.user.id, agency=agency, doc_type=doc_type, program_name=program_name, setaside=setaside, base_number=base_number)
         session.add(rfq)
         session.commit()
 
