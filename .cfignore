@@ -1,7 +1,8 @@
 app/node_modules/
-app/build/
 app/bower_components/
 .DS_Store
 venv/
 *.pyc
 cf-ssh.yml
+app/package.json
+app/src

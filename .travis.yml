@@ -1,16 +1,33 @@
 language: python
 sudo: false
 python:
-    - "2.7"
+- '2.7'
 env:
-    global:
-        # Set cloud.gov credentials
-        # @todo: Add these.
-        # - secure: ''
-        # - secure: ''
+  global:
+  - CF_USERNAME=18f-acq_deployer
+  - secure: QutJrzgQ9L4Bpcj1PerNvK7rbj87CsfS+69MucNdyAN9TvdFzEItcPcWvtFmLXbndkNtKlK+0Y/5XHaLJsvIkDnEuV7HqUo/wr/PIYQ/vLUaeyI0DpfwBjJnQ3pohVVSnmunb8WpVhHNEL35XfXz5pO1hE+RfH9Ox32ciCPOAF/2RyaAGuoyAInMv1tzA1ZscsaTqGsYbvVCqmb257fd0sDrIkEiHLXrA7VBjwXMTAYsVFBc8/0gTKjDOTsR75xluR3uOFlnyWg5kIANC5SVtqT90ZcXAVeJgOnpmR+qIkY/eyfOa6Bzxs3AHfid3+XUtIoNDf3LCDHgeiV2hc3lOSD5r0+1mnfIYrlcLGxTwOyjHIB7q7YGSmlfbs+wX08tmxJkImtc+4A9jdpiPS3wRqtGTAMVNw+K2YI6zyuCQs65nnJBWaQqsbOFtDeu04skbn/JoH/TJC6+JoP8WfZTSLKAALyACR5+DnbONUqbMU5MDTiFOFm6+gcXBJ5B7XAox74XPftI37H+hbcXbY17gOMCf0RRzkVphWuSsO6iiw0hlVGcfVpk5rDMnY6DnV3Pft2qQUmcNIXc+11WPiZkZIiyAfIZFqDsCbU1EaYWQrn+QH9MJO36Qj2ziPHiLIiXoAqR43Uot1K3IuVGbO3MwAp7/NNJVl5xtEvy+fA6ogM=
 install:
-    - pip install -r requirements.txt
-    - npm install app/package.json
-    - psql -c 'create database travis_ci_test;' -U postgres
+- pip install -r requirements.txt
+- npm --prefix ./app install ./app
+- psql -c 'create database travis_ci_test;' -U postgres
 script:
-    - python server.py
+- python tests.py
+before_deploy:
+- export PATH=$HOME:$PATH
+- travis_retry curl -L -o $HOME/cf.tgz "https://cli.run.pivotal.io/stable?release=linux64-binary&version=6.15.0"
+- tar xzvf $HOME/cf.tgz -C $HOME
+- mkdir -p ${HOME}/Godeps/_workspace
+- export GOPATH=${HOME}/Godeps/_workspace
+- go get github.com/concourse/autopilot
+- cf install-plugin -f $GOPATH/bin/autopilot
+deploy:
+- provider: script
+  script: "./deploy.sh staging"
+  skip_cleanup: true
+  on:
+    branch: develop
+- provider: script
+  script: "./deploy.sh production"
+  skip_cleanup: true
+  on:
+    branch: master

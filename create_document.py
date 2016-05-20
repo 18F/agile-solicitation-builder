@@ -2,9 +2,8 @@
 import datetime
 
 from docx import Document
-from models import Agency, RFQ, ContentComponent, Deliverable, CustomComponent, Session
+from models import Agency, RFQ, ContentComponent, Deliverable, CustomComponent, session
 
-session = Session()
 
 BIG_HEADING = 1
 SUB_HEADING = 2
@@ -41,7 +40,7 @@ def get_users(cc, user_types):
     users = []
     for user in user_types:
         if cc[user] == "true":
-            users.append(user)            
+            users.append(user)
     return users
 
 
@@ -59,7 +58,7 @@ def overview(document, rfq):
     sections = ["Definitions", "Services", "Statement of Objectives", "Personnel Requirements", "Inspection and Delivery", "Government Roles", "Special Requirements", "Additional Contract Clauses", "Appendix"]
     for section in sections:
         document.add_paragraph(section, style='ListNumber')
-    
+
     text = "Note: All sections of this RFQ will be incorporated into the contract except the Statement of Objectives, Instructions, and Evaluation Factors."
     document.add_paragraph(text)
     document.add_page_break()
@@ -72,7 +71,7 @@ def definitions(document, rfq):
     document.add_heading("1. Definitions", level=BIG_HEADING)
     all_definitions = session.query(ContentComponent).filter_by(document_id=rfq.id).filter_by(section=1).first()
     for definition in all_definitions.text.split("\n\n"):
-        document.add_paragraph(definition)    
+        document.add_paragraph(definition)
 
     return document
 
@@ -97,7 +96,7 @@ def services(document, rfq):
         document.add_paragraph(travel_text)
         document.add_paragraph(cc["travelLanguage"])
     else:
-        document.add_paragraph("The Government does not anticipate significant travel under this effort.")    
+        document.add_paragraph("The Government does not anticipate significant travel under this effort.")
 
     # @TODO make top column bold, add award fee/incentive information (if applicable)
     # base period
@@ -301,7 +300,7 @@ def invoicing(document, rfq):
 
     content_components = session.query(ContentComponent).filter_by(document_id=rfq.id).filter_by(section=5).all()
     cc = make_dict(content_components)
-    
+
     document.add_paragraph(cc["invoicing"])
 
     document.add_paragraph("The Contractor shall submit an original invoice for payment to the following office:")
@@ -345,7 +344,7 @@ def inspection_and_delivery(document, rfq):
 
 def government_roles(document, rfq):
     document.add_heading("7. Government Roles", level=BIG_HEADING)
-    
+
     content_components = session.query(ContentComponent).filter_by(document_id=rfq.id).filter_by(section=7).all()
     cc = make_dict(content_components)
 
@@ -387,13 +386,11 @@ def contract_clauses(document, rfq):
 def appendix(document, rfq):
 
     document.add_heading("10. Appendix", level=BIG_HEADING)
-    
+
     return document
 
 
 def create_document(rfq_id):
-
-    session = Session()
     rfq = session.query(RFQ).filter_by(id=rfq_id).first()
 
     document = Document()
