@@ -6,7 +6,6 @@ auth = HTTPBasicAuth()
 
 class Users(Resource):
     def get(self):
-        session = Session()
         users = session.query(User).order_by(User.username).all()
         return jsonify(data=[{'id': u.id, 'username': u.username} for u in users])
 
@@ -16,7 +15,6 @@ class Users(Resource):
         password = data['password']
         if username is None or password is None:
             abort(400) # missing arguments
-        session = Session()
         if session.query(User).filter_by(username = username).first() is not None:
             abort(400) # existing user
         user = User(username = username)
