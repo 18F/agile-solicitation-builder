@@ -84,7 +84,7 @@ def isLoggedIn():
     # so it must be at least 6 characters long or it's invalid.
     if auth is not None and len(auth) > 6:
         # Decode the username:password part.
-        pair = base64.b64decode(auth[6:])
+        pair = base64.b64decode(auth[6:]).decode('utf-8')
         # If the user is logged in, the username should be their token
         # and the password should be "none".  Assume that the decoded
         # string is ":none" and ditch it.  If that's not right, the
