@@ -2,10 +2,25 @@ var gulp = require('gulp');
 var browserify = require('browserify');
 var reactify = require('reactify');
 var watchify = require('watchify');
+var uglify = require('gulp-uglify');
 var source = require('vinyl-source-stream');
+var buffer = require('vinyl-buffer');
 var rename = require('gulp-rename');
 var notify = require("gulp-notify");
+// var jshint = require('gulp-jshint');
+var gutil = require('gulp-util');
+var eslint = require('gulp-eslint');
 
+gulp.task('lint', function() {
+  return gulp.src(['./src/*.js', './src/**/*.js', './*.js'])
+  .pipe(eslint())
+      // eslint.format() outputs the lint results to the console.
+      // Alternatively use eslint.formatEach() (see Docs).
+      .pipe(eslint.format())
+      // To have the process exit with an error code (1) on
+      // lint error, return the stream and pipe to failAfterError last.
+      .pipe(eslint.failAfterError());
+});
 function handleErrors() {
   var args = Array.prototype.slice.call(arguments);
   notify.onError({
@@ -30,6 +45,17 @@ gulp.task('bundling', function(){
   bundler
   .bundle()
   .pipe(source('./src/app.js'))
+  .pipe(eslint({
+      baseConfig: {
+        "ecmaFeatures": {
+           "jsx": true
+         }
+      }
+    }))
+  .pipe(eslint.format())
+  // .pipe(eslint.failAfterError())
+  .pipe(buffer()) // <----- convert from streaming to buffered vinyl file object
+  .pipe(uglify().on('error', gutil.log))
   .pipe(rename('bundle.js'))
   .pipe(gulp.dest('./build'));
 });
