@@ -6,20 +6,32 @@ var Button = require('react-bootstrap').Button;
 // Router stuff
 var IndexLink = require('react-router').IndexLink;
 
+// Auth stuff
+var AuthMixin = require('./auth/mixin');
+var LoginButton = require('./auth/login-button');
+var RegisterButton = require('./auth/register-button');
 
 var Welcome = React.createClass({
+	mixins: [AuthMixin],
+
 	getInitialState: function() {
 		return {
 			rfqs: "",
 		};
 	},
-	componentDidMount: function() {
-    getRFQs(function(content){ 
-      this.setState({
-        rfqs: content['data'],
-      });
-    }.bind(this));
-   },
+
+	loginStateChanged: function() {
+		if(this.state.loggedIn) {
+			getRFQs(function(content){
+	      this.setState({
+	        rfqs: content['data'],
+	      });
+	    }.bind(this));
+		} else {
+			this.setState({ rfqs: "" });
+		}
+	},
+
 	render: function() {
 		var rfqs = [];
 		for (var i=0; i < this.state.rfqs.length; i++) {
@@ -57,7 +69,6 @@ var Welcome = React.createClass({
                 <li>Content may unexpectedly change</li>
                 <li>Documents you have created may be deleted without warning</li>
                 <li>Certain pages may not always be functioning. We recommend you refresh the page if this happens</li>
-                <li>Your RFQs will be visible to other visitors on the site</li>
               </ul>
           </div>
           {(rfqs.length > 0)? <div><div className="sub-heading">Resume RFQ</div>
@@ -66,11 +77,14 @@ var Welcome = React.createClass({
             </ul></div> : null}
 
           <br />
+					<LoginButton hideIfLoggedIn={true} />
+					<RegisterButton />
+					{(this.state.loggedIn) ?
           <IndexLink to="/rfp">
-            <Button bsStyle="primary">
-              Start	New RFQ
-            </Button>
-          </IndexLink>
+						<Button bsStyle="primary">
+            	Start	New RFQ
+          	</Button>
+          </IndexLink> : null}
         </div>
       </div>
 		);

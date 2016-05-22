@@ -7,7 +7,7 @@ import logging
 from io import BytesIO
 import base64
 
-from flask import Flask, send_from_directory, send_file, g
+from flask import Flask, send_from_directory, send_file, g, request, jsonify
 from waitress import serve
 port = os.getenv("PORT") or 5000
 from flask_restful import Api
@@ -84,7 +84,7 @@ def isLoggedIn():
     # so it must be at least 6 characters long or it's invalid.
     if auth is not None and len(auth) > 6:
         # Decode the username:password part.
-        pair = base64.b64decode(auth[6:])
+        pair = base64.b64decode(auth[6:]).decode('utf-8')
         # If the user is logged in, the username should be their token
         # and the password should be "none".  Assume that the decoded
         # string is ":none" and ditch it.  If that's not right, the

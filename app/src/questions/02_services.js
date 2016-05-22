@@ -170,7 +170,7 @@ var Services = React.createClass({
   				var row = ADD_CLIN[i];
   				clinData[row] = $("#" + row)[0].value;
   			}
-  			createCLIN({ clinData }, rfqId, function(data) {
+  			createCLIN(clinData, rfqId, function(data) {
   				this.setState({
   					addClin: false,
   					clin: data["data"],
@@ -188,14 +188,14 @@ var Services = React.createClass({
   	}
   	else {
   		this.setState({ addClin: true });
-  	}  
+  	}
   },
   cancelGenerateClin: function(){
   	this.setState({ addClin: false });
   },
 	save: function(cb) {
 		var data = {};
-		
+
 		for (i=0; i < STATES.length; i++){
 			var stateName = STATES[i];
 			data[stateName] = this.state[stateName];
@@ -204,11 +204,11 @@ var Services = React.createClass({
 		// get data from FAR code section
 		var rfqId = getId(window.location.hash);
     put_data(2, "get_content", rfqId, data, cb);
-		
+
 	},
 	render: function() {
 		// create CLIN tables
-		var bPoP = <span>{this.state.basePeriodDurationNumber} {this.state.basePeriodDurationUnit}</span>;		
+		var bPoP = <span>{this.state.basePeriodDurationNumber} {this.state.basePeriodDurationUnit}</span>;
 		var oPoP = <span>{this.state.optionPeriodDurationNumber} {this.state.optionPeriodDurationUnit}</span>;
 		var iPoP = <span>{this.state.iterationPoPNumber} {this.state.iterationPoPUnit}</span>
 
