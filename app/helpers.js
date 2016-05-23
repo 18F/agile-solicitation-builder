@@ -17,7 +17,7 @@ function getComponents(data){
 	// for (i=0; i < states.length; i++){
 	// 	console.log('"' + states[i] + '",');
 	// }
-	componentStates = {};	
+	componentStates = {};
 	for (i=0; i < states.length; i++){
 		var state = states[i];
 		componentStates[state] = data[state];
@@ -81,7 +81,7 @@ function get_data(section, doc_id, callback){
 
 function put_data(section, url, doc_id, data, callback){
 	$.ajax({
-		type: "PUT",		
+		type: "PUT",
 		url: "/api/" + url + "/" + doc_id + "/section/" + section,
 		data: JSON.stringify({data: data}),
 		contentType: 'application/json',
@@ -127,7 +127,7 @@ function createRFQ(dataDict, callback){
 		data: dataDict,
 		dataType: 'json',
 		success: function(data){
-			if (callback){				
+			if (callback){
 				callback(data);
 			}
 		}
@@ -142,7 +142,7 @@ function createComponent(roleData, rfqId, sectionId, callback){
 		contentType: 'application/json',
 		dataType: 'json',
 		success: function(data){
-			if (callback){				
+			if (callback){
 				callback(data);
 			}
 		}
@@ -167,11 +167,11 @@ function createCLIN(clinData, rfqId, callback){
 	$.ajax({
 		type: "POST",
 		url: "/api/clins/" + rfqId,
-		data: JSON.stringify({data: clinData['clinData']}),
+		data: JSON.stringify({data: clinData}),
 		contentType: 'application/json',
 		dataType: 'json',
-		success: function(data){			
-			if (callback){				
+		success: function(data){
+			if (callback){
 				callback(data);
 			}
 		}
@@ -204,5 +204,3 @@ function createString(userTypes){
 	}
 	return usersString;
 }
-
-

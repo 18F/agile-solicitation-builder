@@ -1,3 +1,16 @@
 // Place list of your partial imports below, located in assets/_scss.
 
 @import 'all';
+
+.Popover-body {
+  display: inline-flex;
+  flex-direction: column;
+  padding: 2rem 4rem;
+  background: hsl(0, 0%, 27%);
+  color: white;
+  border-radius: 0.3rem;
+}
+
+.Popover-tipShape {
+  fill: hsl(0, 0%, 27%)
+}
