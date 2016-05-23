@@ -1,6 +1,30 @@
-from models import Agency, RFQ, ContentComponent, AdditionalClin, CustomComponent, session, Deliverable
-from flask import jsonify, request
-from flask_restful import Resource, reqparse
+from models import User, Agency, RFQ, ContentComponent, AdditionalClin, CustomComponent, session, Deliverable
+from flask import jsonify, request, g
+from flask_restful import Resource, reqparse, abort
+from flask.ext.httpauth import HTTPBasicAuth
+auth = HTTPBasicAuth()
+
+class Users(Resource):
+    def get(self):
+        users = session.query(User).order_by(User.username).all()
+        return jsonify(data=[{'id': u.id, 'username': u.username} for u in users])
+
+    def post(self):
+        data = request.get_json()
+        username = data['username']
+        password = data['password']
+        if username is None or password is None:
+            abort(400) # missing arguments
+        if session.query(User).filter_by(username = username).first() is not None:
+            abort(400) # existing user
+        user = User(username = username)
+        user.hash_password(password)
+        session.add(user)
+        session.commit()
+        if session.query(User).filter_by(username = username).first() is not None:
+            return jsonify({ 'username': user.username, 'id': user.id })
+        else:
+            return jsonify({'error': "The user request was not completed."})
 
 class Agencies(Resource):
     def get(self):
@@ -9,7 +33,7 @@ class Agencies(Resource):
 
 
 class Data(Resource):
-
+    decorators = [auth.login_required]
     def get(self, rfq_id, section_id):
         content = session.query(ContentComponent).filter_by(document_id=rfq_id).filter_by(section=int(section_id))
         return jsonify(data=dicts_to_dict([c.to_dict() for c in content], "name"))
@@ -33,7 +57,7 @@ class Data(Resource):
 
 
 class Deliverables(Resource):
-
+    decorators = [auth.login_required]
     def get(self, rfq_id):
         deliverables = session.query(Deliverable).filter_by(document_id=rfq_id).order_by(Deliverable.id).all()
         return jsonify(data=[d.to_dict() for d in deliverables])
@@ -49,7 +73,7 @@ class Deliverables(Resource):
 
 
 class Clin(Resource):
-
+    decorators = [auth.login_required]
     def get(self, rfq_id):
         clins = session.query(AdditionalClin).filter_by(document_id=rfq_id).all()
         return jsonify(data=[c.to_dict() for c in clins])
@@ -77,7 +101,7 @@ class Clin(Resource):
 
 
 class CustomComponents(Resource):
-
+    decorators = [auth.login_required]
     def get(self, rfq_id, section_id):
         components = session.query(CustomComponent).filter_by(document_id=rfq_id).filter_by(section=section_id).order_by(CustomComponent.id).all()
         return jsonify(data=[c.to_dict() for c in components])
@@ -109,9 +133,9 @@ class CustomComponents(Resource):
 
 
 class Create(Resource):
-
+    decorators = [auth.login_required]
     def get(self):
-        rfqs = session.query(RFQ).all()
+        rfqs = session.query(RFQ).filter_by(user_id=g.user.id).all()
         return jsonify(data=[r.to_dict() for r in rfqs])
 
     def post(self, **kwargs):
@@ -130,7 +154,7 @@ class Create(Resource):
         setaside = args['setaside']
         base_number = args['base_number']
 
-        rfq = RFQ(agency=agency, doc_type=doc_type, program_name=program_name, setaside=setaside, base_number=base_number)
+        rfq = RFQ(user_id=g.user.id, agency=agency, doc_type=doc_type, program_name=program_name, setaside=setaside, base_number=base_number)
         session.add(rfq)
         session.commit()
 
@@ -138,7 +162,7 @@ class Create(Resource):
 
 
 class DeleteRFQ(Resource):
-
+    decorators = [auth.login_required]
     def delete(self, rfq_id):
 
         deliverables = session.query(Deliverable).filter_by(document_id=rfq_id).all()
