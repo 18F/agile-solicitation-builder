@@ -1,5 +1,7 @@
 var _components = [ ];
 var _currentState = false;
+var _history = false;
+var History = require('react-router').History;
 
 function updateComponents() {
   _components.forEach(function(c) {
@@ -9,7 +11,6 @@ function updateComponents() {
     }
   });
 }
-
 
 function login(username, password, callback) {
   if(typeof username === 'function') {
@@ -56,11 +57,18 @@ function login(username, password, callback) {
 
 function logout(callback) {
 	$.ajax({
-		type: "GET",
-		url: "/api/token",
-		username: "--invalid--",
-		password: "--invalid--",
-    complete: callback
+		type: 'GET',
+		url: '/api/token',
+		username: '--invalid--',
+		password: '--invalid--',
+    complete: function() {
+      if(_history) {
+        _history.pushState(null, '/');
+      }
+      if(typeof callback === 'function') {
+        callback();
+      }
+    }
 	});
 }
 
@@ -77,8 +85,13 @@ $.ajax({
 });
 
 module.exports = {
+  mixins: [History],
+
   componentWillMount: function() {
     _components.push(this);
+    if(this.history && !_history) {
+      _history = this.history;
+    }
     this.setState({ loggedIn: _currentState });
   },
 
