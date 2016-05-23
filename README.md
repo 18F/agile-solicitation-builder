@@ -3,6 +3,8 @@
 [![Build Status](https://travis-ci.org/18F/playbook-in-action.svg?branch=master)](https://travis-ci.org/18F/playbook-in-action)
 
 ## About Playbook in Action
+The intent of this tool is to assist in the creation of requirements documents for agile software development using best practices from the USDS Playbook and TechFAR. In the alpha release the tool can help Contracting Officer working with Program Managers develop an RFQ for a firm-fixed price procurement.
+
 
 ### Local Installation
 Clone the repository
