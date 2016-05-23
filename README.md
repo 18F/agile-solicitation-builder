@@ -1,4 +1,9 @@
 [![Stories in Ready](https://badge.waffle.io/18F/playbook-in-action.png?label=ready&title=Ready)](https://waffle.io/18F/playbook-in-action)
+
+[![Build Status](https://travis-ci.org/18F/playbook-in-action.svg?branch=master)](https://travis-ci.org/18F/playbook-in-action)
+
+## About Playbook in Action
+
 ### Local Installation
 Clone the repository
 ```
@@ -41,7 +46,7 @@ Load the javaScript modules via npm:
 ```
 cd app
 npm install
-gulp build
+gulp
 cd ..
 ```
 
@@ -52,7 +57,10 @@ python server.py
 ```
 
 
-## The Code
+## Further Development
+
+##### Watching changes
+When performing any front-end changes please run `gulp developing`.
 
 ##### Adding a new page
 
@@ -70,7 +78,7 @@ Content that can be modified is created in seed.py. There are 3 types of content
 
 To remove content you need to both remove the content object from seed.py and if it is referenced by name on a page you need to remove that reference. CustomComponents are not referenced individually so this second step is not necessary.
 
-Please note that any documents created prior to the removal or addition of new content will be incompatabile and will break the site so they should be deleted as soon as the changes go live.
+Please note that any documents created prior to the removal or addition of new content will be incompatible and will break the site so they should be deleted as soon as the changes go live.
 
 ##### The API
 

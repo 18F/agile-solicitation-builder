@@ -61,6 +61,17 @@ gulp.task('bundlingWatch', function () {
   	        watcher.bundle() // Create new bundle that uses the cache for high performance
   	        	.on('error', handleErrors)
   	        	.pipe(source('./src/app.js'))
+              .pipe(eslint({
+                  baseConfig: {
+                    "ecmaFeatures": {
+                       "jsx": true
+                     }
+                  }
+                }))
+              .pipe(eslint.format())
+              // .pipe(eslint.failAfterError())
+              .pipe(buffer()) // <----- convert from streaming to buffered vinyl file object
+              .pipe(uglify().on('error', gutil.log))
   		    	.pipe(rename('bundle.js'))
   		    	.pipe(gulp.dest('./build'));
   	        console.log('Updated!', (Date.now() - updateStart) + 'ms');
@@ -68,16 +79,25 @@ gulp.task('bundlingWatch', function () {
   	    .bundle() // Create the initial bundle when starting the task
   	    .on('error', handleErrors)
   	    .pipe(source('./src/app.js'))
-        // .pipe(buffer())
-        // .pipe(uglify())
+        .pipe(eslint({
+            baseConfig: {
+              "ecmaFeatures": {
+                 "jsx": true
+               }
+            }
+          }))
+        .pipe(eslint.format())
+        // .pipe(eslint.failAfterError())
+        .pipe(buffer()) // <----- convert from streaming to buffered vinyl file object
+        .pipe(uglify().on('error', gutil.log))
       	.pipe(rename('bundle.js'))
       	.pipe(gulp.dest('./build'));
 });
 
-gulp.task('default', ['bundlingWatch'], function() {
+gulp.task('developing', ['bundlingWatch', 'copyjquery'], function() {
   gulp.watch('./src/**/*.js', function(){
     gulp.run('bundling');
   });
 });
 
-gulp.task('build', ['bundling', 'copyjquery'], function(){});
+gulp.task('default', ['bundling', 'copyjquery'], function(){});
