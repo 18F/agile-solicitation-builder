@@ -1,5 +1,6 @@
 var _components = [ ];
 var _currentState = false;
+var _history = false;
 
 function updateComponents() {
   _components.forEach(function(c) {
@@ -56,11 +57,18 @@ function login(username, password, callback) {
 
 function logout(callback) {
 	$.ajax({
-		type: "GET",
-		url: "/api/token",
-		username: "--invalid--",
-		password: "--invalid--",
-    complete: callback
+		type: 'GET',
+		url: '/api/token',
+		username: '--invalid--',
+		password: '--invalid--',
+    complete: function() {
+      if(_history) {
+        _history.pushState(null, '/');
+      }
+      if(typeof callback === 'function') {
+        callback();
+      }
+    }
 	});
 }
 
@@ -79,6 +87,9 @@ $.ajax({
 module.exports = {
   componentWillMount: function() {
     _components.push(this);
+    if(this.props.history && !_history) {
+      _history = this.props.history;
+    }
     this.setState({ loggedIn: _currentState });
   },
 
