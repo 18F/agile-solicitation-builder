@@ -1,6 +1,7 @@
 var _components = [ ];
 var _currentState = false;
 var _history = false;
+var History = require('react-router').History;
 
 function updateComponents() {
   _components.forEach(function(c) {
@@ -10,7 +11,6 @@ function updateComponents() {
     }
   });
 }
-
 
 function login(username, password, callback) {
   if(typeof username === 'function') {
@@ -85,10 +85,12 @@ $.ajax({
 });
 
 module.exports = {
+  mixins: [History],
+
   componentWillMount: function() {
     _components.push(this);
-    if(this.props.history && !_history) {
-      _history = this.props.history;
+    if(this.history && !_history) {
+      _history = this.history;
     }
     this.setState({ loggedIn: _currentState });
   },
