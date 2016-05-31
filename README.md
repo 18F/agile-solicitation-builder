@@ -1,15 +1,15 @@
-[![Stories in Ready](https://badge.waffle.io/18F/playbook-in-action.png?label=ready&title=Ready)](https://waffle.io/18F/playbook-in-action)
+[![Stories in Ready](https://badge.waffle.io/18F/agile-solicitation-builder.png?label=ready&title=Ready)](https://waffle.io/18F/playbook-in-action)
 
-[![Build Status](https://travis-ci.org/18F/playbook-in-action.svg?branch=master)](https://travis-ci.org/18F/playbook-in-action)
+[![Build Status](https://travis-ci.org/18F/agile-solicitation-builder.svg?branch=master)](https://travis-ci.org/18F/playbook-in-action)
 
-## About Playbook in Action
+## About Agile Solicitation Builder (Formerly Playbook in Action)
 The intent of this tool is to assist in the creation of requirements documents for agile software development using best practices from the USDS Playbook and TechFAR. In the alpha release the tool can help Contracting Officer working with Program Managers develop an RFQ for a firm-fixed price procurement.
 
 
 ### Local Installation
 Clone the repository
 ```
-git clone https://github.com/18F/playbook-in-action.git
+git clone https://github.com/18F/agile-solicitation-builder.git
 ```
 ### Flask app
 
@@ -18,7 +18,7 @@ Create a [virtual environment](https://github.com/yyuu/pyenv-virtualenvwrapper) 
 ```
 # pyenv install 3.5.1
 pyenv local 3.5.1
-mkvirtualenv playbook
+mkvirtualenv asb
 pip install -r requirements.txt
 ```
 
@@ -29,7 +29,7 @@ brew install postgres
 initdb /usr/local/var/postgres
 ```
 
-To create a playbook database run:
+To create an app database run:
 ```
 createdb your_database_name
 export DATABASE_URL=postgresql://localhost/your_database_name
@@ -66,17 +66,17 @@ When performing any front-end changes please run `gulp developing`.
 
 ##### Adding a new page
 
-To add a new "questions" page (all pages are listed in the right sidebar), create a new file in the [questions](https://github.com/18F/playbook-in-action/tree/master/app/src/questions) folder. See [`XX_sample.js`](https://github.com/18F/playbook-in-action/blob/master/app/src/questions/XX_sample.js) to get an idea of what needs to be included in a page.
+To add a new "questions" page (all pages are listed in the right sidebar), create a new file in the [questions](https://github.com/18F/agile-solicitation-builder/tree/master/app/src/questions) folder. See [`XX_sample.js`](https://github.com/18F/agile-solicitation-builder/blob/master/app/src/questions/XX_sample.js) to get an idea of what needs to be included in a page.
 
-To make the page visible in and accessible from the side bar you must add it to [`question_list.js`](https://github.com/18F/playbook-in-action/blob/master/app/src/question_list.js).
+To make the page visible in and accessible from the side bar you must add it to [`question_list.js`](https://github.com/18F/agile-solicitation-builder/blob/master/app/src/question_list.js).
 
 ##### Removing an existing page
 
-Delete the corresponding page file from the [questions](https://github.com/18F/playbook-in-action/tree/master/app/src/questions) folder and remove the reference to the question from [`question_list.js`](https://github.com/18F/playbook-in-action/blob/master/app/src/question_list.js).
+Delete the corresponding page file from the [questions](https://github.com/18F/agile-solicitation-builder/tree/master/app/src/questions) folder and remove the reference to the question from [`question_list.js`](https://github.com/18F/agile-solicitation-builder/blob/master/app/src/question_list.js).
 
 ##### Modifying the content
 
-Content that can be modified is created in seed.py. There are 3 types of content, ContentComponents, CustomComponents, and Deliverables. Content types are declared in [`models.py`](https://github.com/18F/playbook-in-action/blob/master/models.py).
+Content that can be modified is created in seed.py. There are 3 types of content, ContentComponents, CustomComponents, and Deliverables. Content types are declared in [`models.py`](https://github.com/18F/agile-solicitation-builder/blob/master/models.py).
 
 To remove content you need to both remove the content object from seed.py and if it is referenced by name on a page you need to remove that reference. CustomComponents are not referenced individually so this second step is not necessary.
 
@@ -84,11 +84,11 @@ Please note that any documents created prior to the removal or addition of new c
 
 ##### The API
 
-The code for the API can be found in [`server.py`](https://github.com/18F/playbook-in-action/blob/master/server.py). Each "questions" page (found in the "questions" folder) calls a function in [`helpers.js`](https://github.com/18F/playbook-in-action/blob/master/app/helpers.js). which in turn sends an ajax request to `server.py` which sends the request to the database.
+The code for the API can be found in [`server.py`](https://github.com/18F/agile-solicitation-builder/blob/master/server.py). Each "questions" page (found in the "questions" folder) calls a function in [`helpers.js`](https://github.com/18F/agile-solicitation-builder/blob/master/app/helpers.js). which in turn sends an ajax request to `server.py` which sends the request to the database.
 
 ##### Creating a Word Document
 
-This is managed in the file [`create_document.py`](https://github.com/18F/playbook-in-action/blob/master/create_document.py). Currently everything is added to the document manually.
+This is managed in the file [`create_document.py`](https://github.com/18F/agile-solicitation-builder/blob/master/create_document.py). Currently everything is added to the document manually.
 
 ##### Node Dependencies
 This project uses the following node modules:
