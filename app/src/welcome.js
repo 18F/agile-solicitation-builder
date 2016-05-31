@@ -15,6 +15,14 @@ var Welcome = React.createClass({
 	mixins: [AuthMixin],
 
 	getInitialState: function() {
+		// This component could be loaded sometime
+		// after the initial page load, in which
+		// case it won't get an event for the initial
+		// login status check.  So, to mitigate that,
+		// pretend we got the event after a short
+		// delay.  The delay is to allow React time
+		// to setup the component state.
+		setTimeout(this.loginStateChanged, 50);
 		return {
 			rfqs: "",
 		};
