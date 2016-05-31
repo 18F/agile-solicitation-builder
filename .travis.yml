@@ -20,6 +20,7 @@ before_deploy:
 - export GOPATH=${HOME}/Godeps/_workspace
 - go get github.com/concourse/autopilot
 - cf install-plugin -f $GOPATH/bin/autopilot
+cache: pip
 deploy:
 - provider: script
   script: "./deploy.sh staging"
