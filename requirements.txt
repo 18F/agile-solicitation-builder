@@ -1,3 +1,4 @@
+flask==0.10.1
 flask-restful==0.3.5
 python-docx==0.8.5
 flask-sqlalchemy==2.1
