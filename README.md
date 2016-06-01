@@ -1,6 +1,7 @@
-[![Stories in Ready](https://badge.waffle.io/18F/agile-solicitation-builder.png?label=ready&title=Ready)](https://waffle.io/18F/playbook-in-action)
+[![Stories in Ready](https://badge.waffle.io/18F/agile-solicitation-builder.png?label=ready&title=Ready)](https://waffle.io/18F/agile-solicitation-builder)
 
-[![Build Status](https://travis-ci.org/18F/agile-solicitation-builder.svg?branch=master)](https://travis-ci.org/18F/playbook-in-action)
+*Master:*
+[![Build Status](https://travis-ci.org/18F/agile-solicitation-builder.svg?branch=master)](https://travis-ci.org/18F/agile-solicitation-builder)
 
 ## About Agile Solicitation Builder (Formerly Playbook in Action)
 The intent of this tool is to assist in the creation of requirements documents for agile software development using best practices from the USDS Playbook and TechFAR. In the alpha release the tool can help Contracting Officer working with Program Managers develop an RFQ for a firm-fixed price procurement.
