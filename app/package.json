@@ -1,10 +1,10 @@
 {
-  "name": "playbook",
+  "name": "agile-solicitation-builder",
   "version": "0.0.1",
-  "description": "Playbook in Action",
+  "description": "Agile Solicitation Builder",
   "repository": {
     "type": "git",
-    "url": "git://github.com/18F/playbook-in-action.git"
+    "url": "git://github.com/18F/agile-solicitation-builder.git"
   },
   "main": "index.js",
   "scripts": {

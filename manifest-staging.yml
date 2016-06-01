@@ -1,9 +1,9 @@
 ---
 applications:
-- name: playbook-in-action
+- name: agile-solicitation-builder
   memory: 512M
   instances: 1
-  host: playbook-in-action-staging
+  host: agile-solicitation-builder-staging
   domain: apps.cloud.gov
   services:
   - playbook-staging
