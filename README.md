@@ -14,6 +14,7 @@ git clone https://github.com/18F/playbook-in-action.git
 ### Flask app
 
 Create a [virtual environment](https://github.com/yyuu/pyenv-virtualenvwrapper) with `Python 3.5.1`
+To create a virtualenv setup on mac check out [this gist](https://gist.github.com/lauraGgit/06204a1bdf297ce5e08788364b0b47e0).
 
 ```
 # pyenv install 3.5.1
@@ -41,14 +42,15 @@ You can then seed the database by running:
 ```
 flask -a server.py seed_db
 ```
+If this is not working, run `pip freeze` and make sure you are running `Flask==0.10.1`
 
 ### Install the Front end.
-Load the javaScript modules via npm:
+If you plan on developing the front-end. Make sure you have npm installed (`brew install npm`). Then run:
 
 ```
 cd app
 npm install
-gulp
+npm install -g gulp
 cd ..
 ```
 
@@ -66,13 +68,45 @@ When performing any front-end changes please run `gulp developing`.
 
 ##### Adding a new page
 
-To add a new "questions" page (all pages are listed in the right sidebar), create a new file in the [questions](https://github.com/18F/playbook-in-action/tree/master/app/src/questions) folder. See [`XX_sample.js`](https://github.com/18F/playbook-in-action/blob/master/app/src/questions/XX_sample.js) to get an idea of what needs to be included in a page.
+To add a new "questions" page (all pages are listed in the right sidebar):
+* Create a new file in the [questions](https://github.com/18F/playbook-in-action/tree/master/app/src/questions) folder.
 
-To make the page visible in and accessible from the side bar you must add it to [`question_list.js`](https://github.com/18F/playbook-in-action/blob/master/app/src/question_list.js).
+* See [`XX_sample.js`](https://github.com/18F/playbook-in-action/blob/master/app/src/questions/XX_sample.js) to get an idea of what needs to be included in a page.
+1. Update the states to reflect the data fields you would like to collect on the page.
+2. Update the page number to order in the questions list on line 12. (This will need to match the custom components in the backend)
+3. Update the name of the `React class` to `ComponentName` (reflecting your component) and change that to the same on line 74.
+4. Update the render function to reflect your states that need to be changed, and add additional components as needed.
+
+* To make the page visible in and accessible from the side bar you must add it to [`question_list.js`](https://github.com/18F/playbook-in-action/blob/master/app/src/question_list.js).
+
+* Make sure you have run `gulp` or are running `gulp developing` to update the resulting javascript file.
+
+* Update the `create_document.py` file.
+1. Add a function to add the custom text:
+```
+def component_name(document, rfq):
+    document.add_heading("XX. Name of Section", level=BIG_HEADING)
+    component_name = session.query(ContentComponent).filter_by(document_id=rfq.id).filter_by(section=XX).first()
+    document.add_paragraph(component_name.text)
+
+    return document
+```
+2. and add a line in the `create_document` function
+
+```
+document = component_name(document, rfq)
+```
+3. Add the section to the `section` array in the `overview` function
 
 ##### Removing an existing page
 
-Delete the corresponding page file from the [questions](https://github.com/18F/playbook-in-action/tree/master/app/src/questions) folder and remove the reference to the question from [`question_list.js`](https://github.com/18F/playbook-in-action/blob/master/app/src/question_list.js).
+* Delete the corresponding page file from the [questions](https://github.com/18F/playbook-in-action/tree/master/app/src/questions) folder
+
+* Remove the reference to the question from [`question_list.js`](https://github.com/18F/playbook-in-action/blob/master/app/src/question_list.js).
+
+* Remove the reference from seed.py.
+
+* Remove the function from the `create_document.py` file and the `create_document` function of the same file, and from the `section` variable in the `overview` function.
 
 ##### Modifying the content
 
