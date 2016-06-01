@@ -28,7 +28,7 @@ var bundler = browserify({
         entries: ['./src/app.js'], // Only need initial file, browserify finds the deps
         transform: [reactify], // We want to convert JSX to normal javascript
         debug: true, // Gives us sourcemapping
-        cache: {}, packageCache: {}, fullPaths: true // Requirement of watchify
+        cache: {}, packageCache: {}, fullPaths: false // Requirement of watchify
     });
 
 gulp.task('bundling', function(){

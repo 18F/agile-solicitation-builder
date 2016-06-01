@@ -10,10 +10,10 @@ if [ $# -ne 1 ]; then
 fi
 
 if [ $SPACE = 'production' ]; then
-  NAME="playbook-in-action"
+  NAME="agile-solicitation-builder"
   MANIFEST="manifest.yml"
 elif [ $SPACE = 'staging' ]; then
-  NAME="playbook-in-action"
+  NAME="agile-solicitation-builder"
   MANIFEST="manifest-staging.yml"
 else
   echo "Unknown space: $SPACE"

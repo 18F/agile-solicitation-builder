@@ -21,7 +21,7 @@ var Question = require('./question');
 var Results = require('./results');
 var LogoutButton = require('./auth/login-button');
 var RepoLink = React.createElement('a', {
-    href: 'https://github.com/18F/playbook-in-action/issues',
+    href: 'https://github.com/18F/agile-solicitation-builder/issues',
     'target': '_blank',
 }, 'Help us improve');
 
@@ -45,7 +45,7 @@ var Header = React.createClass({
         <div className="usa-grid">
           <div className="usa-width-one-whole header">
             <h1>
-              <IndexLink to="/" style={inheritStyle}>Playbook in Action</IndexLink>
+              <IndexLink to="/" style={inheritStyle}>Agile Solicitation Builder</IndexLink>
             </h1>
           </div>
         </div>

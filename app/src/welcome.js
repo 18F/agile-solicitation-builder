@@ -58,7 +58,7 @@ var Welcome = React.createClass({
 		return (
       <div className="usa-grid">
         <div className="usa-width-two-thirds">
-          <h4>Welcome to Playbook in Action! Before you begin, please consider the following:</h4>
+          <h4>Welcome to the Agile Solicitation Builder, formerly the Playbook in Action! Before you begin, please consider the following:</h4>
           <div>
             <ul>
               <li>The intent of this tool is to assist in the creation of requirements documents
