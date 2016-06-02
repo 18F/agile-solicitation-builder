@@ -28,7 +28,7 @@ var ContractClauses = React.createClass({
 	  get_data(9, rfqId, function(content){ 
 	  	var data = content["data"];
 	    this.setState({
-	      contractClauses: data["contract_clauses"],
+	      contractClauses: data[STATES[0]],
 	    });
 	  }.bind(this));
 	},
