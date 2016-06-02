@@ -8,7 +8,7 @@ from io import BytesIO
 import base64
 
 from flask import Flask, send_from_directory, send_file, g, request, jsonify
-from urlparse import urlparse, urlunparse
+from urllib.parse import urlparse, urlunparse
 
 from waitress import serve
 port = os.getenv("PORT") or 5000
