@@ -8,6 +8,8 @@ from io import BytesIO
 import base64
 
 from flask import Flask, send_from_directory, send_file, g, request, jsonify
+from urlparse import urlparse, urlunparse
+
 from waitress import serve
 port = os.getenv("PORT") or 5000
 from flask_restful import Api
@@ -119,6 +121,15 @@ def agile_estimator():
 @app.cli.command()
 def seed_db():
     create_tables()
+
+@app.before_request
+def redirect_fromoldurl():
+    """Redirect old playbook-in-action to agile-solicitation-builder."""
+    urlparts = urlparse(request.url)
+    if urlparts.netloc == 'playbook-in-action.apps.cloud.gov':
+        urlparts_list = list(urlparts)
+        urlparts_list[1] = 'agile-solicitation-builder.apps.cloud.gov'
+        return redirect(urlunparse(urlparts_list), code=301)
 
 if __name__ == "__main__":
     serve(app, port=port)
