@@ -72,10 +72,14 @@ To add a new "questions" page (all pages are listed in the right sidebar):
 * Create a new file in the [questions](https://github.com/18F/playbook-in-action/tree/master/app/src/questions) folder.
 
 * See [`XX_sample.js`](https://github.com/18F/playbook-in-action/blob/master/app/src/questions/XX_sample.js) to get an idea of what needs to be included in a page.
-1. Update the states to reflect the data fields you would like to collect on the page.
+
+1. Update the states to reflect the data fields you would like to collect on the page. (On line 6)
+
 2. Update the page number to order in the questions list on line 12. (This will need to match the custom components in the backend)
-3. Update the name of the `React class` to `ComponentName` (reflecting your component) and change that to the same on line 74.
-4. Update the render function to reflect your states that need to be changed, and add additional components as needed.
+
+3. Update the name of the `React class` (line 14) to `ComponentName` (reflecting your component) and change that to the same on line 74.
+
+4. Update the render function to reflect your states that need to be changed, and add additional components as needed. (Lines 55-70)
 
 * To make the page visible in and accessible from the side bar you must add it to [`question_list.js`](https://github.com/18F/playbook-in-action/blob/master/app/src/question_list.js).
 

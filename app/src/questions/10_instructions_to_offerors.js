@@ -4,14 +4,13 @@ var EditBox = require("../edit_box");
 
 // states data is defined in seeds.py, and must be listed here to be accessed and saved in the database
 var STATES = [
-	"sampleState1",
-	"sampleState2",
+	"instructionsToOfferors"
 ];
 
-// XX would be replaced by the number of this page, the data associated with this section would be established in seed.py
-var page_number = 0;
+// page_number would be replaced by the number of this page, the data associated with this section would be established in seed.py
+var page_number = 10;
 
-var Sample= React.createClass({
+var InstructionsToOfferors= React.createClass({
 	// include mixins
 	mixins: [StateMixin],
 
@@ -30,6 +29,7 @@ var Sample= React.createClass({
 		// the names the states are established with in seed.py should correspond to the state names used on this page
     get_data(page_number, rfqId, function(content){
     	var componentStates = getComponents(content["data"]);
+			console.log(componentStates);
       this.setState( componentStates );
     }.bind(this));
   },
@@ -48,6 +48,7 @@ var Sample= React.createClass({
 			var stateName = STATES[i];
 			data[stateName] = this.state[stateName];
 		}
+		console.log(data);
 		// you can save content_components using the get_content API (the custom_component API is also an option)
     put_data(page_number, 'get_content', rfqId, data, cb);
 
@@ -55,20 +56,14 @@ var Sample= React.createClass({
   render: function() {
       return (
           <div>
-              <div className="page-heading">Sample</div>
+              <div className="page-heading">Instructions to Offerors</div>
               <div className="responder-instructions">The content in this section can be decided upon by either the PM or the CO.</div>
-              <EditBox
-                  text={this.state.sampleState1}
-                  editing={this.state.edit === 'sampleState1'}
-                  onStatusChange={this.toggleEdit.bind(this, 'sampleState1')}
-                  onTextChange={this.handleChange.bind(this, 'sampleState1')}>
-              </EditBox>
-              <div>sampleState2 is updated in this textbox</div>
-              <textarea rows="9" className="form-control" value={this.state.sampleState2} onChange={this.handleChange.bind(this, 'sampleState2')}></textarea>
+
+              <textarea rows="9" className="form-control" value={this.state.instructionsToOfferors} onChange={this.handleChange.bind(this, 'instructionsToOfferors')}></textarea>
           </div>
       );
   },
 });
 
 
-module.exports = Sample;
+module.exports = InstructionsToOfferors;
