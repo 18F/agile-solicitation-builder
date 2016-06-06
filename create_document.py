@@ -43,6 +43,13 @@ def get_users(cc, user_types):
             users.append(user)
     return users
 
+# Add global counter for headings
+# def section_heading(document, headingTitle):
+#     title = str(sectionNumber)+'. '+headingTitle
+#     document.add_heading(headingTitle, level=BIG_HEADING)
+#     global sectionNumberCounter
+#     sectionNumberCounter = sectionNumberCounter+1
+#     return document
 
 def overview(document, rfq):
     # table of contents & basic info
@@ -382,10 +389,23 @@ def contract_clauses(document, rfq):
 
     return document
 
+def instructions_to_offerors(document, rfq):
+    document.add_heading("10. Instructions to Offerors", level=BIG_HEADING)
+    instructions = session.query(ContentComponent).filter_by(document_id=rfq.id).filter_by(section=10).first()
+    document.add_paragraph(instructions.text)
+
+    return document
+
+def evaluation_criteria(document, rfq):
+    document.add_heading("11. Evaluation Criteria", level=BIG_HEADING)
+    instructions = session.query(ContentComponent).filter_by(document_id=rfq.id).filter_by(section=11).first()
+    document.add_paragraph(instructions.text)
+
+    return document
 
 def appendix(document, rfq):
 
-    document.add_heading("10. Appendix", level=BIG_HEADING)
+    document.add_heading("12. Appendix", level=BIG_HEADING)
 
     return document
 
@@ -405,6 +425,8 @@ def create_document(rfq_id):
     document = government_roles(document, rfq)
     document = special_requirements(document, rfq)
     document = contract_clauses(document, rfq)
+    document = instructions_to_offerors(document, rfq)
+    document = evaluation_criteria(document, rfq)
     document = appendix(document, rfq)
 
     return document
