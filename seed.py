@@ -137,7 +137,7 @@ content_components = [
         "name": "clin",
         "text": "null",
         "section": 2,
-    },    
+    },
     {
         "name": "govFurnishedInfo",
         "text": "",
@@ -413,6 +413,16 @@ content_components = [
         "text": "",
         "section": 9,
     },
+    {
+        "name": "instructionsToOfferors",
+        "text": "",
+        "section": 10,
+    },
+    {
+        "name": "evaluationCriteria",
+        "text": "",
+        "section": 11,
+    },
 ]
 
 custom_components = [
@@ -536,7 +546,7 @@ deliverables = [
     {
         "name": "highTraffic",
         "text": "To support high user traffic applications, the vendor shall deploy services on flexible infrastructure, where resources can be provisioned in real-time to meet spikes traffic and user demand. To do so, the vendor will ensure:\n\n  1. Resources are provisioned on demand\n  2. Resources scale based on real-time user demand\n  3. Resources are provisioned through an API\n  4.   Resources are available in multiple regions\n  5. The government only pays for resources used\n  6. Static assets are served through a content delivery network\n  7. Applications are hosted on commodity hardware",
-        "display": "Application capable of supporting high user traffic",        
+        "display": "Application capable of supporting high user traffic",
         "value": "false",
     },
     {
@@ -595,7 +605,7 @@ deliverables = [
     },
 ]
 
-agencies = {    
+agencies = {
     'CFPB': 'Consumer Financial Protection Bureau',
     'DHS': 'Department of Homeland Security',
     'DOC': 'Department of Commerce',

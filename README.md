@@ -95,6 +95,10 @@ def component_name(document, rfq):
 
     return document
 ```
+Add additional dictionary in the content_components list in `seed.py`, for each additional field (state on the front end)
+
+You will likely need to run seed.py or add sample text to the database to prevent API errors. In the future, these errors will be handled.
+
 2. and add a line in the `create_document` function
 
 ```
