@@ -8,4 +8,6 @@ module.exports = [
 	{code: "7", key: "7", title: "Government Roles", component: require('./questions/07_government_roles')},
 	{code: "8", key: "8", title: "Special Requirements", component: require('./questions/08_special_requirements')},
 	{code: "9", key: "9", title: "Contract Clauses", component: require('./questions/09_contract_clauses')},
+	{code: "10", key: "10", title: "Instructions to Offerors", component: require('./questions/10_instructions_to_offerors')},
+	{code: "11", key: "11", title: "Evaluation Criteria", component: require('./questions/11_evaluation_criteria')}
 ];
