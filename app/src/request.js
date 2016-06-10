@@ -140,11 +140,11 @@ var Request = React.createClass({
 				<div className="main usa-width-three-fourths" style={mainStyle}>
           {this.renderChildren()}
 				</div>
-				<div className="usa-width-one-twelfth"></div>
-				<aside className="usa-width-one-sixth sidebar-nav">
+				<div className="usa-width-one-twelfth">
+				<aside className="usa-width-one-sixth">
 					<Sidebar width={200} onChange={this.handleSidebarChange} currentPage={this.props.location.pathname} rfpId={this.props.params.id} />
 				</aside>
-				
+				</div>
 			</div>
 		);
 	},
