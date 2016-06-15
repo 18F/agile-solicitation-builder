@@ -10,6 +10,8 @@ var notify = require("gulp-notify");
 // var jshint = require('gulp-jshint');
 var gutil = require('gulp-util');
 var eslint = require('gulp-eslint');
+var stylelint = require('@18f/stylelint-rules');
+var sass = require('gulp-sass');
 
 function handleErrors() {
   var args = Array.prototype.slice.call(arguments);
@@ -20,8 +22,10 @@ function handleErrors() {
   this.emit('end'); // Keep gulp from hanging on this task
 }
 
-gulp.task('copyjquery', function(){
+gulp.task('copyjsanduswds', function(){
   gulp.src('./node_modules/jquery/dist/jquery.min.js').pipe(gulp.dest('./build'));
+  gulp.src(['./node_modules/uswds/dist/**/*', ]).pipe(gulp.dest('./assets/'))
+
 });
 
 var bundler = browserify({
@@ -94,10 +98,20 @@ gulp.task('bundlingWatch', function () {
       	.pipe(gulp.dest('./build'));
 });
 
-gulp.task('developing', ['bundlingWatch', 'copyjquery'], function() {
+var lintFunction = stylelint('./assets/css/**/*.scss', {});
+
+gulp.task('scssLint', lintFunction);
+
+gulp.task('sass', function(){
+  return gulp.src('./assets/css/**/*.scss')
+    .pipe(sass()) // Using gulp-sass
+    .pipe(gulp.dest('./assets/css'))
+});
+
+gulp.task('watch', ['bundlingWatch', 'copyjsanduswds', 'scssLint', 'sass'], function() {
   gulp.watch('./src/**/*.js', function(){
     gulp.run('bundling');
   });
 });
 
-gulp.task('default', ['bundling', 'copyjquery'], function(){});
+gulp.task('default', ['bundling', 'copyjsanduswds', 'scssLint', 'sass'], function(){});

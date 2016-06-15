@@ -25,11 +25,15 @@ var Sidebar = React.createClass({
 
 	componentDidMount: function() {
 		// Make menu affixed
-		$("#sidenav").affix({
-		  offset: {
-		    top: 93,
-		  }
-		});
+		// $("#sidenav").affix({
+		//   offset: {
+		//     top: 93,
+		//   }
+		// });
+		$('.menu-btn, .overlay, .sliding-panel-close').on('click touchstart',function (e) {
+    $('.sidenav, .overlay').toggleClass('is-visible');
+    e.preventDefault();
+  });
 	},
 	handleFollowLink: function(e) {
 		e.preventDefault();
@@ -102,7 +106,7 @@ var Request = React.createClass({
 			question2: {},
 		};
 	},
-	
+
 	handleSidebarChange: function(callback) {
 		// Get child
 		var child = React.Children.only(this.props.children);
@@ -140,11 +144,11 @@ var Request = React.createClass({
 				<div className="main usa-width-three-fourths" style={mainStyle}>
           {this.renderChildren()}
 				</div>
-				<div className="usa-width-one-twelfth">
-				<aside className="usa-width-one-sixth">
+				<div className="overlay"></div>
+				<div className="usa-width-one-twelfth"></div>
+				<aside className="usa-width-one-sixth side-bar">
 					<Sidebar width={200} onChange={this.handleSidebarChange} currentPage={this.props.location.pathname} rfpId={this.props.params.id} />
 				</aside>
-				</div>
 			</div>
 		);
 	},

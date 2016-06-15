@@ -1,0 +1,400 @@
+// Place list of your partial imports below, located in assets/_scss.
+
+// @import 'all';
+$medium-screen: 600px;
+$large-screen: 1200px;
+$width-nav-sidebar:  250px;
+$color-primary: #0071bc;
+$color-primary-darker:       #205493;
+
+$color-white:                #ffffff;
+$color-base:                 #212121;
+$color-black:                #000000;
+
+$color-gray-dark:            #323a45;
+$color-gray:                 #5b616b; // lighten($color-gray-dark, 20%)
+$color-gray-medium:          #757575; // lightest gray that passes color contrast
+$color-gray-light:           #aeb0b5; // lighten($color-gray-dark, 60%)
+$color-gray-lighter:         #d6d7d9; // lighten($color-gray-dark, 80%)
+$color-gray-lightest:        #f1f1f1; // lighten($color-gray-dark, 91%)
+
+$med-width-plus-side-nav: $medium-screen + $width-nav-sidebar;
+
+@mixin media($bp) {
+  @media screen and (min-width: #{$bp}) {
+    @content;
+  }
+}
+
+// @mixin transition{
+// transition: all 0.2s ease-in-out;
+// }
+
+.Popover-body {
+  display: inline-flex;
+  flex-direction: column;
+  padding: 2rem 4rem;
+  background: hsl(0, 0%, 27%);
+  color: white;
+  border-radius: 0.3rem;
+}
+
+.Popover-tipShape {
+  fill: hsl(0, 0%, 27%);
+}
+
+.menu-btn {
+  @media all and ($med-width-plus-side-nav) {
+    display: none;
+  }
+
+  padding: 1.5rem null;
+  // display: inline;
+  float: left;
+  margin-top: -4px;
+  color: $color-white;
+  background-color: $color-primary;
+  font-size: 1.5rem;
+  width: 15%;
+  text-align: center;
+
+  &:hover {
+    text-decoration: none;
+    color: $color-white;
+    background-color: $color-primary-darker;
+  }
+
+  &:visited {
+    color: $color-white;
+  }
+}
+
+.overlay {
+  // @include position(fixed, 0);
+
+  background: $color-black;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 9999;
+
+  &.is-visible {
+    visibility: visible;
+  }
+}
+
+// Based on code by Diego Eis
+
+// Sidebar Nav --------- //
+
+.sidenav {
+  // @include position(fixed, $site-top null 0 0);
+  width: $width-nav-sidebar;
+  border-right: 1px solid $color-gray-light;
+  padding: 5rem 3rem 3rem 3rem;
+  overflow: auto;
+  display: none;
+  z-index: -1;
+  $med-width-plus-side-nav: $medium-screen + $width-nav-sidebar;
+  &.menu-content {
+    @media (max-width: $med-width-plus-side-nav) {
+      $sliding-panel-width: 220px;
+
+      // @include position(fixed, 0 auto 0 0);
+      // @include size($sliding-panel-width 100%);
+      // @include transform(translateX(- $sliding-panel-width));
+      background: $color-white;
+      -webkit-overflow-scrolling: touch;
+      overflow-y: auto;
+      z-index: 999999;
+      display: block;
+
+      &.is-visible {
+        // @include transition(all 0.25s linear);
+        // @include transform(translateX(0));
+      }
+    }
+  }
+
+  .lt-ie9 & {
+    width: 25%;
+  }
+
+  .usa-sidenav-sub_list {
+    display: none;
+  }
+
+  @include media($medium-screen + $width-nav-sidebar) {
+    display: block;
+  }
+}
+
+.visual-style .sidenav .visual-style-sublist {
+  display: block;
+
+  // scss-lint:disable SelectorDepth
+  ul {
+    display: block;
+  }
+}
+
+.form-controls .sidenav .form-controls-sublist {
+  display: block;
+}
+
+.form-templates .sidenav .form-templates-sublist {
+  display: block;
+}
+
+.footers .sidenav .footers-sublist {
+  display: block;
+}
+
+.header {
+  border-bottom: solid 1px #aeb0b5;
+  margin-bottom: 15px;
+}
+
+.term {
+  font-weight: 500;
+}
+
+.mount {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5em/26px;
+
+  input {
+    font-size: 15px;
+  }
+
+  select {
+    font-size: 15px;
+  }
+
+  textarea {
+    font-size: 16px;
+  }
+}
+
+.nav > li > a {
+  padding: 7px 15px;
+}
+
+a {
+  color: #0071bc;
+}
+
+h1 {
+  font-family: 'Merriweather', serif;
+  font-weight: 700;
+  font-size: 25px;
+  line-height: 1.3em/26px;
+  color: #5b616b;
+}
+
+.affix {
+  position: fixed;
+}
+
+form .usa-grid {
+  margin-left: -30px;
+}
+
+.edit {
+  color: #337ab7;
+  cursor: pointer;
+  cursor: hand;
+}
+
+.edit-box .edit-content > *:first-child {
+  margin-top: 0;
+}
+
+.edit-box .edit-content > *:last-child {
+  margin-bottom: 0;
+}
+
+button {
+  .add {
+    margin-bottom: 10px;
+  }
+}
+
+.clin {
+  border: 1px solid;
+}
+
+.fake-table {
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+.row {
+  border-top: 0;
+}
+
+.btn-toolbar {
+  margin-top: 20px;
+}
+
+.table-content {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.yes-no {
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+.table-wrapper {
+  border: solid 1px;
+}
+
+.page-heading {
+  font-family: 'Merriweather', serif;
+  font-weight: 700;
+  font-size: 30px;
+  margin-bottom: 5px;
+  line-height: 1.3em/26px;
+  color: #212121;
+}
+
+.section-heading {
+  font-weight: 700;
+  font-family: 'Merriweather', serif;
+  font-size: 20px;
+  line-height: 1.3em/22px;
+}
+
+.sub-heading {
+  color: #205493;
+  font-weight: 700;
+  margin: 25px 0 10px 0;
+  font-family: 'Merriweather', serif;
+  font-size: 20px;
+  line-height: 1.3em/22px;
+}
+
+.question {
+  margin: 5vh auto;
+}
+
+.question-text {
+  margin: 25px 0 5px 0;
+  font-size: 16px;
+  font-family: 'Merriweather', serif;
+  color: #323a45;
+  font-weight: 700;
+}
+
+.question-description {
+  font-style: italic;
+  margin: 0 0 10px 0;
+  font-size: 95%;
+}
+
+.responder-instructions {
+  font-style: italic;
+  margin-bottom: 10px;
+  font-size: 95%;
+}
+
+.resulting-text {
+  font-family: 'Times', serif;
+  border: solid 3px #aeb0b5;
+  font-weight: 500;
+  font-size: 105%;
+  color: #212121;
+  background-color: #ffffff;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+.edit-box {
+  margin: 5px 0 10px 0;
+}
+
+.short-response {
+  width: 150px;
+}
+
+.usa-width-one-sixth.sidebar-nav {
+  margin-left: 28px;
+}
+
+.medium-response {
+  width: 300px;
+}
+
+.long-response {
+  width: 100%;
+}
+
+.additional-clin {
+  max-width: none;
+}
+
+textarea {
+  max-width: none;
+  height: auto;
+  margin: 10px 0;
+}
+
+.usa-disclaimer {
+  background-color: #f1f1f1;
+  font-size: 15px;
+  padding: 5px;
+  margin: -8px -23px 0 -23px;
+}
+
+.guidance-text {
+  margin: 0 0 10px 0;
+}
+
+.usa-disclaimer-official {
+  padding-left: 15px;
+}
+
+.usa-flag_icon {
+  margin: 0 5px 0 15px;
+}
+
+.usa-disclaimer-stage {
+  float: right;
+  padding-right: 15px;
+}
+
+.top-right-auth-button {
+  float: right;
+}
+
+// #sidenav.affix {
+//   top: 0;
+// }
+
+.Popover-body {
+  display: inline-flex;
+  flex-direction: column;
+  padding: 2rem 4rem;
+  background: white;
+  color: black;
+  border-radius: 0.3rem;
+  border: 1px solid #888;
+  box-shadow: 10px 10px 25px #555;
+  width: 400px;
+}
+
+.Popover-tipShape {
+  fill: black;
+}
+
+// aside {
+// }
+
+@media screen and (min-width: $medium-screen) and (max-width: $large-screen) {
+  .side-bar {
+    display: none !important;
+  }
+}
