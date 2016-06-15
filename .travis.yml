@@ -2,13 +2,18 @@ language: python
 sudo: false
 python:
 - 3.5.1
+node:
 env:
   global:
   - CF_USERNAME=18f-acq_deployer
   - secure: RQ05JyTtlgttTDMuBlnwwH1LYHdRZSrcro7UIvuC0NhaMxpXbk+HG6iwunDkClTay0YXw3wYKqCe5MYINbjoX8a2sTtj5z192NovgpSeP1LHeK/Och298T9f48lYz6jwBUaFuw34/wTqF9ZM/45FpHeF3hKdiJWinnxArbK7l+teB34N3SjpSSrgHmKmXjPHCXNtWv6KAo0C6Ebh+MFk0QFyYPFeDUjbvm3lp2o6MxDKRZwbKe9uh2DjdsSt/05v84wpdnrE/xuTm5XaNPNYOpMKkzBNwNjvAZCCd1oVSDzR22UQNs7J2u1l/4P4wAieCVTPBZAdW189V4659esK0OwxiTfLgoX0GcslG2Oc3aJLOO7VhA872R3X+umEXEmBoXLsA5gxgujRTs665gQcalgQbn0FH4QBvNuJpJ5VZls1pSB6AZgOtaeqoIZrlDj5askXALVkDG9KunQdFF9+bPpQYwuHwOZOV+ZJU015G8HoqrwP5CeVbAJosoUthihgAiMzsElpNHydY4yt04s2gqzL17sPDkB8s++cEK4hZAffl0Bt4EQ7FLEj9qTJV5rNPHqNmuOIX2SDn/shxOV9wUzvhpRDq3f7+ibOtrz3wlN8JeLrPyxseHtNp1E4Op9eBeQhad9jBqLbXcYadSyoN4j9nAvAIhCnFnbov4vdIQA=
+before_install:
+  - rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/.nvm && (cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`) && source ~/.nvm/nvm.sh && nvm install 6.1.0
 install:
 - pip install -r requirements.txt
-- npm --prefix ./app install ./app
+- cd app
+- npm install
+- cd ..
 - psql -c 'create database travis_ci_test;' -U postgres
 script:
 - python tests.py

@@ -72,7 +72,7 @@ var OPTION_FEE_OPTIONS = {
 var Clin = React.createClass({
 	render: function() {
 		return (
-			<form id="additional-clin">
+			<form id="additional-clin" class="additional-clin">
         <table>
           <tr>
             <td colSpan="2"><input type="text" className="long-response" id="row1"/></td>
