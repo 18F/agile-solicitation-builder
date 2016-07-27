@@ -4,9 +4,10 @@ from io import BytesIO
 import base64
 from flask import (
     Blueprint, request, send_from_directory,
-    jsonify, g, send_file
+    jsonify, g, send_file, current_app
 )
-from asb.extensions import auth
+from asb.extensions import auth, db
+from asb.api.models import User
 from asb import create_document
 
 blueprint = Blueprint('asb', __name__)
@@ -15,7 +16,7 @@ blueprint = Blueprint('asb', __name__)
 def verify_password(username, password):
     user = User.verify_auth_token(username)
     if not user:
-        user = session.query(User).filter_by(username=username).first()
+        user = db.session.query(User).filter_by(username=username).first()
         if not user or not user.verify_password(password):
             return False
             g.user = user
@@ -23,7 +24,7 @@ def verify_password(username, password):
 
 @blueprint.route('/')
 def index():
-    return send_from_directory("app", "index.html")
+    return send_from_directory(current_app.static_folder, "index.html")
 
 @blueprint.route('/api/authtest')
 @auth.login_required
@@ -54,7 +55,7 @@ def get_auth_token():
 
 @blueprint.route('/<path:path>')
 def send_js(path):
-    return send_from_directory("app", path)
+    return send_from_directory(current_app.static_folder, path)
 
 @blueprint.route('/download/<int:rfq_id>')
 def download(rfq_id):
@@ -66,4 +67,4 @@ def download(rfq_id):
 
 @blueprint.route('/agile_estimator')
 def agile_estimator():
-    return send_file("AgileEstimator.xlsx")
+    return send_file("../AgileEstimator.xlsx")

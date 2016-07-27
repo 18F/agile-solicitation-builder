@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 
+import os
+from werkzeug.utils import import_string
+
 from urllib.parse import urlparse, urlunparse
-import asb.config as config
 
 from flask import Flask, redirect, request
 from asb.extensions import db
@@ -9,8 +11,14 @@ from asb.api.resources import api
 from asb.views import blueprint
 
 def create_app():
-    app = Flask(__name__, static_folder='web')
-    app.config['APP_SETTINGS'] = config.DevelopmentConfig
+    config_string = os.environ['CONFIG']
+    if isinstance(config_string, str):
+        config = import_string(config_string)
+    else:
+        config = config_string
+
+    app = Flask(__name__, static_folder='../web')
+    app.config.from_object(config)
     register_extensions(app)
     register_blueprints(app)
 

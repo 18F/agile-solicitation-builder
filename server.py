@@ -9,7 +9,7 @@ from asb.api.models import Base, Agency, session, engine
 from asb.seed import agencies
 from asb.app import create_app
 
-port = os.getenv("PORT") or 5000
+port = os.getenv("PORT") or 8000
 logger = logging.getLogger('waitress')
 logger.setLevel(logging.INFO)
 
@@ -31,4 +31,7 @@ def seed_db():
     create_tables()
 
 if __name__ == "__main__":
-    serve(app, port=port)
+    if app.config['DEBUG']:
+        app.run(port=port)
+    else:
+        serve(app, port=port)
