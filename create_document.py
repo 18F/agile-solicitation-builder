@@ -2,7 +2,7 @@
 import datetime
 
 from docx import Document
-from models import Agency, RFQ, ContentComponent, Deliverable, CustomComponent, session
+from api.models import Agency, RFQ, ContentComponent, Deliverable, CustomComponent, session
 
 
 BIG_HEADING = 1

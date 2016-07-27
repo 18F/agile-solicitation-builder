@@ -1,6 +1,15 @@
-app/node_modules/
-app/bower_components/
+# mac files
 .DS_Store
-venv/
+
+# python compiled files, virtualenvs
 *.pyc
+__pycache__
+venv/
+
+# npm things
+node_modules/
+bower_components/
+build/
+
+# other
 cf-ssh.yml

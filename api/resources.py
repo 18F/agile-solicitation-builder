@@ -1,4 +1,4 @@
-from models import User, Agency, RFQ, ContentComponent, AdditionalClin, CustomComponent, session, Deliverable
+from api.models import User, Agency, RFQ, ContentComponent, AdditionalClin, CustomComponent, session, Deliverable
 from flask import jsonify, request, g
 from flask_restful import Resource, reqparse, abort
 from flask.ext.httpauth import HTTPBasicAuth

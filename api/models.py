@@ -1,21 +1,22 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-import sys, os
+import os
 
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, Integer, Text, Boolean, String, ForeignKey, create_engine
+from sqlalchemy import Column, Integer, Text, String, ForeignKey, create_engine
 from sqlalchemy.orm import sessionmaker, relationship, scoped_session
-from flask_sqlalchemy import SQLAlchemy
 from config import ProductionConfig
 from passlib.apps import custom_app_context as pwd_context
-from itsdangerous import (TimedJSONWebSignatureSerializer as Serializer, BadSignature, SignatureExpired)
+from itsdangerous import (
+    TimedJSONWebSignatureSerializer as Serializer,
+    BadSignature, SignatureExpired
+)
 
-import seed
+from api import seed
 
 engine = create_engine(ProductionConfig.SQLALCHEMY_DATABASE_URI)
 session_factory = sessionmaker(bind=engine)
 session = scoped_session(session_factory)
-
 
 Base = declarative_base()
 
@@ -124,7 +125,6 @@ class RFQ(Base):
             component['title'] = title.replace("{AGENCY}", agency).replace("{DOC_TYPE}", doc_type).replace("{AGENCY_FULL_NAME}", agency_full_name).replace("{PROGRAM_NAME}", program_name).replace("{VEHICLE}", vehicle)
             self.custom_components.append(CustomComponent(**component))
 
-
 class ContentComponent(Base):
     __tablename__ = 'content_components'
 
@@ -138,7 +138,6 @@ class ContentComponent(Base):
 
     def __repr__(self):
         return "<ContentComponent(name='%s', doc_id='%d', text='%s')>" % (self.name, self.document_id, self.text)
-
 
 class Deliverable(Base):
     __tablename__ = 'deliverables'
@@ -155,7 +154,6 @@ class Deliverable(Base):
 
     def __repr__(self):
         return "<Deliverable(name='%s', doc_id='%d', text='%s', value='%s', display='%s')>" % (self.name, self.document_id, self.text, self.value, self.display)
-
 
 class AdditionalClin(Base):
     __tablename__ = 'additional_clins'
@@ -178,7 +176,6 @@ class AdditionalClin(Base):
 
     def __repr__(self):
         return "<Clin(id='%d', row1='%s', row2='%s', row3a='%s')>" % (self.document_id, self.row1, self.row2, self.row3a)
-
 
 class CustomComponent(Base):
     __tablename__ = 'custom_components'
