@@ -5,14 +5,14 @@ import os
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, Text, String, ForeignKey, create_engine
 from sqlalchemy.orm import sessionmaker, relationship, scoped_session
-from config import ProductionConfig
+from asb.config import ProductionConfig
 from passlib.apps import custom_app_context as pwd_context
 from itsdangerous import (
     TimedJSONWebSignatureSerializer as Serializer,
     BadSignature, SignatureExpired
 )
 
-from api import seed
+from asb import seed
 
 engine = create_engine(ProductionConfig.SQLALCHEMY_DATABASE_URI)
 session_factory = sessionmaker(bind=engine)

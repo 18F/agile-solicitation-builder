@@ -1,8 +1,13 @@
-from api.models import User, Agency, RFQ, ContentComponent, AdditionalClin, CustomComponent, session, Deliverable
+# -*- coding: utf-8 -*-
+
+from asb.extensions import auth
+
+from asb.api.models import (
+    User, Agency, RFQ, ContentComponent, AdditionalClin,
+    CustomComponent, session, Deliverable
+)
 from flask import jsonify, request, g
-from flask_restful import Resource, reqparse, abort
-from flask.ext.httpauth import HTTPBasicAuth
-auth = HTTPBasicAuth()
+from flask_restful import Api, Resource, reqparse, abort
 
 class Users(Resource):
     def get(self):
@@ -195,3 +200,18 @@ def dicts_to_dict(dicts, key):
         new_key = d[key]
         new_dict[new_key] = dicts[i]['text']
     return new_dict
+
+api = Api(prefix='/api')
+api.add_resource(Users, '/users')
+api.add_resource(Agencies, '/agencies')
+api.add_resource(
+    Data, '/get_content/<int:rfq_id>/section/<int:section_id>'
+)
+api.add_resource(Deliverables, '/deliverables/<int:rfq_id>')
+api.add_resource(Create, '/rfqs')
+api.add_resource(Clin, '/clins/<int:rfq_id>')
+api.add_resource(
+    CustomComponents,
+    '/custom_component/<int:rfq_id>/section/<int:section_id>'
+)
+api.add_resource(DeleteRFQ, '/delete/rfqs/<int:rfq_id>')

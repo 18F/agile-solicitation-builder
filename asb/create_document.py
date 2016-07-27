@@ -2,7 +2,9 @@
 import datetime
 
 from docx import Document
-from api.models import Agency, RFQ, ContentComponent, Deliverable, CustomComponent, session
+from asb.api.models import (
+    Agency, RFQ, ContentComponent, Deliverable, CustomComponent, session
+)
 
 
 BIG_HEADING = 1
