@@ -5,7 +5,8 @@ import logging
 
 from waitress import serve
 
-from asb.api.models import Base, Agency, session, engine
+from asb.extensions import db
+from asb.api.models import Agency
 from asb.seed import agencies
 from asb.app import create_app
 
@@ -17,14 +18,14 @@ app = create_app()
 
 def create_tables():
     # delete old records
-    Base.metadata.drop_all(engine)
+    db.drop_all()
     #
-    Base.metadata.create_all(engine)
+    db.create_all()
     #
     for agency in agencies:
         a = Agency(abbreviation=agency, full_name=agencies[agency])
-        session.add(a)
-        session.commit()
+        db.session.add(a)
+        db.session.commit()
 
 @app.cli.command()
 def seed_db():

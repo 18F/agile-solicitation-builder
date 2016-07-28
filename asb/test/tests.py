@@ -1,8 +1,8 @@
 import unittest
-import flask.ext.testing
-from flask.ext.testing import TestCase
+from flask_testing import TestCase
 
-from server import app, db
+from asb.app import create_app as _create_app
+from asb.extensions import db
 
 class MyTest(TestCase):
 
@@ -12,7 +12,7 @@ class MyTest(TestCase):
     def create_app(self):
 
         # pass in test configuration
-        return create_app(self)
+        return _create_app(self)
 
     def setUp(self):
 

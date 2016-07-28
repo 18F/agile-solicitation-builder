@@ -10,17 +10,14 @@ class Config(object):
 
 class ProductionConfig(Config):
     DEBUG = False
-    SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 class StagingConfig(Config):
     DEVELOPMENT = True
     DEBUG = True
-    SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 class DevelopmentConfig(Config):
     DEVELOPMENT = True
     DEBUG = True
-    SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 class TestingConfig(Config):
     TESTING = True
