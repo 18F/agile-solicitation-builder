@@ -21,6 +21,3 @@ class TestUserModel(TestCase):
     def test_expired_auth_token(self):
         expired_token = self.user.generate_auth_token(expiration=-1)
         self.assertIsNone(m.User.verify_auth_token(expired_token))
-
-
-class 
