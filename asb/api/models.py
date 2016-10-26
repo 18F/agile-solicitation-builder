@@ -35,8 +35,8 @@ class Model(db.Model):
 class User(Model):
     __tablename__ = 'users'
 
-    id = Column(Integer, primary_key = True)
-    username = Column(String(32), index = True)
+    id = Column(Integer, primary_key=True)
+    username = Column(String(32), index=True)
     password_hash = Column(String(128))
 
     def hash_password(self, password):
@@ -45,7 +45,7 @@ class User(Model):
     def verify_password(self, password):
         return pwd_context.verify(password, self.password_hash)
 
-    def generate_auth_token(self, expiration = 600):
+    def generate_auth_token(self, expiration=600):
         s = Serializer(os.environ.get('SECRET_KEY', "None"), expires_in=expiration)
         return s.dumps({'id': self.id})
 
@@ -104,7 +104,7 @@ class RFQ(Model):
 
         vehicle = ""
 
-        agency_full_name = session.query(Agency).filter_by(abbreviation=agency).first().full_name
+        agency_full_name = db.session.query(Agency).filter_by(abbreviation=agency).first().full_name
 
         if doc_type != "Purchase Order":
             vehicle = "(vehicle number " + base_number_value + ") "

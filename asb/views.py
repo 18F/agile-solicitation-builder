@@ -14,13 +14,13 @@ blueprint = Blueprint('asb', __name__)
 
 @auth.verify_password
 def verify_password(username, password):
-    if not User.verify_auth_token(username):
+    user = User.verify_auth_token(username)
+    if not user:
         user = db.session.query(User).filter_by(username=username).first()
         if not user or not user.verify_password(password):
             return False
-        else:
-            g.user = user
-            return True
+    g.user = user
+    return True
 
 @blueprint.route('/')
 def index():
