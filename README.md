@@ -8,7 +8,10 @@ The intent of this tool is to assist in the creation of requirements documents f
 
 
 ### Local Installation
-Clone the repository
+
+[Instructions for setting up locally.](/SETUP.md)
+
+<!-- Clone the repository
 ```
 git clone https://github.com/18F/agile-solicitation-builder.git
 ```
@@ -58,7 +61,7 @@ cd ..
 From the root directory of the project run
 ```
 python server.py
-```
+``` -->
 
 
 ## Further Development
