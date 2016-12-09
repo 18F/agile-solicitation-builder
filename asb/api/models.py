@@ -1,33 +1,42 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-import sys, os
+import os
 
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, Integer, Text, Boolean, String, ForeignKey, create_engine
-from sqlalchemy.orm import sessionmaker, relationship, scoped_session
-from flask_sqlalchemy import SQLAlchemy
-from config import ProductionConfig
+from sqlalchemy import Column, Integer, Text, String, ForeignKey
+from sqlalchemy.orm import relationship
 from passlib.apps import custom_app_context as pwd_context
-from itsdangerous import (TimedJSONWebSignatureSerializer as Serializer, BadSignature, SignatureExpired)
+from itsdangerous import (
+    TimedJSONWebSignatureSerializer as Serializer,
+    BadSignature, SignatureExpired
+)
 
-import seed
-
-engine = create_engine(ProductionConfig.SQLALCHEMY_DATABASE_URI)
-session_factory = sessionmaker(bind=engine)
-session = scoped_session(session_factory)
-
-
-Base = declarative_base()
+from asb import seed
+from asb.extensions import db
 
 content_components = seed.content_components
 deliverables = seed.deliverables
 custom_components = seed.custom_components
 
-class User(Base):
+class Model(db.Model):
+    __abstract__ = True
+
+    @classmethod
+    def get_by_id(cls, id):
+        if any(
+            (isinstance(id, str) and id.isdigit(),
+             isinstance(id, (int, float))),
+        ):
+            return cls.query.get(int(id))
+        return None
+
+    def to_dict(self):
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+
+class User(Model):
     __tablename__ = 'users'
 
-    id = Column(Integer, primary_key = True)
-    username = Column(String(32), index = True)
+    id = Column(Integer, primary_key=True)
+    username = Column(String(32), index=True)
     password_hash = Column(String(128))
 
     def hash_password(self, password):
@@ -36,9 +45,9 @@ class User(Base):
     def verify_password(self, password):
         return pwd_context.verify(password, self.password_hash)
 
-    def generate_auth_token(self, expiration = 600):
-        s = Serializer(os.environ.get('SECRET_KEY', "None"), expires_in = expiration)
-        return s.dumps({ 'id': self.id })
+    def generate_auth_token(self, expiration=600):
+        s = Serializer(os.environ.get('SECRET_KEY', "None"), expires_in=expiration)
+        return s.dumps({'id': self.id})
 
     @staticmethod
     def verify_auth_token(token):
@@ -49,10 +58,9 @@ class User(Base):
             return None # valid token, but expired
         except BadSignature:
             return None # invalid token
-        user = session.query(User).get(data['id'])
-        return user
+        return User.get_by_id(data['id'])
 
-class Agency(Base):
+class Agency(Model):
     __tablename__ = 'agencies'
 
     id = Column(Integer, primary_key=True)
@@ -62,11 +70,8 @@ class Agency(Base):
     def __repr__(self):
         return "<Agency(id='%d', full_name='%s', abbreviation='%s')>" % (self.id, self.full_name, self.abbreviation)
 
-    def to_dict(self):
-        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
 
-
-class RFQ(Base):
+class RFQ(Model):
     __tablename__ = 'rfqs'
 
     id = Column(Integer, primary_key=True)
@@ -79,9 +84,6 @@ class RFQ(Base):
     content_components = relationship("ContentComponent")
     deliverables = relationship("Deliverable")
     custom_components = relationship("CustomComponent")
-
-    def to_dict(self):
-        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
 
     def __repr__(self):
         return "<RFQ(id='%d', agency='%s', doc_type='%s', program_name='%s')>" % (self.id, self.agency, self.doc_type, self.program_name)
@@ -102,7 +104,7 @@ class RFQ(Base):
 
         vehicle = ""
 
-        agency_full_name = session.query(Agency).filter_by(abbreviation=agency).first().full_name
+        agency_full_name = db.session.query(Agency).filter_by(abbreviation=agency).first().full_name
 
         if doc_type != "Purchase Order":
             vehicle = "(vehicle number " + base_number_value + ") "
@@ -124,8 +126,7 @@ class RFQ(Base):
             component['title'] = title.replace("{AGENCY}", agency).replace("{DOC_TYPE}", doc_type).replace("{AGENCY_FULL_NAME}", agency_full_name).replace("{PROGRAM_NAME}", program_name).replace("{VEHICLE}", vehicle)
             self.custom_components.append(CustomComponent(**component))
 
-
-class ContentComponent(Base):
+class ContentComponent(Model):
     __tablename__ = 'content_components'
 
     document_id = Column(Integer, ForeignKey('rfqs.id'), primary_key=True)
@@ -133,14 +134,10 @@ class ContentComponent(Base):
     name = Column(String, primary_key=True)
     text = Column(Text)
 
-    def to_dict(self):
-        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
-
     def __repr__(self):
         return "<ContentComponent(name='%s', doc_id='%d', text='%s')>" % (self.name, self.document_id, self.text)
 
-
-class Deliverable(Base):
+class Deliverable(Model):
     __tablename__ = 'deliverables'
 
     id = Column(Integer, primary_key=True)
@@ -150,14 +147,10 @@ class Deliverable(Base):
     value = Column(String)
     text = Column(Text)
 
-    def to_dict(self):
-        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
-
     def __repr__(self):
         return "<Deliverable(name='%s', doc_id='%d', text='%s', value='%s', display='%s')>" % (self.name, self.document_id, self.text, self.value, self.display)
 
-
-class AdditionalClin(Base):
+class AdditionalClin(Model):
     __tablename__ = 'additional_clins'
 
     id = Column(Integer, primary_key=True)
@@ -173,14 +166,10 @@ class AdditionalClin(Base):
     row6a = Column(Text)
     row6b = Column(Text)
 
-    def to_dict(self):
-        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
-
     def __repr__(self):
         return "<Clin(id='%d', row1='%s', row2='%s', row3a='%s')>" % (self.document_id, self.row1, self.row2, self.row3a)
 
-
-class CustomComponent(Base):
+class CustomComponent(Model):
     __tablename__ = 'custom_components'
 
     id = Column(Integer, primary_key=True)
@@ -189,9 +178,6 @@ class CustomComponent(Base):
     name = Column(String)
     text = Column(Text)
     section = Column(Integer)
-
-    def to_dict(self):
-        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
 
     def __repr__(self):
         return "<AdditionalComponent(id='%d', title='%s', text='%s')>" % (self.document_id, self.title, self.text)

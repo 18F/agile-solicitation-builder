@@ -2,7 +2,9 @@
 import datetime
 
 from docx import Document
-from models import Agency, RFQ, ContentComponent, Deliverable, CustomComponent, session
+from asb.api.models import (
+    Agency, RFQ, ContentComponent, Deliverable, CustomComponent
+)
 
 
 BIG_HEADING = 1
@@ -54,7 +56,7 @@ def get_users(cc, user_types):
 def overview(document, rfq):
     # table of contents & basic info
 
-    agency_full_name = session.query(Agency).filter_by(abbreviation=rfq.agency).first().full_name
+    agency_full_name = db.session.query(Agency).filter_by(abbreviation=rfq.agency).first().full_name
     title = "RFQ for the " + agency_full_name
     document.add_heading(title, level=BIG_HEADING)
     doc_date = str(datetime.date.today())
@@ -76,7 +78,7 @@ def overview(document, rfq):
 def definitions(document, rfq):
 
     document.add_heading("1. Definitions", level=BIG_HEADING)
-    all_definitions = session.query(ContentComponent).filter_by(document_id=rfq.id).filter_by(section=1).first()
+    all_definitions = db.session.query(ContentComponent).filter_by(document_id=rfq.id).filter_by(section=1).first()
     for definition in all_definitions.text.split("\n\n"):
         document.add_paragraph(definition)
 
@@ -85,7 +87,7 @@ def definitions(document, rfq):
 
 def services(document, rfq):
     document.add_heading("2. Services", level=BIG_HEADING)
-    content_components = session.query(ContentComponent).filter_by(document_id=rfq.id).filter_by(section=2).all()
+    content_components = db.session.query(ContentComponent).filter_by(document_id=rfq.id).filter_by(section=2).all()
     # include vendor number
     cc = make_dict(content_components)
     optionPeriods = cc["optionPeriods"]
@@ -160,7 +162,7 @@ def services(document, rfq):
 
 def objectives(document, rfq):
     document.add_heading("3. Objectives", level=BIG_HEADING)
-    content_components = session.query(ContentComponent).filter_by(document_id=rfq.id).filter_by(section=3).all()
+    content_components = db.session.query(ContentComponent).filter_by(document_id=rfq.id).filter_by(section=3).all()
     cc = make_dict(content_components)
     document.add_heading("General Background", level=SUB_HEADING)
     if len(cc["generalBackground"]) > 0:
@@ -231,7 +233,7 @@ def objectives(document, rfq):
     text = "This " + rfq.doc_type + " will require the following services:"
     document.add_paragraph(text)
 
-    deliverables = session.query(Deliverable).filter_by(document_id=rfq.id).filter_by(value="true").all()
+    deliverables = db.session.query(Deliverable).filter_by(document_id=rfq.id).filter_by(value="true").all()
     for deliverable in deliverables:
         document.add_paragraph("    " + deliverable.display)
 
@@ -273,7 +275,7 @@ def objectives(document, rfq):
 
 def personnel(document, rfq):
     document.add_heading("4. Key Personnel", level=BIG_HEADING)
-    content_components = session.query(ContentComponent).filter_by(document_id=rfq.id).filter_by(section=4).all()
+    content_components = db.session.query(ContentComponent).filter_by(document_id=rfq.id).filter_by(section=4).all()
     cc = make_dict(content_components)
 
     document.add_paragraph(cc["keyPersonnelIntro"])
@@ -305,7 +307,7 @@ def personnel(document, rfq):
 def invoicing(document, rfq):
     document.add_heading("5. Invoicing & Funding", level=BIG_HEADING)
 
-    content_components = session.query(ContentComponent).filter_by(document_id=rfq.id).filter_by(section=5).all()
+    content_components = db.session.query(ContentComponent).filter_by(document_id=rfq.id).filter_by(section=5).all()
     cc = make_dict(content_components)
 
     document.add_paragraph(cc["invoicing"])
@@ -323,7 +325,7 @@ def invoicing(document, rfq):
 def inspection_and_delivery(document, rfq):
     document.add_heading("6. Inspection and Delivery", level=BIG_HEADING)
 
-    content_components = session.query(ContentComponent).filter_by(document_id=rfq.id).filter_by(section=6).all()
+    content_components = db.session.query(ContentComponent).filter_by(document_id=rfq.id).filter_by(section=6).all()
     cc = make_dict(content_components)
 
     document.add_heading("Overview", level=SUB_HEADING)
@@ -352,10 +354,10 @@ def inspection_and_delivery(document, rfq):
 def government_roles(document, rfq):
     document.add_heading("7. Government Roles", level=BIG_HEADING)
 
-    content_components = session.query(ContentComponent).filter_by(document_id=rfq.id).filter_by(section=7).all()
+    content_components = db.session.query(ContentComponent).filter_by(document_id=rfq.id).filter_by(section=7).all()
     cc = make_dict(content_components)
 
-    custom_components = session.query(CustomComponent).filter_by(document_id=rfq.id).filter_by(section=7).order_by(CustomComponent.id).all()
+    custom_components = db.session.query(CustomComponent).filter_by(document_id=rfq.id).filter_by(section=7).order_by(CustomComponent.id).all()
 
     document.add_paragraph(cc["stakeholderIntro"])
 
@@ -371,7 +373,7 @@ def government_roles(document, rfq):
 def special_requirements(document, rfq):
     document.add_heading("8. Special Requirements", level=BIG_HEADING)
 
-    custom_components = session.query(CustomComponent).filter_by(document_id=rfq.id).filter_by(section=8).order_by(CustomComponent.id).all()
+    custom_components = db.session.query(CustomComponent).filter_by(document_id=rfq.id).filter_by(section=8).order_by(CustomComponent.id).all()
 
     component_list = make_custom_component_list(custom_components)
 
@@ -384,21 +386,21 @@ def special_requirements(document, rfq):
 
 def contract_clauses(document, rfq):
     document.add_heading("9. Additional Contract Clauses", level=BIG_HEADING)
-    contract_clauses = session.query(ContentComponent).filter_by(document_id=rfq.id).filter_by(section=9).first()
+    contract_clauses = db.session.query(ContentComponent).filter_by(document_id=rfq.id).filter_by(section=9).first()
     document.add_paragraph(contract_clauses.text)
 
     return document
 
 def instructions_to_offerors(document, rfq):
     document.add_heading("10. Instructions to Offerors", level=BIG_HEADING)
-    instructions = session.query(ContentComponent).filter_by(document_id=rfq.id).filter_by(section=10).first()
+    instructions = db.session.query(ContentComponent).filter_by(document_id=rfq.id).filter_by(section=10).first()
     document.add_paragraph(instructions.text)
 
     return document
 
 def evaluation_criteria(document, rfq):
     document.add_heading("11. Evaluation Criteria", level=BIG_HEADING)
-    instructions = session.query(ContentComponent).filter_by(document_id=rfq.id).filter_by(section=11).first()
+    instructions = db.session.query(ContentComponent).filter_by(document_id=rfq.id).filter_by(section=11).first()
     document.add_paragraph(instructions.text)
 
     return document
@@ -411,7 +413,7 @@ def appendix(document, rfq):
 
 
 def create_document(rfq_id):
-    rfq = session.query(RFQ).filter_by(id=rfq_id).first()
+    rfq = db.session.query(RFQ).filter_by(id=rfq_id).first()
 
     document = Document()
 
