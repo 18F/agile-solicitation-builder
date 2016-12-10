@@ -8,9 +8,7 @@ env:
   - CF_USERNAME=18f-acq_deployer
   - secure: Cl70OZlBnD/U7QRJUb9fn7BrRH0oT+Av8JL0RVzDKLFqjJiwjspVI0ZXCxrtsoaVNIw+OrVGznYVz1/4mTFlxiPpIkr4bulPiOZQl4tOWU5PgeXwUlqIFzLFD8rFXU0sMtFNdsIN9KYSCa78wCMffGyBm75TmsYcTZIJ4+ZInGc2t6LbBTQHUb6Ec6lWOLjCJOWli+1wfrGjRv1eGy6xfZeSL+km2JlbzZZ5s9b300iIjlUtl0PmhcdPcG2lvBg63YKfiy9QoyNUtOLScIIDRlM1ZCMGV2B8cpeZxEzIVgq55tUAlzqRNkaJAvo6hpER21LBh3+Of/pL108M1VF42GhW/t+yhKbZBBibzeSMSA3/8Q3iY5A9Tay+mZgvxKQ9tLoUEtZ3eTHVuIkz77Mw/hOY0ekol15QT/+BWHp1nfAw+d+wC7wVQAb7jtfA3HRuM2g5LhXWtG5tzTfWv8n0R+L/IKy8JiFm97rvHntQ7YBJHaXP4zWOrFxOtjeFcOmrxRZiNqbiJyWbVWg1jhI258DM/v5OLvAMLsBhfshiBaF+NCsgyevCST9SD6maEFVwiMCkklcQXLi1I0fbgKSdtjGVOd0lMzGwLAwBmrFQTxTMZt0aX827EdeNNgIlotiSULqthr/xeHaNw2gKKkP2siXgPwr3TtVP6/gPAeJs9So=
 before_install:
-- rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/.nvm && (cd ~/.nvm
-  && git checkout `git describe --abbrev=0 --tags`) && source ~/.nvm/nvm.sh && nvm
-  install 6.1.0
+- rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/.nvm && (cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`) && source ~/.nvm/nvm.sh && nvm install 6.1.0
 install:
 - pip install -r requirements.txt
 - cd web
