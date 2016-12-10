@@ -6,9 +6,9 @@ node:
 env:
   global:
   - CF_USERNAME=18f-acq_deployer
-  - secure: "Yfn7cgcs84EDit9zmP28vjDKzThIyvfg3Himwag+mMIBuSQuFhZGQsWPeNWzJmXXLHgZGj4kzLgJVUvc8D+q1uG2B3161AXE9gRMnByzgiHd0+cf1Qyx2x0RhXVaHgwg8o2xH9gcjWuuXQuJAISdbmPaEiOkCNCiA3IVjBRnzJiOAt3U2rrqzaYj0NDvPgyuGec1S1ROnBxAhfTUWOlefyZ4Cr2yN8su7/8GenLh9OJVMo0lTYD7UUwMdzHbJQg4oVMxhR/QWAP5Z06YJnRQr8pVmaiZyloifiHa5kK7vOV0AASmPaKybdyyc5R/fTtjI6C5XPeLH9gFkwgZZrod48zXLTtsvX4szg/D0KYhI9d8Nf0OcTO5sAHjAg+gzcHEGGjnxGnYr4uED1fYiWvVL0GCo1q9XrVQfzrEeMqLkpp0MnxwEvz/MNLXDj5gTIdftEWK14kmtKVEz6D6Cf8onv3Ca2K2ro2XsIFgvUjp9sZ8dPY98qj6vOu/wIXYM+eWh+BKpw98e+so+Cq/uU3B8S+z46yp1FXOd9Xp38lp1IpyDWR7t0ZaoAAF2nYBp/99E00qajUSoTbM2mo92H4SqMeFP25Y+e2CDHcizVIRsaBF1K3Oz1FD7fRvxLIIhKLJNKRLeQ5mkQk3k4votv+uQzVLsKjhOZPiMyWCWQsicgs="
+  - secure: Cl70OZlBnD/U7QRJUb9fn7BrRH0oT+Av8JL0RVzDKLFqjJiwjspVI0ZXCxrtsoaVNIw+OrVGznYVz1/4mTFlxiPpIkr4bulPiOZQl4tOWU5PgeXwUlqIFzLFD8rFXU0sMtFNdsIN9KYSCa78wCMffGyBm75TmsYcTZIJ4+ZInGc2t6LbBTQHUb6Ec6lWOLjCJOWli+1wfrGjRv1eGy6xfZeSL+km2JlbzZZ5s9b300iIjlUtl0PmhcdPcG2lvBg63YKfiy9QoyNUtOLScIIDRlM1ZCMGV2B8cpeZxEzIVgq55tUAlzqRNkaJAvo6hpER21LBh3+Of/pL108M1VF42GhW/t+yhKbZBBibzeSMSA3/8Q3iY5A9Tay+mZgvxKQ9tLoUEtZ3eTHVuIkz77Mw/hOY0ekol15QT/+BWHp1nfAw+d+wC7wVQAb7jtfA3HRuM2g5LhXWtG5tzTfWv8n0R+L/IKy8JiFm97rvHntQ7YBJHaXP4zWOrFxOtjeFcOmrxRZiNqbiJyWbVWg1jhI258DM/v5OLvAMLsBhfshiBaF+NCsgyevCST9SD6maEFVwiMCkklcQXLi1I0fbgKSdtjGVOd0lMzGwLAwBmrFQTxTMZt0aX827EdeNNgIlotiSULqthr/xeHaNw2gKKkP2siXgPwr3TtVP6/gPAeJs9So=
 before_install:
-  - rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/.nvm && (cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`) && source ~/.nvm/nvm.sh && nvm install 6.1.0
+- rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/.nvm && (cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`) && source ~/.nvm/nvm.sh && nvm install 6.1.0
 install:
 - pip install -r requirements.txt
 - cd web
