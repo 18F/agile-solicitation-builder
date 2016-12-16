@@ -389,12 +389,3 @@ textarea {
 .Popover-tipShape {
   fill: black;
 }
-
-// aside {
-// }
-
-@media screen and (min-width: $medium-screen) and (max-width: $large-screen) {
-  .side-bar {
-    display: none !important;
-  }
-}
