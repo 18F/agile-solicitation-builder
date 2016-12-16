@@ -7,3 +7,5 @@ applications:
   domain: apps.cloud.gov
   services:
   - playbook
+  env:
+      CONFIG: asb.config.ProductionConfig
