@@ -12,11 +12,9 @@ fi
 if [ $SPACE = 'production' ]; then
   NAME="agile-solicitation-builder"
   MANIFEST="manifest.yml"
-  CONFIG="asb.config.DevelopmentConfig"
 elif [ $SPACE = 'staging' ]; then
   NAME="agile-solicitation-builder"
   MANIFEST="manifest-staging.yml"
-  CONFIG="asb.config.ProductionConfig"
 else
   echo "Unknown space: $SPACE"
   exit

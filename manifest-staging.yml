@@ -7,3 +7,5 @@ applications:
   domain: apps.cloud.gov
   services:
   - playbook-staging
+  env:
+      CONFIG: asb.config.DevelopmentConfig
