@@ -47,7 +47,7 @@ flask -a server.py seed_db
 ### Install the Front end.
 If you plan on developing the front-end, make sure you have npm installed (`brew install npm`). Then run:
 ```
-cd app
+cd web
 npm install
 npm install -g gulp
 gulp
