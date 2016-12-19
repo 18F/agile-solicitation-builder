@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*-
 import os
 import logging
+from cfenv import AppEnv
+env = AppEnv()
 
 from waitress import serve
 
@@ -10,7 +12,7 @@ from asb.api.models import Agency
 from asb.seed import agencies
 from asb.app import create_app
 
-port = os.getenv("PORT") or 8000
+port = env.port or 8000
 logger = logging.getLogger('waitress')
 logger.setLevel(logging.INFO)
 
