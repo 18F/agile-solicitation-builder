@@ -5,8 +5,10 @@ python:
 node:
 env:
   global:
-  - CF_USERNAME=18f-acq_deployer
-  - secure: RQ05JyTtlgttTDMuBlnwwH1LYHdRZSrcro7UIvuC0NhaMxpXbk+HG6iwunDkClTay0YXw3wYKqCe5MYINbjoX8a2sTtj5z192NovgpSeP1LHeK/Och298T9f48lYz6jwBUaFuw34/wTqF9ZM/45FpHeF3hKdiJWinnxArbK7l+teB34N3SjpSSrgHmKmXjPHCXNtWv6KAo0C6Ebh+MFk0QFyYPFeDUjbvm3lp2o6MxDKRZwbKe9uh2DjdsSt/05v84wpdnrE/xuTm5XaNPNYOpMKkzBNwNjvAZCCd1oVSDzR22UQNs7J2u1l/4P4wAieCVTPBZAdW189V4659esK0OwxiTfLgoX0GcslG2Oc3aJLOO7VhA872R3X+umEXEmBoXLsA5gxgujRTs665gQcalgQbn0FH4QBvNuJpJ5VZls1pSB6AZgOtaeqoIZrlDj5askXALVkDG9KunQdFF9+bPpQYwuHwOZOV+ZJU015G8HoqrwP5CeVbAJosoUthihgAiMzsElpNHydY4yt04s2gqzL17sPDkB8s++cEK4hZAffl0Bt4EQ7FLEj9qTJV5rNPHqNmuOIX2SDn/shxOV9wUzvhpRDq3f7+ibOtrz3wlN8JeLrPyxseHtNp1E4Op9eBeQhad9jBqLbXcYadSyoN4j9nAvAIhCnFnbov4vdIQA=
+  - CF_USERNAME_PRODUCTION=cb4feb94-4695-45bb-9d54-73adfa4bed76
+  - secure: "g2eDqkEhlaG9jCfH3qS0+LyTDL6FZ4O6ju0uFM1OJ8fmz3FjfzdZ4F7BNCMrC8ZeH/tkR8zisMJnUBOTlA0n78/jcKJNrQYTYrDYEWCzlS80q07rZrqBmfxruFwxwVQwqCIx9wVpoqSKTewO+mLgAXW2YkWSMKQbPYm2oDaAeqlIuRi6YCWQ7PYhyc7P4PND4Drhz+fkPRsOOe67MLrHAgMpXk/aiU2uWw1UctSCTtPYYj8V6E7nl4DRHVT8RReMF/bx6z7aKRBVGtQoQWuXnpLGc2+2WAM4rAthGdEZHAM92NNhQDP1BhshlaMUcN/3TYyj3DzxQ21CxuCiHYhHzuoufKCpbPc/XBOZ1uw07NRa/LM63Boue0TmEO5qUTsSCTSEMhasf7XxxK30ojVXyYTSNcLuuQ9vpBn10mLnlcceuHE1NWxqSbr1T2fdHox94T3S7oGekNNBIT7wXvCC2WHpHaxbXXzoc+SL/x+RqntwNaoRN6Hmx6udNyavLSqGbIj9FP/GOHzFTvNiNO+Rdr+DPkwozWUT1Pw0t7604I1jSuPKDz7enixdECSa1RIRCLqGnoyH7E3uapr/I8Fs8tKoYS76j/F0NM0Z9auf9SvqOXCATMWxg9F1EsTNiUEEd78bIr+23zajXJRek2JNX1byPGzeeJIcIVFqcl763MU="
+  - CF_USERNAME_STAGING=711e2876-d872-4c7c-8046-a29d9dfa3e93
+  - secure: "Kvx7PtBvytpixhGoj8iTIzjpNgtNh7JvMEeQ48+RR7wVHzc5Nz3i5t6qNLLQcCLdrNN3z3tu6Y+PpxOtHIso9nwnpO1iqr+S3CUDxOZmiH3Xgm/8NwF6l+VTItNIY5ANigX8Kj/pb3X1H0XSaZ0sNffl86CltPkBl9ViiSGWo0d2xERHBpsggp+3Zx9Ui5aQWoUP/VWDxbVWH1IftRJ22QgyP28SiZxA5tpFij8T0vQd2DzrcVOnwskbU4rMKaOz1KqsIMQ/KwW+Y7lJeDX6N2TevsynAGGYPcz7Z+fOPnvFFjmxtxI9c7g2cUuH6ujnXuSiucxeCLnYY3EKtGpaTxWjaowmLrciuB2mVLFBL738+oYcURTKY55F0ojWtkfHVoQUDGgjzIwhwjG19CB6a/1tTHkVBnz2yC4qdUSBqQBra+qII/8KsYVep0zvA1zS6keNsRIXpqrz0uz4uWMxvAFRW+iuDzRuFEjbk7CfezohvzSea2vgnc/k5rHYmxQopwW+DmUK4TBuorew+iIGULU+Hsj2Qop/xxFV8JVd5sr0EblLEHCWNraUYmXsXlxCKsR6rFma2zwZTOrtQm0jl3ZCxO1ebOdH6QbKH+3bbuDneb4RzdL8vx8Yg89+a12Rva4TghpWtWzrVLFfEIqVDy25ntsxnIqjebVd0XW3aMA="
 before_install:
   - rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/.nvm && (cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`) && source ~/.nvm/nvm.sh && nvm install 6.1.0
 install:
@@ -33,7 +35,7 @@ deploy:
   on:
     branch: develop
 - provider: script
-  script: "./deploy.sh production"
+  script: "./deploy.sh prod"
   skip_cleanup: true
   on:
     branch: master

@@ -4,6 +4,6 @@ applications:
   memory: 512M
   instances: 1
   host: agile-solicitation-builder
-  domain: apps.cloud.gov
+  domain: app.cloud.gov
   services:
-  - playbook
+  - asb-prod-psql
