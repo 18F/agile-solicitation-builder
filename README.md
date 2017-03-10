@@ -1,3 +1,6 @@
+#This repository is archived and deprecated. Please see the [USDS Agile Solicitation Builder](https://github.com/usds/agile-solicitation-builder) for current updates.
+
+
 [![Stories in Ready](https://badge.waffle.io/18F/agile-solicitation-builder.png?label=ready&title=Ready)](https://waffle.io/18F/agile-solicitation-builder)
 
 *Master:*
