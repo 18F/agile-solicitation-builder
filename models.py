@@ -16,6 +16,8 @@ engine = create_engine(ProductionConfig.SQLALCHEMY_DATABASE_URI)
 session_factory = sessionmaker(bind=engine)
 session = scoped_session(session_factory)
 
+##TODO
+#warnings.warn('SQLALCHEMY_TRACK_MODIFICATIONS adds significant overhead and will be disabled by default in the future.  Set it to True to suppress this warning.')
 
 Base = declarative_base()
 
@@ -26,7 +28,7 @@ custom_components = seed.custom_components
 class User(Base):
     __tablename__ = 'users'
 
-    id = Column(Integer, primary_key = True)
+    id = Column(Integer, primary_key = True, autoincrement=True, nullable=False)
     username = Column(String(32), index = True)
     password_hash = Column(String(128))
 
@@ -55,7 +57,7 @@ class User(Base):
 class Agency(Base):
     __tablename__ = 'agencies'
 
-    id = Column(Integer, primary_key=True)
+    id = Column(Integer, primary_key=True, autoincrement=True, nullable=False)
     full_name = Column(String, unique=True)
     abbreviation = Column(String, unique=True)
 
@@ -128,7 +130,7 @@ class RFQ(Base):
 class ContentComponent(Base):
     __tablename__ = 'content_components'
 
-    document_id = Column(Integer, ForeignKey('rfqs.id'), primary_key=True)
+    document_id = Column(Integer, ForeignKey('rfqs.id'), primary_key=True, autoincrement=True, nullable=False)
     section = Column(Integer, primary_key=True)
     name = Column(String, primary_key=True)
     text = Column(Text)
@@ -143,7 +145,7 @@ class ContentComponent(Base):
 class Deliverable(Base):
     __tablename__ = 'deliverables'
 
-    id = Column(Integer, primary_key=True)
+    id = Column(Integer, primary_key=True, autoincrement=True, nullable=False)
     document_id = Column(Integer, ForeignKey('rfqs.id'), primary_key=True)
     name = Column(String, primary_key=True)
     display = Column(String)
@@ -160,7 +162,7 @@ class Deliverable(Base):
 class AdditionalClin(Base):
     __tablename__ = 'additional_clins'
 
-    id = Column(Integer, primary_key=True)
+    id = Column(Integer, primary_key=True, autoincrement=True, nullable=False)
     document_id = Column(Integer, ForeignKey('rfqs.id'))
     row1 = Column(Text)
     row2 = Column(Text)
@@ -183,7 +185,7 @@ class AdditionalClin(Base):
 class CustomComponent(Base):
     __tablename__ = 'custom_components'
 
-    id = Column(Integer, primary_key=True)
+    id = Column(Integer, primary_key=True, autoincrement=True, nullable=False)
     document_id = Column(Integer, ForeignKey('rfqs.id'))
     title = Column(String)
     name = Column(String)
